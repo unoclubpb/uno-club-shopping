@@ -3,15 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- APP VERSION: 1.0.3 — bump this number with every code release. -->
+  <meta name="app-version" content="1.0.3">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta name="theme-color" content="#0b0b0b">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Uno Shopping">
   <title>Uno Club Shopping</title>
 
-  <!-- Upload uno-club-shopping.png to the same GitHub repository as index.html. -->
-  <link rel="icon" type="image/png" href="uno-club-shopping.png">
-  <link rel="apple-touch-icon" href="uno-club-shopping.png">
+  <!-- Upload uno-club-shopping.PNG to the same GitHub repository as index.html. -->
+  <link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.3">
+  <link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.3">
 
   <style>
     :root {
@@ -102,7 +107,9 @@
       justify-content: center;
     }
 
-    .back-button:active { background: rgba(255,255,255,.12); }
+    .back-button:active {
+      background: rgba(255,255,255,.12);
+    }
 
     main {
       width: min(100%, 620px);
@@ -110,7 +117,9 @@
       padding: 22px 16px calc(34px + env(safe-area-inset-bottom));
     }
 
-    .screen[hidden] { display: none !important; }
+    .screen[hidden] {
+      display: none !important;
+    }
 
     .button-stack {
       display: grid;
@@ -209,7 +218,9 @@
       letter-spacing: .7px;
     }
 
-    .list-heading span:nth-child(2) { text-align: center; }
+    .list-heading span:nth-child(2) {
+      text-align: center;
+    }
 
     .item-row {
       display: grid;
@@ -221,7 +232,9 @@
       border-bottom: 1px solid #ececec;
     }
 
-    .item-row:last-child { border-bottom: 0; }
+    .item-row:last-child {
+      border-bottom: 0;
+    }
 
     .item-name {
       min-width: 0;
@@ -273,8 +286,13 @@
       justify-content: center;
     }
 
-    .delete-button:active { background: #ffdede; }
-    .delete-button:disabled { opacity: .45; }
+    .delete-button:active {
+      background: #ffdede;
+    }
+
+    .delete-button:disabled {
+      opacity: .45;
+    }
 
     .permanent-row {
       background: #f7faff;
@@ -298,7 +316,9 @@
       font-size: 16px;
     }
 
-    .error-state { color: var(--danger); }
+    .error-state {
+      color: var(--danger);
+    }
 
     .toast {
       position: fixed;
@@ -324,7 +344,9 @@
       transform: translate(-50%, 0);
     }
 
-    .toast.error { background: #8f1d1d; }
+    .toast.error {
+      background: #8f1d1d;
+    }
 
     @media (max-width: 390px) {
       .item-row,
@@ -334,79 +356,248 @@
         padding-left: 11px;
         padding-right: 11px;
       }
-      .qty-input, .qty-fixed { width: 66px; }
+
+      .qty-input,
+      .qty-fixed {
+        width: 66px;
+      }
     }
   </style>
 </head>
+
 <body>
+
   <header class="app-header">
-    <button id="backButton" class="back-button" type="button" aria-label="Back to main page" hidden>&larr;</button>
+    <button
+      id="backButton"
+      class="back-button"
+      type="button"
+      aria-label="Back to main page"
+      hidden
+    >
+      &larr;
+    </button>
+
     <h1 id="pageTitle">Uno Club
 Shopping</h1>
-    <img class="header-logo" src="uno-club-shopping.png" alt="Uno Club Shopping logo">
+
+    <img
+      class="header-logo"
+      src="uno-club-shopping.PNG?v=1.0.3"
+      alt="Uno Club Shopping logo"
+    >
   </header>
 
   <main>
+
     <section id="homeScreen" class="screen">
+
       <div class="button-stack">
-        <button id="addItemButton" class="main-button add-item" type="button">Add Item</button>
-        <button class="main-button store-button" type="button" data-store="sams_costco">Sam’s/Costco</button>
-        <button class="main-button store-button" type="button" data-store="walmart">Walmart</button>
-        <button class="main-button store-button" type="button" data-store="alcohol">Alcohol</button>
-        <button class="main-button store-button" type="button" data-store="sodas">Sodas</button>
+
+        <button
+          id="addItemButton"
+          class="main-button add-item"
+          type="button"
+        >
+          Add Item
+        </button>
+
+        <button
+          class="main-button store-button"
+          type="button"
+          data-store="sams_costco"
+        >
+          Sam’s/Costco
+        </button>
+
+        <button
+          class="main-button store-button"
+          type="button"
+          data-store="walmart"
+        >
+          Walmart
+        </button>
+
+        <button
+          class="main-button store-button"
+          type="button"
+          data-store="alcohol"
+        >
+          Alcohol
+        </button>
+
+        <button
+          class="main-button store-button"
+          type="button"
+          data-store="sodas"
+        >
+          Sodas
+        </button>
+
       </div>
+
     </section>
 
     <section id="addScreen" class="screen" hidden>
+
       <div class="card form-card">
+
         <form id="addItemForm">
+
           <div class="field">
-            <label for="itemName">What item would you like to add?</label>
-            <input id="itemName" name="itemName" type="text" maxlength="100" autocomplete="off" required>
+            <label for="itemName">
+              What item would you like to add?
+            </label>
+
+            <input
+              id="itemName"
+              name="itemName"
+              type="text"
+              maxlength="100"
+              autocomplete="off"
+              required
+            >
           </div>
 
           <div class="field">
-            <label for="quantity">Quantity</label>
-            <input id="quantity" name="quantity" type="number" min="1" max="9999" step="1" inputmode="numeric" placeholder="1">
+
+            <label for="quantity">
+              Quantity
+            </label>
+
+            <input
+              id="quantity"
+              name="quantity"
+              type="number"
+              min="1"
+              max="9999"
+              step="1"
+              inputmode="numeric"
+              placeholder="1"
+            >
+
           </div>
-          <div class="hint">If left blank, the quantity will be 1.</div>
+
+          <div class="hint">
+            If left blank, the quantity will be 1.
+          </div>
 
           <div class="field">
-            <label for="store">Store</label>
-            <select id="store" name="store" required>
-              <option value="" selected disabled>Choose a store</option>
-              <option value="sams_costco">Sam’s/Costco</option>
-              <option value="walmart">Walmart</option>
-              <option value="alcohol">Alcohol</option>
-              <option value="sodas">Sodas</option>
+
+            <label for="store">
+              Store
+            </label>
+
+            <select
+              id="store"
+              name="store"
+              required
+            >
+
+              <option
+                value=""
+                selected
+                disabled
+              >
+                Choose a store
+              </option>
+
+              <option value="sams_costco">
+                Sam’s/Costco
+              </option>
+
+              <option value="walmart">
+                Walmart
+              </option>
+
+              <option value="alcohol">
+                Alcohol
+              </option>
+
+              <option value="sodas">
+                Sodas
+              </option>
+
             </select>
+
           </div>
 
-          <button id="saveItemButton" class="save-button" type="submit">Add Item</button>
+          <button
+            id="saveItemButton"
+            class="save-button"
+            type="submit"
+          >
+            Add Item
+          </button>
+
         </form>
+
       </div>
+
     </section>
 
     <section id="storeScreen" class="screen" hidden>
+
       <div class="card list-card">
-        <div class="list-heading" aria-hidden="true">
+
+        <div
+          class="list-heading"
+          aria-hidden="true"
+        >
+
           <span>Item</span>
           <span>Qty</span>
           <span></span>
+
         </div>
-        <div id="storeList" aria-live="polite"></div>
+
+        <div
+          id="storeList"
+          aria-live="polite"
+        ></div>
+
       </div>
+
     </section>
+
   </main>
 
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div
+    id="toast"
+    class="toast"
+    role="status"
+    aria-live="polite"
+  ></div>
 
   <script>
     'use strict';
 
-    // Supabase project settings. The publishable key is designed for browser use.
-    const SUPABASE_URL = 'https://yfchkrnuxaquqzxtcynp.supabase.co';
-    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_gh0acghIDuQDgh24ZIm8Mw_c1bpvIM6';
+    // ==========================================================
+    // APP VERSION
+    // Change this every time the app code is revised.
+    // Example:
+    // 1.0.3 -> 1.0.4 -> 1.0.5
+    // ==========================================================
+
+    const APP_VERSION = '1.0.3';
+
+    console.info(`Uno Club Shopping v${APP_VERSION}`);
+
+
+    // ==========================================================
+    // SUPABASE SETTINGS
+    // ==========================================================
+
+    const SUPABASE_URL =
+      'https://yfchkrnuxaquqzxtcynp.supabase.co';
+
+    const SUPABASE_PUBLISHABLE_KEY =
+      'sb_publishable_gh0acghIDuQDgh24ZIm8Mw_c1bpvIM6';
+
+
+    // ==========================================================
+    // STORE NAMES
+    // ==========================================================
 
     const STORES = {
       sams_costco: 'Sam’s/Costco',
@@ -415,357 +606,1118 @@ Shopping</h1>
       sodas: 'Sodas'
     };
 
-    const homeScreen = document.getElementById('homeScreen');
-    const addScreen = document.getElementById('addScreen');
-    const storeScreen = document.getElementById('storeScreen');
-    const pageTitle = document.getElementById('pageTitle');
-    const backButton = document.getElementById('backButton');
-    const addItemButton = document.getElementById('addItemButton');
-    const addItemForm = document.getElementById('addItemForm');
-    const itemNameInput = document.getElementById('itemName');
-    const quantityInput = document.getElementById('quantity');
-    const storeSelect = document.getElementById('store');
-    const saveItemButton = document.getElementById('saveItemButton');
-    const storeList = document.getElementById('storeList');
-    const toast = document.getElementById('toast');
+
+    // ==========================================================
+    // PAGE ELEMENTS
+    // ==========================================================
+
+    const homeScreen =
+      document.getElementById('homeScreen');
+
+    const addScreen =
+      document.getElementById('addScreen');
+
+    const storeScreen =
+      document.getElementById('storeScreen');
+
+    const pageTitle =
+      document.getElementById('pageTitle');
+
+    const backButton =
+      document.getElementById('backButton');
+
+    const addItemButton =
+      document.getElementById('addItemButton');
+
+    const addItemForm =
+      document.getElementById('addItemForm');
+
+    const itemNameInput =
+      document.getElementById('itemName');
+
+    const quantityInput =
+      document.getElementById('quantity');
+
+    const storeSelect =
+      document.getElementById('store');
+
+    const saveItemButton =
+      document.getElementById('saveItemButton');
+
+    const storeList =
+      document.getElementById('storeList');
+
+    const toast =
+      document.getElementById('toast');
+
 
     let currentStore = null;
     let toastTimer = null;
 
+
+    // ==========================================================
+    // TOAST MESSAGE
+    // ==========================================================
+
     function showToast(message, isError = false) {
+
       clearTimeout(toastTimer);
+
       toast.textContent = message;
-      toast.classList.toggle('error', isError);
+
+      toast.classList.toggle(
+        'error',
+        isError
+      );
+
       toast.classList.add('show');
-      toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
+
+      toastTimer = setTimeout(
+        () => toast.classList.remove('show'),
+        2500
+      );
     }
 
+
+    // ==========================================================
+    // SCREEN NAVIGATION
+    // ==========================================================
+
     function showOnly(screen) {
-      homeScreen.hidden = screen !== homeScreen;
-      addScreen.hidden = screen !== addScreen;
-      storeScreen.hidden = screen !== storeScreen;
+
+      homeScreen.hidden =
+        screen !== homeScreen;
+
+      addScreen.hidden =
+        screen !== addScreen;
+
+      storeScreen.hidden =
+        screen !== storeScreen;
     }
+
 
     function goHome() {
       location.hash = '#home';
     }
 
+
     function goAdd() {
       location.hash = '#add';
     }
 
+
     function goStore(storeKey) {
-      location.hash = '#store/' + storeKey;
+      location.hash =
+        '#store/' + storeKey;
     }
+
 
     function route() {
-      const hash = location.hash || '#home';
+
+      const hash =
+        location.hash || '#home';
+
 
       if (hash === '#add') {
+
         currentStore = null;
+
         showOnly(addScreen);
-        pageTitle.textContent = 'Add Item';
+
+        pageTitle.textContent =
+          'Add Item';
+
         backButton.hidden = false;
-        setTimeout(() => itemNameInput.focus(), 80);
+
+        setTimeout(
+          () => itemNameInput.focus(),
+          80
+        );
+
         return;
       }
+
 
       if (hash.startsWith('#store/')) {
-        const storeKey = hash.slice('#store/'.length);
+
+        const storeKey =
+          hash.slice('#store/'.length);
+
+
         if (!STORES[storeKey]) {
+
           goHome();
+
           return;
         }
-        currentStore = storeKey;
+
+
+        currentStore =
+          storeKey;
+
+
         showOnly(storeScreen);
-        pageTitle.textContent = STORES[storeKey];
-        backButton.hidden = false;
+
+
+        pageTitle.textContent =
+          STORES[storeKey];
+
+
+        backButton.hidden =
+          false;
+
+
         loadStoreItems();
+
         return;
       }
 
+
       currentStore = null;
+
       showOnly(homeScreen);
-      pageTitle.textContent = 'Uno Club\nShopping';
-      backButton.hidden = true;
+
+      pageTitle.textContent =
+        'Uno Club\nShopping';
+
+      backButton.hidden =
+        true;
     }
 
-    async function api(path, options = {}) {
+
+    // ==========================================================
+    // SUPABASE API
+    // ==========================================================
+
+    async function api(
+      path,
+      options = {}
+    ) {
+
       const headers = {
-        apikey: SUPABASE_PUBLISHABLE_KEY,
-        Accept: 'application/json',
-        ...(options.body ? { 'Content-Type': 'application/json' } : {}),
+
+        apikey:
+          SUPABASE_PUBLISHABLE_KEY,
+
+        Accept:
+          'application/json',
+
+        ...(options.body
+          ? {
+              'Content-Type':
+                'application/json'
+            }
+          : {}),
+
         ...(options.headers || {})
       };
 
-      const response = await fetch(SUPABASE_URL + path, {
-        ...options,
-        headers
-      });
+
+      const response =
+        await fetch(
+          SUPABASE_URL + path,
+          {
+            ...options,
+            headers
+          }
+        );
+
 
       if (!response.ok) {
-        let message = `Request failed (${response.status})`;
+
+        let message =
+          `Request failed (${response.status})`;
+
+
         try {
-          const data = await response.json();
-          message = data.message || data.error_description || data.hint || message;
+
+          const data =
+            await response.json();
+
+
+          message =
+            data.message ||
+            data.error_description ||
+            data.hint ||
+            message;
+
         } catch (_) {
-          const text = await response.text();
-          if (text) message = text;
+
+          const text =
+            await response.text();
+
+
+          if (text) {
+            message = text;
+          }
         }
+
+
         throw new Error(message);
       }
 
-      if (response.status === 204) return null;
-      const text = await response.text();
-      return text ? JSON.parse(text) : null;
+
+      if (response.status === 204) {
+        return null;
+      }
+
+
+      const text =
+        await response.text();
+
+
+      return text
+        ? JSON.parse(text)
+        : null;
     }
+
+
+    // ==========================================================
+    // CLEAN ITEM NAME
+    // ==========================================================
 
     function normalizeItemName(value) {
-      return value.trim().replace(/\s+/g, ' ');
+
+      return value
+        .trim()
+        .replace(/\s+/g, ' ');
     }
 
-    addItemButton.addEventListener('click', goAdd);
 
-    document.querySelectorAll('.store-button').forEach(button => {
-      button.addEventListener('click', () => goStore(button.dataset.store));
-    });
+    // ==========================================================
+    // MAIN PAGE BUTTONS
+    // ==========================================================
 
-    backButton.addEventListener('click', goHome);
+    addItemButton.addEventListener(
+      'click',
+      goAdd
+    );
 
-    addItemForm.addEventListener('submit', async (event) => {
-      event.preventDefault();
 
-      const itemName = normalizeItemName(itemNameInput.value);
-      const store = storeSelect.value;
-      const rawQuantity = quantityInput.value.trim();
-      const quantity = rawQuantity === '' ? 1 : Number.parseInt(rawQuantity, 10);
+    document
+      .querySelectorAll('.store-button')
+      .forEach(button => {
 
-      if (!itemName) {
-        showToast('Please enter an item.', true);
-        itemNameInput.focus();
+        button.addEventListener(
+          'click',
+          () =>
+            goStore(
+              button.dataset.store
+            )
+        );
+
+      });
+
+
+    backButton.addEventListener(
+      'click',
+      goHome
+    );
+
+
+    // ==========================================================
+    // ADD ITEM
+    // ==========================================================
+
+    addItemForm.addEventListener(
+      'submit',
+      async (event) => {
+
+        event.preventDefault();
+
+
+        const itemName =
+          normalizeItemName(
+            itemNameInput.value
+          );
+
+
+        const store =
+          storeSelect.value;
+
+
+        const rawQuantity =
+          quantityInput.value.trim();
+
+
+        const quantity =
+          rawQuantity === ''
+            ? 1
+            : Number.parseInt(
+                rawQuantity,
+                10
+              );
+
+
+        if (!itemName) {
+
+          showToast(
+            'Please enter an item.',
+            true
+          );
+
+          itemNameInput.focus();
+
+          return;
+        }
+
+
+        if (
+          !store ||
+          !STORES[store]
+        ) {
+
+          showToast(
+            'Please choose a store.',
+            true
+          );
+
+          storeSelect.focus();
+
+          return;
+        }
+
+
+        if (
+          !Number.isInteger(quantity) ||
+          quantity < 1 ||
+          quantity > 9999
+        ) {
+
+          showToast(
+            'Quantity must be a whole number of 1 or more.',
+            true
+          );
+
+          quantityInput.focus();
+
+          return;
+        }
+
+
+        if (
+          store === 'sams_costco' &&
+          itemName.toLocaleLowerCase() ===
+            'case of water'
+        ) {
+
+          showToast(
+            'Case of Water is already permanently on Sam’s/Costco.',
+            true
+          );
+
+          return;
+        }
+
+
+        saveItemButton.disabled =
+          true;
+
+
+        saveItemButton.textContent =
+          'Adding…';
+
+
+        try {
+
+          await api(
+            '/rest/v1/shopping_items',
+            {
+              method: 'POST',
+
+              headers: {
+                Prefer:
+                  'return=minimal'
+              },
+
+              body:
+                JSON.stringify({
+                  item_name:
+                    itemName,
+
+                  quantity:
+                    quantity,
+
+                  store:
+                    store
+                })
+            }
+          );
+
+
+          itemNameInput.value =
+            '';
+
+
+          quantityInput.value =
+            '';
+
+
+          showToast(
+            `Added to ${STORES[store]}.`
+          );
+
+
+          itemNameInput.focus();
+
+
+        } catch (error) {
+
+          console.error(error);
+
+
+          showToast(
+            'Could not add the item. Please try again.',
+            true
+          );
+
+
+        } finally {
+
+          saveItemButton.disabled =
+            false;
+
+
+          saveItemButton.textContent =
+            'Add Item';
+        }
+      }
+    );
+
+
+    // ==========================================================
+    // LOAD STORE ITEMS
+    // ==========================================================
+
+    async function loadStoreItems(
+      quiet = false
+    ) {
+
+      if (!currentStore) {
         return;
       }
 
-      if (!store || !STORES[store]) {
-        showToast('Please choose a store.', true);
-        storeSelect.focus();
-        return;
-      }
 
-      if (!Number.isInteger(quantity) || quantity < 1 || quantity > 9999) {
-        showToast('Quantity must be a whole number of 1 or more.', true);
-        quantityInput.focus();
-        return;
-      }
+      const storeAtStart =
+        currentStore;
 
-      if (store === 'sams_costco' && itemName.toLocaleLowerCase() === 'case of water') {
-        showToast('Case of Water is already permanently on Sam’s/Costco.', true);
-        return;
-      }
-
-      saveItemButton.disabled = true;
-      saveItemButton.textContent = 'Adding…';
-
-      try {
-        await api('/rest/v1/shopping_items', {
-          method: 'POST',
-          headers: { Prefer: 'return=minimal' },
-          body: JSON.stringify({
-            item_name: itemName,
-            quantity,
-            store
-          })
-        });
-
-        itemNameInput.value = '';
-        quantityInput.value = '';
-        showToast(`Added to ${STORES[store]}.`);
-        itemNameInput.focus();
-      } catch (error) {
-        console.error(error);
-        showToast('Could not add the item. Please try again.', true);
-      } finally {
-        saveItemButton.disabled = false;
-        saveItemButton.textContent = 'Add Item';
-      }
-    });
-
-    async function loadStoreItems(quiet = false) {
-      if (!currentStore) return;
-      const storeAtStart = currentStore;
 
       if (!quiet) {
-        storeList.innerHTML = '<div class="loading-state">Loading…</div>';
+
+        storeList.innerHTML =
+          '<div class="loading-state">Loading…</div>';
       }
 
+
       try {
-        const data = await api(
-          '/rest/v1/shopping_items?select=id,item_name,quantity,store&store=eq.' + encodeURIComponent(storeAtStart)
+
+        const data =
+          await api(
+
+            '/rest/v1/shopping_items' +
+
+            '?select=id,item_name,quantity,store' +
+
+            '&store=eq.' +
+
+            encodeURIComponent(
+              storeAtStart
+            )
+          );
+
+
+        if (
+          currentStore !==
+          storeAtStart
+        ) {
+          return;
+        }
+
+
+        const items =
+          Array.isArray(data)
+            ? data
+            : [];
+
+
+        items.sort(
+          (a, b) =>
+            a.item_name.localeCompare(
+              b.item_name,
+              undefined,
+              {
+                sensitivity: 'base',
+                numeric: true
+              }
+            )
         );
 
-        if (currentStore !== storeAtStart) return;
-
-        const items = Array.isArray(data) ? data : [];
-        items.sort((a, b) =>
-          a.item_name.localeCompare(b.item_name, undefined, { sensitivity: 'base', numeric: true })
-        );
 
         renderStoreList(items);
+
+
       } catch (error) {
+
         console.error(error);
-        if (!quiet && currentStore === storeAtStart) {
-          storeList.innerHTML = '<div class="error-state">Could not load this list. Please try again.</div>';
+
+
+        if (
+          !quiet &&
+          currentStore ===
+            storeAtStart
+        ) {
+
+          storeList.innerHTML =
+            '<div class="error-state">Could not load this list. Please try again.</div>';
         }
       }
     }
 
-    function renderStoreList(items) {
-      storeList.innerHTML = '';
 
-      if (currentStore === 'sams_costco') {
-        storeList.appendChild(createPermanentWaterRow());
+    // ==========================================================
+    // DISPLAY STORE LIST
+    // ==========================================================
+
+    function renderStoreList(items) {
+
+      storeList.innerHTML =
+        '';
+
+
+      if (
+        currentStore ===
+        'sams_costco'
+      ) {
+
+        storeList.appendChild(
+          createPermanentWaterRow()
+        );
       }
 
-      items.forEach(item => storeList.appendChild(createItemRow(item)));
 
-      if (items.length === 0) {
-        const empty = document.createElement('div');
-        empty.className = 'empty-state';
-        empty.textContent = currentStore === 'sams_costco'
-          ? 'No other items on this list.'
-          : 'No items on this list.';
-        storeList.appendChild(empty);
+      items.forEach(
+        item =>
+          storeList.appendChild(
+            createItemRow(item)
+          )
+      );
+
+
+      if (
+        items.length === 0
+      ) {
+
+        const empty =
+          document.createElement(
+            'div'
+          );
+
+
+        empty.className =
+          'empty-state';
+
+
+        empty.textContent =
+          currentStore ===
+            'sams_costco'
+
+            ? 'No other items on this list.'
+
+            : 'No items on this list.';
+
+
+        storeList.appendChild(
+          empty
+        );
       }
     }
+
+
+    // ==========================================================
+    // PERMANENT CASE OF WATER
+    // ==========================================================
 
     function createPermanentWaterRow() {
-      const row = document.createElement('div');
-      row.className = 'item-row permanent-row';
 
-      const nameWrap = document.createElement('div');
-      const name = document.createElement('div');
-      name.className = 'item-name';
-      name.textContent = 'Case of Water';
-      const note = document.createElement('div');
-      note.className = 'fixed-note';
-      note.textContent = 'Always on list';
-      nameWrap.append(name, note);
+      const row =
+        document.createElement(
+          'div'
+        );
 
-      const qty = document.createElement('div');
-      qty.className = 'qty-fixed';
-      qty.textContent = '1';
-      qty.setAttribute('aria-label', 'Quantity 1');
 
-      const spacer = document.createElement('div');
-      spacer.setAttribute('aria-hidden', 'true');
+      row.className =
+        'item-row permanent-row';
 
-      row.append(nameWrap, qty, spacer);
+
+      const nameWrap =
+        document.createElement(
+          'div'
+        );
+
+
+      const name =
+        document.createElement(
+          'div'
+        );
+
+
+      name.className =
+        'item-name';
+
+
+      name.textContent =
+        'Case of Water';
+
+
+      const note =
+        document.createElement(
+          'div'
+        );
+
+
+      note.className =
+        'fixed-note';
+
+
+      note.textContent =
+        'Always on list';
+
+
+      nameWrap.append(
+        name,
+        note
+      );
+
+
+      const qty =
+        document.createElement(
+          'div'
+        );
+
+
+      qty.className =
+        'qty-fixed';
+
+
+      qty.textContent =
+        '1';
+
+
+      qty.setAttribute(
+        'aria-label',
+        'Quantity 1'
+      );
+
+
+      const spacer =
+        document.createElement(
+          'div'
+        );
+
+
+      spacer.setAttribute(
+        'aria-hidden',
+        'true'
+      );
+
+
+      row.append(
+        nameWrap,
+        qty,
+        spacer
+      );
+
+
       return row;
     }
+
+
+    // ==========================================================
+    // NORMAL SHOPPING ITEM ROW
+    // ==========================================================
 
     function createItemRow(item) {
-      const row = document.createElement('div');
-      row.className = 'item-row db-row';
-      row.dataset.id = item.id;
 
-      const name = document.createElement('div');
-      name.className = 'item-name';
-      name.textContent = item.item_name;
+      const row =
+        document.createElement(
+          'div'
+        );
 
-      const qty = document.createElement('input');
-      qty.className = 'qty-input';
-      qty.type = 'number';
-      qty.min = '1';
-      qty.max = '9999';
-      qty.step = '1';
-      qty.inputMode = 'numeric';
-      qty.value = item.quantity;
-      qty.setAttribute('aria-label', `Quantity for ${item.item_name}`);
-      qty.dataset.savedValue = String(item.quantity);
-      qty.addEventListener('focus', () => qty.select());
-      qty.addEventListener('change', () => updateQuantity(item.id, qty));
 
-      const del = document.createElement('button');
-      del.type = 'button';
-      del.className = 'delete-button';
-      del.textContent = '×';
-      del.setAttribute('aria-label', `Delete ${item.item_name}`);
-      del.addEventListener('click', () => deleteItem(item.id, item.item_name, row, del));
+      row.className =
+        'item-row db-row';
 
-      row.append(name, qty, del);
+
+      row.dataset.id =
+        item.id;
+
+
+      const name =
+        document.createElement(
+          'div'
+        );
+
+
+      name.className =
+        'item-name';
+
+
+      name.textContent =
+        item.item_name;
+
+
+      const qty =
+        document.createElement(
+          'input'
+        );
+
+
+      qty.className =
+        'qty-input';
+
+
+      qty.type =
+        'number';
+
+
+      qty.min =
+        '1';
+
+
+      qty.max =
+        '9999';
+
+
+      qty.step =
+        '1';
+
+
+      qty.inputMode =
+        'numeric';
+
+
+      qty.value =
+        item.quantity;
+
+
+      qty.setAttribute(
+        'aria-label',
+        `Quantity for ${item.item_name}`
+      );
+
+
+      qty.dataset.savedValue =
+        String(item.quantity);
+
+
+      qty.addEventListener(
+        'focus',
+        () => qty.select()
+      );
+
+
+      qty.addEventListener(
+        'change',
+        () =>
+          updateQuantity(
+            item.id,
+            qty
+          )
+      );
+
+
+      const del =
+        document.createElement(
+          'button'
+        );
+
+
+      del.type =
+        'button';
+
+
+      del.className =
+        'delete-button';
+
+
+      del.textContent =
+        '×';
+
+
+      del.setAttribute(
+        'aria-label',
+        `Delete ${item.item_name}`
+      );
+
+
+      del.addEventListener(
+        'click',
+        () =>
+          deleteItem(
+            item.id,
+            item.item_name,
+            row,
+            del
+          )
+      );
+
+
+      row.append(
+        name,
+        qty,
+        del
+      );
+
+
       return row;
     }
 
-    async function updateQuantity(id, input) {
-      const oldValue = Number.parseInt(input.dataset.savedValue, 10);
-      const newValue = Number.parseInt(input.value, 10);
 
-      if (!Number.isInteger(newValue) || newValue < 1 || newValue > 9999) {
-        input.value = oldValue;
-        showToast('Quantity must be a whole number of 1 or more.', true);
+    // ==========================================================
+    // CHANGE QUANTITY
+    // ==========================================================
+
+    async function updateQuantity(
+      id,
+      input
+    ) {
+
+      const oldValue =
+        Number.parseInt(
+          input.dataset.savedValue,
+          10
+        );
+
+
+      const newValue =
+        Number.parseInt(
+          input.value,
+          10
+        );
+
+
+      if (
+        !Number.isInteger(newValue) ||
+        newValue < 1 ||
+        newValue > 9999
+      ) {
+
+        input.value =
+          oldValue;
+
+
+        showToast(
+          'Quantity must be a whole number of 1 or more.',
+          true
+        );
+
+
         return;
       }
 
-      if (newValue === oldValue) return;
 
-      input.disabled = true;
+      if (
+        newValue === oldValue
+      ) {
+        return;
+      }
+
+
+      input.disabled =
+        true;
+
 
       try {
-        await api('/rest/v1/shopping_items?id=eq.' + encodeURIComponent(id), {
-          method: 'PATCH',
-          headers: { Prefer: 'return=minimal' },
-          body: JSON.stringify({ quantity: newValue })
-        });
-        input.dataset.savedValue = String(newValue);
-        showToast('Quantity updated.');
+
+        await api(
+
+          '/rest/v1/shopping_items?id=eq.' +
+
+          encodeURIComponent(id),
+
+          {
+            method:
+              'PATCH',
+
+            headers: {
+              Prefer:
+                'return=minimal'
+            },
+
+            body:
+              JSON.stringify({
+                quantity:
+                  newValue
+              })
+          }
+        );
+
+
+        input.dataset.savedValue =
+          String(newValue);
+
+
+        showToast(
+          'Quantity updated.'
+        );
+
+
       } catch (error) {
+
         console.error(error);
-        input.value = oldValue;
-        showToast('Could not update the quantity.', true);
+
+
+        input.value =
+          oldValue;
+
+
+        showToast(
+          'Could not update the quantity.',
+          true
+        );
+
+
       } finally {
-        input.disabled = false;
+
+        input.disabled =
+          false;
       }
     }
 
-    async function deleteItem(id, itemName, row, button) {
-      button.disabled = true;
+
+    // ==========================================================
+    // DELETE ITEM
+    // ==========================================================
+
+    async function deleteItem(
+      id,
+      itemName,
+      row,
+      button
+    ) {
+
+      button.disabled =
+        true;
+
 
       try {
-        await api('/rest/v1/shopping_items?id=eq.' + encodeURIComponent(id), {
-          method: 'DELETE',
-          headers: { Prefer: 'return=minimal' }
-        });
+
+        await api(
+
+          '/rest/v1/shopping_items?id=eq.' +
+
+          encodeURIComponent(id),
+
+          {
+            method:
+              'DELETE',
+
+            headers: {
+              Prefer:
+                'return=minimal'
+            }
+          }
+        );
+
 
         row.remove();
-        showToast(`${itemName} removed.`);
 
-        if (!storeList.querySelector('.db-row')) {
-          const empty = document.createElement('div');
-          empty.className = 'empty-state';
-          empty.textContent = currentStore === 'sams_costco'
-            ? 'No other items on this list.'
-            : 'No items on this list.';
-          storeList.appendChild(empty);
+
+        showToast(
+          `${itemName} removed.`
+        );
+
+
+        if (
+          !storeList.querySelector(
+            '.db-row'
+          )
+        ) {
+
+          const empty =
+            document.createElement(
+              'div'
+            );
+
+
+          empty.className =
+            'empty-state';
+
+
+          empty.textContent =
+            currentStore ===
+              'sams_costco'
+
+              ? 'No other items on this list.'
+
+              : 'No items on this list.';
+
+
+          storeList.appendChild(
+            empty
+          );
         }
+
+
       } catch (error) {
+
         console.error(error);
-        button.disabled = false;
-        showToast('Could not remove the item.', true);
+
+
+        button.disabled =
+          false;
+
+
+        showToast(
+          'Could not remove the item.',
+          true
+        );
       }
     }
 
-    window.addEventListener('hashchange', route);
 
-    document.addEventListener('visibilitychange', () => {
-      if (!document.hidden && currentStore) {
-        loadStoreItems(true);
+    // ==========================================================
+    // PAGE EVENTS
+    // ==========================================================
+
+    window.addEventListener(
+      'hashchange',
+      route
+    );
+
+
+    document.addEventListener(
+      'visibilitychange',
+      () => {
+
+        if (
+          !document.hidden &&
+          currentStore
+        ) {
+
+          loadStoreItems(true);
+        }
       }
-    });
+    );
+
+
+    // ==========================================================
+    // START APP
+    // ==========================================================
 
     if (!location.hash) {
-      history.replaceState(null, '', '#home');
+
+      history.replaceState(
+        null,
+        '',
+        '#home'
+      );
     }
+
+
     route();
+
   </script>
+
 </body>
 </html>
