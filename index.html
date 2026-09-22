@@ -3,20 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <!-- APP VERSION: 1.0.3 — bump this number with every code release. -->
-  <meta name="app-version" content="1.0.3">
+
+  <!-- APP VERSION: 1.0.4 -->
+  <meta name="app-version" content="1.0.4">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
+
   <meta name="theme-color" content="#0b0b0b">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Uno Shopping">
+
   <title>Uno Club Shopping</title>
 
-  <!-- Upload uno-club-shopping.PNG to the same GitHub repository as index.html. -->
-  <link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.3">
-  <link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.3">
+  <link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.4">
+  <link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.4">
 
   <style>
     :root {
@@ -34,14 +36,18 @@
       --radius: 16px;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-    html, body {
+    html,
+    body {
       margin: 0;
       min-height: 100%;
       background: var(--page);
       color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
       -webkit-text-size-adjust: 100%;
     }
 
@@ -50,7 +56,9 @@
       min-height: 100dvh;
     }
 
-    button, input, select {
+    button,
+    input,
+    select {
       font: inherit;
     }
 
@@ -80,7 +88,6 @@
       font-size: 23px;
       line-height: 1.02;
       font-weight: 850;
-      letter-spacing: .1px;
     }
 
     .header-logo {
@@ -89,7 +96,9 @@
       flex: 0 0 58px;
       object-fit: cover;
       border-radius: 12px;
-      box-shadow: 0 0 0 1px rgba(255,255,255,.14), 0 4px 12px rgba(0,0,0,.35);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.14),
+        0 4px 12px rgba(0,0,0,.35);
     }
 
     .back-button {
@@ -150,6 +159,30 @@
     .main-button.add-item {
       background: var(--black);
       box-shadow: 0 5px 14px rgba(0,0,0,.20);
+    }
+
+    /* STORE BUTTON COUNTS */
+    .store-button {
+      position: relative;
+    }
+
+    .count-badge {
+      position: absolute;
+      top: 8px;
+      right: 9px;
+      min-width: 28px;
+      height: 28px;
+      padding: 0 7px;
+      border-radius: 14px;
+      background: var(--white);
+      color: var(--blue);
+      border: 2px solid rgba(255,255,255,.85);
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 24px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,.20);
+      pointer-events: none;
     }
 
     .card {
@@ -367,1357 +400,1462 @@
 
 <body>
 
-  <header class="app-header">
-    <button
-      id="backButton"
-      class="back-button"
-      type="button"
-      aria-label="Back to main page"
-      hidden
-    >
-      &larr;
-    </button>
+<header class="app-header">
 
-    <h1 id="pageTitle">Uno Club
+  <button
+    id="backButton"
+    class="back-button"
+    type="button"
+    aria-label="Back to main page"
+    hidden
+  >
+    &larr;
+  </button>
+
+  <h1 id="pageTitle">Uno Club
 Shopping</h1>
 
-    <img
-      class="header-logo"
-      src="uno-club-shopping.PNG?v=1.0.3"
-      alt="Uno Club Shopping logo"
-    >
-  </header>
+  <img
+    class="header-logo"
+    src="uno-club-shopping.PNG?v=1.0.4"
+    alt="Uno Club Shopping logo"
+  >
 
-  <main>
+</header>
 
-    <section id="homeScreen" class="screen">
+<main>
 
-      <div class="button-stack">
+  <!-- HOME PAGE -->
+  <section id="homeScreen" class="screen">
+
+    <div class="button-stack">
+
+      <button
+        id="addItemButton"
+        class="main-button add-item"
+        type="button"
+      >
+        Add Item
+      </button>
+
+      <button
+        class="main-button store-button"
+        type="button"
+        data-store="sams_costco"
+      >
+        Sam’s/Costco
+        <span
+          class="count-badge"
+          data-count-store="sams_costco"
+        >1</span>
+      </button>
+
+      <button
+        class="main-button store-button"
+        type="button"
+        data-store="walmart"
+      >
+        Walmart
+        <span
+          class="count-badge"
+          data-count-store="walmart"
+        >0</span>
+      </button>
+
+      <button
+        class="main-button store-button"
+        type="button"
+        data-store="alcohol"
+      >
+        Alcohol
+        <span
+          class="count-badge"
+          data-count-store="alcohol"
+        >0</span>
+      </button>
+
+      <button
+        class="main-button store-button"
+        type="button"
+        data-store="sodas"
+      >
+        Sodas
+        <span
+          class="count-badge"
+          data-count-store="sodas"
+        >0</span>
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ADD ITEM PAGE -->
+  <section id="addScreen" class="screen" hidden>
+
+    <div class="card form-card">
+
+      <form id="addItemForm">
+
+        <div class="field">
+
+          <label for="itemName">
+            What item would you like to add?
+          </label>
+
+          <input
+            id="itemName"
+            name="itemName"
+            type="text"
+            maxlength="100"
+            autocomplete="off"
+            required
+          >
+
+        </div>
+
+        <div class="field">
+
+          <label for="quantity">
+            Quantity
+          </label>
+
+          <input
+            id="quantity"
+            name="quantity"
+            type="number"
+            min="1"
+            max="9999"
+            step="1"
+            inputmode="numeric"
+            placeholder="1"
+          >
+
+        </div>
+
+        <div class="hint">
+          If left blank, the quantity will be 1.
+        </div>
+
+        <div class="field">
+
+          <label for="store">
+            Store
+          </label>
+
+          <select
+            id="store"
+            name="store"
+            required
+          >
+
+            <option value="" selected disabled>
+              Choose a store
+            </option>
+
+            <option value="sams_costco">
+              Sam’s/Costco
+            </option>
+
+            <option value="walmart">
+              Walmart
+            </option>
+
+            <option value="alcohol">
+              Alcohol
+            </option>
+
+            <option value="sodas">
+              Sodas
+            </option>
+
+          </select>
+
+        </div>
 
         <button
-          id="addItemButton"
-          class="main-button add-item"
-          type="button"
+          id="saveItemButton"
+          class="save-button"
+          type="submit"
         >
           Add Item
         </button>
 
-        <button
-          class="main-button store-button"
-          type="button"
-          data-store="sams_costco"
-        >
-          Sam’s/Costco
-        </button>
+      </form>
 
-        <button
-          class="main-button store-button"
-          type="button"
-          data-store="walmart"
-        >
-          Walmart
-        </button>
+    </div>
 
-        <button
-          class="main-button store-button"
-          type="button"
-          data-store="alcohol"
-        >
-          Alcohol
-        </button>
+  </section>
 
-        <button
-          class="main-button store-button"
-          type="button"
-          data-store="sodas"
-        >
-          Sodas
-        </button>
 
+  <!-- STORE PAGE -->
+  <section id="storeScreen" class="screen" hidden>
+
+    <div class="card list-card">
+
+      <div class="list-heading" aria-hidden="true">
+        <span>Item</span>
+        <span>Qty</span>
+        <span></span>
       </div>
 
-    </section>
-
-    <section id="addScreen" class="screen" hidden>
+      <div
+        id="storeList"
+        aria-live="polite"
+      ></div>
 
-      <div class="card form-card">
+    </div>
 
-        <form id="addItemForm">
+  </section>
 
-          <div class="field">
-            <label for="itemName">
-              What item would you like to add?
-            </label>
+</main>
 
-            <input
-              id="itemName"
-              name="itemName"
-              type="text"
-              maxlength="100"
-              autocomplete="off"
-              required
-            >
-          </div>
 
-          <div class="field">
+<div
+  id="toast"
+  class="toast"
+  role="status"
+  aria-live="polite"
+></div>
 
-            <label for="quantity">
-              Quantity
-            </label>
 
-            <input
-              id="quantity"
-              name="quantity"
-              type="number"
-              min="1"
-              max="9999"
-              step="1"
-              inputmode="numeric"
-              placeholder="1"
-            >
+<script>
+'use strict';
 
-          </div>
 
-          <div class="hint">
-            If left blank, the quantity will be 1.
-          </div>
+/* =========================================================
+   APP VERSION
+   ========================================================= */
 
-          <div class="field">
+const APP_VERSION = '1.0.4';
 
-            <label for="store">
-              Store
-            </label>
+console.info(`Uno Club Shopping v${APP_VERSION}`);
 
-            <select
-              id="store"
-              name="store"
-              required
-            >
 
-              <option
-                value=""
-                selected
-                disabled
-              >
-                Choose a store
-              </option>
+/* =========================================================
+   SUPABASE
+   ========================================================= */
 
-              <option value="sams_costco">
-                Sam’s/Costco
-              </option>
+const SUPABASE_URL =
+  'https://yfchkrnuxaquqzxtcynp.supabase.co';
 
-              <option value="walmart">
-                Walmart
-              </option>
+const SUPABASE_PUBLISHABLE_KEY =
+  'sb_publishable_gh0acghIDuQDgh24ZIm8Mw_c1bpvIM6';
 
-              <option value="alcohol">
-                Alcohol
-              </option>
 
-              <option value="sodas">
-                Sodas
-              </option>
+/* =========================================================
+   STORES
+   ========================================================= */
 
-            </select>
+const STORES = {
+  sams_costco: 'Sam’s/Costco',
+  walmart: 'Walmart',
+  alcohol: 'Alcohol',
+  sodas: 'Sodas'
+};
 
-          </div>
 
-          <button
-            id="saveItemButton"
-            class="save-button"
-            type="submit"
-          >
-            Add Item
-          </button>
+/* =========================================================
+   ELEMENTS
+   ========================================================= */
 
-        </form>
+const homeScreen =
+  document.getElementById('homeScreen');
 
-      </div>
+const addScreen =
+  document.getElementById('addScreen');
 
-    </section>
+const storeScreen =
+  document.getElementById('storeScreen');
 
-    <section id="storeScreen" class="screen" hidden>
+const pageTitle =
+  document.getElementById('pageTitle');
 
-      <div class="card list-card">
+const backButton =
+  document.getElementById('backButton');
 
-        <div
-          class="list-heading"
-          aria-hidden="true"
-        >
+const addItemButton =
+  document.getElementById('addItemButton');
 
-          <span>Item</span>
-          <span>Qty</span>
-          <span></span>
+const addItemForm =
+  document.getElementById('addItemForm');
 
-        </div>
+const itemNameInput =
+  document.getElementById('itemName');
 
-        <div
-          id="storeList"
-          aria-live="polite"
-        ></div>
+const quantityInput =
+  document.getElementById('quantity');
 
-      </div>
+const storeSelect =
+  document.getElementById('store');
 
-    </section>
+const saveItemButton =
+  document.getElementById('saveItemButton');
 
-  </main>
+const storeList =
+  document.getElementById('storeList');
 
-  <div
-    id="toast"
-    class="toast"
-    role="status"
-    aria-live="polite"
-  ></div>
+const toast =
+  document.getElementById('toast');
 
-  <script>
-    'use strict';
 
-    // ==========================================================
-    // APP VERSION
-    // Change this every time the app code is revised.
-    // Example:
-    // 1.0.3 -> 1.0.4 -> 1.0.5
-    // ==========================================================
+let currentStore = null;
+let toastTimer = null;
 
-    const APP_VERSION = '1.0.3';
 
-    console.info(`Uno Club Shopping v${APP_VERSION}`);
+/* =========================================================
+   MESSAGE POPUP
+   ========================================================= */
 
+function showToast(message, isError = false) {
 
-    // ==========================================================
-    // SUPABASE SETTINGS
-    // ==========================================================
+  clearTimeout(toastTimer);
 
-    const SUPABASE_URL =
-      'https://yfchkrnuxaquqzxtcynp.supabase.co';
+  toast.textContent = message;
 
-    const SUPABASE_PUBLISHABLE_KEY =
-      'sb_publishable_gh0acghIDuQDgh24ZIm8Mw_c1bpvIM6';
+  toast.classList.toggle(
+    'error',
+    isError
+  );
 
+  toast.classList.add('show');
 
-    // ==========================================================
-    // STORE NAMES
-    // ==========================================================
+  toastTimer = setTimeout(
+    () => toast.classList.remove('show'),
+    2500
+  );
+}
 
-    const STORES = {
-      sams_costco: 'Sam’s/Costco',
-      walmart: 'Walmart',
-      alcohol: 'Alcohol',
-      sodas: 'Sodas'
-    };
 
+/* =========================================================
+   SUPABASE API
+   ========================================================= */
 
-    // ==========================================================
-    // PAGE ELEMENTS
-    // ==========================================================
+async function api(path, options = {}) {
 
-    const homeScreen =
-      document.getElementById('homeScreen');
+  const headers = {
 
-    const addScreen =
-      document.getElementById('addScreen');
+    apikey:
+      SUPABASE_PUBLISHABLE_KEY,
 
-    const storeScreen =
-      document.getElementById('storeScreen');
+    Accept:
+      'application/json',
 
-    const pageTitle =
-      document.getElementById('pageTitle');
-
-    const backButton =
-      document.getElementById('backButton');
-
-    const addItemButton =
-      document.getElementById('addItemButton');
-
-    const addItemForm =
-      document.getElementById('addItemForm');
-
-    const itemNameInput =
-      document.getElementById('itemName');
-
-    const quantityInput =
-      document.getElementById('quantity');
-
-    const storeSelect =
-      document.getElementById('store');
-
-    const saveItemButton =
-      document.getElementById('saveItemButton');
-
-    const storeList =
-      document.getElementById('storeList');
-
-    const toast =
-      document.getElementById('toast');
-
-
-    let currentStore = null;
-    let toastTimer = null;
-
-
-    // ==========================================================
-    // TOAST MESSAGE
-    // ==========================================================
-
-    function showToast(message, isError = false) {
-
-      clearTimeout(toastTimer);
-
-      toast.textContent = message;
-
-      toast.classList.toggle(
-        'error',
-        isError
-      );
-
-      toast.classList.add('show');
-
-      toastTimer = setTimeout(
-        () => toast.classList.remove('show'),
-        2500
-      );
-    }
-
-
-    // ==========================================================
-    // SCREEN NAVIGATION
-    // ==========================================================
-
-    function showOnly(screen) {
-
-      homeScreen.hidden =
-        screen !== homeScreen;
-
-      addScreen.hidden =
-        screen !== addScreen;
-
-      storeScreen.hidden =
-        screen !== storeScreen;
-    }
-
-
-    function goHome() {
-      location.hash = '#home';
-    }
-
-
-    function goAdd() {
-      location.hash = '#add';
-    }
-
-
-    function goStore(storeKey) {
-      location.hash =
-        '#store/' + storeKey;
-    }
-
-
-    function route() {
-
-      const hash =
-        location.hash || '#home';
-
-
-      if (hash === '#add') {
-
-        currentStore = null;
-
-        showOnly(addScreen);
-
-        pageTitle.textContent =
-          'Add Item';
-
-        backButton.hidden = false;
-
-        setTimeout(
-          () => itemNameInput.focus(),
-          80
-        );
-
-        return;
-      }
-
-
-      if (hash.startsWith('#store/')) {
-
-        const storeKey =
-          hash.slice('#store/'.length);
-
-
-        if (!STORES[storeKey]) {
-
-          goHome();
-
-          return;
+    ...(options.body
+      ? {
+          'Content-Type':
+            'application/json'
         }
+      : {}),
+
+    ...(options.headers || {})
+  };
 
 
-        currentStore =
-          storeKey;
-
-
-        showOnly(storeScreen);
-
-
-        pageTitle.textContent =
-          STORES[storeKey];
-
-
-        backButton.hidden =
-          false;
-
-
-        loadStoreItems();
-
-        return;
+  const response =
+    await fetch(
+      SUPABASE_URL + path,
+      {
+        ...options,
+        headers
       }
+    );
 
 
-      currentStore = null;
+  if (!response.ok) {
 
-      showOnly(homeScreen);
+    let message =
+      `Request failed (${response.status})`;
 
-      pageTitle.textContent =
-        'Uno Club\nShopping';
+    try {
 
-      backButton.hidden =
-        true;
-    }
+      const data =
+        await response.json();
 
+      message =
+        data.message ||
+        data.error_description ||
+        data.hint ||
+        message;
 
-    // ==========================================================
-    // SUPABASE API
-    // ==========================================================
-
-    async function api(
-      path,
-      options = {}
-    ) {
-
-      const headers = {
-
-        apikey:
-          SUPABASE_PUBLISHABLE_KEY,
-
-        Accept:
-          'application/json',
-
-        ...(options.body
-          ? {
-              'Content-Type':
-                'application/json'
-            }
-          : {}),
-
-        ...(options.headers || {})
-      };
-
-
-      const response =
-        await fetch(
-          SUPABASE_URL + path,
-          {
-            ...options,
-            headers
-          }
-        );
-
-
-      if (!response.ok) {
-
-        let message =
-          `Request failed (${response.status})`;
-
-
-        try {
-
-          const data =
-            await response.json();
-
-
-          message =
-            data.message ||
-            data.error_description ||
-            data.hint ||
-            message;
-
-        } catch (_) {
-
-          const text =
-            await response.text();
-
-
-          if (text) {
-            message = text;
-          }
-        }
-
-
-        throw new Error(message);
-      }
-
-
-      if (response.status === 204) {
-        return null;
-      }
-
+    } catch (_) {
 
       const text =
         await response.text();
 
-
-      return text
-        ? JSON.parse(text)
-        : null;
+      if (text) {
+        message = text;
+      }
     }
 
+    throw new Error(message);
+  }
 
-    // ==========================================================
-    // CLEAN ITEM NAME
-    // ==========================================================
 
-    function normalizeItemName(value) {
+  if (response.status === 204) {
+    return null;
+  }
 
-      return value
-        .trim()
-        .replace(/\s+/g, ' ');
+
+  const text =
+    await response.text();
+
+
+  return text
+    ? JSON.parse(text)
+    : null;
+}
+
+
+/* =========================================================
+   HOME PAGE ITEM COUNTS
+   ========================================================= */
+
+async function loadHomeCounts() {
+
+  /*
+    Sam’s/Costco begins at 1 because
+    Case of Water is permanently on that list.
+  */
+
+  const counts = {
+    sams_costco: 1,
+    walmart: 0,
+    alcohol: 0,
+    sodas: 0
+  };
+
+
+  try {
+
+    const data =
+      await api(
+        '/rest/v1/shopping_items?select=store'
+      );
+
+
+    if (Array.isArray(data)) {
+
+      data.forEach(item => {
+
+        if (
+          Object.prototype.hasOwnProperty.call(
+            counts,
+            item.store
+          )
+        ) {
+
+          counts[item.store]++;
+        }
+
+      });
+
     }
-
-
-    // ==========================================================
-    // MAIN PAGE BUTTONS
-    // ==========================================================
-
-    addItemButton.addEventListener(
-      'click',
-      goAdd
-    );
 
 
     document
-      .querySelectorAll('.store-button')
-      .forEach(button => {
+      .querySelectorAll('.count-badge')
+      .forEach(badge => {
 
-        button.addEventListener(
-          'click',
-          () =>
-            goStore(
-              button.dataset.store
-            )
-        );
+        const store =
+          badge.dataset.countStore;
+
+        badge.textContent =
+          counts[store] ?? 0;
 
       });
 
 
-    backButton.addEventListener(
-      'click',
-      goHome
+  } catch (error) {
+
+    console.error(
+      'Could not load store counts:',
+      error
     );
 
-
-    // ==========================================================
-    // ADD ITEM
-    // ==========================================================
-
-    addItemForm.addEventListener(
-      'submit',
-      async (event) => {
-
-        event.preventDefault();
+  }
+}
 
 
-        const itemName =
-          normalizeItemName(
-            itemNameInput.value
-          );
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+function showOnly(screen) {
+
+  homeScreen.hidden =
+    screen !== homeScreen;
+
+  addScreen.hidden =
+    screen !== addScreen;
+
+  storeScreen.hidden =
+    screen !== storeScreen;
+}
 
 
-        const store =
-          storeSelect.value;
+function goHome() {
+  location.hash = '#home';
+}
 
 
-        const rawQuantity =
-          quantityInput.value.trim();
+function goAdd() {
+  location.hash = '#add';
+}
 
 
-        const quantity =
-          rawQuantity === ''
-            ? 1
-            : Number.parseInt(
-                rawQuantity,
-                10
-              );
+function goStore(storeKey) {
+  location.hash =
+    '#store/' + storeKey;
+}
 
 
-        if (!itemName) {
+function route() {
 
-          showToast(
-            'Please enter an item.',
-            true
-          );
-
-          itemNameInput.focus();
-
-          return;
-        }
+  const hash =
+    location.hash || '#home';
 
 
-        if (
-          !store ||
-          !STORES[store]
-        ) {
+  if (hash === '#add') {
 
-          showToast(
-            'Please choose a store.',
-            true
-          );
+    currentStore = null;
 
-          storeSelect.focus();
+    showOnly(addScreen);
 
-          return;
-        }
+    pageTitle.textContent =
+      'Add Item';
 
+    backButton.hidden =
+      false;
 
-        if (
-          !Number.isInteger(quantity) ||
-          quantity < 1 ||
-          quantity > 9999
-        ) {
-
-          showToast(
-            'Quantity must be a whole number of 1 or more.',
-            true
-          );
-
-          quantityInput.focus();
-
-          return;
-        }
-
-
-        if (
-          store === 'sams_costco' &&
-          itemName.toLocaleLowerCase() ===
-            'case of water'
-        ) {
-
-          showToast(
-            'Case of Water is already permanently on Sam’s/Costco.',
-            true
-          );
-
-          return;
-        }
-
-
-        saveItemButton.disabled =
-          true;
-
-
-        saveItemButton.textContent =
-          'Adding…';
-
-
-        try {
-
-          await api(
-            '/rest/v1/shopping_items',
-            {
-              method: 'POST',
-
-              headers: {
-                Prefer:
-                  'return=minimal'
-              },
-
-              body:
-                JSON.stringify({
-                  item_name:
-                    itemName,
-
-                  quantity:
-                    quantity,
-
-                  store:
-                    store
-                })
-            }
-          );
-
-
-          itemNameInput.value =
-            '';
-
-
-          quantityInput.value =
-            '';
-
-
-          showToast(
-            `Added to ${STORES[store]}.`
-          );
-
-
-          itemNameInput.focus();
-
-
-        } catch (error) {
-
-          console.error(error);
-
-
-          showToast(
-            'Could not add the item. Please try again.',
-            true
-          );
-
-
-        } finally {
-
-          saveItemButton.disabled =
-            false;
-
-
-          saveItemButton.textContent =
-            'Add Item';
-        }
-      }
+    setTimeout(
+      () => itemNameInput.focus(),
+      80
     );
 
-
-    // ==========================================================
-    // LOAD STORE ITEMS
-    // ==========================================================
-
-    async function loadStoreItems(
-      quiet = false
-    ) {
-
-      if (!currentStore) {
-        return;
-      }
+    return;
+  }
 
 
-      const storeAtStart =
-        currentStore;
+  if (hash.startsWith('#store/')) {
+
+    const storeKey =
+      hash.slice('#store/'.length);
 
 
-      if (!quiet) {
+    if (!STORES[storeKey]) {
 
-        storeList.innerHTML =
-          '<div class="loading-state">Loading…</div>';
-      }
+      goHome();
 
-
-      try {
-
-        const data =
-          await api(
-
-            '/rest/v1/shopping_items' +
-
-            '?select=id,item_name,quantity,store' +
-
-            '&store=eq.' +
-
-            encodeURIComponent(
-              storeAtStart
-            )
-          );
-
-
-        if (
-          currentStore !==
-          storeAtStart
-        ) {
-          return;
-        }
-
-
-        const items =
-          Array.isArray(data)
-            ? data
-            : [];
-
-
-        items.sort(
-          (a, b) =>
-            a.item_name.localeCompare(
-              b.item_name,
-              undefined,
-              {
-                sensitivity: 'base',
-                numeric: true
-              }
-            )
-        );
-
-
-        renderStoreList(items);
-
-
-      } catch (error) {
-
-        console.error(error);
-
-
-        if (
-          !quiet &&
-          currentStore ===
-            storeAtStart
-        ) {
-
-          storeList.innerHTML =
-            '<div class="error-state">Could not load this list. Please try again.</div>';
-        }
-      }
+      return;
     }
 
 
-    // ==========================================================
-    // DISPLAY STORE LIST
-    // ==========================================================
+    currentStore =
+      storeKey;
 
-    function renderStoreList(items) {
 
-      storeList.innerHTML =
+    showOnly(storeScreen);
+
+
+    pageTitle.textContent =
+      STORES[storeKey];
+
+
+    backButton.hidden =
+      false;
+
+
+    loadStoreItems();
+
+    return;
+  }
+
+
+  currentStore = null;
+
+  showOnly(homeScreen);
+
+  pageTitle.textContent =
+    'Uno Club\nShopping';
+
+  backButton.hidden =
+    true;
+
+  loadHomeCounts();
+}
+
+
+/* =========================================================
+   CLEAN ITEM NAME
+   ========================================================= */
+
+function normalizeItemName(value) {
+
+  return value
+    .trim()
+    .replace(/\s+/g, ' ');
+}
+
+
+/* =========================================================
+   MAIN BUTTONS
+   ========================================================= */
+
+addItemButton.addEventListener(
+  'click',
+  goAdd
+);
+
+
+document
+  .querySelectorAll('.store-button')
+  .forEach(button => {
+
+    button.addEventListener(
+      'click',
+      () =>
+        goStore(
+          button.dataset.store
+        )
+    );
+
+  });
+
+
+backButton.addEventListener(
+  'click',
+  goHome
+);
+
+
+/* =========================================================
+   ADD ITEM
+   ========================================================= */
+
+addItemForm.addEventListener(
+  'submit',
+  async event => {
+
+    event.preventDefault();
+
+
+    const itemName =
+      normalizeItemName(
+        itemNameInput.value
+      );
+
+
+    const store =
+      storeSelect.value;
+
+
+    const rawQuantity =
+      quantityInput.value.trim();
+
+
+    const quantity =
+      rawQuantity === ''
+        ? 1
+        : Number.parseInt(
+            rawQuantity,
+            10
+          );
+
+
+    if (!itemName) {
+
+      showToast(
+        'Please enter an item.',
+        true
+      );
+
+      itemNameInput.focus();
+
+      return;
+    }
+
+
+    if (
+      !store ||
+      !STORES[store]
+    ) {
+
+      showToast(
+        'Please choose a store.',
+        true
+      );
+
+      storeSelect.focus();
+
+      return;
+    }
+
+
+    if (
+      !Number.isInteger(quantity) ||
+      quantity < 1 ||
+      quantity > 9999
+    ) {
+
+      showToast(
+        'Quantity must be a whole number of 1 or more.',
+        true
+      );
+
+      quantityInput.focus();
+
+      return;
+    }
+
+
+    if (
+      store === 'sams_costco' &&
+      itemName.toLocaleLowerCase() ===
+        'case of water'
+    ) {
+
+      showToast(
+        'Case of Water is already permanently on Sam’s/Costco.',
+        true
+      );
+
+      return;
+    }
+
+
+    saveItemButton.disabled =
+      true;
+
+    saveItemButton.textContent =
+      'Adding…';
+
+
+    try {
+
+      await api(
+        '/rest/v1/shopping_items',
+        {
+          method: 'POST',
+
+          headers: {
+            Prefer:
+              'return=minimal'
+          },
+
+          body:
+            JSON.stringify({
+              item_name:
+                itemName,
+
+              quantity:
+                quantity,
+
+              store:
+                store
+            })
+        }
+      );
+
+
+      itemNameInput.value =
+        '';
+
+      quantityInput.value =
         '';
 
 
-      if (
-        currentStore ===
+      showToast(
+        `Added to ${STORES[store]}.`
+      );
+
+
+      /*
+        Update the hidden home-page counts
+        immediately after adding.
+      */
+      loadHomeCounts();
+
+
+      itemNameInput.focus();
+
+
+    } catch (error) {
+
+      console.error(error);
+
+
+      showToast(
+        'Could not add the item. Please try again.',
+        true
+      );
+
+
+    } finally {
+
+      saveItemButton.disabled =
+        false;
+
+      saveItemButton.textContent =
+        'Add Item';
+    }
+
+  }
+);
+
+
+/* =========================================================
+   LOAD STORE LIST
+   ========================================================= */
+
+async function loadStoreItems(
+  quiet = false
+) {
+
+  if (!currentStore) {
+    return;
+  }
+
+
+  const storeAtStart =
+    currentStore;
+
+
+  if (!quiet) {
+
+    storeList.innerHTML =
+      '<div class="loading-state">Loading…</div>';
+  }
+
+
+  try {
+
+    const data =
+      await api(
+
+        '/rest/v1/shopping_items' +
+
+        '?select=id,item_name,quantity,store' +
+
+        '&store=eq.' +
+
+        encodeURIComponent(
+          storeAtStart
+        )
+      );
+
+
+    if (
+      currentStore !==
+      storeAtStart
+    ) {
+      return;
+    }
+
+
+    const items =
+      Array.isArray(data)
+        ? data
+        : [];
+
+
+    items.sort(
+      (a, b) =>
+        a.item_name.localeCompare(
+          b.item_name,
+          undefined,
+          {
+            sensitivity: 'base',
+            numeric: true
+          }
+        )
+    );
+
+
+    renderStoreList(items);
+
+
+  } catch (error) {
+
+    console.error(error);
+
+
+    if (
+      !quiet &&
+      currentStore ===
+        storeAtStart
+    ) {
+
+      storeList.innerHTML =
+        '<div class="error-state">Could not load this list. Please try again.</div>';
+    }
+
+  }
+}
+
+
+/* =========================================================
+   DISPLAY STORE LIST
+   ========================================================= */
+
+function renderStoreList(items) {
+
+  storeList.innerHTML =
+    '';
+
+
+  if (
+    currentStore ===
+    'sams_costco'
+  ) {
+
+    storeList.appendChild(
+      createPermanentWaterRow()
+    );
+  }
+
+
+  items.forEach(
+    item =>
+      storeList.appendChild(
+        createItemRow(item)
+      )
+  );
+
+
+  if (
+    items.length === 0
+  ) {
+
+    const empty =
+      document.createElement(
+        'div'
+      );
+
+
+    empty.className =
+      'empty-state';
+
+
+    empty.textContent =
+      currentStore ===
         'sams_costco'
-      ) {
 
-        storeList.appendChild(
-          createPermanentWaterRow()
-        );
-      }
+        ? 'No other items on this list.'
 
+        : 'No items on this list.';
 
-      items.forEach(
-        item =>
-          storeList.appendChild(
-            createItemRow(item)
-          )
-      );
 
+    storeList.appendChild(
+      empty
+    );
+  }
+}
 
-      if (
-        items.length === 0
-      ) {
 
-        const empty =
-          document.createElement(
-            'div'
-          );
+/* =========================================================
+   PERMANENT CASE OF WATER
+   ========================================================= */
 
+function createPermanentWaterRow() {
 
-        empty.className =
-          'empty-state';
+  const row =
+    document.createElement(
+      'div'
+    );
 
 
-        empty.textContent =
-          currentStore ===
-            'sams_costco'
+  row.className =
+    'item-row permanent-row';
 
-            ? 'No other items on this list.'
 
-            : 'No items on this list.';
+  const nameWrap =
+    document.createElement(
+      'div'
+    );
 
 
-        storeList.appendChild(
-          empty
-        );
-      }
-    }
+  const name =
+    document.createElement(
+      'div'
+    );
 
 
-    // ==========================================================
-    // PERMANENT CASE OF WATER
-    // ==========================================================
+  name.className =
+    'item-name';
 
-    function createPermanentWaterRow() {
 
-      const row =
-        document.createElement(
-          'div'
-        );
+  name.textContent =
+    'Case of Water';
 
 
-      row.className =
-        'item-row permanent-row';
+  const note =
+    document.createElement(
+      'div'
+    );
 
 
-      const nameWrap =
-        document.createElement(
-          'div'
-        );
+  note.className =
+    'fixed-note';
 
 
-      const name =
-        document.createElement(
-          'div'
-        );
+  note.textContent =
+    'Always on list';
 
 
-      name.className =
-        'item-name';
+  nameWrap.append(
+    name,
+    note
+  );
 
 
-      name.textContent =
-        'Case of Water';
+  const qty =
+    document.createElement(
+      'div'
+    );
 
 
-      const note =
-        document.createElement(
-          'div'
-        );
+  qty.className =
+    'qty-fixed';
 
 
-      note.className =
-        'fixed-note';
+  qty.textContent =
+    '1';
 
 
-      note.textContent =
-        'Always on list';
+  qty.setAttribute(
+    'aria-label',
+    'Quantity 1'
+  );
 
 
-      nameWrap.append(
-        name,
-        note
-      );
+  const spacer =
+    document.createElement(
+      'div'
+    );
 
 
-      const qty =
-        document.createElement(
-          'div'
-        );
+  spacer.setAttribute(
+    'aria-hidden',
+    'true'
+  );
 
 
-      qty.className =
-        'qty-fixed';
+  row.append(
+    nameWrap,
+    qty,
+    spacer
+  );
 
 
-      qty.textContent =
-        '1';
+  return row;
+}
 
 
-      qty.setAttribute(
-        'aria-label',
-        'Quantity 1'
-      );
+/* =========================================================
+   NORMAL ITEM ROW
+   ========================================================= */
 
+function createItemRow(item) {
 
-      const spacer =
-        document.createElement(
-          'div'
-        );
+  const row =
+    document.createElement(
+      'div'
+    );
 
 
-      spacer.setAttribute(
-        'aria-hidden',
-        'true'
-      );
+  row.className =
+    'item-row db-row';
 
 
-      row.append(
-        nameWrap,
-        qty,
-        spacer
-      );
+  row.dataset.id =
+    item.id;
 
 
-      return row;
-    }
+  const name =
+    document.createElement(
+      'div'
+    );
 
 
-    // ==========================================================
-    // NORMAL SHOPPING ITEM ROW
-    // ==========================================================
+  name.className =
+    'item-name';
 
-    function createItemRow(item) {
 
-      const row =
-        document.createElement(
-          'div'
-        );
+  name.textContent =
+    item.item_name;
 
 
-      row.className =
-        'item-row db-row';
+  const qty =
+    document.createElement(
+      'input'
+    );
 
 
-      row.dataset.id =
-        item.id;
+  qty.className =
+    'qty-input';
 
 
-      const name =
-        document.createElement(
-          'div'
-        );
+  qty.type =
+    'number';
 
 
-      name.className =
-        'item-name';
+  qty.min =
+    '1';
 
 
-      name.textContent =
-        item.item_name;
+  qty.max =
+    '9999';
 
 
-      const qty =
-        document.createElement(
-          'input'
-        );
+  qty.step =
+    '1';
 
 
-      qty.className =
-        'qty-input';
+  qty.inputMode =
+    'numeric';
 
 
-      qty.type =
-        'number';
+  qty.value =
+    item.quantity;
 
 
-      qty.min =
-        '1';
+  qty.setAttribute(
+    'aria-label',
+    `Quantity for ${item.item_name}`
+  );
 
 
-      qty.max =
-        '9999';
+  qty.dataset.savedValue =
+    String(item.quantity);
 
 
-      qty.step =
-        '1';
+  qty.addEventListener(
+    'focus',
+    () => qty.select()
+  );
 
 
-      qty.inputMode =
-        'numeric';
+  qty.addEventListener(
+    'change',
+    () =>
+      updateQuantity(
+        item.id,
+        qty
+      )
+  );
 
 
-      qty.value =
-        item.quantity;
+  const del =
+    document.createElement(
+      'button'
+    );
 
 
-      qty.setAttribute(
-        'aria-label',
-        `Quantity for ${item.item_name}`
-      );
+  del.type =
+    'button';
 
 
-      qty.dataset.savedValue =
-        String(item.quantity);
+  del.className =
+    'delete-button';
 
 
-      qty.addEventListener(
-        'focus',
-        () => qty.select()
-      );
+  del.textContent =
+    '×';
 
 
-      qty.addEventListener(
-        'change',
-        () =>
-          updateQuantity(
-            item.id,
-            qty
-          )
-      );
+  del.setAttribute(
+    'aria-label',
+    `Delete ${item.item_name}`
+  );
 
 
-      const del =
-        document.createElement(
-          'button'
-        );
-
-
-      del.type =
-        'button';
-
-
-      del.className =
-        'delete-button';
-
-
-      del.textContent =
-        '×';
-
-
-      del.setAttribute(
-        'aria-label',
-        `Delete ${item.item_name}`
-      );
-
-
-      del.addEventListener(
-        'click',
-        () =>
-          deleteItem(
-            item.id,
-            item.item_name,
-            row,
-            del
-          )
-      );
-
-
-      row.append(
-        name,
-        qty,
+  del.addEventListener(
+    'click',
+    () =>
+      deleteItem(
+        item.id,
+        item.item_name,
+        row,
         del
-      );
+      )
+  );
 
 
-      return row;
-    }
+  row.append(
+    name,
+    qty,
+    del
+  );
 
 
-    // ==========================================================
-    // CHANGE QUANTITY
-    // ==========================================================
+  return row;
+}
 
-    async function updateQuantity(
-      id,
-      input
-    ) {
 
-      const oldValue =
-        Number.parseInt(
-          input.dataset.savedValue,
-          10
-        );
+/* =========================================================
+   UPDATE QUANTITY
+   ========================================================= */
 
+async function updateQuantity(
+  id,
+  input
+) {
 
-      const newValue =
-        Number.parseInt(
-          input.value,
-          10
-        );
-
-
-      if (
-        !Number.isInteger(newValue) ||
-        newValue < 1 ||
-        newValue > 9999
-      ) {
-
-        input.value =
-          oldValue;
-
-
-        showToast(
-          'Quantity must be a whole number of 1 or more.',
-          true
-        );
-
-
-        return;
-      }
-
-
-      if (
-        newValue === oldValue
-      ) {
-        return;
-      }
-
-
-      input.disabled =
-        true;
-
-
-      try {
-
-        await api(
-
-          '/rest/v1/shopping_items?id=eq.' +
-
-          encodeURIComponent(id),
-
-          {
-            method:
-              'PATCH',
-
-            headers: {
-              Prefer:
-                'return=minimal'
-            },
-
-            body:
-              JSON.stringify({
-                quantity:
-                  newValue
-              })
-          }
-        );
-
-
-        input.dataset.savedValue =
-          String(newValue);
-
-
-        showToast(
-          'Quantity updated.'
-        );
-
-
-      } catch (error) {
-
-        console.error(error);
-
-
-        input.value =
-          oldValue;
-
-
-        showToast(
-          'Could not update the quantity.',
-          true
-        );
-
-
-      } finally {
-
-        input.disabled =
-          false;
-      }
-    }
-
-
-    // ==========================================================
-    // DELETE ITEM
-    // ==========================================================
-
-    async function deleteItem(
-      id,
-      itemName,
-      row,
-      button
-    ) {
-
-      button.disabled =
-        true;
-
-
-      try {
-
-        await api(
-
-          '/rest/v1/shopping_items?id=eq.' +
-
-          encodeURIComponent(id),
-
-          {
-            method:
-              'DELETE',
-
-            headers: {
-              Prefer:
-                'return=minimal'
-            }
-          }
-        );
-
-
-        row.remove();
-
-
-        showToast(
-          `${itemName} removed.`
-        );
-
-
-        if (
-          !storeList.querySelector(
-            '.db-row'
-          )
-        ) {
-
-          const empty =
-            document.createElement(
-              'div'
-            );
-
-
-          empty.className =
-            'empty-state';
-
-
-          empty.textContent =
-            currentStore ===
-              'sams_costco'
-
-              ? 'No other items on this list.'
-
-              : 'No items on this list.';
-
-
-          storeList.appendChild(
-            empty
-          );
-        }
-
-
-      } catch (error) {
-
-        console.error(error);
-
-
-        button.disabled =
-          false;
-
-
-        showToast(
-          'Could not remove the item.',
-          true
-        );
-      }
-    }
-
-
-    // ==========================================================
-    // PAGE EVENTS
-    // ==========================================================
-
-    window.addEventListener(
-      'hashchange',
-      route
+  const oldValue =
+    Number.parseInt(
+      input.dataset.savedValue,
+      10
     );
 
 
-    document.addEventListener(
-      'visibilitychange',
-      () => {
+  const newValue =
+    Number.parseInt(
+      input.value,
+      10
+    );
 
-        if (
-          !document.hidden &&
-          currentStore
-        ) {
 
-          loadStoreItems(true);
+  if (
+    !Number.isInteger(newValue) ||
+    newValue < 1 ||
+    newValue > 9999
+  ) {
+
+    input.value =
+      oldValue;
+
+
+    showToast(
+      'Quantity must be a whole number of 1 or more.',
+      true
+    );
+
+
+    return;
+  }
+
+
+  if (
+    newValue === oldValue
+  ) {
+    return;
+  }
+
+
+  input.disabled =
+    true;
+
+
+  try {
+
+    await api(
+
+      '/rest/v1/shopping_items?id=eq.' +
+      encodeURIComponent(id),
+
+      {
+        method:
+          'PATCH',
+
+        headers: {
+          Prefer:
+            'return=minimal'
+        },
+
+        body:
+          JSON.stringify({
+            quantity:
+              newValue
+          })
+      }
+    );
+
+
+    input.dataset.savedValue =
+      String(newValue);
+
+
+    showToast(
+      'Quantity updated.'
+    );
+
+
+  } catch (error) {
+
+    console.error(error);
+
+
+    input.value =
+      oldValue;
+
+
+    showToast(
+      'Could not update the quantity.',
+      true
+    );
+
+
+  } finally {
+
+    input.disabled =
+      false;
+  }
+}
+
+
+/* =========================================================
+   DELETE ITEM
+   ========================================================= */
+
+async function deleteItem(
+  id,
+  itemName,
+  row,
+  button
+) {
+
+  button.disabled =
+    true;
+
+
+  try {
+
+    await api(
+
+      '/rest/v1/shopping_items?id=eq.' +
+      encodeURIComponent(id),
+
+      {
+        method:
+          'DELETE',
+
+        headers: {
+          Prefer:
+            'return=minimal'
         }
       }
     );
 
 
-    // ==========================================================
-    // START APP
-    // ==========================================================
+    row.remove();
 
-    if (!location.hash) {
 
-      history.replaceState(
-        null,
-        '',
-        '#home'
+    showToast(
+      `${itemName} removed.`
+    );
+
+
+    /*
+      Refresh counts after deletion.
+    */
+    loadHomeCounts();
+
+
+    if (
+      !storeList.querySelector(
+        '.db-row'
+      )
+    ) {
+
+      const empty =
+        document.createElement(
+          'div'
+        );
+
+
+      empty.className =
+        'empty-state';
+
+
+      empty.textContent =
+        currentStore ===
+          'sams_costco'
+
+          ? 'No other items on this list.'
+
+          : 'No items on this list.';
+
+
+      storeList.appendChild(
+        empty
       );
     }
 
 
-    route();
+  } catch (error) {
 
-  </script>
+    console.error(error);
+
+
+    button.disabled =
+      false;
+
+
+    showToast(
+      'Could not remove the item.',
+      true
+    );
+  }
+}
+
+
+/* =========================================================
+   PAGE EVENTS
+   ========================================================= */
+
+window.addEventListener(
+  'hashchange',
+  route
+);
+
+
+document.addEventListener(
+  'visibilitychange',
+  () => {
+
+    if (document.hidden) {
+      return;
+    }
+
+
+    /*
+      Refresh whichever data is relevant
+      whenever the app becomes active again.
+    */
+
+    if (currentStore) {
+
+      loadStoreItems(true);
+
+    } else {
+
+      loadHomeCounts();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   START APP
+   ========================================================= */
+
+if (!location.hash) {
+
+  history.replaceState(
+    null,
+    '',
+    '#home'
+  );
+}
+
+
+route();
+
+</script>
 
 </body>
 </html>
