@@ -8,8 +8,8 @@
     content="width=device-width, initial-scale=1, viewport-fit=cover"
   >
 
-  <!-- APP VERSION: 1.0.6 -->
-  <meta name="app-version" content="1.0.6">
+  <!-- APP VERSION: 1.0.7 -->
+  <meta name="app-version" content="1.0.7">
 
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
@@ -25,12 +25,12 @@
   <link
     rel="icon"
     type="image/png"
-    href="uno-club-shopping.PNG?v=1.0.6"
+    href="uno-club-shopping.PNG?v=1.0.7"
   >
 
   <link
     rel="apple-touch-icon"
-    href="uno-club-shopping.PNG?v=1.0.6"
+    href="uno-club-shopping.PNG?v=1.0.7"
   >
 
   <style>
@@ -84,8 +84,6 @@
       touch-action: manipulation;
     }
 
-    /* FIXED HEADER */
-
     .app-header {
       height: calc(82px + env(safe-area-inset-top));
 
@@ -115,10 +113,8 @@
     .app-header h1 {
       flex: 1;
       margin: 0;
-
       text-align: center;
       white-space: nowrap;
-
       font-size: 22px;
       line-height: 1.1;
       font-weight: 850;
@@ -128,7 +124,6 @@
       width: 58px;
       height: 58px;
       flex: 0 0 58px;
-
       object-fit: cover;
       border-radius: 12px;
 
@@ -176,8 +171,6 @@
       display: none !important;
     }
 
-    /* MAIN BUTTONS */
-
     .button-stack {
       display: grid;
       gap: 13px;
@@ -217,8 +210,6 @@
       box-shadow: 0 5px 14px rgba(0,0,0,.20);
     }
 
-    /* STORE COUNT */
-
     .store-button {
       position: relative;
     }
@@ -249,8 +240,6 @@
       pointer-events: none;
     }
 
-    /* CARDS */
-
     .card {
       background: var(--white);
 
@@ -266,17 +255,13 @@
       padding: 18px;
     }
 
-    /* FORM */
-
     .field {
       margin-bottom: 18px;
     }
 
     .field label {
       display: block;
-
       margin-bottom: 7px;
-
       font-size: 15px;
       font-weight: 800;
     }
@@ -302,12 +287,8 @@
     .field input:focus,
     .field select:focus {
       border-color: var(--blue);
-
-      box-shadow:
-        0 0 0 3px rgba(30,90,203,.12);
+      box-shadow: 0 0 0 3px rgba(30,90,203,.12);
     }
-
-    /* QUANTITY CONTROLS */
 
     .qty-control {
       display: flex;
@@ -376,9 +357,7 @@
 
     .qty-input:focus {
       border-color: var(--blue);
-
-      box-shadow:
-        0 0 0 3px rgba(30,90,203,.12);
+      box-shadow: 0 0 0 3px rgba(30,90,203,.12);
     }
 
     .add-qty-control {
@@ -394,11 +373,8 @@
     .add-qty-control .qty-input {
       width: 76px;
       min-height: 52px;
-
       font-size: 20px;
     }
-
-    /* STORE LIST */
 
     .list-card {
       padding: 0;
@@ -418,8 +394,7 @@
 
       background: #edf3ff;
 
-      border-bottom:
-        1px solid var(--border);
+      border-bottom: 1px solid var(--border);
 
       color: #364152;
 
@@ -449,8 +424,7 @@
 
       padding: 9px 14px;
 
-      border-bottom:
-        1px solid #ececec;
+      border-bottom: 1px solid #ececec;
     }
 
     .item-row:last-child {
@@ -547,8 +521,6 @@
       color: var(--danger);
     }
 
-    /* TOAST */
-
     .toast {
       position: fixed;
 
@@ -589,9 +561,7 @@
 
     .toast.show {
       opacity: 1;
-
-      transform:
-        translate(-50%, 0);
+      transform: translate(-50%, 0);
     }
 
     .toast.error {
@@ -626,13 +596,10 @@
         width: 44px;
       }
     }
-
   </style>
 </head>
 
-
 <body>
-
 
 <header class="app-header">
 
@@ -646,30 +613,21 @@
     &larr;
   </button>
 
-
   <h1 id="pageTitle">
     Uno Club Shopping
   </h1>
 
-
   <img
     class="header-logo"
-    src="uno-club-shopping.PNG?v=1.0.6"
+    src="uno-club-shopping.PNG?v=1.0.7"
     alt="Uno Club Shopping logo"
   >
 
 </header>
 
-
 <main>
 
-
-  <!-- HOME -->
-
-  <section
-    id="homeScreen"
-    class="screen"
-  >
+  <section id="homeScreen" class="screen">
 
     <div class="button-stack">
 
@@ -681,13 +639,12 @@
         Add Item
       </button>
 
-
       <button
         class="main-button store-button"
         type="button"
         data-store="sams_costco"
       >
-        Sam’s/Costco
+        Sam’s / CostCo
 
         <span
           class="count-badge"
@@ -696,7 +653,6 @@
           1
         </span>
       </button>
-
 
       <button
         class="main-button store-button"
@@ -713,7 +669,6 @@
         </span>
       </button>
 
-
       <button
         class="main-button store-button"
         type="button"
@@ -728,7 +683,6 @@
           0
         </span>
       </button>
-
 
       <button
         class="main-button store-button"
@@ -749,19 +703,11 @@
 
   </section>
 
-
-  <!-- ADD ITEM -->
-
-  <section
-    id="addScreen"
-    class="screen"
-    hidden
-  >
+  <section id="addScreen" class="screen" hidden>
 
     <div class="card form-card">
 
       <form id="addItemForm">
-
 
         <div class="field">
 
@@ -779,17 +725,13 @@
 
         </div>
 
-
         <div class="field">
 
           <label>
             Quantity
           </label>
 
-
-          <div
-            class="qty-control add-qty-control"
-          >
+          <div class="qty-control add-qty-control">
 
             <button
               id="addQtyMinus"
@@ -799,7 +741,6 @@
             >
               −
             </button>
-
 
             <input
               id="quantity"
@@ -812,7 +753,6 @@
               value="1"
               aria-label="Quantity"
             >
-
 
             <button
               id="addQtyPlus"
@@ -827,13 +767,11 @@
 
         </div>
 
-
         <div class="field">
 
           <label for="store">
             Store
           </label>
-
 
           <select
             id="store"
@@ -848,21 +786,17 @@
               Choose a store
             </option>
 
-
             <option value="sams_costco">
-              Sam’s/Costco
+              Sam’s / CostCo
             </option>
-
 
             <option value="walmart">
               Walmart
             </option>
 
-
             <option value="alcohol">
               Alcohol
             </option>
-
 
             <option value="sodas">
               Sodas
@@ -872,7 +806,6 @@
 
         </div>
 
-
         <button
           id="saveItemButton"
           class="save-button"
@@ -881,21 +814,13 @@
           Add Item
         </button>
 
-
       </form>
 
     </div>
 
   </section>
 
-
-  <!-- STORE PAGE -->
-
-  <section
-    id="storeScreen"
-    class="screen"
-    hidden
-  >
+  <section id="storeScreen" class="screen" hidden>
 
     <div class="card list-card">
 
@@ -903,19 +828,10 @@
         class="list-heading"
         aria-hidden="true"
       >
-
-        <span>
-          Item
-        </span>
-
-        <span>
-          Qty
-        </span>
-
+        <span>Item</span>
+        <span>Qty</span>
         <span></span>
-
       </div>
-
 
       <div
         id="storeList"
@@ -926,9 +842,7 @@
 
   </section>
 
-
 </main>
-
 
 <div
   id="toast"
@@ -937,25 +851,16 @@
   aria-live="polite"
 ></div>
 
-
 <script>
 
 'use strict';
 
-
-const APP_VERSION =
-  '1.0.6';
-
+const APP_VERSION = '1.0.7';
 
 console.info(
   `Uno Club Shopping v${APP_VERSION}`
 );
 
-
-
-/* =========================================================
-   SUPABASE
-   ========================================================= */
 
 const SUPABASE_URL =
   'https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -965,53 +870,29 @@ const SUPABASE_PUBLISHABLE_KEY =
   'sb_publishable_gh0acghIDuQDgh24ZIm8Mw_c1bpvIM6';
 
 
-
-/* =========================================================
-   STORES
-   ========================================================= */
-
 const STORES = {
-
-  sams_costco:
-    'Sam’s/Costco',
-
-  walmart:
-    'Walmart',
-
-  alcohol:
-    'Alcohol',
-
-  sodas:
-    'Sodas'
-
+  sams_costco: 'Sam’s / CostCo',
+  walmart: 'Walmart',
+  alcohol: 'Alcohol',
+  sodas: 'Sodas'
 };
 
-
-
-/* =========================================================
-   REMEMBER LAST STORE
-   ========================================================= */
 
 const LAST_STORE_KEY =
   'unoClubShoppingLastStore';
 
 
-function rememberLastStore(
-  store
-) {
+function rememberLastStore(store) {
 
   if (!STORES[store]) {
     return;
   }
 
-
   try {
-
     localStorage.setItem(
       LAST_STORE_KEY,
       store
     );
-
   } catch (_) {}
 
 }
@@ -1026,112 +907,89 @@ function getLastStore() {
         LAST_STORE_KEY
       );
 
-
     if (
       store &&
       STORES[store]
     ) {
-
       return store;
-
     }
 
   } catch (_) {}
-
 
   return null;
 
 }
 
 
-
-/* =========================================================
-   ELEMENTS
-   ========================================================= */
-
 const homeScreen =
   document.getElementById(
     'homeScreen'
   );
-
 
 const addScreen =
   document.getElementById(
     'addScreen'
   );
 
-
 const storeScreen =
   document.getElementById(
     'storeScreen'
   );
-
 
 const pageTitle =
   document.getElementById(
     'pageTitle'
   );
 
-
 const backButton =
   document.getElementById(
     'backButton'
   );
-
 
 const addItemButton =
   document.getElementById(
     'addItemButton'
   );
 
-
 const addItemForm =
   document.getElementById(
     'addItemForm'
   );
-
 
 const itemNameInput =
   document.getElementById(
     'itemName'
   );
 
-
 const quantityInput =
   document.getElementById(
     'quantity'
   );
-
 
 const addQtyMinus =
   document.getElementById(
     'addQtyMinus'
   );
 
-
 const addQtyPlus =
   document.getElementById(
     'addQtyPlus'
   );
-
 
 const storeSelect =
   document.getElementById(
     'store'
   );
 
-
 const saveItemButton =
   document.getElementById(
     'saveItemButton'
   );
 
-
 const storeList =
   document.getElementById(
     'storeList'
   );
-
 
 const toast =
   document.getElementById(
@@ -1139,18 +997,9 @@ const toast =
   );
 
 
-let currentStore =
-  null;
+let currentStore = null;
+let toastTimer = null;
 
-
-let toastTimer =
-  null;
-
-
-
-/* =========================================================
-   TOAST
-   ========================================================= */
 
 function showToast(
   message,
@@ -1161,41 +1010,30 @@ function showToast(
     toastTimer
   );
 
-
   toast.textContent =
     message;
-
 
   toast.classList.toggle(
     'error',
     isError
   );
 
-
   toast.classList.add(
     'show'
   );
 
-
   toastTimer =
     setTimeout(
       () => {
-
         toast.classList.remove(
           'show'
         );
-
       },
       2800
     );
 
 }
 
-
-
-/* =========================================================
-   API
-   ========================================================= */
 
 async function api(
   path,
@@ -1237,12 +1075,10 @@ async function api(
     let message =
       `Request failed (${response.status})`;
 
-
     try {
 
       const data =
         await response.json();
-
 
       message =
         data.message ||
@@ -1250,19 +1086,16 @@ async function api(
         data.hint ||
         message;
 
-
     } catch (_) {
 
       const text =
         await response.text();
-
 
       if (text) {
         message = text;
       }
 
     }
-
 
     throw new Error(
       message
@@ -1274,9 +1107,7 @@ async function api(
   if (
     response.status === 204
   ) {
-
     return null;
-
   }
 
 
@@ -1291,20 +1122,13 @@ async function api(
 }
 
 
-
-/* =========================================================
-   HOME COUNTS
-   ========================================================= */
-
 async function loadHomeCounts() {
 
   const counts = {
-
     sams_costco: 1,
     walmart: 0,
     alcohol: 0,
     sodas: 0
-
   };
 
 
@@ -1355,7 +1179,6 @@ async function loadHomeCounts() {
             badge.dataset
               .countStore;
 
-
           badge.textContent =
             counts[store] ?? 0;
 
@@ -1376,11 +1199,6 @@ async function loadHomeCounts() {
 }
 
 
-
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
-
 function showOnly(
   screen
 ) {
@@ -1388,10 +1206,8 @@ function showOnly(
   homeScreen.hidden =
     screen !== homeScreen;
 
-
   addScreen.hidden =
     screen !== addScreen;
-
 
   storeScreen.hidden =
     screen !== storeScreen;
@@ -1400,18 +1216,12 @@ function showOnly(
 
 
 function goHome() {
-
-  location.hash =
-    '#home';
-
+  location.hash = '#home';
 }
 
 
 function goAdd() {
-
-  location.hash =
-    '#add';
-
+  location.hash = '#add';
 }
 
 
@@ -1440,15 +1250,12 @@ function route() {
     currentStore =
       null;
 
-
     showOnly(
       addScreen
     );
 
-
     pageTitle.textContent =
       'Add Item';
-
 
     backButton.hidden =
       false;
@@ -1558,11 +1365,6 @@ function route() {
 }
 
 
-
-/* =========================================================
-   CLEAN ITEM NAME
-   ========================================================= */
-
 function normalizeItemName(
   value
 ) {
@@ -1576,11 +1378,6 @@ function normalizeItemName(
 
 }
 
-
-
-/* =========================================================
-   HOME BUTTONS
-   ========================================================= */
 
 addItemButton
   .addEventListener(
@@ -1601,8 +1398,7 @@ document
         () => {
 
           goStore(
-            button.dataset
-              .store
+            button.dataset.store
           );
 
         }
@@ -1619,11 +1415,6 @@ backButton
   );
 
 
-
-/* =========================================================
-   REMEMBER STORE
-   ========================================================= */
-
 storeSelect
   .addEventListener(
     'change',
@@ -1636,11 +1427,6 @@ storeSelect
     }
   );
 
-
-
-/* =========================================================
-   ADD PAGE QUANTITY
-   ========================================================= */
 
 function getAddQuantity() {
 
@@ -1714,8 +1500,7 @@ addQtyMinus
     () => {
 
       setAddQuantity(
-        getAddQuantity() -
-        1
+        getAddQuantity() - 1
       );
 
     }
@@ -1728,8 +1513,7 @@ addQtyPlus
     () => {
 
       setAddQuantity(
-        getAddQuantity() +
-        1
+        getAddQuantity() + 1
       );
 
     }
@@ -1755,11 +1539,6 @@ quantityInput
     }
   );
 
-
-
-/* =========================================================
-   ADD ITEM
-   ========================================================= */
 
 addItemForm
   .addEventListener(
@@ -1790,9 +1569,7 @@ addItemForm
           true
         );
 
-
         itemNameInput.focus();
-
 
         return;
 
@@ -1809,20 +1586,12 @@ addItemForm
           true
         );
 
-
         storeSelect.focus();
-
 
         return;
 
       }
 
-
-      /*
-        Case of Water is permanent
-        and does not exist as a normal
-        database row.
-      */
 
       if (
         itemName
@@ -1831,10 +1600,9 @@ addItemForm
       ) {
 
         showToast(
-          'Case of Water is already on the Sam’s/Costco list.',
+          'Case of Water is already on the Sam’s / CostCo list.',
           true
         );
-
 
         return;
 
@@ -1961,11 +1729,6 @@ addItemForm
   );
 
 
-
-/* =========================================================
-   LOAD STORE LIST
-   ========================================================= */
-
 async function loadStoreItems(
   quiet = false
 ) {
@@ -2069,11 +1832,6 @@ async function loadStoreItems(
 }
 
 
-
-/* =========================================================
-   RENDER LIST
-   ========================================================= */
-
 function renderStoreList(
   items
 ) {
@@ -2138,11 +1896,6 @@ function renderStoreList(
 
 }
 
-
-
-/* =========================================================
-   PERMANENT WATER
-   ========================================================= */
 
 function createPermanentWaterRow() {
 
@@ -2227,11 +1980,6 @@ function createPermanentWaterRow() {
 
 }
 
-
-
-/* =========================================================
-   NORMAL ITEM ROW
-   ========================================================= */
 
 function createItemRow(
   item
@@ -2547,11 +2295,6 @@ function createItemRow(
 }
 
 
-
-/* =========================================================
-   ROW QUANTITY
-   ========================================================= */
-
 function getRowQuantity(
   input
 ) {
@@ -2579,7 +2322,6 @@ function getRowQuantity(
   );
 
 }
-
 
 
 async function saveRowQuantity(
@@ -2722,11 +2464,6 @@ async function saveRowQuantity(
 }
 
 
-
-/* =========================================================
-   DELETE ITEM
-   ========================================================= */
-
 async function deleteItem(
   id,
   itemName,
@@ -2826,11 +2563,6 @@ async function deleteItem(
 }
 
 
-
-/* =========================================================
-   PAGE EVENTS
-   ========================================================= */
-
 window.addEventListener(
   'hashchange',
   route
@@ -2844,9 +2576,7 @@ document.addEventListener(
     if (
       document.hidden
     ) {
-
       return;
-
     }
 
 
@@ -2868,11 +2598,6 @@ document.addEventListener(
 );
 
 
-
-/* =========================================================
-   START APP
-   ========================================================= */
-
 if (
   !location.hash
 ) {
@@ -2889,7 +2614,6 @@ if (
 route();
 
 </script>
-
 
 </body>
 </html>
