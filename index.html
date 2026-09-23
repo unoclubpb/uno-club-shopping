@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-  <!-- APP VERSION: 1.0.5 -->
-  <meta name="app-version" content="1.0.5">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <!-- APP VERSION: 1.0.6 -->
+  <meta name="app-version" content="1.0.6">
+
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -17,8 +22,16 @@
 
   <title>Uno Club Shopping</title>
 
-  <link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.5">
-  <link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.5">
+  <link
+    rel="icon"
+    type="image/png"
+    href="uno-club-shopping.PNG?v=1.0.6"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="uno-club-shopping.PNG?v=1.0.6"
+  >
 
   <style>
     :root {
@@ -31,7 +44,7 @@
       --text: #171717;
       --muted: #6b7280;
       --danger: #c62828;
-      --shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+      --shadow: 0 8px 24px rgba(0,0,0,.10);
       --radius: 16px;
     }
 
@@ -45,8 +58,14 @@
       min-height: 100%;
       background: var(--page);
       color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, Helvetica, Arial, sans-serif;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
       -webkit-text-size-adjust: 100%;
     }
 
@@ -65,9 +84,11 @@
       touch-action: manipulation;
     }
 
-    /* FIXED TOP BANNER */
+    /* FIXED HEADER */
+
     .app-header {
       height: calc(82px + env(safe-area-inset-top));
+
       padding:
         calc(9px + env(safe-area-inset-top))
         14px
@@ -96,12 +117,11 @@
       margin: 0;
 
       text-align: center;
+      white-space: nowrap;
 
       font-size: 22px;
       line-height: 1.1;
       font-weight: 850;
-
-      white-space: nowrap;
     }
 
     .header-logo {
@@ -156,6 +176,8 @@
       display: none !important;
     }
 
+    /* MAIN BUTTONS */
+
     .button-stack {
       display: grid;
       gap: 13px;
@@ -192,11 +214,11 @@
 
     .main-button.add-item {
       background: var(--black);
-      border: 2px solid var(--black);
       box-shadow: 0 5px 14px rgba(0,0,0,.20);
     }
 
-    /* STORE COUNT BADGES */
+    /* STORE COUNT */
+
     .store-button {
       position: relative;
     }
@@ -227,11 +249,16 @@
       pointer-events: none;
     }
 
+    /* CARDS */
+
     .card {
       background: var(--white);
+
       border: 1px solid var(--border);
       border-radius: var(--radius);
+
       box-shadow: var(--shadow);
+
       overflow: hidden;
     }
 
@@ -239,13 +266,17 @@
       padding: 18px;
     }
 
+    /* FORM */
+
     .field {
       margin-bottom: 18px;
     }
 
     .field label {
       display: block;
+
       margin-bottom: 7px;
+
       font-size: 15px;
       font-weight: 800;
     }
@@ -264,20 +295,110 @@
       color: var(--text);
 
       font-size: 18px;
+
       outline: none;
     }
 
     .field input:focus,
     .field select:focus {
       border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(30,90,203,.12);
+
+      box-shadow:
+        0 0 0 3px rgba(30,90,203,.12);
     }
 
-    .hint {
-      margin: -9px 0 18px;
-      color: var(--muted);
-      font-size: 13px;
+    /* QUANTITY CONTROLS */
+
+    .qty-control {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
     }
+
+    .qty-step-button {
+      width: 36px;
+      height: 44px;
+      flex: 0 0 36px;
+
+      border: 2px solid var(--black);
+      border-radius: 10px;
+
+      background: var(--white);
+      color: var(--black);
+
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 1;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      cursor: pointer;
+    }
+
+    .qty-step-button:active {
+      background: #e7e7e7;
+    }
+
+    .qty-step-button:disabled {
+      opacity: .35;
+    }
+
+    .qty-input {
+      width: 48px;
+      min-height: 44px;
+
+      padding: 4px;
+
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+
+      background: var(--white);
+      color: var(--text);
+
+      text-align: center;
+
+      font-size: 18px;
+      font-weight: 800;
+
+      outline: none;
+
+      -moz-appearance: textfield;
+    }
+
+    .qty-input::-webkit-outer-spin-button,
+    .qty-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .qty-input:focus {
+      border-color: var(--blue);
+
+      box-shadow:
+        0 0 0 3px rgba(30,90,203,.12);
+    }
+
+    .add-qty-control {
+      justify-content: flex-start;
+    }
+
+    .add-qty-control .qty-step-button {
+      width: 48px;
+      height: 52px;
+      flex: 0 0 48px;
+    }
+
+    .add-qty-control .qty-input {
+      width: 76px;
+      min-height: 52px;
+
+      font-size: 20px;
+    }
+
+    /* STORE LIST */
 
     .list-card {
       padding: 0;
@@ -285,14 +406,20 @@
 
     .list-heading {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 84px 48px;
-      gap: 10px;
+
+      grid-template-columns:
+        minmax(0, 1fr)
+        132px
+        48px;
+
+      gap: 8px;
 
       padding: 12px 14px;
 
       background: #edf3ff;
 
-      border-bottom: 1px solid var(--border);
+      border-bottom:
+        1px solid var(--border);
 
       color: #364152;
 
@@ -308,8 +435,13 @@
 
     .item-row {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 84px 48px;
-      gap: 10px;
+
+      grid-template-columns:
+        minmax(0, 1fr)
+        132px
+        48px;
+
+      gap: 8px;
 
       align-items: center;
 
@@ -317,7 +449,8 @@
 
       padding: 9px 14px;
 
-      border-bottom: 1px solid #ececec;
+      border-bottom:
+        1px solid #ececec;
     }
 
     .item-row:last-child {
@@ -333,37 +466,24 @@
       overflow-wrap: anywhere;
     }
 
-    .qty-input,
     .qty-fixed {
-      width: 76px;
+      width: 48px;
       min-height: 44px;
+
+      margin: 0 auto;
 
       border: 1.5px solid var(--border);
       border-radius: 10px;
 
-      background: var(--white);
-
-      text-align: center;
-
-      font-size: 18px;
-      font-weight: 800;
-
-      color: var(--text);
-    }
-
-    .qty-input:focus {
-      outline: none;
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(30,90,203,.12);
-    }
-
-    .qty-fixed {
       display: flex;
       align-items: center;
       justify-content: center;
 
       background: #f1f3f6;
       color: #515865;
+
+      font-size: 18px;
+      font-weight: 800;
     }
 
     .delete-button {
@@ -427,6 +547,8 @@
       color: var(--danger);
     }
 
+    /* TOAST */
+
     .toast {
       position: fixed;
 
@@ -467,7 +589,9 @@
 
     .toast.show {
       opacity: 1;
-      transform: translate(-50%, 0);
+
+      transform:
+        translate(-50%, 0);
     }
 
     .toast.error {
@@ -480,28 +604,35 @@
         font-size: 20px;
       }
 
-      .item-row,
-      .list-heading {
+      .list-heading,
+      .item-row {
         grid-template-columns:
           minmax(0, 1fr)
-          72px
+          124px
           44px;
 
-        gap: 7px;
+        gap: 5px;
 
-        padding-left: 11px;
-        padding-right: 11px;
+        padding-left: 10px;
+        padding-right: 10px;
       }
 
-      .qty-input,
-      .qty-fixed {
-        width: 66px;
+      .qty-step-button {
+        width: 34px;
+        flex-basis: 34px;
+      }
+
+      .qty-input {
+        width: 44px;
       }
     }
+
   </style>
 </head>
 
+
 <body>
+
 
 <header class="app-header">
 
@@ -515,19 +646,30 @@
     &larr;
   </button>
 
-  <h1 id="pageTitle">Uno Club Shopping</h1>
+
+  <h1 id="pageTitle">
+    Uno Club Shopping
+  </h1>
+
 
   <img
     class="header-logo"
-    src="uno-club-shopping.PNG?v=1.0.5"
+    src="uno-club-shopping.PNG?v=1.0.6"
     alt="Uno Club Shopping logo"
   >
 
 </header>
 
+
 <main>
 
-  <section id="homeScreen" class="screen">
+
+  <!-- HOME -->
+
+  <section
+    id="homeScreen"
+    class="screen"
+  >
 
     <div class="button-stack">
 
@@ -538,6 +680,7 @@
       >
         Add Item
       </button>
+
 
       <button
         class="main-button store-button"
@@ -554,6 +697,7 @@
         </span>
       </button>
 
+
       <button
         class="main-button store-button"
         type="button"
@@ -569,6 +713,7 @@
         </span>
       </button>
 
+
       <button
         class="main-button store-button"
         type="button"
@@ -583,6 +728,7 @@
           0
         </span>
       </button>
+
 
       <button
         class="main-button store-button"
@@ -604,11 +750,18 @@
   </section>
 
 
-  <section id="addScreen" class="screen" hidden>
+  <!-- ADD ITEM -->
+
+  <section
+    id="addScreen"
+    class="screen"
+    hidden
+  >
 
     <div class="card form-card">
 
       <form id="addItemForm">
+
 
         <div class="field">
 
@@ -626,33 +779,61 @@
 
         </div>
 
+
         <div class="field">
 
-          <label for="quantity">
+          <label>
             Quantity
           </label>
 
-          <input
-            id="quantity"
-            type="number"
-            min="1"
-            max="9999"
-            step="1"
-            inputmode="numeric"
-            placeholder="1"
+
+          <div
+            class="qty-control add-qty-control"
           >
 
+            <button
+              id="addQtyMinus"
+              class="qty-step-button"
+              type="button"
+              aria-label="Decrease quantity"
+            >
+              −
+            </button>
+
+
+            <input
+              id="quantity"
+              class="qty-input"
+              type="number"
+              min="1"
+              max="9999"
+              step="1"
+              inputmode="numeric"
+              value="1"
+              aria-label="Quantity"
+            >
+
+
+            <button
+              id="addQtyPlus"
+              class="qty-step-button"
+              type="button"
+              aria-label="Increase quantity"
+            >
+              +
+            </button>
+
+          </div>
+
         </div>
 
-        <div class="hint">
-          If left blank, the quantity will be 1.
-        </div>
 
         <div class="field">
 
           <label for="store">
             Store
           </label>
+
 
           <select
             id="store"
@@ -667,17 +848,21 @@
               Choose a store
             </option>
 
+
             <option value="sams_costco">
               Sam’s/Costco
             </option>
+
 
             <option value="walmart">
               Walmart
             </option>
 
+
             <option value="alcohol">
               Alcohol
             </option>
+
 
             <option value="sodas">
               Sodas
@@ -687,6 +872,7 @@
 
         </div>
 
+
         <button
           id="saveItemButton"
           class="save-button"
@@ -695,6 +881,7 @@
           Add Item
         </button>
 
+
       </form>
 
     </div>
@@ -702,7 +889,13 @@
   </section>
 
 
-  <section id="storeScreen" class="screen" hidden>
+  <!-- STORE PAGE -->
+
+  <section
+    id="storeScreen"
+    class="screen"
+    hidden
+  >
 
     <div class="card list-card">
 
@@ -710,10 +903,19 @@
         class="list-heading"
         aria-hidden="true"
       >
-        <span>Item</span>
-        <span>Qty</span>
+
+        <span>
+          Item
+        </span>
+
+        <span>
+          Qty
+        </span>
+
         <span></span>
+
       </div>
+
 
       <div
         id="storeList"
@@ -723,6 +925,7 @@
     </div>
 
   </section>
+
 
 </main>
 
@@ -736,15 +939,23 @@
 
 
 <script>
+
 'use strict';
 
 
-const APP_VERSION = '1.0.5';
+const APP_VERSION =
+  '1.0.6';
+
 
 console.info(
   `Uno Club Shopping v${APP_VERSION}`
 );
 
+
+
+/* =========================================================
+   SUPABASE
+   ========================================================= */
 
 const SUPABASE_URL =
   'https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -753,6 +964,11 @@ const SUPABASE_URL =
 const SUPABASE_PUBLISHABLE_KEY =
   'sb_publishable_gh0acghIDuQDgh24ZIm8Mw_c1bpvIM6';
 
+
+
+/* =========================================================
+   STORES
+   ========================================================= */
 
 const STORES = {
 
@@ -767,8 +983,71 @@ const STORES = {
 
   sodas:
     'Sodas'
+
 };
 
+
+
+/* =========================================================
+   REMEMBER LAST STORE
+   ========================================================= */
+
+const LAST_STORE_KEY =
+  'unoClubShoppingLastStore';
+
+
+function rememberLastStore(
+  store
+) {
+
+  if (!STORES[store]) {
+    return;
+  }
+
+
+  try {
+
+    localStorage.setItem(
+      LAST_STORE_KEY,
+      store
+    );
+
+  } catch (_) {}
+
+}
+
+
+function getLastStore() {
+
+  try {
+
+    const store =
+      localStorage.getItem(
+        LAST_STORE_KEY
+      );
+
+
+    if (
+      store &&
+      STORES[store]
+    ) {
+
+      return store;
+
+    }
+
+  } catch (_) {}
+
+
+  return null;
+
+}
+
+
+
+/* =========================================================
+   ELEMENTS
+   ========================================================= */
 
 const homeScreen =
   document.getElementById(
@@ -824,6 +1103,18 @@ const quantityInput =
   );
 
 
+const addQtyMinus =
+  document.getElementById(
+    'addQtyMinus'
+  );
+
+
+const addQtyPlus =
+  document.getElementById(
+    'addQtyPlus'
+  );
+
+
 const storeSelect =
   document.getElementById(
     'store'
@@ -848,9 +1139,18 @@ const toast =
   );
 
 
-let currentStore = null;
-let toastTimer = null;
+let currentStore =
+  null;
 
+
+let toastTimer =
+  null;
+
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
 
 function showToast(
   message,
@@ -879,14 +1179,23 @@ function showToast(
 
   toastTimer =
     setTimeout(
-      () =>
+      () => {
+
         toast.classList.remove(
           'show'
-        ),
-      2500
+        );
+
+      },
+      2800
     );
+
 }
 
+
+
+/* =========================================================
+   API
+   ========================================================= */
 
 async function api(
   path,
@@ -909,6 +1218,7 @@ async function api(
       : {}),
 
     ...(options.headers || {})
+
   };
 
 
@@ -950,19 +1260,23 @@ async function api(
       if (text) {
         message = text;
       }
+
     }
 
 
     throw new Error(
       message
     );
+
   }
 
 
   if (
     response.status === 204
   ) {
+
     return null;
+
   }
 
 
@@ -973,20 +1287,24 @@ async function api(
   return text
     ? JSON.parse(text)
     : null;
+
 }
 
+
+
+/* =========================================================
+   HOME COUNTS
+   ========================================================= */
 
 async function loadHomeCounts() {
 
   const counts = {
 
     sams_costco: 1,
-
     walmart: 0,
-
     alcohol: 0,
-
     sodas: 0
+
   };
 
 
@@ -1022,6 +1340,7 @@ async function loadHomeCounts() {
 
         }
       );
+
     }
 
 
@@ -1044,44 +1363,55 @@ async function loadHomeCounts() {
       );
 
 
-  } catch (error) {
+  } catch (
+    error
+  ) {
 
     console.error(
-      'Could not load store counts:',
       error
     );
 
   }
+
 }
 
 
-function showOnly(screen) {
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+function showOnly(
+  screen
+) {
 
   homeScreen.hidden =
-    screen !==
-    homeScreen;
+    screen !== homeScreen;
 
 
   addScreen.hidden =
-    screen !==
-    addScreen;
+    screen !== addScreen;
 
 
   storeScreen.hidden =
-    screen !==
-    storeScreen;
+    screen !== storeScreen;
+
 }
 
 
 function goHome() {
+
   location.hash =
     '#home';
+
 }
 
 
 function goAdd() {
+
   location.hash =
     '#add';
+
 }
 
 
@@ -1092,6 +1422,7 @@ function goStore(
   location.hash =
     '#store/' +
     storeKey;
+
 }
 
 
@@ -1123,14 +1454,33 @@ function route() {
       false;
 
 
+    const lastStore =
+      getLastStore();
+
+
+    if (lastStore) {
+
+      storeSelect.value =
+        lastStore;
+
+    }
+
+
+    refreshAddQuantityButtons();
+
+
     setTimeout(
-      () =>
-        itemNameInput.focus(),
+      () => {
+
+        itemNameInput.focus();
+
+      },
       80
     );
 
 
     return;
+
   }
 
 
@@ -1155,6 +1505,7 @@ function route() {
       goHome();
 
       return;
+
     }
 
 
@@ -1181,6 +1532,7 @@ function route() {
 
 
     return;
+
   }
 
 
@@ -1202,8 +1554,14 @@ function route() {
 
 
   loadHomeCounts();
+
 }
 
+
+
+/* =========================================================
+   CLEAN ITEM NAME
+   ========================================================= */
 
 function normalizeItemName(
   value
@@ -1215,8 +1573,14 @@ function normalizeItemName(
       /\s+/g,
       ' '
     );
+
 }
 
+
+
+/* =========================================================
+   HOME BUTTONS
+   ========================================================= */
 
 addItemButton
   .addEventListener(
@@ -1232,15 +1596,17 @@ document
   .forEach(
     button => {
 
-      button
-        .addEventListener(
-          'click',
-          () =>
-            goStore(
-              button.dataset
-                .store
-            )
-        );
+      button.addEventListener(
+        'click',
+        () => {
+
+          goStore(
+            button.dataset
+              .store
+          );
+
+        }
+      );
 
     }
   );
@@ -1252,6 +1618,148 @@ backButton
     goHome
   );
 
+
+
+/* =========================================================
+   REMEMBER STORE
+   ========================================================= */
+
+storeSelect
+  .addEventListener(
+    'change',
+    () => {
+
+      rememberLastStore(
+        storeSelect.value
+      );
+
+    }
+  );
+
+
+
+/* =========================================================
+   ADD PAGE QUANTITY
+   ========================================================= */
+
+function getAddQuantity() {
+
+  const value =
+    Number.parseInt(
+      quantityInput.value,
+      10
+    );
+
+
+  if (
+    !Number.isInteger(value) ||
+    value < 1
+  ) {
+
+    return 1;
+
+  }
+
+
+  return Math.min(
+    value,
+    9999
+  );
+
+}
+
+
+function setAddQuantity(
+  value
+) {
+
+  const quantity =
+    Math.min(
+      9999,
+      Math.max(
+        1,
+        value
+      )
+    );
+
+
+  quantityInput.value =
+    quantity;
+
+
+  refreshAddQuantityButtons();
+
+}
+
+
+function refreshAddQuantityButtons() {
+
+  const quantity =
+    getAddQuantity();
+
+
+  addQtyMinus.disabled =
+    quantity <= 1;
+
+
+  addQtyPlus.disabled =
+    quantity >= 9999;
+
+}
+
+
+addQtyMinus
+  .addEventListener(
+    'click',
+    () => {
+
+      setAddQuantity(
+        getAddQuantity() -
+        1
+      );
+
+    }
+  );
+
+
+addQtyPlus
+  .addEventListener(
+    'click',
+    () => {
+
+      setAddQuantity(
+        getAddQuantity() +
+        1
+      );
+
+    }
+  );
+
+
+quantityInput
+  .addEventListener(
+    'input',
+    refreshAddQuantityButtons
+  );
+
+
+quantityInput
+  .addEventListener(
+    'blur',
+    () => {
+
+      setAddQuantity(
+        getAddQuantity()
+      );
+
+    }
+  );
+
+
+
+/* =========================================================
+   ADD ITEM
+   ========================================================= */
 
 addItemForm
   .addEventListener(
@@ -1271,19 +1779,8 @@ addItemForm
         storeSelect.value;
 
 
-      const rawQuantity =
-        quantityInput
-          .value
-          .trim();
-
-
       const quantity =
-        rawQuantity === ''
-          ? 1
-          : Number.parseInt(
-              rawQuantity,
-              10
-            );
+        getAddQuantity();
 
 
       if (!itemName) {
@@ -1293,9 +1790,12 @@ addItemForm
           true
         );
 
+
         itemNameInput.focus();
 
+
         return;
+
       }
 
 
@@ -1309,98 +1809,119 @@ addItemForm
           true
         );
 
+
         storeSelect.focus();
 
+
         return;
+
       }
 
 
-      if (
-        !Number.isInteger(
-          quantity
-        ) ||
-        quantity < 1 ||
-        quantity > 9999
-      ) {
-
-        showToast(
-          'Quantity must be a whole number of 1 or more.',
-          true
-        );
-
-        quantityInput.focus();
-
-        return;
-      }
-
+      /*
+        Case of Water is permanent
+        and does not exist as a normal
+        database row.
+      */
 
       if (
-        store ===
-          'sams_costco' &&
         itemName
           .toLocaleLowerCase() ===
-          'case of water'
+        'case of water'
       ) {
 
         showToast(
-          'Case of Water is already permanently on Sam’s/Costco.',
+          'Case of Water is already on the Sam’s/Costco list.',
           true
         );
 
+
         return;
+
       }
 
 
-      saveItemButton
-        .disabled =
+      rememberLastStore(
+        store
+      );
+
+
+      saveItemButton.disabled =
         true;
 
 
-      saveItemButton
-        .textContent =
+      saveItemButton.textContent =
         'Adding…';
 
 
       try {
 
-        await api(
-          '/rest/v1/shopping_items',
-          {
-            method:
-              'POST',
+        const result =
+          await api(
 
-            headers: {
-              Prefer:
-                'return=minimal'
-            },
+            '/rest/v1/rpc/add_shopping_item',
 
-            body:
-              JSON.stringify(
-                {
-                  item_name:
-                    itemName,
+            {
+              method: 'POST',
 
-                  quantity:
-                    quantity,
+              body:
+                JSON.stringify(
+                  {
+                    p_item_name:
+                      itemName,
 
-                  store:
-                    store
-                }
-              )
-          }
-        );
+                    p_quantity:
+                      quantity,
+
+                    p_store:
+                      store
+                  }
+                )
+            }
+
+          );
+
+
+        const resultData =
+          Array.isArray(result)
+            ? result[0]
+            : result;
+
+
+        if (
+          resultData &&
+          resultData.added === false
+        ) {
+
+          const existingStore =
+            STORES[
+              resultData.existing_store
+            ] ||
+            'another';
+
+
+          showToast(
+            `${itemName} is already on the ${existingStore} list.`,
+            true
+          );
+
+
+          return;
+
+        }
 
 
         itemNameInput.value =
           '';
 
 
-        quantityInput.value =
-          '';
+        setAddQuantity(
+          1
+        );
 
 
         showToast(
-          `Added to ${STORES[store]}.`
+          `${itemName} added to ${STORES[store]}.`
         );
 
 
@@ -1410,7 +1931,9 @@ addItemForm
         itemNameInput.focus();
 
 
-      } catch (error) {
+      } catch (
+        error
+      ) {
 
         console.error(
           error
@@ -1425,19 +1948,23 @@ addItemForm
 
       } finally {
 
-        saveItemButton
-          .disabled =
+        saveItemButton.disabled =
           false;
 
 
-        saveItemButton
-          .textContent =
+        saveItemButton.textContent =
           'Add Item';
+
       }
 
     }
   );
 
+
+
+/* =========================================================
+   LOAD STORE LIST
+   ========================================================= */
 
 async function loadStoreItems(
   quiet = false
@@ -1446,7 +1973,9 @@ async function loadStoreItems(
   if (
     !currentStore
   ) {
+
     return;
+
   }
 
 
@@ -1458,6 +1987,7 @@ async function loadStoreItems(
 
     storeList.innerHTML =
       '<div class="loading-state">Loading…</div>';
+
   }
 
 
@@ -1475,6 +2005,7 @@ async function loadStoreItems(
         encodeURIComponent(
           storeAtStart
         )
+
       );
 
 
@@ -1482,7 +2013,9 @@ async function loadStoreItems(
       currentStore !==
       storeAtStart
     ) {
+
       return;
+
     }
 
 
@@ -1494,18 +2027,15 @@ async function loadStoreItems(
 
     items.sort(
       (a, b) =>
-        a.item_name
-          .localeCompare(
-            b.item_name,
-            undefined,
-            {
-              sensitivity:
-                'base',
 
-              numeric:
-                true
-            }
-          )
+        a.item_name.localeCompare(
+          b.item_name,
+          undefined,
+          {
+            sensitivity: 'base',
+            numeric: true
+          }
+        )
     );
 
 
@@ -1514,7 +2044,9 @@ async function loadStoreItems(
     );
 
 
-  } catch (error) {
+  } catch (
+    error
+  ) {
 
     console.error(
       error
@@ -1524,7 +2056,7 @@ async function loadStoreItems(
     if (
       !quiet &&
       currentStore ===
-        storeAtStart
+      storeAtStart
     ) {
 
       storeList.innerHTML =
@@ -1533,8 +2065,14 @@ async function loadStoreItems(
     }
 
   }
+
 }
 
+
+
+/* =========================================================
+   RENDER LIST
+   ========================================================= */
 
 function renderStoreList(
   items
@@ -1557,13 +2095,15 @@ function renderStoreList(
 
 
   items.forEach(
-    item =>
+    item => {
 
       storeList.appendChild(
         createItemRow(
           item
         )
-      )
+      );
+
+    }
   );
 
 
@@ -1595,8 +2135,14 @@ function renderStoreList(
     );
 
   }
+
 }
 
+
+
+/* =========================================================
+   PERMANENT WATER
+   ========================================================= */
 
 function createPermanentWaterRow() {
 
@@ -1678,8 +2224,14 @@ function createPermanentWaterRow() {
 
 
   return row;
+
 }
 
+
+
+/* =========================================================
+   NORMAL ITEM ROW
+   ========================================================= */
 
 function createItemRow(
   item
@@ -1711,6 +2263,40 @@ function createItemRow(
 
   name.textContent =
     item.item_name;
+
+
+  const qtyControl =
+    document.createElement(
+      'div'
+    );
+
+
+  qtyControl.className =
+    'qty-control';
+
+
+  const minus =
+    document.createElement(
+      'button'
+    );
+
+
+  minus.type =
+    'button';
+
+
+  minus.className =
+    'qty-step-button';
+
+
+  minus.textContent =
+    '−';
+
+
+  minus.setAttribute(
+    'aria-label',
+    `Decrease ${item.item_name}`
+  );
 
 
   const qty =
@@ -1753,20 +2339,161 @@ function createItemRow(
     );
 
 
+  qty.setAttribute(
+    'aria-label',
+    `Quantity for ${item.item_name}`
+  );
+
+
+  const plus =
+    document.createElement(
+      'button'
+    );
+
+
+  plus.type =
+    'button';
+
+
+  plus.className =
+    'qty-step-button';
+
+
+  plus.textContent =
+    '+';
+
+
+  plus.setAttribute(
+    'aria-label',
+    `Increase ${item.item_name}`
+  );
+
+
+  function refreshButtons() {
+
+    const value =
+      getRowQuantity(
+        qty
+      );
+
+
+    minus.disabled =
+      value <= 1;
+
+
+    plus.disabled =
+      value >= 9999;
+
+  }
+
+
+  minus.addEventListener(
+    'click',
+    async () => {
+
+      const value =
+        getRowQuantity(
+          qty
+        );
+
+
+      if (
+        value <= 1
+      ) {
+
+        return;
+
+      }
+
+
+      qty.value =
+        value - 1;
+
+
+      await saveRowQuantity(
+        item.id,
+        qty,
+        minus,
+        plus
+      );
+
+    }
+  );
+
+
+  plus.addEventListener(
+    'click',
+    async () => {
+
+      const value =
+        getRowQuantity(
+          qty
+        );
+
+
+      if (
+        value >= 9999
+      ) {
+
+        return;
+
+      }
+
+
+      qty.value =
+        value + 1;
+
+
+      await saveRowQuantity(
+        item.id,
+        qty,
+        minus,
+        plus
+      );
+
+    }
+  );
+
+
   qty.addEventListener(
     'focus',
-    () => qty.select()
+    () => {
+
+      qty.select();
+
+    }
+  );
+
+
+  qty.addEventListener(
+    'input',
+    refreshButtons
   );
 
 
   qty.addEventListener(
     'change',
-    () =>
-      updateQuantity(
+    () => {
+
+      saveRowQuantity(
         item.id,
-        qty
-      )
+        qty,
+        minus,
+        plus
+      );
+
+    }
   );
+
+
+  qtyControl.append(
+    minus,
+    qty,
+    plus
+  );
+
+
+  refreshButtons();
 
 
   const del =
@@ -1795,41 +2522,41 @@ function createItemRow(
 
   del.addEventListener(
     'click',
-    () =>
+    () => {
+
       deleteItem(
         item.id,
         item.item_name,
         row,
         del
-      )
+      );
+
+    }
   );
 
 
   row.append(
     name,
-    qty,
+    qtyControl,
     del
   );
 
 
   return row;
+
 }
 
 
-async function updateQuantity(
-  id,
+
+/* =========================================================
+   ROW QUANTITY
+   ========================================================= */
+
+function getRowQuantity(
   input
 ) {
 
-  const oldValue =
-    Number.parseInt(
-      input.dataset
-        .savedValue,
-      10
-    );
-
-
-  const newValue =
+  const value =
     Number.parseInt(
       input.value,
       10
@@ -1837,37 +2564,80 @@ async function updateQuantity(
 
 
   if (
-    !Number.isInteger(
-      newValue
-    ) ||
-    newValue < 1 ||
-    newValue > 9999
+    !Number.isInteger(value) ||
+    value < 1
   ) {
 
-    input.value =
-      oldValue;
+    return 1;
+
+  }
 
 
-    showToast(
-      'Quantity must be a whole number of 1 or more.',
-      true
+  return Math.min(
+    value,
+    9999
+  );
+
+}
+
+
+
+async function saveRowQuantity(
+  id,
+  input,
+  minusButton,
+  plusButton
+) {
+
+  const oldValue =
+    Number.parseInt(
+      input.dataset.savedValue,
+      10
     );
 
 
-    return;
-  }
+  const newValue =
+    getRowQuantity(
+      input
+    );
+
+
+  input.value =
+    newValue;
+
+
+  minusButton.disabled =
+    true;
+
+
+  plusButton.disabled =
+    true;
+
+
+  input.disabled =
+    true;
 
 
   if (
     newValue ===
     oldValue
   ) {
+
+    input.disabled =
+      false;
+
+
+    minusButton.disabled =
+      newValue <= 1;
+
+
+    plusButton.disabled =
+      newValue >= 9999;
+
+
     return;
+
   }
-
-
-  input.disabled =
-    true;
 
 
   try {
@@ -1881,8 +2651,7 @@ async function updateQuantity(
       ),
 
       {
-        method:
-          'PATCH',
+        method: 'PATCH',
 
         headers: {
           Prefer:
@@ -1897,6 +2666,7 @@ async function updateQuantity(
             }
           )
       }
+
     );
 
 
@@ -1911,7 +2681,9 @@ async function updateQuantity(
     );
 
 
-  } catch (error) {
+  } catch (
+    error
+  ) {
 
     console.error(
       error
@@ -1927,14 +2699,33 @@ async function updateQuantity(
       true
     );
 
-
-  } finally {
-
-    input.disabled =
-      false;
   }
+
+
+  const currentValue =
+    getRowQuantity(
+      input
+    );
+
+
+  input.disabled =
+    false;
+
+
+  minusButton.disabled =
+    currentValue <= 1;
+
+
+  plusButton.disabled =
+    currentValue >= 9999;
+
 }
 
+
+
+/* =========================================================
+   DELETE ITEM
+   ========================================================= */
 
 async function deleteItem(
   id,
@@ -1958,14 +2749,14 @@ async function deleteItem(
       ),
 
       {
-        method:
-          'DELETE',
+        method: 'DELETE',
 
         headers: {
           Prefer:
             'return=minimal'
         }
       }
+
     );
 
 
@@ -2000,9 +2791,9 @@ async function deleteItem(
         currentStore ===
           'sams_costco'
 
-          ? 'No other items on this list.'
+        ? 'No other items on this list.'
 
-          : 'No items on this list.';
+        : 'No items on this list.';
 
 
       storeList.appendChild(
@@ -2012,7 +2803,9 @@ async function deleteItem(
     }
 
 
-  } catch (error) {
+  } catch (
+    error
+  ) {
 
     console.error(
       error
@@ -2029,8 +2822,14 @@ async function deleteItem(
     );
 
   }
+
 }
 
+
+
+/* =========================================================
+   PAGE EVENTS
+   ========================================================= */
 
 window.addEventListener(
   'hashchange',
@@ -2045,7 +2844,9 @@ document.addEventListener(
     if (
       document.hidden
     ) {
+
       return;
+
     }
 
 
@@ -2067,6 +2868,11 @@ document.addEventListener(
 );
 
 
+
+/* =========================================================
+   START APP
+   ========================================================= */
+
 if (
   !location.hash
 ) {
@@ -2083,6 +2889,7 @@ if (
 route();
 
 </script>
+
 
 </body>
 </html>
