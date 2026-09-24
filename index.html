@@ -8,8 +8,8 @@
     content="width=device-width, initial-scale=1, viewport-fit=cover"
   >
 
-  <!-- APP VERSION: 1.0.8 -->
-  <meta name="app-version" content="1.0.8">
+  <!-- APP VERSION: 1.0.9 -->
+  <meta name="app-version" content="1.0.9">
 
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
@@ -25,12 +25,12 @@
   <link
     rel="icon"
     type="image/png"
-    href="uno-club-shopping.PNG?v=1.0.8"
+    href="uno-club-shopping.PNG?v=1.0.9"
   >
 
   <link
     rel="apple-touch-icon"
-    href="uno-club-shopping.PNG?v=1.0.8"
+    href="uno-club-shopping.PNG?v=1.0.9"
   >
 
   <style>
@@ -245,6 +245,11 @@
       box-shadow: 0 2px 5px rgba(0,0,0,.18);
 
       pointer-events: none;
+    }
+
+    .store-add-button {
+      margin-bottom: 13px;
+      background: var(--black);
     }
 
     .card {
@@ -627,7 +632,7 @@
 
   <img
     class="header-logo"
-    src="uno-club-shopping.PNG?v=1.0.8"
+    src="uno-club-shopping.PNG?v=1.0.9"
     alt="Uno Club Shopping logo"
   >
 
@@ -830,6 +835,14 @@
 
   <section id="storeScreen" class="screen" hidden>
 
+    <button
+      id="storeAddItemButton"
+      class="main-button store-add-button"
+      type="button"
+    >
+      Add Item
+    </button>
+
     <div class="card list-card">
 
       <div
@@ -863,7 +876,9 @@
 
 'use strict';
 
-const APP_VERSION = '1.0.8';
+
+const APP_VERSION = '1.0.9';
+
 
 console.info(
   `Uno Club Shopping v${APP_VERSION}`
@@ -968,6 +983,12 @@ const backButton =
 const addItemButton =
   document.getElementById(
     'addItemButton'
+  );
+
+
+const storeAddItemButton =
+  document.getElementById(
+    'storeAddItemButton'
   );
 
 
@@ -1439,6 +1460,29 @@ addItemButton
   .addEventListener(
     'click',
     goAdd
+  );
+
+
+storeAddItemButton
+  .addEventListener(
+    'click',
+    () => {
+
+      if (
+        currentStore &&
+        STORES[currentStore]
+      ) {
+
+        rememberLastStore(
+          currentStore
+        );
+
+      }
+
+
+      goAdd();
+
+    }
   );
 
 
