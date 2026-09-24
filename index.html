@@ -8,8 +8,8 @@
     content="width=device-width, initial-scale=1, viewport-fit=cover"
   >
 
-  <!-- APP VERSION: 1.0.9 -->
-  <meta name="app-version" content="1.0.9">
+  <!-- APP VERSION: 1.0.11 -->
+  <meta name="app-version" content="1.0.11">
 
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
@@ -25,12 +25,12 @@
   <link
     rel="icon"
     type="image/png"
-    href="uno-club-shopping.PNG?v=1.0.9"
+    href="uno-club-shopping.PNG?v=1.0.11"
   >
 
   <link
     rel="apple-touch-icon"
-    href="uno-club-shopping.PNG?v=1.0.9"
+    href="uno-club-shopping.PNG?v=1.0.11"
   >
 
   <style>
@@ -58,6 +58,7 @@
       min-height: 100%;
       background: var(--page);
       color: var(--text);
+
       font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -66,6 +67,7 @@
         Helvetica,
         Arial,
         sans-serif;
+
       -webkit-text-size-adjust: 100%;
     }
 
@@ -84,6 +86,8 @@
       touch-action: manipulation;
     }
 
+    /* HEADER */
+
     .app-header {
       height: calc(82px + env(safe-area-inset-top));
 
@@ -100,18 +104,22 @@
       gap: 10px;
 
       position: fixed;
+
       top: 0;
       left: 0;
       right: 0;
 
       width: 100%;
+
       z-index: 1000;
 
-      box-shadow: 0 2px 10px rgba(0,0,0,.22);
+      box-shadow:
+        0 2px 10px rgba(0,0,0,.22);
     }
 
     .app-header h1 {
       flex: 1;
+
       margin: 0;
 
       text-align: center;
@@ -125,9 +133,11 @@
     .header-logo {
       width: 58px;
       height: 58px;
+
       flex: 0 0 58px;
 
       object-fit: cover;
+
       border-radius: 12px;
 
       box-shadow:
@@ -138,6 +148,7 @@
     .back-button {
       width: 44px;
       height: 44px;
+
       flex: 0 0 44px;
 
       border: 0;
@@ -166,17 +177,20 @@
 
     main {
       width: min(100%, 620px);
+
       margin: 0 auto;
 
       padding:
         calc(104px + env(safe-area-inset-top))
         16px
-        calc(34px + env(safe-area-inset-bottom));
+        calc(42px + env(safe-area-inset-bottom));
     }
 
     .screen[hidden] {
       display: none !important;
     }
+
+    /* MAIN BUTTONS */
 
     .button-stack {
       display: grid;
@@ -186,6 +200,7 @@
     .main-button,
     .save-button {
       width: 100%;
+
       min-height: 62px;
 
       border: 2px solid var(--black);
@@ -197,7 +212,8 @@
       font-size: 20px;
       font-weight: 800;
 
-      box-shadow: 0 5px 14px rgba(30,90,203,.24);
+      box-shadow:
+        0 5px 14px rgba(30,90,203,.24);
 
       cursor: pointer;
 
@@ -214,7 +230,9 @@
 
     .main-button.add-item {
       background: var(--black);
-      box-shadow: 0 5px 14px rgba(0,0,0,.20);
+
+      box-shadow:
+        0 5px 14px rgba(0,0,0,.20);
     }
 
     .store-button {
@@ -223,11 +241,13 @@
 
     .count-badge {
       position: absolute;
+
       top: 7px;
       right: 8px;
 
       min-width: 29px;
       height: 29px;
+
       padding: 0 7px;
 
       border-radius: 15px;
@@ -242,15 +262,39 @@
       line-height: 25px;
       text-align: center;
 
-      box-shadow: 0 2px 5px rgba(0,0,0,.18);
+      box-shadow:
+        0 2px 5px rgba(0,0,0,.18);
 
       pointer-events: none;
     }
 
     .store-add-button {
       margin-bottom: 13px;
+
       background: var(--black);
     }
+
+    /* VERSION NUMBER */
+
+    .version-label {
+      position: fixed;
+
+      left: 10px;
+
+      bottom:
+        calc(7px + env(safe-area-inset-bottom));
+
+      color: #000000;
+
+      font-size: 11px;
+      font-weight: 500;
+
+      z-index: 10;
+
+      pointer-events: none;
+    }
+
+    /* CARDS */
 
     .card {
       background: var(--white);
@@ -267,12 +311,15 @@
       padding: 18px;
     }
 
+    /* FORM */
+
     .field {
       margin-bottom: 18px;
     }
 
     .field label {
       display: block;
+
       margin-bottom: 7px;
 
       font-size: 15px;
@@ -282,6 +329,7 @@
     .field input,
     .field select {
       width: 100%;
+
       min-height: 54px;
 
       padding: 12px 13px;
@@ -300,19 +348,51 @@
     .field input:focus,
     .field select:focus {
       border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(30,90,203,.12);
+
+      box-shadow:
+        0 0 0 3px rgba(30,90,203,.12);
     }
+
+    .field select:disabled {
+      opacity: 1;
+
+      background: #eeeeee;
+
+      color: #4b5563;
+
+      -webkit-text-fill-color: #4b5563;
+
+      border-color: #b8b8b8;
+    }
+
+    .locked-note {
+      margin-top: 7px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .locked-note[hidden] {
+      display: none !important;
+    }
+
+    /* QUANTITY */
 
     .qty-control {
       display: flex;
+
       align-items: center;
       justify-content: center;
+
       gap: 5px;
     }
 
     .qty-step-button {
       width: 36px;
       height: 44px;
+
       flex: 0 0 36px;
 
       border: 2px solid var(--black);
@@ -342,6 +422,7 @@
 
     .qty-input {
       width: 48px;
+
       min-height: 44px;
 
       padding: 4px;
@@ -370,7 +451,9 @@
 
     .qty-input:focus {
       border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(30,90,203,.12);
+
+      box-shadow:
+        0 0 0 3px rgba(30,90,203,.12);
     }
 
     .add-qty-control {
@@ -380,14 +463,19 @@
     .add-qty-control .qty-step-button {
       width: 48px;
       height: 52px;
+
       flex: 0 0 48px;
     }
 
     .add-qty-control .qty-input {
       width: 76px;
+
       min-height: 52px;
+
       font-size: 20px;
     }
+
+    /* STORE LIST */
 
     .list-card {
       padding: 0;
@@ -407,12 +495,14 @@
 
       background: #edf3ff;
 
-      border-bottom: 1px solid var(--border);
+      border-bottom:
+        1px solid var(--border);
 
       color: #364152;
 
       font-size: 12px;
       font-weight: 900;
+
       text-transform: uppercase;
       letter-spacing: .7px;
     }
@@ -437,7 +527,8 @@
 
       padding: 9px 14px;
 
-      border-bottom: 1px solid #ececec;
+      border-bottom:
+        1px solid #ececec;
     }
 
     .item-row:last-child {
@@ -455,18 +546,23 @@
 
     .qty-fixed {
       width: 48px;
+
       min-height: 44px;
 
       margin: 0 auto;
 
-      border: 1.5px solid var(--border);
+      border:
+        1.5px solid var(--border);
+
       border-radius: 10px;
 
       display: flex;
+
       align-items: center;
       justify-content: center;
 
       background: #f1f3f6;
+
       color: #515865;
 
       font-size: 18px;
@@ -534,6 +630,8 @@
       color: var(--danger);
     }
 
+    /* TOAST */
+
     .toast {
       position: fixed;
 
@@ -574,7 +672,9 @@
 
     .toast.show {
       opacity: 1;
-      transform: translate(-50%, 0);
+
+      transform:
+        translate(-50%, 0);
     }
 
     .toast.error {
@@ -602,6 +702,7 @@
 
       .qty-step-button {
         width: 34px;
+
         flex-basis: 34px;
       }
 
@@ -620,7 +721,7 @@
     id="backButton"
     class="back-button"
     type="button"
-    aria-label="Back to main page"
+    aria-label="Back"
     hidden
   >
     &larr;
@@ -632,15 +733,21 @@
 
   <img
     class="header-logo"
-    src="uno-club-shopping.PNG?v=1.0.9"
+    src="uno-club-shopping.PNG?v=1.0.11"
     alt="Uno Club Shopping logo"
   >
 
 </header>
 
+
 <main>
 
-  <section id="homeScreen" class="screen">
+  <!-- MAIN PAGE -->
+
+  <section
+    id="homeScreen"
+    class="screen"
+  >
 
     <div class="button-stack">
 
@@ -714,9 +821,20 @@
 
     </div>
 
+    <div class="version-label">
+      v1.0.11
+    </div>
+
   </section>
 
-  <section id="addScreen" class="screen" hidden>
+
+  <!-- ADD ITEM PAGE -->
+
+  <section
+    id="addScreen"
+    class="screen"
+    hidden
+  >
 
     <div class="card form-card">
 
@@ -737,6 +855,7 @@
           >
 
         </div>
+
 
         <div class="field">
 
@@ -780,6 +899,7 @@
 
         </div>
 
+
         <div class="field">
 
           <label for="store">
@@ -817,7 +937,16 @@
 
           </select>
 
+          <div
+            id="lockedStoreNote"
+            class="locked-note"
+            hidden
+          >
+            This item will be added to this store.
+          </div>
+
         </div>
+
 
         <button
           id="saveItemButton"
@@ -833,7 +962,14 @@
 
   </section>
 
-  <section id="storeScreen" class="screen" hidden>
+
+  <!-- STORE PAGE -->
+
+  <section
+    id="storeScreen"
+    class="screen"
+    hidden
+  >
 
     <button
       id="storeAddItemButton"
@@ -849,9 +985,13 @@
         class="list-heading"
         aria-hidden="true"
       >
+
         <span>Item</span>
+
         <span>Qty</span>
+
         <span></span>
+
       </div>
 
       <div
@@ -865,6 +1005,7 @@
 
 </main>
 
+
 <div
   id="toast"
   class="toast"
@@ -872,12 +1013,14 @@
   aria-live="polite"
 ></div>
 
+
 <script>
 
 'use strict';
 
 
-const APP_VERSION = '1.0.9';
+const APP_VERSION =
+  '1.0.11';
 
 
 console.info(
@@ -894,10 +1037,19 @@ const SUPABASE_PUBLISHABLE_KEY =
 
 
 const STORES = {
-  sams_costco: 'Sam’s / CostCo',
-  walmart: 'Walmart',
-  alcohol: 'Alcohol',
-  sodas: 'Sodas'
+
+  sams_costco:
+    'Sam’s / CostCo',
+
+  walmart:
+    'Walmart',
+
+  alcohol:
+    'Alcohol',
+
+  sodas:
+    'Sodas'
+
 };
 
 
@@ -905,50 +1057,20 @@ const LAST_STORE_KEY =
   'unoClubShoppingLastStore';
 
 
-function rememberLastStore(store) {
-
-  if (!STORES[store]) {
-    return;
-  }
-
-  try {
-
-    localStorage.setItem(
-      LAST_STORE_KEY,
-      store
-    );
-
-  } catch (_) {}
-
-}
+let currentStore =
+  null;
 
 
-function getLastStore() {
-
-  try {
-
-    const store =
-      localStorage.getItem(
-        LAST_STORE_KEY
-      );
+let lockedAddStore =
+  null;
 
 
-    if (
-      store &&
-      STORES[store]
-    ) {
-
-      return store;
-
-    }
-
-  } catch (_) {}
+let toastTimer =
+  null;
 
 
-  return null;
 
-}
-
+/* ELEMENTS */
 
 const homeScreen =
   document.getElementById(
@@ -1028,6 +1150,12 @@ const storeSelect =
   );
 
 
+const lockedStoreNote =
+  document.getElementById(
+    'lockedStoreNote'
+  );
+
+
 const saveItemButton =
   document.getElementById(
     'saveItemButton'
@@ -1046,9 +1174,67 @@ const toast =
   );
 
 
-let currentStore = null;
-let toastTimer = null;
 
+/* LAST STORE */
+
+function rememberLastStore(
+  store
+) {
+
+  if (
+    !STORES[
+      store
+    ]
+  ) {
+
+    return;
+
+  }
+
+
+  try {
+
+    localStorage.setItem(
+      LAST_STORE_KEY,
+      store
+    );
+
+  } catch (_) {}
+
+}
+
+
+function getLastStore() {
+
+  try {
+
+    const store =
+      localStorage.getItem(
+        LAST_STORE_KEY
+      );
+
+
+    if (
+      store &&
+      STORES[
+        store
+      ]
+    ) {
+
+      return store;
+
+    }
+
+  } catch (_) {}
+
+
+  return null;
+
+}
+
+
+
+/* TOAST */
 
 function showToast(
   message,
@@ -1090,6 +1276,9 @@ function showToast(
 }
 
 
+
+/* API */
+
 async function api(
   path,
   options = {}
@@ -1125,7 +1314,9 @@ async function api(
     );
 
 
-  if (!response.ok) {
+  if (
+    !response.ok
+  ) {
 
     let message =
       `Request failed (${response.status})`;
@@ -1168,7 +1359,8 @@ async function api(
 
 
   if (
-    response.status === 204
+    response.status ===
+    204
   ) {
 
     return null;
@@ -1187,13 +1379,25 @@ async function api(
 }
 
 
+
+/* HOME COUNTS */
+
 async function loadHomeCounts() {
 
   const counts = {
-    sams_costco: 1,
-    walmart: 0,
-    alcohol: 0,
-    sodas: 0
+
+    sams_costco:
+      1,
+
+    walmart:
+      0,
+
+    alcohol:
+      0,
+
+    sodas:
+      0
+
   };
 
 
@@ -1206,7 +1410,9 @@ async function loadHomeCounts() {
 
 
     if (
-      Array.isArray(data)
+      Array.isArray(
+        data
+      )
     ) {
 
       data.forEach(
@@ -1246,7 +1452,9 @@ async function loadHomeCounts() {
 
 
           badge.textContent =
-            counts[store] ?? 0;
+            counts[
+              store
+            ] ?? 0;
 
         }
       );
@@ -1265,20 +1473,26 @@ async function loadHomeCounts() {
 }
 
 
+
+/* NAVIGATION */
+
 function showOnly(
   screen
 ) {
 
   homeScreen.hidden =
-    screen !== homeScreen;
+    screen !==
+    homeScreen;
 
 
   addScreen.hidden =
-    screen !== addScreen;
+    screen !==
+    addScreen;
 
 
   storeScreen.hidden =
-    screen !== storeScreen;
+    screen !==
+    storeScreen;
 
 }
 
@@ -1299,16 +1513,30 @@ function goAdd() {
 }
 
 
+function goAddForStore(
+  store
+) {
+
+  location.hash =
+    '#add/' +
+    store;
+
+}
+
+
 function goStore(
-  storeKey
+  store
 ) {
 
   location.hash =
     '#store/' +
-    storeKey;
+    store;
 
 }
 
+
+
+/* ROUTER */
 
 function route() {
 
@@ -1317,9 +1545,36 @@ function route() {
     '#home';
 
 
+  /* ADD ITEM FROM A STORE */
+
   if (
-    hash === '#add'
+    hash.startsWith(
+      '#add/'
+    )
   ) {
+
+    const store =
+      hash.slice(
+        '#add/'.length
+      );
+
+
+    if (
+      !STORES[
+        store
+      ]
+    ) {
+
+      goHome();
+
+      return;
+
+    }
+
+
+    lockedAddStore =
+      store;
+
 
     currentStore =
       null;
@@ -1338,19 +1593,21 @@ function route() {
       false;
 
 
-    const lastStore =
-      getLastStore();
+    storeSelect.value =
+      store;
 
 
-    if (lastStore) {
-
-      storeSelect.value =
-        lastStore;
-
-    }
+    storeSelect.disabled =
+      true;
 
 
-    refreshAddQuantityButtons();
+    lockedStoreNote.hidden =
+      false;
+
+
+    setAddQuantity(
+      1
+    );
 
 
     setTimeout(
@@ -1368,13 +1625,90 @@ function route() {
   }
 
 
+  /* NORMAL ADD ITEM FROM MAIN PAGE */
+
+  if (
+    hash ===
+    '#add'
+  ) {
+
+    lockedAddStore =
+      null;
+
+
+    currentStore =
+      null;
+
+
+    showOnly(
+      addScreen
+    );
+
+
+    pageTitle.textContent =
+      'Add Item';
+
+
+    backButton.hidden =
+      false;
+
+
+    storeSelect.disabled =
+      false;
+
+
+    lockedStoreNote.hidden =
+      true;
+
+
+    const lastStore =
+      getLastStore();
+
+
+    if (
+      lastStore
+    ) {
+
+      storeSelect.value =
+        lastStore;
+
+    } else {
+
+      storeSelect.value =
+        '';
+
+    }
+
+
+    setAddQuantity(
+      1
+    );
+
+
+    setTimeout(
+      () => {
+
+        itemNameInput.focus();
+
+      },
+      80
+    );
+
+
+    return;
+
+  }
+
+
+  /* STORE PAGE */
+
   if (
     hash.startsWith(
       '#store/'
     )
   ) {
 
-    const storeKey =
+    const store =
       hash.slice(
         '#store/'.length
       );
@@ -1382,7 +1716,7 @@ function route() {
 
     if (
       !STORES[
-        storeKey
+        store
       ]
     ) {
 
@@ -1393,8 +1727,12 @@ function route() {
     }
 
 
+    lockedAddStore =
+      null;
+
+
     currentStore =
-      storeKey;
+      store;
 
 
     showOnly(
@@ -1404,7 +1742,7 @@ function route() {
 
     pageTitle.textContent =
       STORES[
-        storeKey
+        store
       ];
 
 
@@ -1420,8 +1758,22 @@ function route() {
   }
 
 
+  /* MAIN PAGE */
+
+  lockedAddStore =
+    null;
+
+
   currentStore =
     null;
+
+
+  storeSelect.disabled =
+    false;
+
+
+  lockedStoreNote.hidden =
+    true;
 
 
   showOnly(
@@ -1442,6 +1794,143 @@ function route() {
 }
 
 
+
+/* BACK BUTTON */
+
+backButton
+  .addEventListener(
+    'click',
+    () => {
+
+      const hash =
+        location.hash;
+
+
+      if (
+        hash.startsWith(
+          '#add/'
+        )
+      ) {
+
+        const store =
+          hash.slice(
+            '#add/'.length
+          );
+
+
+        if (
+          STORES[
+            store
+          ]
+        ) {
+
+          goStore(
+            store
+          );
+
+          return;
+
+        }
+
+      }
+
+
+      goHome();
+
+    }
+  );
+
+
+
+/* HOME ADD ITEM */
+
+addItemButton
+  .addEventListener(
+    'click',
+    () => {
+
+      goAdd();
+
+    }
+  );
+
+
+
+/* STORE BUTTONS */
+
+document
+  .querySelectorAll(
+    '.store-button'
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        'click',
+        () => {
+
+          goStore(
+            button.dataset
+              .store
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+
+/* ADD ITEM FROM STORE PAGE */
+
+storeAddItemButton
+  .addEventListener(
+    'click',
+    () => {
+
+      if (
+        currentStore &&
+        STORES[
+          currentStore
+        ]
+      ) {
+
+        goAddForStore(
+          currentStore
+        );
+
+      }
+
+    }
+  );
+
+
+
+/* REMEMBER STORE */
+
+storeSelect
+  .addEventListener(
+    'change',
+    () => {
+
+      if (
+        !lockedAddStore
+      ) {
+
+        rememberLastStore(
+          storeSelect.value
+        );
+
+      }
+
+    }
+  );
+
+
+
+/* CLEAN ITEM NAME */
+
 function normalizeItemName(
   value
 ) {
@@ -1456,77 +1945,8 @@ function normalizeItemName(
 }
 
 
-addItemButton
-  .addEventListener(
-    'click',
-    goAdd
-  );
 
-
-storeAddItemButton
-  .addEventListener(
-    'click',
-    () => {
-
-      if (
-        currentStore &&
-        STORES[currentStore]
-      ) {
-
-        rememberLastStore(
-          currentStore
-        );
-
-      }
-
-
-      goAdd();
-
-    }
-  );
-
-
-document
-  .querySelectorAll(
-    '.store-button'
-  )
-  .forEach(
-    button => {
-
-      button.addEventListener(
-        'click',
-        () => {
-
-          goStore(
-            button.dataset.store
-          );
-
-        }
-      );
-
-    }
-  );
-
-
-backButton
-  .addEventListener(
-    'click',
-    goHome
-  );
-
-
-storeSelect
-  .addEventListener(
-    'change',
-    () => {
-
-      rememberLastStore(
-        storeSelect.value
-      );
-
-    }
-  );
-
+/* ADD QUANTITY */
 
 function getAddQuantity() {
 
@@ -1538,7 +1958,9 @@ function getAddQuantity() {
 
 
   if (
-    !Number.isInteger(value) ||
+    !Number.isInteger(
+      value
+    ) ||
     value < 1
   ) {
 
@@ -1600,7 +2022,8 @@ addQtyMinus
     () => {
 
       setAddQuantity(
-        getAddQuantity() - 1
+        getAddQuantity() -
+        1
       );
 
     }
@@ -1613,7 +2036,8 @@ addQtyPlus
     () => {
 
       setAddQuantity(
-        getAddQuantity() + 1
+        getAddQuantity() +
+        1
       );
 
     }
@@ -1640,6 +2064,9 @@ quantityInput
   );
 
 
+
+/* ADD ITEM */
+
 addItemForm
   .addEventListener(
     'submit',
@@ -1654,7 +2081,13 @@ addItemForm
         );
 
 
+      /*
+        If Add Item was opened from a store,
+        lockedAddStore overrides everything.
+      */
+
       const store =
+        lockedAddStore ||
         storeSelect.value;
 
 
@@ -1662,7 +2095,9 @@ addItemForm
         getAddQuantity();
 
 
-      if (!itemName) {
+      if (
+        !itemName
+      ) {
 
         showToast(
           'Please enter an item.',
@@ -1680,7 +2115,9 @@ addItemForm
 
       if (
         !store ||
-        !STORES[store]
+        !STORES[
+          store
+        ]
       ) {
 
         showToast(
@@ -1714,9 +2151,15 @@ addItemForm
       }
 
 
-      rememberLastStore(
-        store
-      );
+      if (
+        !lockedAddStore
+      ) {
+
+        rememberLastStore(
+          store
+        );
+
+      }
 
 
       saveItemButton.disabled =
@@ -1735,7 +2178,8 @@ addItemForm
             '/rest/v1/rpc/add_shopping_item',
 
             {
-              method: 'POST',
+              method:
+                'POST',
 
               body:
                 JSON.stringify(
@@ -1756,19 +2200,23 @@ addItemForm
 
 
         const resultData =
-          Array.isArray(result)
+          Array.isArray(
+            result
+          )
             ? result[0]
             : result;
 
 
         if (
           resultData &&
-          resultData.added === false
+          resultData.added ===
+            false
         ) {
 
           const existingStore =
             STORES[
-              resultData.existing_store
+              resultData
+                .existing_store
             ] ||
             'another';
 
@@ -1834,6 +2282,9 @@ addItemForm
   );
 
 
+
+/* LOAD STORE */
+
 async function loadStoreItems(
   quiet = false
 ) {
@@ -1851,7 +2302,9 @@ async function loadStoreItems(
     currentStore;
 
 
-  if (!quiet) {
+  if (
+    !quiet
+  ) {
 
     storeList.innerHTML =
       '<div class="loading-state">Loading…</div>';
@@ -1888,7 +2341,9 @@ async function loadStoreItems(
 
 
     const items =
-      Array.isArray(data)
+      Array.isArray(
+        data
+      )
         ? data
         : [];
 
@@ -1896,14 +2351,18 @@ async function loadStoreItems(
     items.sort(
       (a, b) =>
 
-        a.item_name.localeCompare(
-          b.item_name,
-          undefined,
-          {
-            sensitivity: 'base',
-            numeric: true
-          }
-        )
+        a.item_name
+          .localeCompare(
+            b.item_name,
+            undefined,
+            {
+              sensitivity:
+                'base',
+
+              numeric:
+                true
+            }
+          )
     );
 
 
@@ -1924,7 +2383,7 @@ async function loadStoreItems(
     if (
       !quiet &&
       currentStore ===
-      storeAtStart
+        storeAtStart
     ) {
 
       storeList.innerHTML =
@@ -1936,6 +2395,9 @@ async function loadStoreItems(
 
 }
 
+
+
+/* RENDER STORE */
 
 function renderStoreList(
   items
@@ -1971,7 +2433,8 @@ function renderStoreList(
 
 
   if (
-    items.length === 0
+    items.length ===
+    0
   ) {
 
     const empty =
@@ -2001,6 +2464,9 @@ function renderStoreList(
 
 }
 
+
+
+/* PERMANENT WATER */
 
 function createPermanentWaterRow() {
 
@@ -2085,6 +2551,9 @@ function createPermanentWaterRow() {
 
 }
 
+
+
+/* NORMAL ITEM ROW */
 
 function createItemRow(
   item
@@ -2400,6 +2869,9 @@ function createItemRow(
 }
 
 
+
+/* ROW QUANTITY */
+
 function getRowQuantity(
   input
 ) {
@@ -2412,7 +2884,9 @@ function getRowQuantity(
 
 
   if (
-    !Number.isInteger(value) ||
+    !Number.isInteger(
+      value
+    ) ||
     value < 1
   ) {
 
@@ -2438,7 +2912,8 @@ async function saveRowQuantity(
 
   const oldValue =
     Number.parseInt(
-      input.dataset.savedValue,
+      input.dataset
+        .savedValue,
       10
     );
 
@@ -2498,7 +2973,8 @@ async function saveRowQuantity(
       ),
 
       {
-        method: 'PATCH',
+        method:
+          'PATCH',
 
         headers: {
           Prefer:
@@ -2569,6 +3045,9 @@ async function saveRowQuantity(
 }
 
 
+
+/* DELETE ITEM */
+
 async function deleteItem(
   id,
   itemName,
@@ -2591,7 +3070,8 @@ async function deleteItem(
       ),
 
       {
-        method: 'DELETE',
+        method:
+          'DELETE',
 
         headers: {
           Prefer:
@@ -2614,9 +3094,10 @@ async function deleteItem(
 
 
     if (
-      !storeList.querySelector(
-        '.db-row'
-      )
+      !storeList
+        .querySelector(
+          '.db-row'
+        )
     ) {
 
       const empty =
@@ -2668,6 +3149,9 @@ async function deleteItem(
 }
 
 
+
+/* PAGE EVENTS */
+
 window.addEventListener(
   'hashchange',
   route
@@ -2704,6 +3188,9 @@ document.addEventListener(
   }
 );
 
+
+
+/* START */
 
 if (
   !location.hash
