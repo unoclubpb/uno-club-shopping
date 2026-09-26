@@ -8,8 +8,8 @@
     content="width=device-width, initial-scale=1, viewport-fit=cover"
   >
 
-  <!-- APP VERSION: 1.0.13 -->
-  <meta name="app-version" content="1.0.13">
+  <!-- APP VERSION: 1.0.14 -->
+  <meta name="app-version" content="1.0.14">
 
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
@@ -25,12 +25,12 @@
   <link
     rel="icon"
     type="image/png"
-    href="uno-club-shopping.PNG?v=1.0.13"
+    href="uno-club-shopping.PNG?v=1.0.14"
   >
 
   <link
     rel="apple-touch-icon"
-    href="uno-club-shopping.PNG?v=1.0.13"
+    href="uno-club-shopping.PNG?v=1.0.14"
   >
 
   <style>
@@ -83,8 +83,6 @@
     button {
       touch-action: manipulation;
     }
-
-    /* HEADER */
 
     .app-header {
       height: calc(82px + env(safe-area-inset-top));
@@ -180,8 +178,6 @@
     .screen[hidden] {
       display: none !important;
     }
-
-    /* HOME */
 
     #homeScreen:not([hidden]) {
       display: flex;
@@ -279,8 +275,6 @@
       background: var(--black);
     }
 
-    /* VERSION */
-
     .version-label {
       position: fixed;
 
@@ -299,8 +293,6 @@
       pointer-events: none;
     }
 
-    /* CARDS */
-
     .card {
       background: var(--white);
 
@@ -315,8 +307,6 @@
     .form-card {
       padding: 18px;
     }
-
-    /* FORM */
 
     .field {
       margin-bottom: 18px;
@@ -381,8 +371,6 @@
     .locked-note[hidden] {
       display: none !important;
     }
-
-    /* QUANTITY */
 
     .qty-control {
       display: flex;
@@ -472,8 +460,6 @@
 
       font-size: 20px;
     }
-
-    /* STORE LIST */
 
     .list-card {
       padding: 0;
@@ -608,8 +594,6 @@
 
       margin-top: 3px;
     }
-
-    /* RESTRICTIONS */
 
     .restrictions-toolbar {
       margin-bottom: 13px;
@@ -746,8 +730,6 @@
       background: #ffdede;
     }
 
-    /* STATES */
-
     .empty-state,
     .loading-state,
     .error-state {
@@ -763,8 +745,6 @@
     .error-state {
       color: var(--danger);
     }
-
-    /* TOAST */
 
     .toast {
       position: fixed;
@@ -866,7 +846,7 @@
 
   <img
     class="header-logo"
-    src="uno-club-shopping.PNG?v=1.0.13"
+    src="uno-club-shopping.PNG?v=1.0.14"
     alt="Uno Club Shopping logo"
   >
 
@@ -874,8 +854,6 @@
 
 
 <main>
-
-  <!-- HOME -->
 
   <section
     id="homeScreen"
@@ -952,6 +930,21 @@
         </span>
       </button>
 
+      <button
+        class="main-button store-button"
+        type="button"
+        data-store="amazon"
+      >
+        Amazon
+
+        <span
+          class="count-badge"
+          data-count-store="amazon"
+        >
+          0
+        </span>
+      </button>
+
     </div>
 
     <button
@@ -963,13 +956,11 @@
     </button>
 
     <div class="version-label">
-      v1.0.13
+      v1.0.14
     </div>
 
   </section>
 
-
-  <!-- ADD SHOPPING ITEM -->
 
   <section
     id="addScreen"
@@ -1074,6 +1065,10 @@
               Sodas
             </option>
 
+            <option value="amazon">
+              Amazon
+            </option>
+
           </select>
 
           <div
@@ -1100,8 +1095,6 @@
 
   </section>
 
-
-  <!-- STORE PAGE -->
 
   <section
     id="storeScreen"
@@ -1138,8 +1131,6 @@
   </section>
 
 
-  <!-- MANAGE RESTRICTIONS -->
-
   <section
     id="restrictionsScreen"
     class="screen"
@@ -1166,8 +1157,6 @@
 
   </section>
 
-
-  <!-- ADD / EDIT RESTRICTION -->
 
   <section
     id="restrictionEditScreen"
@@ -1240,6 +1229,15 @@
               <span>Sodas</span>
             </label>
 
+            <label class="store-check-row">
+              <input
+                type="checkbox"
+                name="allowedStore"
+                value="amazon"
+              >
+              <span>Amazon</span>
+            </label>
+
           </div>
 
           <div class="form-note">
@@ -1288,7 +1286,7 @@
 'use strict';
 
 
-const APP_VERSION = '1.0.13';
+const APP_VERSION = '1.0.14';
 
 console.info(
   `Uno Club Shopping v${APP_VERSION}`
@@ -1307,7 +1305,8 @@ const STORES = {
   sams_costco: 'Sam’s / CostCo',
   walmart: 'Walmart',
   alcohol: 'Alcohol',
-  sodas: 'Sodas'
+  sodas: 'Sodas',
+  amazon: 'Amazon'
 };
 
 
@@ -1324,9 +1323,6 @@ let editingRestrictionOriginalName = null;
 let toastTimer = null;
 
 
-
-/* ELEMENTS */
-
 const homeScreen =
   document.getElementById('homeScreen');
 
@@ -1342,13 +1338,11 @@ const restrictionsScreen =
 const restrictionEditScreen =
   document.getElementById('restrictionEditScreen');
 
-
 const pageTitle =
   document.getElementById('pageTitle');
 
 const backButton =
   document.getElementById('backButton');
-
 
 const addItemButton =
   document.getElementById('addItemButton');
@@ -1361,7 +1355,6 @@ const manageRestrictionsButton =
 
 const addRestrictionButton =
   document.getElementById('addRestrictionButton');
-
 
 const addItemForm =
   document.getElementById('addItemForm');
@@ -1390,7 +1383,6 @@ const saveItemButton =
 const storeList =
   document.getElementById('storeList');
 
-
 const restrictionList =
   document.getElementById('restrictionList');
 
@@ -1406,13 +1398,9 @@ const saveRestrictionButton =
 const deleteRestrictionButton =
   document.getElementById('deleteRestrictionButton');
 
-
 const toast =
   document.getElementById('toast');
 
-
-
-/* HELPERS */
 
 function normalizeItemName(value) {
 
@@ -1484,9 +1472,6 @@ function unwrapRpcResult(result) {
 }
 
 
-
-/* TOAST */
-
 function showToast(
   message,
   isError = false
@@ -1520,9 +1505,6 @@ function showToast(
 
 }
 
-
-
-/* API */
 
 async function api(
   path,
@@ -1613,9 +1595,6 @@ async function api(
 }
 
 
-
-/* SCREENS */
-
 function showOnly(screen) {
 
   homeScreen.hidden =
@@ -1635,9 +1614,6 @@ function showOnly(screen) {
 
 }
 
-
-
-/* NAVIGATION */
 
 function goHome() {
 
@@ -1698,20 +1674,12 @@ function goEditRestriction(itemName) {
 }
 
 
-
-/* ROUTER */
-
 function route() {
 
   const hash =
     location.hash ||
     '#home';
 
-
-  /*
-    ADD SHOPPING ITEM
-    FROM A PARTICULAR STORE
-  */
 
   if (
     hash.startsWith(
@@ -1781,10 +1749,6 @@ function route() {
   }
 
 
-  /*
-    NORMAL ADD SHOPPING ITEM
-  */
-
   if (
     hash === '#add'
   ) {
@@ -1850,10 +1814,6 @@ function route() {
   }
 
 
-  /*
-    STORE PAGE
-  */
-
   if (
     hash.startsWith(
       '#store/'
@@ -1902,10 +1862,6 @@ function route() {
   }
 
 
-  /*
-    RESTRICTION LIST
-  */
-
   if (
     hash ===
     '#restrictions'
@@ -1940,10 +1896,6 @@ function route() {
 
   }
 
-
-  /*
-    NEW RESTRICTION
-  */
 
   if (
     hash ===
@@ -1989,10 +1941,6 @@ function route() {
 
   }
 
-
-  /*
-    EDIT RESTRICTION
-  */
 
   if (
     hash.startsWith(
@@ -2053,10 +2001,6 @@ function route() {
   }
 
 
-  /*
-    HOME
-  */
-
   currentStore =
     null;
 
@@ -2090,9 +2034,6 @@ function route() {
 
 }
 
-
-
-/* BACK */
 
 backButton
   .addEventListener(
@@ -2146,9 +2087,6 @@ backButton
   );
 
 
-
-/* HOME BUTTONS */
-
 addItemButton
   .addEventListener(
     'click',
@@ -2185,9 +2123,6 @@ document
   );
 
 
-
-/* STORE ADD BUTTON */
-
 storeAddItemButton
   .addEventListener(
     'click',
@@ -2208,16 +2143,14 @@ storeAddItemButton
   );
 
 
-
-/* HOME COUNTS */
-
 async function loadHomeCounts() {
 
   const counts = {
     sams_costco: 1,
     walmart: 0,
     alcohol: 0,
-    sodas: 0
+    sodas: 0,
+    amazon: 0
   };
 
 
@@ -2284,9 +2217,6 @@ async function loadHomeCounts() {
 }
 
 
-
-/* ADD ITEM STORE MEMORY */
-
 storeSelect
   .addEventListener(
     'change',
@@ -2305,9 +2235,6 @@ storeSelect
     }
   );
 
-
-
-/* ADD QUANTITY */
 
 function getAddQuantity() {
 
@@ -2418,9 +2345,6 @@ quantityInput
   );
 
 
-
-/* RESTRICTION MESSAGE */
-
 function formatAllowedStores(
   storeKeys
 ) {
@@ -2476,9 +2400,6 @@ function formatAllowedStores(
 
 }
 
-
-
-/* ADD SHOPPING ITEM */
 
 addItemForm
   .addEventListener(
@@ -2698,9 +2619,6 @@ addItemForm
   );
 
 
-
-/* LOAD STORE */
-
 async function loadStoreItems(
   quiet = false
 ) {
@@ -2788,9 +2706,6 @@ async function loadStoreItems(
 }
 
 
-
-/* RENDER STORE */
-
 function renderStoreList(items) {
 
   storeList.innerHTML =
@@ -2851,9 +2766,6 @@ function renderStoreList(items) {
 
 }
 
-
-
-/* PERMANENT WATER */
 
 function createPermanentWaterRow() {
 
@@ -2935,9 +2847,6 @@ function createPermanentWaterRow() {
 
 }
 
-
-
-/* NORMAL SHOPPING ITEM */
 
 function createItemRow(item) {
 
@@ -3190,9 +3099,6 @@ function createItemRow(item) {
 }
 
 
-
-/* SHOPPING ITEM QUANTITY */
-
 function getRowQuantity(input) {
 
   const value =
@@ -3334,9 +3240,6 @@ async function saveRowQuantity(
 }
 
 
-
-/* DELETE SHOPPING ITEM */
-
 async function deleteItem(
   id,
   itemName,
@@ -3425,9 +3328,6 @@ async function deleteItem(
 
 }
 
-
-
-/* RESTRICTION LIST */
 
 addRestrictionButton
   .addEventListener(
@@ -3691,9 +3591,6 @@ function renderRestrictions(items) {
 
 }
 
-
-
-/* RESTRICTION FORM */
 
 function clearRestrictionChecks() {
 
@@ -4063,9 +3960,6 @@ restrictionForm
   );
 
 
-
-/* DELETE RESTRICTION */
-
 deleteRestrictionButton
   .addEventListener(
     'click',
@@ -4177,9 +4071,6 @@ deleteRestrictionButton
   );
 
 
-
-/* PAGE EVENTS */
-
 window.addEventListener(
   'hashchange',
   route
@@ -4234,9 +4125,6 @@ document.addEventListener(
   }
 );
 
-
-
-/* START */
 
 if (!location.hash) {
 
