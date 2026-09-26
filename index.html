@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.17 -->
-<meta name="app-version" content="1.0.17">
+<!-- APP VERSION: 1.0.18 -->
+<meta name="app-version" content="1.0.18">
 
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -18,8 +18,8 @@
 
 <title>Uno Club Shopping</title>
 
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.17">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.17">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.18">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.18">
 
 <style>
 :root{
@@ -40,24 +40,14 @@
   --radius:16px
 }
 
-*{
-  box-sizing:border-box
-}
+*{box-sizing:border-box}
 
-html,
-body{
+html,body{
   margin:0;
   min-height:100%;
   background:var(--page);
   color:var(--text);
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Helvetica,
-    Arial,
-    sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   -webkit-text-size-adjust:100%
 }
 
@@ -66,9 +56,7 @@ body{
   min-height:100dvh
 }
 
-button,
-input,
-select{
+button,input,select{
   font:inherit
 }
 
@@ -78,10 +66,7 @@ button{
 
 .app-header{
   height:calc(82px + env(safe-area-inset-top));
-  padding:
-    calc(9px + env(safe-area-inset-top))
-    14px
-    9px;
+  padding:calc(9px + env(safe-area-inset-top)) 14px 9px;
   background:var(--black);
   color:var(--white);
   display:flex;
@@ -90,8 +75,7 @@ button{
   position:fixed;
   inset:0 0 auto 0;
   z-index:1000;
-  box-shadow:
-    0 2px 10px rgba(0,0,0,.22)
+  box-shadow:0 2px 10px rgba(0,0,0,.22)
 }
 
 .app-header h1{
@@ -113,9 +97,7 @@ button{
   flex:0 0 58px;
   object-fit:cover;
   border-radius:12px;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,.14),
-    0 4px 12px rgba(0,0,0,.35)
+  box-shadow:0 0 0 1px rgba(255,255,255,.14),0 4px 12px rgba(0,0,0,.35)
 }
 
 .back-button{
@@ -145,10 +127,7 @@ button{
 main{
   width:min(100%,620px);
   margin:0 auto;
-  padding:
-    calc(104px + env(safe-area-inset-top))
-    16px
-    calc(42px + env(safe-area-inset-bottom))
+  padding:calc(104px + env(safe-area-inset-top)) 16px calc(42px + env(safe-area-inset-bottom))
 }
 
 .screen[hidden]{
@@ -158,12 +137,7 @@ main{
 #homeScreen:not([hidden]){
   display:flex;
   flex-direction:column;
-  min-height:
-    calc(
-      100dvh -
-      155px -
-      env(safe-area-inset-top)
-    )
+  min-height:calc(100dvh - 155px - env(safe-area-inset-top))
 }
 
 .button-stack,
@@ -189,12 +163,9 @@ main{
   color:var(--white);
   font-size:20px;
   font-weight:800;
-  box-shadow:
-    0 5px 14px rgba(30,90,203,.24);
+  box-shadow:0 5px 14px rgba(30,90,203,.24);
   cursor:pointer;
-  transition:
-    transform .08s ease,
-    background .15s ease
+  transition:transform .08s ease,background .15s ease
 }
 
 .main-button:active,
@@ -207,8 +178,7 @@ main{
 .store-add-button,
 .inventory-add-button{
   background:var(--black);
-  box-shadow:
-    0 5px 14px rgba(0,0,0,.20)
+  box-shadow:0 5px 14px rgba(0,0,0,.20)
 }
 
 .store-button{
@@ -227,8 +197,7 @@ main{
 
 #inventoryButton{
   background:var(--green);
-  box-shadow:
-    0 5px 14px rgba(33,140,79,.24)
+  box-shadow:0 5px 14px rgba(33,140,79,.24)
 }
 
 #inventoryButton:active{
@@ -237,8 +206,7 @@ main{
 
 #manageRestrictionsButton{
   background:var(--red);
-  box-shadow:
-    0 5px 14px rgba(198,40,40,.24)
+  box-shadow:0 5px 14px rgba(198,40,40,.24)
 }
 
 #manageRestrictionsButton:active{
@@ -260,19 +228,14 @@ main{
   font-weight:900;
   line-height:25px;
   text-align:center;
-  box-shadow:
-    0 2px 5px rgba(0,0,0,.18);
+  box-shadow:0 2px 5px rgba(0,0,0,.18);
   pointer-events:none
 }
 
 .version-label{
   position:fixed;
   left:10px;
-  bottom:
-    calc(
-      7px +
-      env(safe-area-inset-bottom)
-    );
+  bottom:calc(7px + env(safe-area-inset-bottom));
   color:#000;
   font-size:11px;
   font-weight:500;
@@ -321,8 +284,7 @@ main{
 .field input:focus,
 .field select:focus{
   border-color:var(--blue);
-  box-shadow:
-    0 0 0 3px rgba(30,90,203,.12)
+  box-shadow:0 0 0 3px rgba(30,90,203,.12)
 }
 
 .field select:disabled{
@@ -400,8 +362,7 @@ main{
 
 .qty-input:focus{
   border-color:var(--blue);
-  box-shadow:
-    0 0 0 3px rgba(30,90,203,.12)
+  box-shadow:0 0 0 3px rgba(30,90,203,.12)
 }
 
 .add-qty-control{
@@ -427,10 +388,7 @@ main{
 .list-heading,
 .item-row{
   display:grid;
-  grid-template-columns:
-    minmax(0,1fr)
-    132px
-    48px;
+  grid-template-columns:minmax(0,1fr) 132px 48px;
   gap:8px;
   align-items:center
 }
@@ -552,9 +510,7 @@ main{
   color:var(--text);
   padding:14px 15px;
   display:grid;
-  grid-template-columns:
-    minmax(0,1fr)
-    auto;
+  grid-template-columns:minmax(0,1fr) auto;
   gap:12px;
   align-items:center;
   text-align:left;
@@ -652,24 +608,11 @@ main{
 .toast{
   position:fixed;
   left:50%;
-  bottom:
-    calc(
-      20px +
-      env(safe-area-inset-bottom)
-    );
-  transform:
-    translate(-50%,18px);
-  width:
-    min(
-      calc(100% - 32px),
-      520px
-    );
+  bottom:calc(20px + env(safe-area-inset-bottom));
+  transform:translate(-50%,18px);
+  width:min(calc(100% - 32px),520px);
   min-height:52px;
-  padding:
-    9px
-    10px
-    9px
-    16px;
+  padding:9px 10px 9px 16px;
   border-radius:12px;
   background:var(--black);
   color:var(--white);
@@ -679,20 +622,16 @@ main{
   gap:14px;
   text-align:center;
   font-weight:700;
-  box-shadow:
-    0 8px 30px rgba(0,0,0,.26);
+  box-shadow:0 8px 30px rgba(0,0,0,.26);
   opacity:0;
   pointer-events:none;
-  transition:
-    opacity .18s ease,
-    transform .18s ease;
+  transition:opacity .18s ease,transform .18s ease;
   z-index:2000
 }
 
 .toast.show{
   opacity:1;
-  transform:
-    translate(-50%,0);
+  transform:translate(-50%,0);
   pointer-events:auto
 }
 
@@ -722,8 +661,7 @@ main{
 }
 
 .toast-undo-button:active{
-  background:
-    rgba(255,255,255,.18)
+  background:rgba(255,255,255,.18)
 }
 
 .toast-undo-button:disabled{
@@ -731,17 +669,13 @@ main{
 }
 
 @media(max-width:390px){
-
   .app-header h1{
     font-size:19px
   }
 
   .list-heading,
   .item-row{
-    grid-template-columns:
-      minmax(0,1fr)
-      124px
-      44px;
+    grid-template-columns:minmax(0,1fr) 124px 44px;
     gap:5px;
     padding-left:10px;
     padding-right:10px
@@ -755,7 +689,6 @@ main{
   .qty-input{
     width:44px
   }
-
 }
 </style>
 </head>
@@ -774,153 +707,73 @@ main{
     &larr;
   </button>
 
-  <h1 id="pageTitle">
-    Uno Club Shopping
-  </h1>
+  <h1 id="pageTitle">Uno Club Shopping</h1>
 
   <img
     class="header-logo"
-    src="uno-club-shopping.PNG?v=1.0.17"
+    src="uno-club-shopping.PNG?v=1.0.18"
     alt="Uno Club Shopping logo"
   >
 
 </header>
 
-
 <main>
 
-  <section
-    id="homeScreen"
-    class="screen"
-  >
+  <section id="homeScreen" class="screen">
 
     <div class="button-stack">
 
-      <button
-        id="addItemButton"
-        class="main-button add-item"
-        type="button"
-      >
+      <button id="addItemButton" class="main-button add-item" type="button">
         Add Item
       </button>
 
-
-      <button
-        class="main-button store-button"
-        type="button"
-        data-store="sams_costco"
-      >
+      <button class="main-button store-button" type="button" data-store="sams_costco">
         Sam’s / CostCo
-
-        <span
-          class="count-badge"
-          data-count-store="sams_costco"
-        >
-          1
-        </span>
+        <span class="count-badge" data-count-store="sams_costco">1</span>
       </button>
 
-
-      <button
-        class="main-button store-button"
-        type="button"
-        data-store="walmart"
-      >
+      <button class="main-button store-button" type="button" data-store="walmart">
         Walmart
-
-        <span
-          class="count-badge"
-          data-count-store="walmart"
-        >
-          0
-        </span>
+        <span class="count-badge" data-count-store="walmart">0</span>
       </button>
 
-
-      <button
-        class="main-button store-button"
-        type="button"
-        data-store="alcohol"
-      >
+      <button class="main-button store-button" type="button" data-store="alcohol">
         Alcohol
-
-        <span
-          class="count-badge"
-          data-count-store="alcohol"
-        >
-          0
-        </span>
+        <span class="count-badge" data-count-store="alcohol">0</span>
       </button>
 
-
-      <button
-        class="main-button store-button"
-        type="button"
-        data-store="sodas"
-      >
+      <button class="main-button store-button" type="button" data-store="sodas">
         Sodas
-
-        <span
-          class="count-badge"
-          data-count-store="sodas"
-        >
-          0
-        </span>
+        <span class="count-badge" data-count-store="sodas">0</span>
       </button>
 
-
-      <button
-        class="main-button store-button"
-        type="button"
-        data-store="amazon"
-      >
+      <button class="main-button store-button" type="button" data-store="amazon">
         Amazon
-
-        <span
-          class="count-badge"
-          data-count-store="amazon"
-        >
-          0
-        </span>
+        <span class="count-badge" data-count-store="amazon">0</span>
       </button>
 
     </div>
 
-
     <div class="home-bottom-menu">
 
-      <button
-        id="inventoryButton"
-        class="main-button secondary-menu-button"
-        type="button"
-      >
+      <button id="inventoryButton" class="main-button secondary-menu-button" type="button">
         Inventory
       </button>
 
-
-      <button
-        id="manageRestrictionsButton"
-        class="main-button secondary-menu-button"
-        type="button"
-      >
+      <button id="manageRestrictionsButton" class="main-button secondary-menu-button" type="button">
         Manage Restrictions
       </button>
 
     </div>
 
-
     <div class="version-label">
-      v1.0.17
+      v1.0.18
     </div>
 
   </section>
 
 
-  <section
-    id="addScreen"
-    class="screen"
-    hidden
-  >
+  <section id="addScreen" class="screen" hidden>
 
     <div class="card form-card">
 
@@ -942,21 +795,13 @@ main{
 
         </div>
 
-
         <div class="field">
 
-          <label>
-            Quantity
-          </label>
+          <label>Quantity</label>
 
           <div class="qty-control add-qty-control">
 
-            <button
-              id="addQtyMinus"
-              class="qty-step-button"
-              type="button"
-              aria-label="Decrease quantity"
-            >
+            <button id="addQtyMinus" class="qty-step-button" type="button">
               −
             </button>
 
@@ -969,15 +814,9 @@ main{
               step="1"
               inputmode="numeric"
               value="1"
-              aria-label="Quantity"
             >
 
-            <button
-              id="addQtyPlus"
-              class="qty-step-button"
-              type="button"
-              aria-label="Increase quantity"
-            >
+            <button id="addQtyPlus" class="qty-step-button" type="button">
               +
             </button>
 
@@ -985,64 +824,31 @@ main{
 
         </div>
 
-
         <div class="field">
 
-          <label for="store">
-            Store
-          </label>
+          <label for="store">Store</label>
 
-          <select
-            id="store"
-            required
-          >
+          <select id="store" required>
 
-            <option
-              value=""
-              selected
-              disabled
-            >
+            <option value="" selected disabled>
               Choose a store
             </option>
 
-            <option value="sams_costco">
-              Sam’s / CostCo
-            </option>
-
-            <option value="walmart">
-              Walmart
-            </option>
-
-            <option value="alcohol">
-              Alcohol
-            </option>
-
-            <option value="sodas">
-              Sodas
-            </option>
-
-            <option value="amazon">
-              Amazon
-            </option>
+            <option value="sams_costco">Sam’s / CostCo</option>
+            <option value="walmart">Walmart</option>
+            <option value="alcohol">Alcohol</option>
+            <option value="sodas">Sodas</option>
+            <option value="amazon">Amazon</option>
 
           </select>
 
-          <div
-            id="lockedStoreNote"
-            class="locked-note"
-            hidden
-          >
+          <div id="lockedStoreNote" class="locked-note" hidden>
             This item will be added to this store.
           </div>
 
         </div>
 
-
-        <button
-          id="saveItemButton"
-          class="save-button"
-          type="submit"
-        >
+        <button id="saveItemButton" class="save-button" type="submit">
           Add Item
         </button>
 
@@ -1053,97 +859,56 @@ main{
   </section>
 
 
-  <section
-    id="storeScreen"
-    class="screen"
-    hidden
-  >
+  <section id="storeScreen" class="screen" hidden>
 
-    <button
-      id="storeAddItemButton"
-      class="main-button store-add-button"
-      type="button"
-    >
+    <button id="storeAddItemButton" class="main-button store-add-button" type="button">
       Add Item
     </button>
 
-
     <div class="card list-card">
 
-      <div
-        class="list-heading"
-        aria-hidden="true"
-      >
+      <div class="list-heading">
         <span>Item</span>
         <span>Qty</span>
         <span></span>
       </div>
 
-      <div
-        id="storeList"
-        aria-live="polite"
-      ></div>
+      <div id="storeList"></div>
 
     </div>
 
   </section>
 
 
-  <section
-    id="inventoryScreen"
-    class="screen"
-    hidden
-  >
+  <section id="inventoryScreen" class="screen" hidden>
 
-    <div
-      id="inventoryCategoryButtons"
-      class="category-stack"
-    ></div>
+    <div id="inventoryCategoryButtons" class="category-stack"></div>
 
   </section>
 
 
-  <section
-    id="inventoryCategoryScreen"
-    class="screen"
-    hidden
-  >
+  <section id="inventoryCategoryScreen" class="screen" hidden>
 
-    <button
-      id="inventoryAddItemButton"
-      class="main-button inventory-add-button"
-      type="button"
-    >
+    <button id="inventoryAddItemButton" class="main-button inventory-add-button" type="button">
       Add Item
     </button>
 
-
     <div class="card list-card">
 
-      <div
-        class="list-heading"
-        aria-hidden="true"
-      >
+      <div class="list-heading">
         <span>Item</span>
         <span>Qty</span>
         <span></span>
       </div>
 
-      <div
-        id="inventoryList"
-        aria-live="polite"
-      ></div>
+      <div id="inventoryList"></div>
 
     </div>
 
   </section>
 
 
-  <section
-    id="inventoryAddScreen"
-    class="screen"
-    hidden
-  >
+  <section id="inventoryAddScreen" class="screen" hidden>
 
     <div class="card form-card">
 
@@ -1165,7 +930,6 @@ main{
 
         </div>
 
-
         <div class="field">
 
           <label>
@@ -1174,12 +938,7 @@ main{
 
           <div class="qty-control add-qty-control">
 
-            <button
-              id="inventoryQtyMinus"
-              class="qty-step-button"
-              type="button"
-              aria-label="Decrease quantity"
-            >
+            <button id="inventoryQtyMinus" class="qty-step-button" type="button">
               −
             </button>
 
@@ -1192,15 +951,9 @@ main{
               step="1"
               inputmode="numeric"
               value="1"
-              aria-label="Quantity in stock"
             >
 
-            <button
-              id="inventoryQtyPlus"
-              class="qty-step-button"
-              type="button"
-              aria-label="Increase quantity"
-            >
+            <button id="inventoryQtyPlus" class="qty-step-button" type="button">
               +
             </button>
 
@@ -1208,18 +961,9 @@ main{
 
         </div>
 
+        <div id="inventoryCategoryNote" class="inventory-category-note"></div>
 
-        <div
-          id="inventoryCategoryNote"
-          class="inventory-category-note"
-        ></div>
-
-
-        <button
-          id="saveInventoryItemButton"
-          class="save-button"
-          type="submit"
-        >
+        <button id="saveInventoryItemButton" class="save-button" type="submit">
           Add to Inventory
         </button>
 
@@ -1230,38 +974,22 @@ main{
   </section>
 
 
-  <section
-    id="restrictionsScreen"
-    class="screen"
-    hidden
-  >
+  <section id="restrictionsScreen" class="screen" hidden>
 
     <div class="restrictions-toolbar">
 
-      <button
-        id="addRestrictionButton"
-        class="main-button add-item"
-        type="button"
-      >
+      <button id="addRestrictionButton" class="main-button add-item" type="button">
         Add Restriction
       </button>
 
     </div>
 
-
-    <div
-      id="restrictionList"
-      class="restriction-list"
-    ></div>
+    <div id="restrictionList" class="restriction-list"></div>
 
   </section>
 
 
-  <section
-    id="restrictionEditScreen"
-    class="screen"
-    hidden
-  >
+  <section id="restrictionEditScreen" class="screen" hidden>
 
     <div class="card form-card">
 
@@ -1283,67 +1011,40 @@ main{
 
         </div>
 
-
         <div class="field">
 
           <div class="field-label">
             Allowed Stores
           </div>
 
-
           <div class="store-checks">
 
             <label class="store-check-row">
-              <input
-                type="checkbox"
-                name="allowedStore"
-                value="sams_costco"
-              >
+              <input type="checkbox" name="allowedStore" value="sams_costco">
               <span>Sam’s / CostCo</span>
             </label>
 
-
             <label class="store-check-row">
-              <input
-                type="checkbox"
-                name="allowedStore"
-                value="walmart"
-              >
+              <input type="checkbox" name="allowedStore" value="walmart">
               <span>Walmart</span>
             </label>
 
-
             <label class="store-check-row">
-              <input
-                type="checkbox"
-                name="allowedStore"
-                value="alcohol"
-              >
+              <input type="checkbox" name="allowedStore" value="alcohol">
               <span>Alcohol</span>
             </label>
 
-
             <label class="store-check-row">
-              <input
-                type="checkbox"
-                name="allowedStore"
-                value="sodas"
-              >
+              <input type="checkbox" name="allowedStore" value="sodas">
               <span>Sodas</span>
             </label>
 
-
             <label class="store-check-row">
-              <input
-                type="checkbox"
-                name="allowedStore"
-                value="amazon"
-              >
+              <input type="checkbox" name="allowedStore" value="amazon">
               <span>Amazon</span>
             </label>
 
           </div>
-
 
           <div class="form-note">
             Check every store where this item is allowed.
@@ -1351,22 +1052,11 @@ main{
 
         </div>
 
-
-        <button
-          id="saveRestrictionButton"
-          class="save-button"
-          type="submit"
-        >
+        <button id="saveRestrictionButton" class="save-button" type="submit">
           Save Restriction
         </button>
 
-
-        <button
-          id="deleteRestrictionButton"
-          class="delete-restriction-button"
-          type="button"
-          hidden
-        >
+        <button id="deleteRestrictionButton" class="delete-restriction-button" type="button" hidden>
           Delete Restriction
         </button>
 
@@ -1379,24 +1069,11 @@ main{
 </main>
 
 
-<div
-  id="toast"
-  class="toast"
-  role="status"
-  aria-live="polite"
->
+<div id="toast" class="toast">
 
-  <span
-    id="toastMessage"
-    class="toast-message"
-  ></span>
+  <span id="toastMessage" class="toast-message"></span>
 
-  <button
-    id="toastUndoButton"
-    class="toast-undo-button"
-    type="button"
-    hidden
-  >
+  <button id="toastUndoButton" class="toast-undo-button" type="button" hidden>
     UNDO
   </button>
 
@@ -1408,8 +1085,7 @@ main{
 'use strict';
 
 
-const APP_VERSION =
-  '1.0.17';
+const APP_VERSION = '1.0.18';
 
 
 console.info(
@@ -1462,8 +1138,11 @@ const INVENTORY_CATEGORIES = {
   pasta_sauces:
     'Pasta & Sauces',
 
-  condiments_dressings:
-    'Condiments & Dressings',
+  condiments:
+    'Condiments',
+
+  salad_dressings:
+    'Salad Dressings',
 
   cooking_supplies:
     'Cooking Supplies',
@@ -1487,29 +1166,12 @@ const LAST_STORE_KEY =
   'unoClubShoppingLastStore';
 
 
-let currentStore =
-  null;
-
-
-let currentInventoryCategory =
-  null;
-
-
-let lockedAddStore =
-  null;
-
-
-let editingRestrictionOriginalName =
-  null;
-
-
-let toastTimer =
-  null;
-
-
-let pendingUndo =
-  null;
-
+let currentStore = null;
+let currentInventoryCategory = null;
+let lockedAddStore = null;
+let editingRestrictionOriginalName = null;
+let toastTimer = null;
+let pendingUndo = null;
 
 
 function $(id) {
@@ -1521,187 +1183,64 @@ function $(id) {
 }
 
 
-
-const homeScreen =
-  $('homeScreen');
-
-
-const addScreen =
-  $('addScreen');
-
-
-const storeScreen =
-  $('storeScreen');
-
-
-const inventoryScreen =
-  $('inventoryScreen');
-
-
-const inventoryCategoryScreen =
-  $('inventoryCategoryScreen');
-
-
-const inventoryAddScreen =
-  $('inventoryAddScreen');
-
-
-const restrictionsScreen =
-  $('restrictionsScreen');
-
-
-const restrictionEditScreen =
-  $('restrictionEditScreen');
-
-
-const pageTitle =
-  $('pageTitle');
-
-
-const backButton =
-  $('backButton');
-
-
-const addItemButton =
-  $('addItemButton');
-
-
-const storeAddItemButton =
-  $('storeAddItemButton');
-
-
-const inventoryButton =
-  $('inventoryButton');
-
-
-const inventoryAddItemButton =
-  $('inventoryAddItemButton');
-
-
-const manageRestrictionsButton =
-  $('manageRestrictionsButton');
-
-
-const addRestrictionButton =
-  $('addRestrictionButton');
-
-
-const addItemForm =
-  $('addItemForm');
-
-
-const itemNameInput =
-  $('itemName');
-
-
-const quantityInput =
-  $('quantity');
-
-
-const addQtyMinus =
-  $('addQtyMinus');
-
-
-const addQtyPlus =
-  $('addQtyPlus');
-
-
-const storeSelect =
-  $('store');
-
-
-const lockedStoreNote =
-  $('lockedStoreNote');
-
-
-const saveItemButton =
-  $('saveItemButton');
-
-
-const storeList =
-  $('storeList');
-
-
-const inventoryCategoryButtons =
-  $('inventoryCategoryButtons');
-
-
-const inventoryList =
-  $('inventoryList');
-
-
-const inventoryAddForm =
-  $('inventoryAddForm');
-
-
-const inventoryItemName =
-  $('inventoryItemName');
-
-
-const inventoryQuantity =
-  $('inventoryQuantity');
-
-
-const inventoryQtyMinus =
-  $('inventoryQtyMinus');
-
-
-const inventoryQtyPlus =
-  $('inventoryQtyPlus');
-
-
-const inventoryCategoryNote =
-  $('inventoryCategoryNote');
-
-
-const saveInventoryItemButton =
-  $('saveInventoryItemButton');
-
-
-const restrictionList =
-  $('restrictionList');
-
-
-const restrictionForm =
-  $('restrictionForm');
-
-
-const restrictionItemName =
-  $('restrictionItemName');
-
-
-const saveRestrictionButton =
-  $('saveRestrictionButton');
-
-
-const deleteRestrictionButton =
-  $('deleteRestrictionButton');
-
-
-const toast =
-  $('toast');
-
-
-const toastMessage =
-  $('toastMessage');
-
-
-const toastUndoButton =
-  $('toastUndoButton');
-
+const homeScreen = $('homeScreen');
+const addScreen = $('addScreen');
+const storeScreen = $('storeScreen');
+const inventoryScreen = $('inventoryScreen');
+const inventoryCategoryScreen = $('inventoryCategoryScreen');
+const inventoryAddScreen = $('inventoryAddScreen');
+const restrictionsScreen = $('restrictionsScreen');
+const restrictionEditScreen = $('restrictionEditScreen');
+
+const pageTitle = $('pageTitle');
+const backButton = $('backButton');
+
+const addItemButton = $('addItemButton');
+const storeAddItemButton = $('storeAddItemButton');
+const inventoryButton = $('inventoryButton');
+const inventoryAddItemButton = $('inventoryAddItemButton');
+const manageRestrictionsButton = $('manageRestrictionsButton');
+const addRestrictionButton = $('addRestrictionButton');
+
+const addItemForm = $('addItemForm');
+const itemNameInput = $('itemName');
+const quantityInput = $('quantity');
+const addQtyMinus = $('addQtyMinus');
+const addQtyPlus = $('addQtyPlus');
+const storeSelect = $('store');
+const lockedStoreNote = $('lockedStoreNote');
+const saveItemButton = $('saveItemButton');
+
+const storeList = $('storeList');
+
+const inventoryCategoryButtons = $('inventoryCategoryButtons');
+const inventoryList = $('inventoryList');
+const inventoryAddForm = $('inventoryAddForm');
+const inventoryItemName = $('inventoryItemName');
+const inventoryQuantity = $('inventoryQuantity');
+const inventoryQtyMinus = $('inventoryQtyMinus');
+const inventoryQtyPlus = $('inventoryQtyPlus');
+const inventoryCategoryNote = $('inventoryCategoryNote');
+const saveInventoryItemButton = $('saveInventoryItemButton');
+
+const restrictionList = $('restrictionList');
+const restrictionForm = $('restrictionForm');
+const restrictionItemName = $('restrictionItemName');
+const saveRestrictionButton = $('saveRestrictionButton');
+const deleteRestrictionButton = $('deleteRestrictionButton');
+
+const toast = $('toast');
+const toastMessage = $('toastMessage');
+const toastUndoButton = $('toastUndoButton');
 
 
 function normalizeItemName(value) {
 
   return value
     .trim()
-    .replace(
-      /\s+/g,
-      ' '
-    );
+    .replace(/\s+/g,' ');
 
 }
-
 
 
 function normalizedKey(value) {
@@ -1713,19 +1252,11 @@ function normalizedKey(value) {
 }
 
 
+function rememberLastStore(store) {
 
-function rememberLastStore(
-  store
-) {
-
-  if (
-    !STORES[store]
-  ) {
-
+  if (!STORES[store]) {
     return;
-
   }
-
 
   try {
 
@@ -1739,7 +1270,6 @@ function rememberLastStore(
 }
 
 
-
 function getLastStore() {
 
   try {
@@ -1748,7 +1278,6 @@ function getLastStore() {
       localStorage.getItem(
         LAST_STORE_KEY
       );
-
 
     if (
       store &&
@@ -1761,51 +1290,37 @@ function getLastStore() {
 
   } catch (_) {}
 
-
   return null;
 
 }
 
 
+function unwrapRpcResult(result) {
 
-function unwrapRpcResult(
-  result
-) {
-
-  return Array.isArray(
-    result
-  )
+  return Array.isArray(result)
     ? result[0]
     : result;
 
 }
 
 
-
-function sortByName(
-  items
-) {
+function sortByName(items) {
 
   items.sort(
-    (a, b) =>
+    (a,b) =>
       a.item_name.localeCompare(
         b.item_name,
         undefined,
         {
-          sensitivity:
-            'base',
-
-          numeric:
-            true
+          sensitivity:'base',
+          numeric:true
         }
       )
   );
 
-
   return items;
 
 }
-
 
 
 function showToast(
@@ -1818,33 +1333,25 @@ function showToast(
     toastTimer
   );
 
-
-  pendingUndo =
-    null;
-
+  pendingUndo = null;
 
   toastMessage.textContent =
     message;
 
-
   toastUndoButton.hidden =
     true;
 
-
   toastUndoButton.disabled =
     false;
-
 
   toast.classList.toggle(
     'error',
     isError
   );
 
-
   toast.classList.add(
     'show'
   );
-
 
   toastTimer =
     setTimeout(
@@ -1861,7 +1368,6 @@ function showToast(
 }
 
 
-
 function showUndoToast(
   item,
   type
@@ -1871,55 +1377,39 @@ function showUndoToast(
     toastTimer
   );
 
-
   pendingUndo = {
-
     type,
-
-    item: {
-      ...item
-    }
-
+    item:{...item}
   };
-
 
   toastMessage.textContent =
     `${item.item_name} removed`;
-
 
   toast.classList.remove(
     'error'
   );
 
-
   toastUndoButton.hidden =
     false;
-
 
   toastUndoButton.disabled =
     false;
 
-
   toastUndoButton.textContent =
     'UNDO';
-
 
   toast.classList.add(
     'show'
   );
 
-
   toastTimer =
     setTimeout(
       () => {
 
-        pendingUndo =
-          null;
-
+        pendingUndo = null;
 
         toastUndoButton.hidden =
           true;
-
 
         toast.classList.remove(
           'show'
@@ -1932,237 +1422,190 @@ function showUndoToast(
 }
 
 
+toastUndoButton.addEventListener(
+  'click',
+  async () => {
 
-toastUndoButton
-  .addEventListener(
-    'click',
-    async () => {
+    if (!pendingUndo) {
+      return;
+    }
+
+    const undo = {
+      ...pendingUndo,
+      item:{
+        ...pendingUndo.item
+      }
+    };
+
+    clearTimeout(
+      toastTimer
+    );
+
+    pendingUndo = null;
+
+    toastUndoButton.disabled =
+      true;
+
+    toastUndoButton.hidden =
+      true;
+
+    toastMessage.textContent =
+      `Restoring ${undo.item.item_name}…`;
+
+    try {
+
+      let result;
 
       if (
-        !pendingUndo
+        undo.type ===
+        'shopping'
       ) {
+
+        result =
+          unwrapRpcResult(
+            await api(
+              '/rest/v1/rpc/add_shopping_item',
+              {
+                method:'POST',
+                body:JSON.stringify({
+                  p_item_name:
+                    undo.item.item_name,
+
+                  p_quantity:
+                    undo.item.quantity,
+
+                  p_store:
+                    undo.item.store
+                })
+              }
+            )
+          );
+
+        if (
+          result &&
+          result.added === true
+        ) {
+
+          if (
+            currentStore ===
+            undo.item.store
+          ) {
+
+            await loadStoreItems(
+              true
+            );
+
+          }
+
+          loadHomeCounts();
+
+          showToast(
+            `${undo.item.item_name} restored to ${STORES[undo.item.store]}.`
+          );
+
+          return;
+
+        }
+
+      } else if (
+        undo.type ===
+        'inventory'
+      ) {
+
+        result =
+          unwrapRpcResult(
+            await api(
+              '/rest/v1/rpc/add_inventory_item',
+              {
+                method:'POST',
+                body:JSON.stringify({
+                  p_item_name:
+                    undo.item.item_name,
+
+                  p_quantity:
+                    undo.item.quantity,
+
+                  p_category:
+                    undo.item.category
+                })
+              }
+            )
+          );
+
+        if (
+          result &&
+          result.added === true
+        ) {
+
+          if (
+            currentInventoryCategory ===
+            undo.item.category
+          ) {
+
+            await loadInventoryItems(
+              true
+            );
+
+          }
+
+          showToast(
+            `${undo.item.item_name} restored to ${INVENTORY_CATEGORIES[undo.item.category]}.`
+          );
+
+          return;
+
+        }
+
+      }
+
+      if (
+        result &&
+        result.reason ===
+        'duplicate'
+      ) {
+
+        showToast(
+          `${undo.item.item_name} is already on a list.`,
+          true
+        );
 
         return;
 
       }
 
-
-      const undo = {
-
-        ...pendingUndo,
-
-        item: {
-          ...pendingUndo.item
-        }
-
-      };
-
-
-      clearTimeout(
-        toastTimer
-      );
-
-
-      pendingUndo =
-        null;
-
-
-      toastUndoButton.disabled =
-        true;
-
-
-      toastUndoButton.hidden =
-        true;
-
-
-      toastMessage.textContent =
-        `Restoring ${undo.item.item_name}…`;
-
-
-      try {
-
-        let result;
-
-
-        if (
-          undo.type ===
-          'shopping'
-        ) {
-
-          result =
-            unwrapRpcResult(
-
-              await api(
-                '/rest/v1/rpc/add_shopping_item',
-                {
-                  method:
-                    'POST',
-
-                  body:
-                    JSON.stringify({
-                      p_item_name:
-                        undo.item.item_name,
-
-                      p_quantity:
-                        undo.item.quantity,
-
-                      p_store:
-                        undo.item.store
-                    })
-                }
-              )
-
-            );
-
-
-          if (
-            result &&
-            result.added ===
-              true
-          ) {
-
-            if (
-              currentStore ===
-              undo.item.store
-            ) {
-
-              await loadStoreItems(
-                true
-              );
-
-            }
-
-
-            loadHomeCounts();
-
-
-            showToast(
-              `${undo.item.item_name} restored to ${STORES[undo.item.store]}.`
-            );
-
-
-            return;
-
-          }
-
-        } else if (
-          undo.type ===
-          'inventory'
-        ) {
-
-          result =
-            unwrapRpcResult(
-
-              await api(
-                '/rest/v1/rpc/add_inventory_item',
-                {
-                  method:
-                    'POST',
-
-                  body:
-                    JSON.stringify({
-                      p_item_name:
-                        undo.item.item_name,
-
-                      p_quantity:
-                        undo.item.quantity,
-
-                      p_category:
-                        undo.item.category
-                    })
-                }
-              )
-
-            );
-
-
-          if (
-            result &&
-            result.added ===
-              true
-          ) {
-
-            if (
-              currentInventoryCategory ===
-              undo.item.category
-            ) {
-
-              await loadInventoryItems(
-                true
-              );
-
-            }
-
-
-            showToast(
-              `${undo.item.item_name} restored to ${INVENTORY_CATEGORIES[undo.item.category]}.`
-            );
-
-
-            return;
-
-          }
-
-        }
-
-
-        if (
-          result &&
-          result.reason ===
-            'duplicate'
-        ) {
-
-          showToast(
-            `${undo.item.item_name} is already on a list.`,
-            true
-          );
-
-
-          return;
-
-        }
-
-
-        if (
-          result &&
-          result.reason ===
-            'restricted'
-        ) {
-
-          showToast(
-            `${undo.item.item_name} could not be restored because its store restriction has changed.`,
-            true
-          );
-
-
-          return;
-
-        }
-
+      if (
+        result &&
+        result.reason ===
+        'restricted'
+      ) {
 
         showToast(
-          `Could not restore ${undo.item.item_name}.`,
+          `${undo.item.item_name} could not be restored because its store restriction has changed.`,
           true
         );
 
-
-      } catch (error) {
-
-        console.error(
-          error
-        );
-
-
-        showToast(
-          `Could not restore ${undo.item.item_name}.`,
-          true
-        );
+        return;
 
       }
 
-    }
-  );
+      showToast(
+        `Could not restore ${undo.item.item_name}.`,
+        true
+      );
 
+    } catch (error) {
+
+      console.error(error);
+
+      showToast(
+        `Could not restore ${undo.item.item_name}.`,
+        true
+      );
+
+    }
+
+  }
+);
 
 
 async function api(
@@ -2189,7 +1632,6 @@ async function api(
 
   };
 
-
   const response =
     await fetch(
       SUPABASE_URL + path,
@@ -2199,20 +1641,15 @@ async function api(
       }
     );
 
-
-  if (
-    !response.ok
-  ) {
+  if (!response.ok) {
 
     let message =
       `Request failed (${response.status})`;
-
 
     try {
 
       const data =
         await response.json();
-
 
       message =
         data.message ||
@@ -2220,31 +1657,22 @@ async function api(
         data.hint ||
         message;
 
-
     } catch (_) {
 
       const text =
         await response.text();
 
-
-      if (
-        text
-      ) {
-
-        message =
-          text;
-
+      if (text) {
+        message = text;
       }
 
     }
-
 
     throw new Error(
       message
     );
 
   }
-
 
   if (
     response.status ===
@@ -2255,24 +1683,17 @@ async function api(
 
   }
 
-
   const text =
     await response.text();
 
-
   return text
-    ? JSON.parse(
-        text
-      )
+    ? JSON.parse(text)
     : null;
 
 }
 
 
-
-function showOnly(
-  screen
-) {
+function showOnly(screen) {
 
   [
     homeScreen,
@@ -2296,14 +1717,12 @@ function showOnly(
 }
 
 
-
 function goHome() {
 
   location.hash =
     '#home';
 
 }
-
 
 
 function goAdd() {
@@ -2314,10 +1733,7 @@ function goAdd() {
 }
 
 
-
-function goAddForStore(
-  store
-) {
+function goAddForStore(store) {
 
   location.hash =
     '#add/' +
@@ -2326,10 +1742,7 @@ function goAddForStore(
 }
 
 
-
-function goStore(
-  store
-) {
+function goStore(store) {
 
   location.hash =
     '#store/' +
@@ -2338,14 +1751,12 @@ function goStore(
 }
 
 
-
 function goInventory() {
 
   location.hash =
     '#inventory';
 
 }
-
 
 
 function goInventoryCategory(
@@ -2359,7 +1770,6 @@ function goInventoryCategory(
 }
 
 
-
 function goInventoryAdd(
   category
 ) {
@@ -2371,7 +1781,6 @@ function goInventoryAdd(
 }
 
 
-
 function goRestrictions() {
 
   location.hash =
@@ -2380,14 +1789,12 @@ function goRestrictions() {
 }
 
 
-
 function goNewRestriction() {
 
   location.hash =
     '#restriction/new';
 
 }
-
 
 
 function goEditRestriction(
@@ -2403,17 +1810,14 @@ function goEditRestriction(
 }
 
 
-
 function route() {
 
   const hash =
     location.hash ||
     '#home';
 
-
   currentInventoryCategory =
     null;
-
 
   if (
     hash.startsWith(
@@ -2422,69 +1826,48 @@ function route() {
   ) {
 
     const store =
-      hash.slice(
-        5
-      );
+      hash.slice(5);
 
-
-    if (
-      !STORES[store]
-    ) {
+    if (!STORES[store]) {
 
       goHome();
-
       return;
 
     }
 
-
     lockedAddStore =
       store;
 
-
     currentStore =
       null;
-
 
     showOnly(
       addScreen
     );
 
-
     pageTitle.textContent =
       'Add Item';
-
 
     backButton.hidden =
       false;
 
-
     storeSelect.value =
       store;
-
 
     storeSelect.disabled =
       true;
 
-
     lockedStoreNote.hidden =
       false;
 
-
-    setAddQuantity(
-      1
-    );
-
+    setAddQuantity(1);
 
     setTimeout(
       () => {
-
         itemNameInput.focus();
-
       },
       80
     );
-
 
     return;
 
@@ -2499,51 +1882,37 @@ function route() {
     lockedAddStore =
       null;
 
-
     currentStore =
       null;
-
 
     showOnly(
       addScreen
     );
 
-
     pageTitle.textContent =
       'Add Item';
-
 
     backButton.hidden =
       false;
 
-
     storeSelect.disabled =
       false;
 
-
     lockedStoreNote.hidden =
       true;
-
 
     storeSelect.value =
       getLastStore() ||
       '';
 
-
-    setAddQuantity(
-      1
-    );
-
+    setAddQuantity(1);
 
     setTimeout(
       () => {
-
         itemNameInput.focus();
-
       },
       80
     );
-
 
     return;
 
@@ -2557,45 +1926,32 @@ function route() {
   ) {
 
     const store =
-      hash.slice(
-        7
-      );
+      hash.slice(7);
 
-
-    if (
-      !STORES[store]
-    ) {
+    if (!STORES[store]) {
 
       goHome();
-
       return;
 
     }
 
-
     lockedAddStore =
       null;
 
-
     currentStore =
       store;
-
 
     showOnly(
       storeScreen
     );
 
-
     pageTitle.textContent =
       STORES[store];
-
 
     backButton.hidden =
       false;
 
-
     loadStoreItems();
-
 
     return;
 
@@ -2610,26 +1966,20 @@ function route() {
     currentStore =
       null;
 
-
     lockedAddStore =
       null;
-
 
     showOnly(
       inventoryScreen
     );
 
-
     pageTitle.textContent =
       'Inventory';
-
 
     backButton.hidden =
       false;
 
-
     renderInventoryCategories();
-
 
     return;
 
@@ -2647,7 +1997,6 @@ function route() {
         '#inventory-add/'.length
       );
 
-
     if (
       !INVENTORY_CATEGORIES[
         category
@@ -2655,59 +2004,45 @@ function route() {
     ) {
 
       goInventory();
-
       return;
 
     }
 
-
     currentStore =
       null;
-
 
     lockedAddStore =
       null;
 
-
     currentInventoryCategory =
       category;
-
 
     showOnly(
       inventoryAddScreen
     );
 
-
     pageTitle.textContent =
       'Add Inventory Item';
-
 
     backButton.hidden =
       false;
 
-
     inventoryItemName.value =
       '';
-
 
     setInventoryAddQuantity(
       1
     );
 
-
     inventoryCategoryNote.textContent =
       `Category: ${INVENTORY_CATEGORIES[category]}`;
 
-
     setTimeout(
       () => {
-
         inventoryItemName.focus();
-
       },
       80
     );
-
 
     return;
 
@@ -2725,7 +2060,6 @@ function route() {
         '#inventory/'.length
       );
 
-
     if (
       !INVENTORY_CATEGORIES[
         category
@@ -2733,41 +2067,32 @@ function route() {
     ) {
 
       goInventory();
-
       return;
 
     }
 
-
     currentStore =
       null;
-
 
     lockedAddStore =
       null;
 
-
     currentInventoryCategory =
       category;
-
 
     showOnly(
       inventoryCategoryScreen
     );
-
 
     pageTitle.textContent =
       INVENTORY_CATEGORIES[
         category
       ];
 
-
     backButton.hidden =
       false;
 
-
     loadInventoryItems();
-
 
     return;
 
@@ -2782,30 +2107,23 @@ function route() {
     currentStore =
       null;
 
-
     lockedAddStore =
       null;
 
-
     editingRestrictionOriginalName =
       null;
-
 
     showOnly(
       restrictionsScreen
     );
 
-
     pageTitle.textContent =
       'Manage Restrictions';
-
 
     backButton.hidden =
       false;
 
-
     loadRestrictions();
-
 
     return;
 
@@ -2820,40 +2138,30 @@ function route() {
     currentStore =
       null;
 
-
     lockedAddStore =
       null;
 
-
     editingRestrictionOriginalName =
       null;
-
 
     showOnly(
       restrictionEditScreen
     );
 
-
     pageTitle.textContent =
       'Add Restriction';
-
 
     backButton.hidden =
       false;
 
-
     clearRestrictionForm();
-
 
     setTimeout(
       () => {
-
         restrictionItemName.focus();
-
       },
       80
     );
-
 
     return;
 
@@ -2869,7 +2177,6 @@ function route() {
     let itemName =
       '';
 
-
     try {
 
       itemName =
@@ -2879,41 +2186,32 @@ function route() {
           )
         );
 
-
     } catch (_) {
 
       goRestrictions();
-
       return;
 
     }
 
-
     currentStore =
       null;
 
-
     lockedAddStore =
       null;
-
 
     showOnly(
       restrictionEditScreen
     );
 
-
     pageTitle.textContent =
       'Edit Restriction';
-
 
     backButton.hidden =
       false;
 
-
     loadRestrictionForEdit(
       itemName
     );
-
 
     return;
 
@@ -2923,186 +2221,148 @@ function route() {
   currentStore =
     null;
 
-
   lockedAddStore =
     null;
-
 
   editingRestrictionOriginalName =
     null;
 
-
   storeSelect.disabled =
     false;
 
-
   lockedStoreNote.hidden =
     true;
-
 
   showOnly(
     homeScreen
   );
 
-
   pageTitle.textContent =
     'Uno Club Shopping';
 
-
   backButton.hidden =
     true;
-
 
   loadHomeCounts();
 
 }
 
 
+backButton.addEventListener(
+  'click',
+  () => {
 
-backButton
-  .addEventListener(
-    'click',
-    () => {
+    const hash =
+      location.hash;
 
-      const hash =
-        location.hash;
+    if (
+      hash.startsWith(
+        '#add/'
+      )
+    ) {
 
-
-      if (
-        hash.startsWith(
-          '#add/'
-        )
-      ) {
-
-        const store =
-          hash.slice(
-            5
-          );
-
-
-        if (
-          STORES[store]
-        ) {
-
-          goStore(
-            store
-          );
-
-
-          return;
-
-        }
-
-      }
-
+      const store =
+        hash.slice(5);
 
       if (
-        hash.startsWith(
-          '#inventory-add/'
-        )
+        STORES[store]
       ) {
 
-        const category =
-          hash.slice(
-            '#inventory-add/'.length
-          );
-
-
-        if (
-          INVENTORY_CATEGORIES[
-            category
-          ]
-        ) {
-
-          goInventoryCategory(
-            category
-          );
-
-
-          return;
-
-        }
-
-      }
-
-
-      if (
-        hash.startsWith(
-          '#inventory/'
-        )
-      ) {
-
-        goInventory();
-
+        goStore(store);
         return;
 
       }
-
-
-      if (
-        hash ===
-        '#inventory'
-      ) {
-
-        goHome();
-
-        return;
-
-      }
-
-
-      if (
-        hash ===
-          '#restriction/new' ||
-        hash.startsWith(
-          '#restriction/edit/'
-        )
-      ) {
-
-        goRestrictions();
-
-        return;
-
-      }
-
-
-      goHome();
 
     }
-  );
+
+    if (
+      hash.startsWith(
+        '#inventory-add/'
+      )
+    ) {
+
+      const category =
+        hash.slice(
+          '#inventory-add/'.length
+        );
+
+      if (
+        INVENTORY_CATEGORIES[
+          category
+        ]
+      ) {
+
+        goInventoryCategory(
+          category
+        );
+
+        return;
+
+      }
+
+    }
+
+    if (
+      hash.startsWith(
+        '#inventory/'
+      )
+    ) {
+
+      goInventory();
+      return;
+
+    }
+
+    if (
+      hash ===
+      '#inventory'
+    ) {
+
+      goHome();
+      return;
+
+    }
+
+    if (
+      hash === '#restriction/new' ||
+      hash.startsWith(
+        '#restriction/edit/'
+      )
+    ) {
+
+      goRestrictions();
+      return;
+
+    }
+
+    goHome();
+
+  }
+);
 
 
-
-addItemButton
-  .addEventListener(
-    'click',
-    goAdd
-  );
+addItemButton.addEventListener(
+  'click',
+  goAdd
+);
 
 
-
-inventoryButton
-  .addEventListener(
-    'click',
-    goInventory
-  );
+inventoryButton.addEventListener(
+  'click',
+  goInventory
+);
 
 
-
-manageRestrictionsButton
-  .addEventListener(
-    'click',
-    goRestrictions
-  );
+manageRestrictionsButton.addEventListener(
+  'click',
+  goRestrictions
+);
 
 
-
-addRestrictionButton
-  .addEventListener(
-    'click',
-    goNewRestriction
-  );
-
+addRestrictionButton.addEventListener(
+  'click',
+  goNewRestriction
+);
 
 
 document
@@ -3127,74 +2387,57 @@ document
   );
 
 
+storeAddItemButton.addEventListener(
+  'click',
+  () => {
 
-storeAddItemButton
-  .addEventListener(
-    'click',
-    () => {
+    if (
+      currentStore &&
+      STORES[currentStore]
+    ) {
 
-      if (
-        currentStore &&
-        STORES[
-          currentStore
-        ]
-      ) {
-
-        goAddForStore(
-          currentStore
-        );
-
-      }
+      goAddForStore(
+        currentStore
+      );
 
     }
-  );
+
+  }
+);
 
 
+inventoryAddItemButton.addEventListener(
+  'click',
+  () => {
 
-inventoryAddItemButton
-  .addEventListener(
-    'click',
-    () => {
+    if (
+      currentInventoryCategory &&
+      INVENTORY_CATEGORIES[
+        currentInventoryCategory
+      ]
+    ) {
 
-      if (
-        currentInventoryCategory &&
-        INVENTORY_CATEGORIES[
-          currentInventoryCategory
-        ]
-      ) {
-
-        goInventoryAdd(
-          currentInventoryCategory
-        );
-
-      }
+      goInventoryAdd(
+        currentInventoryCategory
+      );
 
     }
-  );
 
+  }
+);
 
 
 async function loadHomeCounts() {
 
   const counts = {
 
-    sams_costco:
-      1,
-
-    walmart:
-      0,
-
-    alcohol:
-      0,
-
-    sodas:
-      0,
-
-    amazon:
-      0
+    sams_costco:1,
+    walmart:0,
+    alcohol:0,
+    sodas:0,
+    amazon:0
 
   };
-
 
   try {
 
@@ -3203,11 +2446,8 @@ async function loadHomeCounts() {
         '/rest/v1/shopping_items?select=store'
       );
 
-
     if (
-      Array.isArray(
-        data
-      )
+      Array.isArray(data)
     ) {
 
       data.forEach(
@@ -3233,7 +2473,6 @@ async function loadHomeCounts() {
 
     }
 
-
     document
       .querySelectorAll(
         '.count-badge'
@@ -3244,43 +2483,36 @@ async function loadHomeCounts() {
           badge.textContent =
             counts[
               badge.dataset.countStore
-            ] ??
-            0;
+            ] ?? 0;
 
         }
       );
 
-
   } catch (error) {
 
-    console.error(
-      error
-    );
+    console.error(error);
 
   }
 
 }
 
 
+storeSelect.addEventListener(
+  'change',
+  () => {
 
-storeSelect
-  .addEventListener(
-    'change',
-    () => {
+    if (
+      !lockedAddStore
+    ) {
 
-      if (
-        !lockedAddStore
-      ) {
-
-        rememberLastStore(
-          storeSelect.value
-        );
-
-      }
+      rememberLastStore(
+        storeSelect.value
+      );
 
     }
-  );
 
+  }
+);
 
 
 function getBoundedQuantity(
@@ -3294,18 +2526,14 @@ function getBoundedQuantity(
       10
     );
 
-
   if (
-    !Number.isInteger(
-      value
-    ) ||
+    !Number.isInteger(value) ||
     value < min
   ) {
 
     return min;
 
   }
-
 
   return Math.min(
     value,
@@ -3315,10 +2543,7 @@ function getBoundedQuantity(
 }
 
 
-
-function setAddQuantity(
-  value
-) {
+function setAddQuantity(value) {
 
   quantityInput.value =
     Math.min(
@@ -3329,11 +2554,9 @@ function setAddQuantity(
       )
     );
 
-
   refreshAddQuantityButtons();
 
 }
-
 
 
 function getAddQuantity() {
@@ -3346,16 +2569,13 @@ function getAddQuantity() {
 }
 
 
-
 function refreshAddQuantityButtons() {
 
   const q =
     getAddQuantity();
 
-
   addQtyMinus.disabled =
     q <= 1;
-
 
   addQtyPlus.disabled =
     q >= 9999;
@@ -3363,57 +2583,46 @@ function refreshAddQuantityButtons() {
 }
 
 
+addQtyMinus.addEventListener(
+  'click',
+  () => {
 
-addQtyMinus
-  .addEventListener(
-    'click',
-    () => {
+    setAddQuantity(
+      getAddQuantity() - 1
+    );
 
-      setAddQuantity(
-        getAddQuantity() -
-        1
-      );
-
-    }
-  );
+  }
+);
 
 
+addQtyPlus.addEventListener(
+  'click',
+  () => {
 
-addQtyPlus
-  .addEventListener(
-    'click',
-    () => {
+    setAddQuantity(
+      getAddQuantity() + 1
+    );
 
-      setAddQuantity(
-        getAddQuantity() +
-        1
-      );
-
-    }
-  );
+  }
+);
 
 
-
-quantityInput
-  .addEventListener(
-    'input',
-    refreshAddQuantityButtons
-  );
+quantityInput.addEventListener(
+  'input',
+  refreshAddQuantityButtons
+);
 
 
+quantityInput.addEventListener(
+  'blur',
+  () => {
 
-quantityInput
-  .addEventListener(
-    'blur',
-    () => {
+    setAddQuantity(
+      getAddQuantity()
+    );
 
-      setAddQuantity(
-        getAddQuantity()
-      );
-
-    }
-  );
-
+  }
+);
 
 
 function setInventoryAddQuantity(
@@ -3429,11 +2638,9 @@ function setInventoryAddQuantity(
       )
     );
 
-
   refreshInventoryAddQuantityButtons();
 
 }
-
 
 
 function getInventoryAddQuantity() {
@@ -3446,16 +2653,13 @@ function getInventoryAddQuantity() {
 }
 
 
-
 function refreshInventoryAddQuantityButtons() {
 
   const q =
     getInventoryAddQuantity();
 
-
   inventoryQtyMinus.disabled =
     q <= 0;
-
 
   inventoryQtyPlus.disabled =
     q >= 9999;
@@ -3463,57 +2667,46 @@ function refreshInventoryAddQuantityButtons() {
 }
 
 
+inventoryQtyMinus.addEventListener(
+  'click',
+  () => {
 
-inventoryQtyMinus
-  .addEventListener(
-    'click',
-    () => {
+    setInventoryAddQuantity(
+      getInventoryAddQuantity() - 1
+    );
 
-      setInventoryAddQuantity(
-        getInventoryAddQuantity() -
-        1
-      );
-
-    }
-  );
+  }
+);
 
 
+inventoryQtyPlus.addEventListener(
+  'click',
+  () => {
 
-inventoryQtyPlus
-  .addEventListener(
-    'click',
-    () => {
+    setInventoryAddQuantity(
+      getInventoryAddQuantity() + 1
+    );
 
-      setInventoryAddQuantity(
-        getInventoryAddQuantity() +
-        1
-      );
-
-    }
-  );
+  }
+);
 
 
-
-inventoryQuantity
-  .addEventListener(
-    'input',
-    refreshInventoryAddQuantityButtons
-  );
+inventoryQuantity.addEventListener(
+  'input',
+  refreshInventoryAddQuantityButtons
+);
 
 
+inventoryQuantity.addEventListener(
+  'blur',
+  () => {
 
-inventoryQuantity
-  .addEventListener(
-    'blur',
-    () => {
+    setInventoryAddQuantity(
+      getInventoryAddQuantity()
+    );
 
-      setInventoryAddQuantity(
-        getInventoryAddQuantity()
-      );
-
-    }
-  );
-
+  }
+);
 
 
 function formatAllowedStores(
@@ -3524,37 +2717,26 @@ function formatAllowedStores(
     storeKeys
       .map(
         store =>
-          STORES[
-            store
-          ]
+          STORES[store]
       )
-      .filter(
-        Boolean
-      );
+      .filter(Boolean);
 
-
-  if (
-    !names.length
-  ) {
+  if (!names.length) {
 
     return 'the correct store';
 
   }
 
-
   if (
-    names.length ===
-    1
+    names.length === 1
   ) {
 
     return names[0];
 
   }
 
-
   if (
-    names.length ===
-    2
+    names.length === 2
   ) {
 
     return (
@@ -3565,281 +2747,215 @@ function formatAllowedStores(
 
   }
 
-
   return (
     names
-      .slice(
-        0,
-        -1
-      )
-      .join(
-        ', '
-      ) +
+      .slice(0,-1)
+      .join(', ') +
     ', or ' +
-    names[
-      names.length -
-      1
-    ]
+    names[names.length - 1]
   );
 
 }
 
 
+addItemForm.addEventListener(
+  'submit',
+  async event => {
 
-addItemForm
-  .addEventListener(
-    'submit',
-    async event => {
+    event.preventDefault();
 
-      event.preventDefault();
+    const itemName =
+      normalizeItemName(
+        itemNameInput.value
+      );
 
+    const store =
+      lockedAddStore ||
+      storeSelect.value;
 
-      const itemName =
-        normalizeItemName(
-          itemNameInput.value
+    const quantity =
+      getAddQuantity();
+
+    if (!itemName) {
+
+      showToast(
+        'Please enter an item.',
+        true
+      );
+
+      itemNameInput.focus();
+      return;
+
+    }
+
+    if (
+      !store ||
+      !STORES[store]
+    ) {
+
+      showToast(
+        'Please choose a store.',
+        true
+      );
+
+      storeSelect.focus();
+      return;
+
+    }
+
+    if (
+      normalizedKey(
+        itemName
+      ) ===
+      'case of water'
+    ) {
+
+      showToast(
+        'Case of Water is already on the Sam’s / CostCo list.',
+        true
+      );
+
+      return;
+
+    }
+
+    if (
+      !lockedAddStore
+    ) {
+
+      rememberLastStore(
+        store
+      );
+
+    }
+
+    saveItemButton.disabled =
+      true;
+
+    saveItemButton.textContent =
+      'Adding…';
+
+    try {
+
+      const result =
+        unwrapRpcResult(
+          await api(
+            '/rest/v1/rpc/add_shopping_item',
+            {
+              method:'POST',
+              body:JSON.stringify({
+                p_item_name:
+                  itemName,
+
+                p_quantity:
+                  quantity,
+
+                p_store:
+                  store
+              })
+            }
+          )
         );
 
-
-      const store =
-        lockedAddStore ||
-        storeSelect.value;
-
-
-      const quantity =
-        getAddQuantity();
-
-
       if (
-        !itemName
+        result &&
+        result.added === false &&
+        result.reason ===
+          'duplicate'
       ) {
 
         showToast(
-          'Please enter an item.',
+          `${itemName} is already on the ${STORES[result.existing_store] || 'another'} list.`,
           true
         );
 
+        return;
+
+      }
+
+      if (
+        result &&
+        result.added === false &&
+        result.reason ===
+          'restricted'
+      ) {
+
+        showToast(
+          `${itemName} can only be added to ${formatAllowedStores(Array.isArray(result.allowed_stores) ? result.allowed_stores : [])}.`,
+          true
+        );
+
+        return;
+
+      }
+
+      if (
+        result &&
+        result.added === true
+      ) {
+
+        itemNameInput.value =
+          '';
+
+        setAddQuantity(1);
+
+        showToast(
+          `${itemName} added to ${STORES[store]}.`
+        );
+
+        loadHomeCounts();
 
         itemNameInput.focus();
 
-
         return;
 
       }
 
+      showToast(
+        'Could not add the item. Please try again.',
+        true
+      );
 
-      if (
-        !store ||
-        !STORES[
-          store
-        ]
-      ) {
+    } catch (error) {
 
-        showToast(
-          'Please choose a store.',
-          true
-        );
+      console.error(error);
 
+      showToast(
+        'Could not add the item. Please try again.',
+        true
+      );
 
-        storeSelect.focus();
-
-
-        return;
-
-      }
-
-
-      if (
-        normalizedKey(
-          itemName
-        ) ===
-        'case of water'
-      ) {
-
-        showToast(
-          'Case of Water is already on the Sam’s / CostCo list.',
-          true
-        );
-
-
-        return;
-
-      }
-
-
-      if (
-        !lockedAddStore
-      ) {
-
-        rememberLastStore(
-          store
-        );
-
-      }
-
+    } finally {
 
       saveItemButton.disabled =
-        true;
-
+        false;
 
       saveItemButton.textContent =
-        'Adding…';
-
-
-      try {
-
-        const result =
-          unwrapRpcResult(
-
-            await api(
-              '/rest/v1/rpc/add_shopping_item',
-              {
-                method:
-                  'POST',
-
-                body:
-                  JSON.stringify({
-                    p_item_name:
-                      itemName,
-
-                    p_quantity:
-                      quantity,
-
-                    p_store:
-                      store
-                  })
-              }
-            )
-
-          );
-
-
-        if (
-          result &&
-          result.added === false &&
-          result.reason ===
-            'duplicate'
-        ) {
-
-          showToast(
-            `${itemName} is already on the ${STORES[result.existing_store] || 'another'} list.`,
-            true
-          );
-
-
-          return;
-
-        }
-
-
-        if (
-          result &&
-          result.added === false &&
-          result.reason ===
-            'restricted'
-        ) {
-
-          showToast(
-            `${itemName} can only be added to ${formatAllowedStores(Array.isArray(result.allowed_stores) ? result.allowed_stores : [])}.`,
-            true
-          );
-
-
-          return;
-
-        }
-
-
-        if (
-          result &&
-          result.added === true
-        ) {
-
-          itemNameInput.value =
-            '';
-
-
-          setAddQuantity(
-            1
-          );
-
-
-          showToast(
-            `${itemName} added to ${STORES[store]}.`
-          );
-
-
-          loadHomeCounts();
-
-
-          itemNameInput.focus();
-
-
-          return;
-
-        }
-
-
-        showToast(
-          'Could not add the item. Please try again.',
-          true
-        );
-
-
-      } catch (error) {
-
-        console.error(
-          error
-        );
-
-
-        showToast(
-          'Could not add the item. Please try again.',
-          true
-        );
-
-
-      } finally {
-
-        saveItemButton.disabled =
-          false;
-
-
-        saveItemButton.textContent =
-          'Add Item';
-
-      }
+        'Add Item';
 
     }
-  );
 
+  }
+);
 
 
 async function loadStoreItems(
   quiet = false
 ) {
 
-  if (
-    !currentStore
-  ) {
-
+  if (!currentStore) {
     return;
-
   }
-
 
   const storeAtStart =
     currentStore;
 
-
-  if (
-    !quiet
-  ) {
+  if (!quiet) {
 
     storeList.innerHTML =
       '<div class="loading-state">Loading…</div>';
 
   }
-
 
   try {
 
@@ -3853,7 +2969,6 @@ async function loadStoreItems(
         )
       );
 
-
     if (
       currentStore !==
       storeAtStart
@@ -3863,26 +2978,17 @@ async function loadStoreItems(
 
     }
 
-
     renderStoreList(
-
       sortByName(
-        Array.isArray(
-          data
-        )
+        Array.isArray(data)
           ? data
           : []
       )
-
     );
-
 
   } catch (error) {
 
-    console.error(
-      error
-    );
-
+    console.error(error);
 
     if (
       !quiet &&
@@ -3900,14 +3006,12 @@ async function loadStoreItems(
 }
 
 
-
 function renderStoreList(
   items
 ) {
 
   storeList.innerHTML =
     '';
-
 
   if (
     currentStore ===
@@ -3919,7 +3023,6 @@ function renderStoreList(
     );
 
   }
-
 
   items.forEach(
     item => {
@@ -3933,29 +3036,21 @@ function renderStoreList(
     }
   );
 
-
   if (
-    items.length ===
-    0
+    items.length === 0
   ) {
 
     appendEmpty(
-
       storeList,
-
       currentStore ===
         'sams_costco'
-
         ? 'No other items on this list.'
-
         : 'No items on this list.'
-
     );
 
   }
 
 }
-
 
 
 function appendEmpty(
@@ -3968,21 +3063,17 @@ function appendEmpty(
       'div'
     );
 
-
   empty.className =
     'empty-state';
 
-
   empty.textContent =
     message;
-
 
   container.appendChild(
     empty
   );
 
 }
-
 
 
 function createPermanentWaterRow() {
@@ -3992,70 +3083,56 @@ function createPermanentWaterRow() {
       'div'
     );
 
-
   row.className =
     'item-row permanent-row';
-
 
   const wrap =
     document.createElement(
       'div'
     );
 
-
   const name =
     document.createElement(
       'div'
     );
-
 
   const note =
     document.createElement(
       'div'
     );
 
-
   const qty =
     document.createElement(
       'div'
     );
-
 
   const spacer =
     document.createElement(
       'div'
     );
 
-
   name.className =
     'item-name';
-
 
   name.textContent =
     'Case of Water';
 
-
   note.className =
     'fixed-note';
 
-
   note.textContent =
     'Always on list';
-
 
   wrap.append(
     name,
     note
   );
 
-
   qty.className =
     'qty-fixed';
 
-
   qty.textContent =
     '1';
-
 
   row.append(
     wrap,
@@ -4063,11 +3140,9 @@ function createPermanentWaterRow() {
     spacer
   );
 
-
   return row;
 
 }
-
 
 
 function createShoppingItemRow(
@@ -4075,9 +3150,7 @@ function createShoppingItemRow(
 ) {
 
   return createDataItemRow(
-
     item,
-
     1,
 
     async newQuantity => {
@@ -4104,11 +3177,9 @@ function createShoppingItemRow(
       );
 
     }
-
   );
 
 }
-
 
 
 function createInventoryItemRow(
@@ -4116,9 +3187,7 @@ function createInventoryItemRow(
 ) {
 
   return createDataItemRow(
-
     item,
-
     0,
 
     async newQuantity => {
@@ -4145,11 +3214,9 @@ function createInventoryItemRow(
       );
 
     }
-
   );
 
 }
-
 
 
 function createDataItemRow(
@@ -4164,116 +3231,91 @@ function createDataItemRow(
       'div'
     );
 
-
   row.className =
     'item-row db-row';
 
-
   row.dataset.id =
     item.id;
-
 
   const name =
     document.createElement(
       'div'
     );
 
-
   name.className =
     'item-name';
 
-
   name.textContent =
     item.item_name;
-
 
   const control =
     document.createElement(
       'div'
     );
 
-
   control.className =
     'qty-control';
-
 
   const minus =
     document.createElement(
       'button'
     );
 
-
   const qty =
     document.createElement(
       'input'
     );
-
 
   const plus =
     document.createElement(
       'button'
     );
 
-
   minus.type =
     'button';
-
 
   plus.type =
     'button';
 
-
   minus.className =
     'qty-step-button';
-
 
   plus.className =
     'qty-step-button';
 
-
   minus.textContent =
     '−';
-
 
   plus.textContent =
     '+';
 
-
   qty.className =
     'qty-input';
 
-
   qty.type =
     'number';
-
 
   qty.min =
     String(
       minQuantity
     );
 
-
   qty.max =
     '9999';
-
 
   qty.step =
     '1';
 
-
   qty.inputMode =
     'numeric';
 
-
   qty.value =
     item.quantity;
-
 
   qty.dataset.savedValue =
     String(
       item.quantity
     );
-
 
   const getQty =
     () =>
@@ -4282,25 +3324,19 @@ function createDataItemRow(
         minQuantity
       );
 
-
   const refresh =
     () => {
 
       const value =
         getQty();
 
-
       minus.disabled =
-        value <=
-        minQuantity;
-
+        value <= minQuantity;
 
       plus.disabled =
-        value >=
-        9999;
+        value >= 9999;
 
     };
-
 
   const save =
     async () => {
@@ -4311,14 +3347,11 @@ function createDataItemRow(
           10
         );
 
-
       const newValue =
         getQty();
 
-
       qty.value =
         newValue;
-
 
       if (
         newValue ===
@@ -4326,23 +3359,18 @@ function createDataItemRow(
       ) {
 
         refresh();
-
         return;
 
       }
 
-
       minus.disabled =
         true;
-
 
       plus.disabled =
         true;
 
-
       qty.disabled =
         true;
-
 
       try {
 
@@ -4350,28 +3378,21 @@ function createDataItemRow(
           newValue
         );
 
-
         qty.dataset.savedValue =
           String(
             newValue
           );
 
-
         showToast(
           'Quantity updated.'
         );
 
-
       } catch (error) {
 
-        console.error(
-          error
-        );
-
+        console.error(error);
 
         qty.value =
           oldValue;
-
 
         showToast(
           'Could not update the quantity.',
@@ -4380,15 +3401,12 @@ function createDataItemRow(
 
       }
 
-
       qty.disabled =
         false;
-
 
       refresh();
 
     };
-
 
   minus.addEventListener(
     'click',
@@ -4396,7 +3414,6 @@ function createDataItemRow(
 
       const value =
         getQty();
-
 
       if (
         value <=
@@ -4407,16 +3424,13 @@ function createDataItemRow(
 
       }
 
-
       qty.value =
         value - 1;
-
 
       await save();
 
     }
   );
-
 
   plus.addEventListener(
     'click',
@@ -4424,7 +3438,6 @@ function createDataItemRow(
 
       const value =
         getQty();
-
 
       if (
         value >=
@@ -4435,38 +3448,30 @@ function createDataItemRow(
 
       }
 
-
       qty.value =
         value + 1;
-
 
       await save();
 
     }
   );
 
-
   qty.addEventListener(
     'focus',
     () => {
-
       qty.select();
-
     }
   );
-
 
   qty.addEventListener(
     'input',
     refresh
   );
 
-
   qty.addEventListener(
     'change',
     save
   );
-
 
   control.append(
     minus,
@@ -4474,27 +3479,21 @@ function createDataItemRow(
     plus
   );
 
-
   refresh();
-
 
   const del =
     document.createElement(
       'button'
     );
 
-
   del.type =
     'button';
-
 
   del.className =
     'delete-button';
 
-
   del.textContent =
     '×';
-
 
   del.addEventListener(
     'click',
@@ -4502,7 +3501,6 @@ function createDataItemRow(
 
       del.disabled =
         true;
-
 
       await deleteHandler(
         row,
@@ -4513,18 +3511,15 @@ function createDataItemRow(
     }
   );
 
-
   row.append(
     name,
     control,
     del
   );
 
-
   return row;
 
 }
-
 
 
 async function updateQuantity(
@@ -4536,23 +3531,19 @@ async function updateQuantity(
   await api(
     `/rest/v1/${table}?id=eq.${encodeURIComponent(id)}`,
     {
-      method:
-        'PATCH',
+      method:'PATCH',
 
-      headers: {
-        Prefer:
-          'return=minimal'
+      headers:{
+        Prefer:'return=minimal'
       },
 
-      body:
-        JSON.stringify({
-          quantity
-        })
+      body:JSON.stringify({
+        quantity
+      })
     }
   );
 
 }
-
 
 
 async function deleteShoppingItem(
@@ -4570,33 +3561,26 @@ async function deleteShoppingItem(
         item.id
       ),
       {
-        method:
-          'DELETE',
+        method:'DELETE',
 
-        headers: {
-          Prefer:
-            'return=minimal'
+        headers:{
+          Prefer:'return=minimal'
         }
       }
     );
 
-
     row.remove();
-
 
     showUndoToast(
       {
         ...item,
-
         quantity:
           currentQuantity
       },
       'shopping'
     );
 
-
     loadHomeCounts();
-
 
     if (
       !storeList.querySelector(
@@ -4605,31 +3589,21 @@ async function deleteShoppingItem(
     ) {
 
       appendEmpty(
-
         storeList,
-
         currentStore ===
           'sams_costco'
-
           ? 'No other items on this list.'
-
           : 'No items on this list.'
-
       );
 
     }
 
-
   } catch (error) {
 
-    console.error(
-      error
-    );
-
+    console.error(error);
 
     button.disabled =
       false;
-
 
     showToast(
       'Could not remove the item.',
@@ -4641,7 +3615,6 @@ async function deleteShoppingItem(
 }
 
 
-
 /* INVENTORY */
 
 
@@ -4650,30 +3623,25 @@ function renderInventoryCategories() {
   inventoryCategoryButtons.innerHTML =
     '';
 
-
   Object.entries(
     INVENTORY_CATEGORIES
   )
   .forEach(
-    ([key, label]) => {
+    ([key,label]) => {
 
       const button =
         document.createElement(
           'button'
         );
 
-
       button.className =
         'main-button category-button';
-
 
       button.type =
         'button';
 
-
       button.textContent =
         label;
-
 
       button.addEventListener(
         'click',
@@ -4686,7 +3654,6 @@ function renderInventoryCategories() {
         }
       );
 
-
       inventoryCategoryButtons.appendChild(
         button
       );
@@ -4695,7 +3662,6 @@ function renderInventoryCategories() {
   );
 
 }
-
 
 
 async function loadInventoryItems(
@@ -4710,20 +3676,15 @@ async function loadInventoryItems(
 
   }
 
-
   const categoryAtStart =
     currentInventoryCategory;
 
-
-  if (
-    !quiet
-  ) {
+  if (!quiet) {
 
     inventoryList.innerHTML =
       '<div class="loading-state">Loading…</div>';
 
   }
-
 
   try {
 
@@ -4737,7 +3698,6 @@ async function loadInventoryItems(
         )
       );
 
-
     if (
       currentInventoryCategory !==
       categoryAtStart
@@ -4747,26 +3707,17 @@ async function loadInventoryItems(
 
     }
 
-
     renderInventoryList(
-
       sortByName(
-        Array.isArray(
-          data
-        )
+        Array.isArray(data)
           ? data
           : []
       )
-
     );
-
 
   } catch (error) {
 
-    console.error(
-      error
-    );
-
+    console.error(error);
 
     if (
       !quiet &&
@@ -4784,14 +3735,12 @@ async function loadInventoryItems(
 }
 
 
-
 function renderInventoryList(
   items
 ) {
 
   inventoryList.innerHTML =
     '';
-
 
   items.forEach(
     item => {
@@ -4805,10 +3754,8 @@ function renderInventoryList(
     }
   );
 
-
   if (
-    items.length ===
-    0
+    items.length === 0
   ) {
 
     appendEmpty(
@@ -4821,180 +3768,144 @@ function renderInventoryList(
 }
 
 
+inventoryAddForm.addEventListener(
+  'submit',
+  async event => {
 
-inventoryAddForm
-  .addEventListener(
-    'submit',
-    async event => {
+    event.preventDefault();
 
-      event.preventDefault();
+    const itemName =
+      normalizeItemName(
+        inventoryItemName.value
+      );
 
+    const quantity =
+      getInventoryAddQuantity();
 
-      const itemName =
-        normalizeItemName(
-          inventoryItemName.value
+    const category =
+      currentInventoryCategory;
+
+    if (!itemName) {
+
+      showToast(
+        'Please enter an item.',
+        true
+      );
+
+      inventoryItemName.focus();
+      return;
+
+    }
+
+    if (
+      !category ||
+      !INVENTORY_CATEGORIES[
+        category
+      ]
+    ) {
+
+      showToast(
+        'Inventory category not found.',
+        true
+      );
+
+      return;
+
+    }
+
+    saveInventoryItemButton.disabled =
+      true;
+
+    saveInventoryItemButton.textContent =
+      'Adding…';
+
+    try {
+
+      const result =
+        unwrapRpcResult(
+          await api(
+            '/rest/v1/rpc/add_inventory_item',
+            {
+              method:'POST',
+
+              body:JSON.stringify({
+                p_item_name:
+                  itemName,
+
+                p_quantity:
+                  quantity,
+
+                p_category:
+                  category
+              })
+            }
+          )
         );
 
-
-      const quantity =
-        getInventoryAddQuantity();
-
-
-      const category =
-        currentInventoryCategory;
-
-
       if (
-        !itemName
+        result &&
+        result.added === false &&
+        result.reason ===
+          'duplicate'
       ) {
 
         showToast(
-          'Please enter an item.',
+          `${itemName} is already in ${INVENTORY_CATEGORIES[result.existing_category] || 'Inventory'}.`,
           true
         );
 
+        return;
+
+      }
+
+      if (
+        result &&
+        result.added === true
+      ) {
+
+        inventoryItemName.value =
+          '';
+
+        setInventoryAddQuantity(
+          1
+        );
+
+        showToast(
+          `${itemName} added to ${INVENTORY_CATEGORIES[category]}.`
+        );
 
         inventoryItemName.focus();
 
-
         return;
 
       }
 
+      showToast(
+        'Could not add the inventory item.',
+        true
+      );
 
-      if (
-        !category ||
-        !INVENTORY_CATEGORIES[
-          category
-        ]
-      ) {
+    } catch (error) {
 
-        showToast(
-          'Inventory category not found.',
-          true
-        );
+      console.error(error);
 
+      showToast(
+        'Could not add the inventory item.',
+        true
+      );
 
-        return;
-
-      }
-
+    } finally {
 
       saveInventoryItemButton.disabled =
-        true;
-
+        false;
 
       saveInventoryItemButton.textContent =
-        'Adding…';
-
-
-      try {
-
-        const result =
-          unwrapRpcResult(
-
-            await api(
-              '/rest/v1/rpc/add_inventory_item',
-              {
-                method:
-                  'POST',
-
-                body:
-                  JSON.stringify({
-                    p_item_name:
-                      itemName,
-
-                    p_quantity:
-                      quantity,
-
-                    p_category:
-                      category
-                  })
-              }
-            )
-
-          );
-
-
-        if (
-          result &&
-          result.added === false &&
-          result.reason ===
-            'duplicate'
-        ) {
-
-          showToast(
-            `${itemName} is already in ${INVENTORY_CATEGORIES[result.existing_category] || 'Inventory'}.`,
-            true
-          );
-
-
-          return;
-
-        }
-
-
-        if (
-          result &&
-          result.added ===
-            true
-        ) {
-
-          inventoryItemName.value =
-            '';
-
-
-          setInventoryAddQuantity(
-            1
-          );
-
-
-          showToast(
-            `${itemName} added to ${INVENTORY_CATEGORIES[category]}.`
-          );
-
-
-          inventoryItemName.focus();
-
-
-          return;
-
-        }
-
-
-        showToast(
-          'Could not add the inventory item.',
-          true
-        );
-
-
-      } catch (error) {
-
-        console.error(
-          error
-        );
-
-
-        showToast(
-          'Could not add the inventory item.',
-          true
-        );
-
-
-      } finally {
-
-        saveInventoryItemButton.disabled =
-          false;
-
-
-        saveInventoryItemButton.textContent =
-          'Add to Inventory';
-
-      }
+        'Add to Inventory';
 
     }
-  );
 
+  }
+);
 
 
 async function deleteInventoryItem(
@@ -5012,30 +3923,24 @@ async function deleteInventoryItem(
         item.id
       ),
       {
-        method:
-          'DELETE',
+        method:'DELETE',
 
-        headers: {
-          Prefer:
-            'return=minimal'
+        headers:{
+          Prefer:'return=minimal'
         }
       }
     );
 
-
     row.remove();
-
 
     showUndoToast(
       {
         ...item,
-
         quantity:
           currentQuantity
       },
       'inventory'
     );
-
 
     if (
       !inventoryList.querySelector(
@@ -5050,17 +3955,12 @@ async function deleteInventoryItem(
 
     }
 
-
   } catch (error) {
 
-    console.error(
-      error
-    );
-
+    console.error(error);
 
     button.disabled =
       false;
-
 
     showToast(
       'Could not remove the inventory item.',
@@ -5070,7 +3970,6 @@ async function deleteInventoryItem(
   }
 
 }
-
 
 
 /* RESTRICTIONS */
@@ -5084,24 +3983,17 @@ async function fetchRestrictionRows() {
       '?select=item_name,allowed_store'
     );
 
-
-  return Array.isArray(
-    data
-  )
+  return Array.isArray(data)
     ? data
     : [];
 
 }
 
 
-
-function groupRestrictions(
-  rows
-) {
+function groupRestrictions(rows) {
 
   const grouped =
     new Map();
-
 
   rows.forEach(
     row => {
@@ -5111,11 +4003,8 @@ function groupRestrictions(
           row.item_name
         );
 
-
       if (
-        !grouped.has(
-          key
-        )
+        !grouped.has(key)
       ) {
 
         grouped.set(
@@ -5131,12 +4020,8 @@ function groupRestrictions(
 
       }
 
-
       const item =
-        grouped.get(
-          key
-        );
-
+        grouped.get(key);
 
       if (
         !item.allowed_stores
@@ -5154,7 +4039,6 @@ function groupRestrictions(
     }
   );
 
-
   return sortByName(
     Array.from(
       grouped.values()
@@ -5164,30 +4048,22 @@ function groupRestrictions(
 }
 
 
-
 async function loadRestrictions() {
 
   restrictionList.innerHTML =
     '<div class="loading-state">Loading…</div>';
 
-
   try {
 
     renderRestrictions(
-
       groupRestrictions(
         await fetchRestrictionRows()
       )
-
     );
-
 
   } catch (error) {
 
-    console.error(
-      error
-    );
-
+    console.error(error);
 
     restrictionList.innerHTML =
       '<div class="error-state">Could not load restrictions.</div>';
@@ -5197,7 +4073,6 @@ async function loadRestrictions() {
 }
 
 
-
 function renderRestrictions(
   items
 ) {
@@ -5205,19 +4080,14 @@ function renderRestrictions(
   restrictionList.innerHTML =
     '';
 
-
-  if (
-    !items.length
-  ) {
+  if (!items.length) {
 
     restrictionList.innerHTML =
       '<div class="empty-state">No restricted items yet.</div>';
 
-
     return;
 
   }
-
 
   items.forEach(
     item => {
@@ -5227,50 +4097,40 @@ function renderRestrictions(
           'button'
         );
 
-
       const wrap =
         document.createElement(
           'div'
         );
-
 
       const name =
         document.createElement(
           'div'
         );
 
-
       const stores =
         document.createElement(
           'div'
         );
-
 
       const chevron =
         document.createElement(
           'div'
         );
 
-
       button.type =
         'button';
-
 
       button.className =
         'restriction-row';
 
-
       name.className =
         'restriction-name';
-
 
       name.textContent =
         item.item_name;
 
-
       stores.className =
         'restriction-stores';
-
 
       stores.textContent =
         Object.keys(
@@ -5285,34 +4145,25 @@ function renderRestrictions(
         )
         .map(
           store =>
-            STORES[
-              store
-            ]
+            STORES[store]
         )
-        .join(
-          ' • '
-        );
-
+        .join(' • ');
 
       wrap.append(
         name,
         stores
       );
 
-
       chevron.className =
         'restriction-chevron';
 
-
       chevron.textContent =
         '›';
-
 
       button.append(
         wrap,
         chevron
       );
-
 
       button.addEventListener(
         'click',
@@ -5325,7 +4176,6 @@ function renderRestrictions(
         }
       );
 
-
       restrictionList.appendChild(
         button
       );
@@ -5334,7 +4184,6 @@ function renderRestrictions(
   );
 
 }
-
 
 
 function clearRestrictionChecks() {
@@ -5355,33 +4204,26 @@ function clearRestrictionChecks() {
 }
 
 
-
 function clearRestrictionForm() {
 
   editingRestrictionOriginalName =
     null;
 
-
   restrictionItemName.value =
     '';
 
-
   clearRestrictionChecks();
-
 
   deleteRestrictionButton.hidden =
     true;
 
-
   saveRestrictionButton.disabled =
     false;
-
 
   saveRestrictionButton.textContent =
     'Save Restriction';
 
 }
-
 
 
 async function loadRestrictionForEdit(
@@ -5391,65 +4233,49 @@ async function loadRestrictionForEdit(
   restrictionItemName.value =
     '';
 
-
   clearRestrictionChecks();
-
 
   deleteRestrictionButton.hidden =
     true;
-
 
   try {
 
     const rows =
       await fetchRestrictionRows();
 
-
     const targetKey =
       normalizedKey(
         itemName
       );
-
 
     const matches =
       rows.filter(
         row =>
           normalizedKey(
             row.item_name
-          ) ===
-          targetKey
+          ) === targetKey
       );
 
-
-    if (
-      !matches.length
-    ) {
+    if (!matches.length) {
 
       showToast(
         'That restriction no longer exists.',
         true
       );
 
-
       goRestrictions();
-
-
       return;
 
     }
 
-
     const displayName =
       matches[0].item_name;
-
 
     editingRestrictionOriginalName =
       displayName;
 
-
     restrictionItemName.value =
       displayName;
-
 
     matches.forEach(
       row => {
@@ -5459,10 +4285,7 @@ async function loadRestrictionForEdit(
             `input[name="allowedStore"][value="${row.allowed_store}"]`
           );
 
-
-        if (
-          checkbox
-        ) {
+        if (checkbox) {
 
           checkbox.checked =
             true;
@@ -5472,30 +4295,23 @@ async function loadRestrictionForEdit(
       }
     );
 
-
     deleteRestrictionButton.hidden =
       false;
 
-
   } catch (error) {
 
-    console.error(
-      error
-    );
-
+    console.error(error);
 
     showToast(
       'Could not load this restriction.',
       true
     );
 
-
     goRestrictions();
 
   }
 
 }
-
 
 
 function getCheckedStores() {
@@ -5513,339 +4329,278 @@ function getCheckedStores() {
 }
 
 
+restrictionForm.addEventListener(
+  'submit',
+  async event => {
 
-restrictionForm
-  .addEventListener(
-    'submit',
-    async event => {
+    event.preventDefault();
 
-      event.preventDefault();
+    const itemName =
+      normalizeItemName(
+        restrictionItemName.value
+      );
 
+    const allowedStores =
+      getCheckedStores();
 
-      const itemName =
-        normalizeItemName(
-          restrictionItemName.value
+    if (!itemName) {
+
+      showToast(
+        'Please enter an item.',
+        true
+      );
+
+      restrictionItemName.focus();
+      return;
+
+    }
+
+    if (
+      normalizedKey(
+        itemName
+      ) ===
+      'case of water'
+    ) {
+
+      showToast(
+        'Case of Water is permanently assigned to Sam’s / CostCo.',
+        true
+      );
+
+      return;
+
+    }
+
+    if (
+      !allowedStores.length
+    ) {
+
+      showToast(
+        'Choose at least one allowed store.',
+        true
+      );
+
+      return;
+
+    }
+
+    saveRestrictionButton.disabled =
+      true;
+
+    saveRestrictionButton.textContent =
+      'Saving…';
+
+    try {
+
+      const result =
+        unwrapRpcResult(
+          await api(
+            '/rest/v1/rpc/save_item_store_restriction',
+            {
+              method:'POST',
+
+              body:JSON.stringify({
+                p_original_item_name:
+                  editingRestrictionOriginalName,
+
+                p_item_name:
+                  itemName,
+
+                p_allowed_stores:
+                  allowedStores
+              })
+            }
+          )
         );
-
-
-      const allowedStores =
-        getCheckedStores();
-
 
       if (
-        !itemName
+        result &&
+        result.saved === false
       ) {
-
-        showToast(
-          'Please enter an item.',
-          true
-        );
-
-
-        restrictionItemName.focus();
-
-
-        return;
-
-      }
-
-
-      if (
-        normalizedKey(
-          itemName
-        ) ===
-        'case of water'
-      ) {
-
-        showToast(
-          'Case of Water is permanently assigned to Sam’s / CostCo.',
-          true
-        );
-
-
-        return;
-
-      }
-
-
-      if (
-        !allowedStores.length
-      ) {
-
-        showToast(
-          'Choose at least one allowed store.',
-          true
-        );
-
-
-        return;
-
-      }
-
-
-      saveRestrictionButton.disabled =
-        true;
-
-
-      saveRestrictionButton.textContent =
-        'Saving…';
-
-
-      try {
-
-        const result =
-          unwrapRpcResult(
-
-            await api(
-              '/rest/v1/rpc/save_item_store_restriction',
-              {
-                method:
-                  'POST',
-
-                body:
-                  JSON.stringify({
-                    p_original_item_name:
-                      editingRestrictionOriginalName,
-
-                    p_item_name:
-                      itemName,
-
-                    p_allowed_stores:
-                      allowedStores
-                  })
-              }
-            )
-
-          );
-
 
         if (
-          result &&
-          result.saved ===
-            false
+          result.reason ===
+          'restriction_exists'
         ) {
 
-          if (
-            result.reason ===
-            'restriction_exists'
-          ) {
-
-            showToast(
-              'A restriction for that item already exists.',
-              true
-            );
-
-
-            return;
-
-          }
-
-
-          if (
-            result.reason ===
-            'item_on_disallowed_store'
-          ) {
-
-            showToast(
-              `${itemName} is currently on the ${STORES[result.existing_store] || 'another store'} list. Remove it from that list before applying this restriction.`,
-              true
-            );
-
-
-            return;
-
-          }
-
-
-          if (
-            result.reason ===
-            'no_stores'
-          ) {
-
-            showToast(
-              'Choose at least one allowed store.',
-              true
-            );
-
-
-            return;
-
-          }
-
-
           showToast(
-            'Could not save the restriction.',
+            'A restriction for that item already exists.',
             true
           );
-
 
           return;
 
         }
 
+        if (
+          result.reason ===
+          'item_on_disallowed_store'
+        ) {
 
-        goRestrictions();
+          showToast(
+            `${itemName} is currently on the ${STORES[result.existing_store] || 'another store'} list. Remove it from that list before applying this restriction.`,
+            true
+          );
 
+          return;
 
-        setTimeout(
-          () => {
+        }
 
-            showToast(
-              `${itemName} restriction saved.`
-            );
+        if (
+          result.reason ===
+          'no_stores'
+        ) {
 
-          },
-          80
-        );
+          showToast(
+            'Choose at least one allowed store.',
+            true
+          );
 
+          return;
 
-      } catch (error) {
-
-        console.error(
-          error
-        );
-
+        }
 
         showToast(
           'Could not save the restriction.',
           true
         );
 
-
-      } finally {
-
-        saveRestrictionButton.disabled =
-          false;
-
-
-        saveRestrictionButton.textContent =
-          'Save Restriction';
-
-      }
-
-    }
-  );
-
-
-
-deleteRestrictionButton
-  .addEventListener(
-    'click',
-    async () => {
-
-      if (
-        !editingRestrictionOriginalName
-      ) {
-
         return;
 
       }
 
+      goRestrictions();
 
-      const itemName =
-        editingRestrictionOriginalName;
-
-
-      if (
-        !window.confirm(
-          `Delete the restriction for ${itemName}?`
-        )
-      ) {
-
-        return;
-
-      }
-
-
-      deleteRestrictionButton.disabled =
-        true;
-
-
-      deleteRestrictionButton.textContent =
-        'Deleting…';
-
-
-      try {
-
-        const result =
-          unwrapRpcResult(
-
-            await api(
-              '/rest/v1/rpc/delete_item_store_restriction',
-              {
-                method:
-                  'POST',
-
-                body:
-                  JSON.stringify({
-                    p_item_name:
-                      itemName
-                  })
-              }
-            )
-
-          );
-
-
-        if (
-          !result ||
-          result.deleted !==
-            true
-        ) {
+      setTimeout(
+        () => {
 
           showToast(
-            'Could not delete the restriction.',
-            true
+            `${itemName} restriction saved.`
           );
 
+        },
+        80
+      );
 
-          return;
+    } catch (error) {
 
-        }
+      console.error(error);
+
+      showToast(
+        'Could not save the restriction.',
+        true
+      );
+
+    } finally {
+
+      saveRestrictionButton.disabled =
+        false;
+
+      saveRestrictionButton.textContent =
+        'Save Restriction';
+
+    }
+
+  }
+);
 
 
-        goRestrictions();
+deleteRestrictionButton.addEventListener(
+  'click',
+  async () => {
 
+    if (
+      !editingRestrictionOriginalName
+    ) {
 
-        setTimeout(
-          () => {
+      return;
 
-            showToast(
-              `${itemName} restriction deleted.`
-            );
+    }
 
-          },
-          80
+    const itemName =
+      editingRestrictionOriginalName;
+
+    if (
+      !window.confirm(
+        `Delete the restriction for ${itemName}?`
+      )
+    ) {
+
+      return;
+
+    }
+
+    deleteRestrictionButton.disabled =
+      true;
+
+    deleteRestrictionButton.textContent =
+      'Deleting…';
+
+    try {
+
+      const result =
+        unwrapRpcResult(
+          await api(
+            '/rest/v1/rpc/delete_item_store_restriction',
+            {
+              method:'POST',
+
+              body:JSON.stringify({
+                p_item_name:
+                  itemName
+              })
+            }
+          )
         );
 
-
-      } catch (error) {
-
-        console.error(
-          error
-        );
-
+      if (
+        !result ||
+        result.deleted !== true
+      ) {
 
         showToast(
           'Could not delete the restriction.',
           true
         );
 
-
-      } finally {
-
-        deleteRestrictionButton.disabled =
-          false;
-
-
-        deleteRestrictionButton.textContent =
-          'Delete Restriction';
+        return;
 
       }
 
-    }
-  );
+      goRestrictions();
 
+      setTimeout(
+        () => {
+
+          showToast(
+            `${itemName} restriction deleted.`
+          );
+
+        },
+        80
+      );
+
+    } catch (error) {
+
+      console.error(error);
+
+      showToast(
+        'Could not delete the restriction.',
+        true
+      );
+
+    } finally {
+
+      deleteRestrictionButton.disabled =
+        false;
+
+      deleteRestrictionButton.textContent =
+        'Delete Restriction';
+
+    }
+
+  }
+);
 
 
 window.addEventListener(
@@ -5854,33 +4609,20 @@ window.addEventListener(
 );
 
 
-
 document.addEventListener(
   'visibilitychange',
   () => {
 
-    if (
-      document.hidden
-    ) {
+    if (document.hidden) {
+      return;
+    }
 
+    if (currentStore) {
+
+      loadStoreItems(true);
       return;
 
     }
-
-
-    if (
-      currentStore
-    ) {
-
-      loadStoreItems(
-        true
-      );
-
-
-      return;
-
-    }
-
 
     if (
       currentInventoryCategory &&
@@ -5889,15 +4631,10 @@ document.addEventListener(
       )
     ) {
 
-      loadInventoryItems(
-        true
-      );
-
-
+      loadInventoryItems(true);
       return;
 
     }
-
 
     if (
       location.hash ===
@@ -5905,12 +4642,9 @@ document.addEventListener(
     ) {
 
       loadRestrictions();
-
-
       return;
 
     }
-
 
     if (
       location.hash ===
@@ -5925,10 +4659,7 @@ document.addEventListener(
 );
 
 
-
-if (
-  !location.hash
-) {
+if (!location.hash) {
 
   history.replaceState(
     null,
