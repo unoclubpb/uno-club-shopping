@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.21 -->
-<meta name="app-version" content="1.0.21">
+<!-- APP VERSION: 1.0.22 -->
+<meta name="app-version" content="1.0.22">
 
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -18,8 +18,8 @@
 
 <title>Uno Club Shopping</title>
 
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.21">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.21">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.22">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.22">
 
 <style>
 :root{
@@ -295,6 +295,20 @@ main{
   border-color:#b8b8b8
 }
 
+.readonly-value{
+  width:100%;
+  min-height:54px;
+  padding:14px 13px;
+  border:1.5px solid var(--border);
+  border-radius:12px;
+  background:#f1f3f6;
+  color:var(--text);
+  font-size:18px;
+  font-weight:700;
+  display:flex;
+  align-items:center
+}
+
 .locked-note,
 .form-note{
   margin-top:7px;
@@ -423,6 +437,25 @@ main{
   font-size:17px;
   font-weight:750;
   overflow-wrap:anywhere
+}
+
+.clickable-item-name{
+  min-width:0;
+  max-width:100%;
+  border:0;
+  margin:0;
+  padding:0;
+  background:transparent;
+  color:var(--blue);
+  font-size:17px;
+  font-weight:750;
+  text-align:left;
+  overflow-wrap:anywhere;
+  cursor:pointer
+}
+
+.clickable-item-name:active{
+  color:var(--blue-dark)
 }
 
 .qty-fixed{
@@ -711,11 +744,12 @@ main{
 
   <img
     class="header-logo"
-    src="uno-club-shopping.PNG?v=1.0.21"
+    src="uno-club-shopping.PNG?v=1.0.22"
     alt="Uno Club Shopping logo"
   >
 
 </header>
+
 
 <main>
 
@@ -775,7 +809,7 @@ main{
     </div>
 
     <div class="version-label">
-      v1.0.21
+      v1.0.22
     </div>
 
   </section>
@@ -813,7 +847,6 @@ main{
               id="addQtyMinus"
               class="qty-step-button"
               type="button"
-              aria-label="Decrease quantity"
             >
               −
             </button>
@@ -827,14 +860,12 @@ main{
               step="1"
               inputmode="numeric"
               value="1"
-              aria-label="Quantity"
             >
 
             <button
               id="addQtyPlus"
               class="qty-step-button"
               type="button"
-              aria-label="Increase quantity"
             >
               +
             </button>
@@ -895,6 +926,66 @@ main{
       </div>
 
       <div id="storeList"></div>
+
+    </div>
+
+  </section>
+
+
+  <section id="shoppingMoveScreen" class="screen" hidden>
+
+    <div class="card form-card">
+
+      <form id="moveShoppingForm">
+
+        <div class="field">
+
+          <div class="field-label">
+            Item
+          </div>
+
+          <div
+            id="moveItemName"
+            class="readonly-value"
+          ></div>
+
+        </div>
+
+        <div class="field">
+
+          <div class="field-label">
+            Current Store
+          </div>
+
+          <div
+            id="moveCurrentStore"
+            class="readonly-value"
+          ></div>
+
+        </div>
+
+        <div class="field">
+
+          <label for="moveStoreSelect">
+            Move To
+          </label>
+
+          <select
+            id="moveStoreSelect"
+            required
+          ></select>
+
+        </div>
+
+        <button
+          id="saveMoveButton"
+          class="save-button"
+          type="submit"
+        >
+          Move Item
+        </button>
+
+      </form>
 
     </div>
 
@@ -1198,7 +1289,7 @@ main{
 
 
 const APP_VERSION =
-  '1.0.21';
+  '1.0.22';
 
 
 console.info(
@@ -1303,6 +1394,10 @@ let editingRestrictionOriginalName =
   null;
 
 
+let movingShoppingItem =
+  null;
+
+
 let toastTimer =
   null;
 
@@ -1337,42 +1432,35 @@ function $(id) {
 const homeScreen =
   $('homeScreen');
 
-
 const addScreen =
   $('addScreen');
-
 
 const storeScreen =
   $('storeScreen');
 
+const shoppingMoveScreen =
+  $('shoppingMoveScreen');
 
 const inventoryScreen =
   $('inventoryScreen');
 
-
 const inventoryCategoryScreen =
   $('inventoryCategoryScreen');
-
 
 const inventoryAddScreen =
   $('inventoryAddScreen');
 
-
 const restrictionsScreen =
   $('restrictionsScreen');
-
 
 const restrictionsByItemScreen =
   $('restrictionsByItemScreen');
 
-
 const restrictionsByStoreScreen =
   $('restrictionsByStoreScreen');
 
-
 const restrictionStoreScreen =
   $('restrictionStoreScreen');
-
 
 const restrictionEditScreen =
   $('restrictionEditScreen');
@@ -1381,38 +1469,29 @@ const restrictionEditScreen =
 const pageTitle =
   $('pageTitle');
 
-
 const backButton =
   $('backButton');
-
 
 const addItemButton =
   $('addItemButton');
 
-
 const storeAddItemButton =
   $('storeAddItemButton');
-
 
 const inventoryButton =
   $('inventoryButton');
 
-
 const inventoryAddItemButton =
   $('inventoryAddItemButton');
-
 
 const manageRestrictionsButton =
   $('manageRestrictionsButton');
 
-
 const restrictionsByItemButton =
   $('restrictionsByItemButton');
 
-
 const restrictionsByStoreButton =
   $('restrictionsByStoreButton');
-
 
 const addRestrictionButton =
   $('addRestrictionButton');
@@ -1421,30 +1500,23 @@ const addRestrictionButton =
 const addItemForm =
   $('addItemForm');
 
-
 const itemNameInput =
   $('itemName');
-
 
 const quantityInput =
   $('quantity');
 
-
 const addQtyMinus =
   $('addQtyMinus');
-
 
 const addQtyPlus =
   $('addQtyPlus');
 
-
 const storeSelect =
   $('store');
 
-
 const lockedStoreNote =
   $('lockedStoreNote');
-
 
 const saveItemButton =
   $('saveItemButton');
@@ -1454,37 +1526,45 @@ const storeList =
   $('storeList');
 
 
+const moveShoppingForm =
+  $('moveShoppingForm');
+
+const moveItemName =
+  $('moveItemName');
+
+const moveCurrentStore =
+  $('moveCurrentStore');
+
+const moveStoreSelect =
+  $('moveStoreSelect');
+
+const saveMoveButton =
+  $('saveMoveButton');
+
+
 const inventoryCategoryButtons =
   $('inventoryCategoryButtons');
-
 
 const inventoryList =
   $('inventoryList');
 
-
 const inventoryAddForm =
   $('inventoryAddForm');
-
 
 const inventoryItemName =
   $('inventoryItemName');
 
-
 const inventoryQuantity =
   $('inventoryQuantity');
-
 
 const inventoryQtyMinus =
   $('inventoryQtyMinus');
 
-
 const inventoryQtyPlus =
   $('inventoryQtyPlus');
 
-
 const inventoryCategoryNote =
   $('inventoryCategoryNote');
-
 
 const saveInventoryItemButton =
   $('saveInventoryItemButton');
@@ -1493,26 +1573,20 @@ const saveInventoryItemButton =
 const restrictionList =
   $('restrictionList');
 
-
 const restrictionStoreButtons =
   $('restrictionStoreButtons');
-
 
 const restrictionStoreList =
   $('restrictionStoreList');
 
-
 const restrictionForm =
   $('restrictionForm');
-
 
 const restrictionItemName =
   $('restrictionItemName');
 
-
 const saveRestrictionButton =
   $('saveRestrictionButton');
-
 
 const deleteRestrictionButton =
   $('deleteRestrictionButton');
@@ -1521,10 +1595,8 @@ const deleteRestrictionButton =
 const toast =
   $('toast');
 
-
 const toastMessage =
   $('toastMessage');
-
 
 const toastUndoButton =
   $('toastUndoButton');
@@ -1559,7 +1631,9 @@ function rememberLastStore(
 ) {
 
   if (
-    !STORES[store]
+    !STORES[
+      store
+    ]
   ) {
 
     return;
@@ -1592,7 +1666,9 @@ function getLastStore() {
 
     if (
       store &&
-      STORES[store]
+      STORES[
+        store
+      ]
     ) {
 
       return store;
@@ -1713,13 +1789,10 @@ function showUndoToast(
 
 
   pendingUndo = {
-
     type,
-
     item:{
       ...item
     }
-
   };
 
 
@@ -1788,13 +1861,10 @@ toastUndoButton
 
 
       const undo = {
-
         ...pendingUndo,
-
         item:{
           ...pendingUndo.item
         }
-
       };
 
 
@@ -2101,6 +2171,7 @@ function showOnly(
     homeScreen,
     addScreen,
     storeScreen,
+    shoppingMoveScreen,
     inventoryScreen,
     inventoryCategoryScreen,
     inventoryAddScreen,
@@ -2214,6 +2285,72 @@ function rebuildStoreOptions(
 
 
 
+function getAllowedStoresForItemName(
+  itemName,
+  restrictionRows
+) {
+
+  if (
+    !Array.isArray(
+      restrictionRows
+    )
+  ) {
+
+    return null;
+
+  }
+
+
+  const itemKey =
+    normalizedKey(
+      itemName
+    );
+
+
+  const matches =
+    restrictionRows.filter(
+      row =>
+        normalizedKey(
+          row.item_name
+        ) ===
+        itemKey
+    );
+
+
+  if (
+    !matches.length
+  ) {
+
+    return Object.keys(
+      STORES
+    );
+
+  }
+
+
+  const allowedSet =
+    new Set(
+      matches.map(
+        row =>
+          row.allowed_store
+      )
+    );
+
+
+  return Object.keys(
+    STORES
+  )
+  .filter(
+    store =>
+      allowedSet.has(
+        store
+      )
+  );
+
+}
+
+
+
 async function refreshStoreChoicesForItem(
   preferBlank = false
 ) {
@@ -2292,57 +2429,11 @@ async function refreshStoreChoicesForItem(
     }
 
 
-    const key =
-      normalizedKey(
-        itemName
+    const allowedStores =
+      getAllowedStoresForItemName(
+        itemName,
+        rows
       );
-
-
-    const matches =
-      rows.filter(
-        row =>
-          normalizedKey(
-            row.item_name
-          ) ===
-          key
-      );
-
-
-    let allowedStores;
-
-
-    if (
-      matches.length
-    ) {
-
-      const allowedSet =
-        new Set(
-          matches.map(
-            row =>
-              row.allowed_store
-          )
-        );
-
-
-      allowedStores =
-        Object.keys(
-          STORES
-        )
-        .filter(
-          store =>
-            allowedSet.has(
-              store
-            )
-        );
-
-    } else {
-
-      allowedStores =
-        Object.keys(
-          STORES
-        );
-
-    }
 
 
     let selectedStore =
@@ -2532,6 +2623,20 @@ function goStore(
 
 
 
+function goMoveShoppingItem(
+  id
+) {
+
+  location.hash =
+    '#shopping/move/' +
+    encodeURIComponent(
+      id
+    );
+
+}
+
+
+
 function goInventory() {
 
   location.hash =
@@ -2688,6 +2793,51 @@ function route() {
 
   if (
     hash.startsWith(
+      '#shopping/move/'
+    )
+  ) {
+
+    const id =
+      decodeURIComponent(
+        hash.slice(
+          '#shopping/move/'.length
+        )
+      );
+
+
+    currentStore =
+      null;
+
+
+    lockedAddStore =
+      null;
+
+
+    showOnly(
+      shoppingMoveScreen
+    );
+
+
+    pageTitle.textContent =
+      'Move Item';
+
+
+    backButton.hidden =
+      false;
+
+
+    loadShoppingItemForMove(
+      id
+    );
+
+
+    return;
+
+  }
+
+
+  if (
+    hash.startsWith(
       '#add/'
     )
   ) {
@@ -2709,6 +2859,10 @@ function route() {
       return;
 
     }
+
+
+    movingShoppingItem =
+      null;
 
 
     pendingShoppingPrefillName =
@@ -2776,6 +2930,10 @@ function route() {
     hash ===
     '#add'
   ) {
+
+    movingShoppingItem =
+      null;
+
 
     const prefillName =
       pendingShoppingPrefillName;
@@ -2915,6 +3073,10 @@ function route() {
     }
 
 
+    movingShoppingItem =
+      null;
+
+
     lockedAddStore =
       null;
 
@@ -2950,6 +3112,10 @@ function route() {
     hash ===
     '#inventory'
   ) {
+
+    movingShoppingItem =
+      null;
+
 
     currentStore =
       null;
@@ -3003,6 +3169,10 @@ function route() {
       return;
 
     }
+
+
+    movingShoppingItem =
+      null;
 
 
     currentStore =
@@ -3083,6 +3253,10 @@ function route() {
     }
 
 
+    movingShoppingItem =
+      null;
+
+
     currentStore =
       null;
 
@@ -3123,6 +3297,10 @@ function route() {
     '#restrictions/items'
   ) {
 
+    movingShoppingItem =
+      null;
+
+
     currentStore =
       null;
 
@@ -3160,6 +3338,10 @@ function route() {
     hash ===
     '#restrictions/stores'
   ) {
+
+    movingShoppingItem =
+      null;
+
 
     currentStore =
       null;
@@ -3219,6 +3401,10 @@ function route() {
     }
 
 
+    movingShoppingItem =
+      null;
+
+
     currentStore =
       null;
 
@@ -3265,6 +3451,10 @@ function route() {
     '#restrictions'
   ) {
 
+    movingShoppingItem =
+      null;
+
+
     currentStore =
       null;
 
@@ -3299,6 +3489,10 @@ function route() {
     hash ===
     '#restriction/new'
   ) {
+
+    movingShoppingItem =
+      null;
+
 
     currentStore =
       null;
@@ -3372,6 +3566,10 @@ function route() {
     }
 
 
+    movingShoppingItem =
+      null;
+
+
     currentStore =
       null;
 
@@ -3401,6 +3599,10 @@ function route() {
     return;
 
   }
+
+
+  movingShoppingItem =
+    null;
 
 
   currentStore =
@@ -3441,6 +3643,35 @@ backButton
 
       const hash =
         location.hash;
+
+
+      if (
+        hash.startsWith(
+          '#shopping/move/'
+        )
+      ) {
+
+        if (
+          movingShoppingItem &&
+          STORES[
+            movingShoppingItem.store
+          ]
+        ) {
+
+          goStore(
+            movingShoppingItem.store
+          );
+
+        } else {
+
+          goHome();
+
+        }
+
+
+        return;
+
+      }
 
 
       if (
@@ -4403,6 +4634,24 @@ async function loadStoreItems(
       );
 
 
+    let restrictionRows =
+      null;
+
+
+    try {
+
+      restrictionRows =
+        await fetchRestrictionRows();
+
+    } catch (restrictionError) {
+
+      console.error(
+        restrictionError
+      );
+
+    }
+
+
     if (
       currentStore !==
       storeAtStart
@@ -4414,15 +4663,14 @@ async function loadStoreItems(
 
 
     renderStoreList(
-
       sortByName(
         Array.isArray(
           data
         )
           ? data
           : []
-      )
-
+      ),
+      restrictionRows
     );
 
 
@@ -4451,7 +4699,8 @@ async function loadStoreItems(
 
 
 function renderStoreList(
-  items
+  items,
+  restrictionRows
 ) {
 
   storeList.innerHTML =
@@ -4475,7 +4724,8 @@ function renderStoreList(
 
       storeList.appendChild(
         createShoppingItemRow(
-          item
+          item,
+          restrictionRows
         )
       );
 
@@ -4489,7 +4739,6 @@ function renderStoreList(
   ) {
 
     appendEmpty(
-
       storeList,
 
       currentStore ===
@@ -4498,7 +4747,6 @@ function renderStoreList(
         ? 'No other items on this list.'
 
         : 'No items on this list.'
-
     );
 
   }
@@ -4620,8 +4868,24 @@ function createPermanentWaterRow() {
 
 
 function createShoppingItemRow(
-  item
+  item,
+  restrictionRows
 ) {
+
+  const allowedStores =
+    getAllowedStoresForItemName(
+      item.item_name,
+      restrictionRows
+    );
+
+
+  const itemIsMovable =
+    Array.isArray(
+      allowedStores
+    ) &&
+    allowedStores.length >
+      1;
+
 
   return createDataItemRow(
 
@@ -4652,7 +4916,19 @@ function createShoppingItemRow(
         currentQuantity
       );
 
-    }
+    },
+
+    null,
+
+    itemIsMovable
+      ? () => {
+
+          goMoveShoppingItem(
+            item.id
+          );
+
+        }
+      : null
 
   );
 
@@ -4729,7 +5005,9 @@ function createInventoryItemRow(
 
       return false;
 
-    }
+    },
+
+    null
 
   );
 
@@ -4742,7 +5020,8 @@ function createDataItemRow(
   minQuantity,
   saveQuantity,
   deleteHandler,
-  afterSaveQuantity = null
+  afterSaveQuantity = null,
+  itemNameClickHandler = null
 ) {
 
   const row =
@@ -4759,14 +5038,45 @@ function createDataItemRow(
     item.id;
 
 
-  const name =
-    document.createElement(
-      'div'
+  let name;
+
+
+  if (
+    typeof itemNameClickHandler ===
+    'function'
+  ) {
+
+    name =
+      document.createElement(
+        'button'
+      );
+
+
+    name.type =
+      'button';
+
+
+    name.className =
+      'clickable-item-name';
+
+
+    name.addEventListener(
+      'click',
+      itemNameClickHandler
     );
 
+  } else {
 
-  name.className =
-    'item-name';
+    name =
+      document.createElement(
+        'div'
+      );
+
+
+    name.className =
+      'item-name';
+
+  }
 
 
   name.textContent =
@@ -4999,7 +5309,8 @@ function createDataItemRow(
           afterSaveQuantity(
             oldValue,
             newValue
-          ) === true;
+          ) ===
+          true;
 
       }
 
@@ -5232,7 +5543,6 @@ async function deleteShoppingItem(
     ) {
 
       appendEmpty(
-
         storeList,
 
         currentStore ===
@@ -5241,7 +5551,6 @@ async function deleteShoppingItem(
           ? 'No other items on this list.'
 
           : 'No items on this list.'
-
       );
 
     }
@@ -5266,6 +5575,433 @@ async function deleteShoppingItem(
   }
 
 }
+
+
+
+/* MOVE SHOPPING ITEM */
+
+
+function rebuildMoveStoreOptions(
+  allowedStores,
+  currentStore
+) {
+
+  moveStoreSelect.innerHTML =
+    '';
+
+
+  const placeholder =
+    document.createElement(
+      'option'
+    );
+
+
+  placeholder.value =
+    '';
+
+
+  placeholder.textContent =
+    'Choose a new store';
+
+
+  placeholder.disabled =
+    true;
+
+
+  placeholder.selected =
+    true;
+
+
+  moveStoreSelect.appendChild(
+    placeholder
+  );
+
+
+  allowedStores.forEach(
+    store => {
+
+      if (
+        store ===
+        currentStore ||
+        !STORES[
+          store
+        ]
+      ) {
+
+        return;
+
+      }
+
+
+      const option =
+        document.createElement(
+          'option'
+        );
+
+
+      option.value =
+        store;
+
+
+      option.textContent =
+        STORES[
+          store
+        ];
+
+
+      moveStoreSelect.appendChild(
+        option
+      );
+
+    }
+  );
+
+}
+
+
+
+async function loadShoppingItemForMove(
+  id
+) {
+
+  movingShoppingItem =
+    null;
+
+
+  moveItemName.textContent =
+    'Loading…';
+
+
+  moveCurrentStore.textContent =
+    'Loading…';
+
+
+  moveStoreSelect.innerHTML =
+    '';
+
+
+  saveMoveButton.disabled =
+    true;
+
+
+  try {
+
+    const data =
+      await api(
+        '/rest/v1/shopping_items' +
+        '?select=id,item_name,quantity,store' +
+        '&id=eq.' +
+        encodeURIComponent(
+          id
+        ) +
+        '&limit=1'
+      );
+
+
+    if (
+      !Array.isArray(
+        data
+      ) ||
+      !data.length
+    ) {
+
+      showToast(
+        'That shopping item no longer exists.',
+        true
+      );
+
+
+      goHome();
+
+
+      return;
+
+    }
+
+
+    const item =
+      data[0];
+
+
+    const restrictionRows =
+      await fetchRestrictionRows();
+
+
+    const allowedStores =
+      getAllowedStoresForItemName(
+        item.item_name,
+        restrictionRows
+      );
+
+
+    if (
+      !Array.isArray(
+        allowedStores
+      ) ||
+      allowedStores.length <=
+        1
+    ) {
+
+      showToast(
+        `${item.item_name} is locked to its store.`,
+        true
+      );
+
+
+      goStore(
+        item.store
+      );
+
+
+      return;
+
+    }
+
+
+    movingShoppingItem = {
+      ...item,
+      allowedStores
+    };
+
+
+    moveItemName.textContent =
+      item.item_name;
+
+
+    moveCurrentStore.textContent =
+      STORES[
+        item.store
+      ] ||
+      item.store;
+
+
+    rebuildMoveStoreOptions(
+      allowedStores,
+      item.store
+    );
+
+
+    saveMoveButton.disabled =
+      false;
+
+
+  } catch (error) {
+
+    console.error(
+      error
+    );
+
+
+    showToast(
+      'Could not load this item.',
+      true
+    );
+
+
+    goHome();
+
+  }
+
+}
+
+
+
+moveShoppingForm
+  .addEventListener(
+    'submit',
+    async event => {
+
+      event.preventDefault();
+
+
+      if (
+        !movingShoppingItem
+      ) {
+
+        return;
+
+      }
+
+
+      const newStore =
+        moveStoreSelect.value;
+
+
+      if (
+        !newStore ||
+        !STORES[
+          newStore
+        ]
+      ) {
+
+        showToast(
+          'Please choose a new store.',
+          true
+        );
+
+
+        moveStoreSelect.focus();
+
+
+        return;
+
+      }
+
+
+      const itemName =
+        movingShoppingItem.item_name;
+
+
+      saveMoveButton.disabled =
+        true;
+
+
+      saveMoveButton.textContent =
+        'Moving…';
+
+
+      try {
+
+        const result =
+          unwrapRpcResult(
+
+            await api(
+              '/rest/v1/rpc/move_shopping_item',
+              {
+                method:
+                  'POST',
+
+                body:
+                  JSON.stringify({
+                    p_id:
+                      movingShoppingItem.id,
+
+                    p_new_store:
+                      newStore
+                  })
+              }
+            )
+
+          );
+
+
+        if (
+          result &&
+          result.moved ===
+            true
+        ) {
+
+          loadHomeCounts();
+
+
+          goStore(
+            newStore
+          );
+
+
+          setTimeout(
+            () => {
+
+              showToast(
+                `${itemName} moved to ${STORES[newStore]}.`
+              );
+
+            },
+            80
+          );
+
+
+          return;
+
+        }
+
+
+        if (
+          result &&
+          result.reason ===
+            'locked_to_store'
+        ) {
+
+          showToast(
+            `${itemName} is restricted to one store and cannot be moved.`,
+            true
+          );
+
+
+          return;
+
+        }
+
+
+        if (
+          result &&
+          result.reason ===
+            'restricted'
+        ) {
+
+          showToast(
+            `${itemName} cannot be moved to that store.`,
+            true
+          );
+
+
+          return;
+
+        }
+
+
+        if (
+          result &&
+          result.reason ===
+            'not_found'
+        ) {
+
+          showToast(
+            'That item no longer exists.',
+            true
+          );
+
+
+          goHome();
+
+
+          return;
+
+        }
+
+
+        showToast(
+          'Could not move the item.',
+          true
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          error
+        );
+
+
+        showToast(
+          'Could not move the item.',
+          true
+        );
+
+
+      } finally {
+
+        saveMoveButton.disabled =
+          false;
+
+
+        saveMoveButton.textContent =
+          'Move Item';
+
+      }
+
+    }
+  );
 
 
 
@@ -5376,7 +6112,6 @@ async function loadInventoryItems(
 
 
     renderInventoryList(
-
       sortByName(
         Array.isArray(
           data
@@ -5384,7 +6119,6 @@ async function loadInventoryItems(
           ? data
           : []
       )
-
     );
 
 
@@ -5545,7 +6279,8 @@ inventoryAddForm
 
         if (
           result &&
-          result.added === false &&
+          result.added ===
+            false &&
           result.reason ===
             'duplicate'
         ) {
@@ -5969,11 +6704,9 @@ async function loadRestrictions() {
   try {
 
     renderRestrictions(
-
       groupRestrictions(
         await fetchRestrictionRows()
       )
-
     );
 
 
