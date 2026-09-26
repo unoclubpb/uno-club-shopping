@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.20 -->
-<meta name="app-version" content="1.0.20">
+<!-- APP VERSION: 1.0.21 -->
+<meta name="app-version" content="1.0.21">
 
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -18,8 +18,8 @@
 
 <title>Uno Club Shopping</title>
 
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.20">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.20">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.21">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.21">
 
 <style>
 :root{
@@ -711,12 +711,11 @@ main{
 
   <img
     class="header-logo"
-    src="uno-club-shopping.PNG?v=1.0.20"
+    src="uno-club-shopping.PNG?v=1.0.21"
     alt="Uno Club Shopping logo"
   >
 
 </header>
-
 
 <main>
 
@@ -776,7 +775,7 @@ main{
     </div>
 
     <div class="version-label">
-      v1.0.20
+      v1.0.21
     </div>
 
   </section>
@@ -902,8 +901,13 @@ main{
   </section>
 
 
-  <section id="inventoryScreen" class="screen" hidden>
-    <div id="inventoryCategoryButtons" class="category-stack"></div>
+  <section id="inventoryScreen" class="screen" hidden">
+
+    <div
+      id="inventoryCategoryButtons"
+      class="category-stack"
+    ></div>
+
   </section>
 
 
@@ -1015,6 +1019,31 @@ main{
 
   <section id="restrictionsScreen" class="screen" hidden>
 
+    <div class="category-stack">
+
+      <button
+        id="restrictionsByItemButton"
+        class="main-button category-button"
+        type="button"
+      >
+        By Item
+      </button>
+
+      <button
+        id="restrictionsByStoreButton"
+        class="main-button category-button"
+        type="button"
+      >
+        By Store
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <section id="restrictionsByItemScreen" class="screen" hidden>
+
     <div class="restrictions-toolbar">
 
       <button
@@ -1027,7 +1056,30 @@ main{
 
     </div>
 
-    <div id="restrictionList" class="restriction-list"></div>
+    <div
+      id="restrictionList"
+      class="restriction-list"
+    ></div>
+
+  </section>
+
+
+  <section id="restrictionsByStoreScreen" class="screen" hidden>
+
+    <div
+      id="restrictionStoreButtons"
+      class="category-stack"
+    ></div>
+
+  </section>
+
+
+  <section id="restrictionStoreScreen" class="screen" hidden>
+
+    <div
+      id="restrictionStoreList"
+      class="restriction-list"
+    ></div>
 
   </section>
 
@@ -1123,7 +1175,10 @@ main{
 
 <div id="toast" class="toast">
 
-  <span id="toastMessage" class="toast-message"></span>
+  <span
+    id="toastMessage"
+    class="toast-message"
+  ></span>
 
   <button
     id="toastUndoButton"
@@ -1142,7 +1197,9 @@ main{
 'use strict';
 
 
-const APP_VERSION = '1.0.20';
+const APP_VERSION =
+  '1.0.21';
+
 
 console.info(
   `Uno Club Shopping v${APP_VERSION}`
@@ -1222,82 +1279,269 @@ const LAST_STORE_KEY =
   'unoClubShoppingLastStore';
 
 
-let currentStore = null;
-let currentInventoryCategory = null;
-let lockedAddStore = null;
-let editingRestrictionOriginalName = null;
-let toastTimer = null;
-let pendingUndo = null;
-let pendingShoppingPrefillName = null;
+let currentStore =
+  null;
 
-let storeRestrictionTimer = null;
-let storeRestrictionRequestNumber = 0;
+
+let currentInventoryCategory =
+  null;
+
+
+let currentRestrictionStore =
+  null;
+
+
+let restrictionReturnHash =
+  '#restrictions/items';
+
+
+let lockedAddStore =
+  null;
+
+
+let editingRestrictionOriginalName =
+  null;
+
+
+let toastTimer =
+  null;
+
+
+let pendingUndo =
+  null;
+
+
+let pendingShoppingPrefillName =
+  null;
+
+
+let storeRestrictionTimer =
+  null;
+
+
+let storeRestrictionRequestNumber =
+  0;
+
 
 
 function $(id) {
-  return document.getElementById(id);
+
+  return document.getElementById(
+    id
+  );
+
 }
 
 
-const homeScreen = $('homeScreen');
-const addScreen = $('addScreen');
-const storeScreen = $('storeScreen');
-const inventoryScreen = $('inventoryScreen');
-const inventoryCategoryScreen = $('inventoryCategoryScreen');
-const inventoryAddScreen = $('inventoryAddScreen');
-const restrictionsScreen = $('restrictionsScreen');
-const restrictionEditScreen = $('restrictionEditScreen');
 
-const pageTitle = $('pageTitle');
-const backButton = $('backButton');
+const homeScreen =
+  $('homeScreen');
 
-const addItemButton = $('addItemButton');
-const storeAddItemButton = $('storeAddItemButton');
-const inventoryButton = $('inventoryButton');
-const inventoryAddItemButton = $('inventoryAddItemButton');
-const manageRestrictionsButton = $('manageRestrictionsButton');
-const addRestrictionButton = $('addRestrictionButton');
 
-const addItemForm = $('addItemForm');
-const itemNameInput = $('itemName');
-const quantityInput = $('quantity');
-const addQtyMinus = $('addQtyMinus');
-const addQtyPlus = $('addQtyPlus');
-const storeSelect = $('store');
-const lockedStoreNote = $('lockedStoreNote');
-const saveItemButton = $('saveItemButton');
+const addScreen =
+  $('addScreen');
 
-const storeList = $('storeList');
 
-const inventoryCategoryButtons = $('inventoryCategoryButtons');
-const inventoryList = $('inventoryList');
+const storeScreen =
+  $('storeScreen');
 
-const inventoryAddForm = $('inventoryAddForm');
-const inventoryItemName = $('inventoryItemName');
-const inventoryQuantity = $('inventoryQuantity');
-const inventoryQtyMinus = $('inventoryQtyMinus');
-const inventoryQtyPlus = $('inventoryQtyPlus');
-const inventoryCategoryNote = $('inventoryCategoryNote');
-const saveInventoryItemButton = $('saveInventoryItemButton');
 
-const restrictionList = $('restrictionList');
-const restrictionForm = $('restrictionForm');
-const restrictionItemName = $('restrictionItemName');
-const saveRestrictionButton = $('saveRestrictionButton');
-const deleteRestrictionButton = $('deleteRestrictionButton');
+const inventoryScreen =
+  $('inventoryScreen');
 
-const toast = $('toast');
-const toastMessage = $('toastMessage');
-const toastUndoButton = $('toastUndoButton');
+
+const inventoryCategoryScreen =
+  $('inventoryCategoryScreen');
+
+
+const inventoryAddScreen =
+  $('inventoryAddScreen');
+
+
+const restrictionsScreen =
+  $('restrictionsScreen');
+
+
+const restrictionsByItemScreen =
+  $('restrictionsByItemScreen');
+
+
+const restrictionsByStoreScreen =
+  $('restrictionsByStoreScreen');
+
+
+const restrictionStoreScreen =
+  $('restrictionStoreScreen');
+
+
+const restrictionEditScreen =
+  $('restrictionEditScreen');
+
+
+const pageTitle =
+  $('pageTitle');
+
+
+const backButton =
+  $('backButton');
+
+
+const addItemButton =
+  $('addItemButton');
+
+
+const storeAddItemButton =
+  $('storeAddItemButton');
+
+
+const inventoryButton =
+  $('inventoryButton');
+
+
+const inventoryAddItemButton =
+  $('inventoryAddItemButton');
+
+
+const manageRestrictionsButton =
+  $('manageRestrictionsButton');
+
+
+const restrictionsByItemButton =
+  $('restrictionsByItemButton');
+
+
+const restrictionsByStoreButton =
+  $('restrictionsByStoreButton');
+
+
+const addRestrictionButton =
+  $('addRestrictionButton');
+
+
+const addItemForm =
+  $('addItemForm');
+
+
+const itemNameInput =
+  $('itemName');
+
+
+const quantityInput =
+  $('quantity');
+
+
+const addQtyMinus =
+  $('addQtyMinus');
+
+
+const addQtyPlus =
+  $('addQtyPlus');
+
+
+const storeSelect =
+  $('store');
+
+
+const lockedStoreNote =
+  $('lockedStoreNote');
+
+
+const saveItemButton =
+  $('saveItemButton');
+
+
+const storeList =
+  $('storeList');
+
+
+const inventoryCategoryButtons =
+  $('inventoryCategoryButtons');
+
+
+const inventoryList =
+  $('inventoryList');
+
+
+const inventoryAddForm =
+  $('inventoryAddForm');
+
+
+const inventoryItemName =
+  $('inventoryItemName');
+
+
+const inventoryQuantity =
+  $('inventoryQuantity');
+
+
+const inventoryQtyMinus =
+  $('inventoryQtyMinus');
+
+
+const inventoryQtyPlus =
+  $('inventoryQtyPlus');
+
+
+const inventoryCategoryNote =
+  $('inventoryCategoryNote');
+
+
+const saveInventoryItemButton =
+  $('saveInventoryItemButton');
+
+
+const restrictionList =
+  $('restrictionList');
+
+
+const restrictionStoreButtons =
+  $('restrictionStoreButtons');
+
+
+const restrictionStoreList =
+  $('restrictionStoreList');
+
+
+const restrictionForm =
+  $('restrictionForm');
+
+
+const restrictionItemName =
+  $('restrictionItemName');
+
+
+const saveRestrictionButton =
+  $('saveRestrictionButton');
+
+
+const deleteRestrictionButton =
+  $('deleteRestrictionButton');
+
+
+const toast =
+  $('toast');
+
+
+const toastMessage =
+  $('toastMessage');
+
+
+const toastUndoButton =
+  $('toastUndoButton');
+
 
 
 function normalizeItemName(value) {
 
   return value
     .trim()
-    .replace(/\s+/g,' ');
+    .replace(
+      /\s+/g,
+      ' '
+    );
 
 }
+
 
 
 function normalizedKey(value) {
@@ -1309,11 +1553,19 @@ function normalizedKey(value) {
 }
 
 
-function rememberLastStore(store) {
 
-  if (!STORES[store]) {
+function rememberLastStore(
+  store
+) {
+
+  if (
+    !STORES[store]
+  ) {
+
     return;
+
   }
+
 
   try {
 
@@ -1327,6 +1579,7 @@ function rememberLastStore(store) {
 }
 
 
+
 function getLastStore() {
 
   try {
@@ -1335,6 +1588,7 @@ function getLastStore() {
       localStorage.getItem(
         LAST_STORE_KEY
       );
+
 
     if (
       store &&
@@ -1347,21 +1601,30 @@ function getLastStore() {
 
   } catch (_) {}
 
+
   return null;
 
 }
 
 
-function unwrapRpcResult(result) {
 
-  return Array.isArray(result)
+function unwrapRpcResult(
+  result
+) {
+
+  return Array.isArray(
+    result
+  )
     ? result[0]
     : result;
 
 }
 
 
-function sortByName(items) {
+
+function sortByName(
+  items
+) {
 
   items.sort(
     (a,b) =>
@@ -1369,15 +1632,20 @@ function sortByName(items) {
         b.item_name,
         undefined,
         {
-          sensitivity:'base',
-          numeric:true
+          sensitivity:
+            'base',
+
+          numeric:
+            true
         }
       )
   );
 
+
   return items;
 
 }
+
 
 
 function showToast(
@@ -1390,25 +1658,33 @@ function showToast(
     toastTimer
   );
 
-  pendingUndo = null;
+
+  pendingUndo =
+    null;
+
 
   toastMessage.textContent =
     message;
 
+
   toastUndoButton.hidden =
     true;
 
+
   toastUndoButton.disabled =
     false;
+
 
   toast.classList.toggle(
     'error',
     isError
   );
 
+
   toast.classList.add(
     'show'
   );
+
 
   toastTimer =
     setTimeout(
@@ -1425,6 +1701,7 @@ function showToast(
 }
 
 
+
 function showUndoToast(
   item,
   type
@@ -1434,39 +1711,55 @@ function showUndoToast(
     toastTimer
   );
 
+
   pendingUndo = {
+
     type,
-    item:{...item}
+
+    item:{
+      ...item
+    }
+
   };
+
 
   toastMessage.textContent =
     `${item.item_name} removed`;
+
 
   toast.classList.remove(
     'error'
   );
 
+
   toastUndoButton.hidden =
     false;
+
 
   toastUndoButton.disabled =
     false;
 
+
   toastUndoButton.textContent =
     'UNDO';
+
 
   toast.classList.add(
     'show'
   );
 
+
   toastTimer =
     setTimeout(
       () => {
 
-        pendingUndo = null;
+        pendingUndo =
+          null;
+
 
         toastUndoButton.hidden =
           true;
+
 
         toast.classList.remove(
           'show'
@@ -1479,177 +1772,220 @@ function showUndoToast(
 }
 
 
-toastUndoButton.addEventListener(
-  'click',
-  async () => {
 
-    if (!pendingUndo) {
-      return;
-    }
-
-    const undo = {
-      ...pendingUndo,
-      item:{
-        ...pendingUndo.item
-      }
-    };
-
-    clearTimeout(
-      toastTimer
-    );
-
-    pendingUndo = null;
-
-    toastUndoButton.disabled =
-      true;
-
-    toastUndoButton.hidden =
-      true;
-
-    toastMessage.textContent =
-      `Restoring ${undo.item.item_name}…`;
-
-    try {
-
-      let result;
+toastUndoButton
+  .addEventListener(
+    'click',
+    async () => {
 
       if (
-        undo.type ===
-        'shopping'
+        !pendingUndo
       ) {
-
-        result =
-          unwrapRpcResult(
-            await api(
-              '/rest/v1/rpc/add_shopping_item',
-              {
-                method:'POST',
-
-                body:JSON.stringify({
-                  p_item_name:
-                    undo.item.item_name,
-
-                  p_quantity:
-                    undo.item.quantity,
-
-                  p_store:
-                    undo.item.store
-                })
-              }
-            )
-          );
-
-        if (
-          result &&
-          result.added === true
-        ) {
-
-          if (
-            currentStore ===
-            undo.item.store
-          ) {
-
-            await loadStoreItems(
-              true
-            );
-
-          }
-
-          loadHomeCounts();
-
-          showToast(
-            `${undo.item.item_name} restored to ${STORES[undo.item.store]}.`
-          );
-
-          return;
-
-        }
-
-      } else if (
-        undo.type ===
-        'inventory'
-      ) {
-
-        result =
-          unwrapRpcResult(
-            await api(
-              '/rest/v1/rpc/add_inventory_item',
-              {
-                method:'POST',
-
-                body:JSON.stringify({
-                  p_item_name:
-                    undo.item.item_name,
-
-                  p_quantity:
-                    undo.item.quantity,
-
-                  p_category:
-                    undo.item.category
-                })
-              }
-            )
-          );
-
-        if (
-          result &&
-          result.added === true
-        ) {
-
-          if (
-            currentInventoryCategory ===
-            undo.item.category
-          ) {
-
-            await loadInventoryItems(
-              true
-            );
-
-          }
-
-          showToast(
-            `${undo.item.item_name} restored to ${INVENTORY_CATEGORIES[undo.item.category]}.`
-          );
-
-          return;
-
-        }
-
-      }
-
-      if (
-        result &&
-        result.reason ===
-        'duplicate'
-      ) {
-
-        showToast(
-          `${undo.item.item_name} is already on a list.`,
-          true
-        );
 
         return;
 
       }
 
-      showToast(
-        `Could not restore ${undo.item.item_name}.`,
-        true
+
+      const undo = {
+
+        ...pendingUndo,
+
+        item:{
+          ...pendingUndo.item
+        }
+
+      };
+
+
+      clearTimeout(
+        toastTimer
       );
 
-    } catch (error) {
 
-      console.error(error);
+      pendingUndo =
+        null;
 
-      showToast(
-        `Could not restore ${undo.item.item_name}.`,
-        true
-      );
+
+      toastUndoButton.disabled =
+        true;
+
+
+      toastUndoButton.hidden =
+        true;
+
+
+      toastMessage.textContent =
+        `Restoring ${undo.item.item_name}…`;
+
+
+      try {
+
+        let result;
+
+
+        if (
+          undo.type ===
+          'shopping'
+        ) {
+
+          result =
+            unwrapRpcResult(
+
+              await api(
+                '/rest/v1/rpc/add_shopping_item',
+                {
+                  method:
+                    'POST',
+
+                  body:
+                    JSON.stringify({
+                      p_item_name:
+                        undo.item.item_name,
+
+                      p_quantity:
+                        undo.item.quantity,
+
+                      p_store:
+                        undo.item.store
+                    })
+                }
+              )
+
+            );
+
+
+          if (
+            result &&
+            result.added ===
+              true
+          ) {
+
+            if (
+              currentStore ===
+              undo.item.store
+            ) {
+
+              await loadStoreItems(
+                true
+              );
+
+            }
+
+
+            loadHomeCounts();
+
+
+            showToast(
+              `${undo.item.item_name} restored to ${STORES[undo.item.store]}.`
+            );
+
+
+            return;
+
+          }
+
+        } else if (
+          undo.type ===
+          'inventory'
+        ) {
+
+          result =
+            unwrapRpcResult(
+
+              await api(
+                '/rest/v1/rpc/add_inventory_item',
+                {
+                  method:
+                    'POST',
+
+                  body:
+                    JSON.stringify({
+                      p_item_name:
+                        undo.item.item_name,
+
+                      p_quantity:
+                        undo.item.quantity,
+
+                      p_category:
+                        undo.item.category
+                    })
+                }
+              )
+
+            );
+
+
+          if (
+            result &&
+            result.added ===
+              true
+          ) {
+
+            if (
+              currentInventoryCategory ===
+              undo.item.category
+            ) {
+
+              await loadInventoryItems(
+                true
+              );
+
+            }
+
+
+            showToast(
+              `${undo.item.item_name} restored to ${INVENTORY_CATEGORIES[undo.item.category]}.`
+            );
+
+
+            return;
+
+          }
+
+        }
+
+
+        if (
+          result &&
+          result.reason ===
+            'duplicate'
+        ) {
+
+          showToast(
+            `${undo.item.item_name} is already on a list.`,
+            true
+          );
+
+
+          return;
+
+        }
+
+
+        showToast(
+          `Could not restore ${undo.item.item_name}.`,
+          true
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          error
+        );
+
+
+        showToast(
+          `Could not restore ${undo.item.item_name}.`,
+          true
+        );
+
+      }
 
     }
+  );
 
-  }
-);
 
 
 async function api(
@@ -1676,6 +2012,7 @@ async function api(
 
   };
 
+
   const response =
     await fetch(
       SUPABASE_URL + path,
@@ -1685,15 +2022,20 @@ async function api(
       }
     );
 
-  if (!response.ok) {
+
+  if (
+    !response.ok
+  ) {
 
     let message =
       `Request failed (${response.status})`;
+
 
     try {
 
       const data =
         await response.json();
+
 
       message =
         data.message ||
@@ -1701,22 +2043,31 @@ async function api(
         data.hint ||
         message;
 
+
     } catch (_) {
 
       const text =
         await response.text();
 
-      if (text) {
-        message = text;
+
+      if (
+        text
+      ) {
+
+        message =
+          text;
+
       }
 
     }
+
 
     throw new Error(
       message
     );
 
   }
+
 
   if (
     response.status ===
@@ -1727,17 +2078,24 @@ async function api(
 
   }
 
+
   const text =
     await response.text();
 
+
   return text
-    ? JSON.parse(text)
+    ? JSON.parse(
+        text
+      )
     : null;
 
 }
 
 
-function showOnly(screen) {
+
+function showOnly(
+  screen
+) {
 
   [
     homeScreen,
@@ -1747,6 +2105,9 @@ function showOnly(screen) {
     inventoryCategoryScreen,
     inventoryAddScreen,
     restrictionsScreen,
+    restrictionsByItemScreen,
+    restrictionsByStoreScreen,
+    restrictionStoreScreen,
     restrictionEditScreen
   ]
   .forEach(
@@ -1761,6 +2122,7 @@ function showOnly(screen) {
 }
 
 
+
 function rebuildStoreOptions(
   storeKeys,
   selectedStore = ''
@@ -1769,41 +2131,59 @@ function rebuildStoreOptions(
   storeSelect.innerHTML =
     '';
 
+
   const placeholder =
     document.createElement(
       'option'
     );
 
+
   placeholder.value =
     '';
+
 
   placeholder.textContent =
     'Choose a store';
 
+
   placeholder.disabled =
     true;
+
 
   storeSelect.appendChild(
     placeholder
   );
 
+
   storeKeys.forEach(
     storeKey => {
 
-      if (!STORES[storeKey]) {
+      if (
+        !STORES[
+          storeKey
+        ]
+      ) {
+
         return;
+
       }
+
 
       const option =
         document.createElement(
           'option'
         );
 
+
       option.value =
         storeKey;
 
+
       option.textContent =
-        STORES[storeKey];
+        STORES[
+          storeKey
+        ];
+
 
       storeSelect.appendChild(
         option
@@ -1811,6 +2191,7 @@ function rebuildStoreOptions(
 
     }
   );
+
 
   if (
     selectedStore &&
@@ -1832,6 +2213,7 @@ function rebuildStoreOptions(
 }
 
 
+
 async function refreshStoreChoicesForItem(
   preferBlank = false
 ) {
@@ -1841,26 +2223,35 @@ async function refreshStoreChoicesForItem(
   ) {
 
     rebuildStoreOptions(
-      [lockedAddStore],
+      [
+        lockedAddStore
+      ],
       lockedAddStore
     );
+
 
     return;
 
   }
+
 
   const itemName =
     normalizeItemName(
       itemNameInput.value
     );
 
+
   const previousStore =
     storeSelect.value;
+
 
   const requestNumber =
     ++storeRestrictionRequestNumber;
 
-  if (!itemName) {
+
+  if (
+    !itemName
+  ) {
 
     const selected =
       preferBlank
@@ -1871,19 +2262,25 @@ async function refreshStoreChoicesForItem(
             ''
           );
 
+
     rebuildStoreOptions(
-      Object.keys(STORES),
+      Object.keys(
+        STORES
+      ),
       selected
     );
+
 
     return;
 
   }
 
+
   try {
 
     const rows =
       await fetchRestrictionRows();
+
 
     if (
       requestNumber !==
@@ -1894,10 +2291,12 @@ async function refreshStoreChoicesForItem(
 
     }
 
+
     const key =
       normalizedKey(
         itemName
       );
+
 
     const matches =
       rows.filter(
@@ -1908,7 +2307,9 @@ async function refreshStoreChoicesForItem(
           key
       );
 
+
     let allowedStores;
+
 
     if (
       matches.length
@@ -1922,24 +2323,31 @@ async function refreshStoreChoicesForItem(
           )
         );
 
+
       allowedStores =
-        Object.keys(STORES)
-          .filter(
-            store =>
-              allowedSet.has(
-                store
-              )
-          );
+        Object.keys(
+          STORES
+        )
+        .filter(
+          store =>
+            allowedSet.has(
+              store
+            )
+        );
 
     } else {
 
       allowedStores =
-        Object.keys(STORES);
+        Object.keys(
+          STORES
+        );
 
     }
 
+
     let selectedStore =
       '';
+
 
     if (
       allowedStores.length ===
@@ -1967,6 +2375,7 @@ async function refreshStoreChoicesForItem(
       const lastStore =
         getLastStore();
 
+
       if (
         lastStore &&
         allowedStores.includes(
@@ -1981,14 +2390,19 @@ async function refreshStoreChoicesForItem(
 
     }
 
+
     rebuildStoreOptions(
       allowedStores,
       selectedStore
     );
 
+
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
+
 
     if (
       requestNumber !==
@@ -1999,8 +2413,11 @@ async function refreshStoreChoicesForItem(
 
     }
 
+
     rebuildStoreOptions(
-      Object.keys(STORES),
+      Object.keys(
+        STORES
+      ),
       preferBlank
         ? ''
         : (
@@ -2015,11 +2432,13 @@ async function refreshStoreChoicesForItem(
 }
 
 
+
 function scheduleStoreRestrictionCheck() {
 
   clearTimeout(
     storeRestrictionTimer
   );
+
 
   if (
     lockedAddStore
@@ -2028,6 +2447,7 @@ function scheduleStoreRestrictionCheck() {
     return;
 
   }
+
 
   storeRestrictionTimer =
     setTimeout(
@@ -2044,20 +2464,31 @@ function scheduleStoreRestrictionCheck() {
 }
 
 
-itemNameInput.addEventListener(
-  'input',
-  scheduleStoreRestrictionCheck
-);
+
+itemNameInput
+  .addEventListener(
+    'input',
+    scheduleStoreRestrictionCheck
+  );
+
 
 
 function goHome() {
-  location.hash = '#home';
+
+  location.hash =
+    '#home';
+
 }
+
 
 
 function goAdd() {
-  location.hash = '#add';
+
+  location.hash =
+    '#add';
+
 }
+
 
 
 function goAddWithInventoryItem(
@@ -2069,54 +2500,151 @@ function goAddWithInventoryItem(
       itemName
     );
 
+
   location.hash =
     '#add';
 
 }
 
 
-function goAddForStore(store) {
-  location.hash = '#add/' + store;
+
+function goAddForStore(
+  store
+) {
+
+  location.hash =
+    '#add/' +
+    store;
+
 }
 
 
-function goStore(store) {
-  location.hash = '#store/' + store;
+
+function goStore(
+  store
+) {
+
+  location.hash =
+    '#store/' +
+    store;
+
 }
+
 
 
 function goInventory() {
-  location.hash = '#inventory';
+
+  location.hash =
+    '#inventory';
+
 }
+
 
 
 function goInventoryCategory(
   category
 ) {
-  location.hash = '#inventory/' + category;
+
+  location.hash =
+    '#inventory/' +
+    category;
+
 }
+
 
 
 function goInventoryAdd(
   category
 ) {
-  location.hash = '#inventory-add/' + category;
+
+  location.hash =
+    '#inventory-add/' +
+    category;
+
 }
+
 
 
 function goRestrictions() {
-  location.hash = '#restrictions';
+
+  location.hash =
+    '#restrictions';
+
 }
+
+
+
+function goRestrictionsByItem() {
+
+  location.hash =
+    '#restrictions/items';
+
+}
+
+
+
+function goRestrictionsByStore() {
+
+  location.hash =
+    '#restrictions/stores';
+
+}
+
+
+
+function goRestrictionStore(
+  store
+) {
+
+  if (
+    !STORES[
+      store
+    ]
+  ) {
+
+    return;
+
+  }
+
+
+  location.hash =
+    '#restrictions/store/' +
+    store;
+
+}
+
 
 
 function goNewRestriction() {
-  location.hash = '#restriction/new';
+
+  restrictionReturnHash =
+    '#restrictions/items';
+
+
+  location.hash =
+    '#restriction/new';
+
 }
 
 
+
 function goEditRestriction(
-  itemName
+  itemName,
+  returnHash = location.hash
 ) {
+
+  if (
+    returnHash &&
+    returnHash.startsWith(
+      '#restrictions'
+    )
+  ) {
+
+    restrictionReturnHash =
+      returnHash;
+
+  }
+
 
   location.hash =
     '#restriction/edit/' +
@@ -2127,18 +2655,36 @@ function goEditRestriction(
 }
 
 
+
+function goRestrictionReturn() {
+
+  location.hash =
+    restrictionReturnHash ||
+    '#restrictions/items';
+
+}
+
+
+
 function route() {
 
   const hash =
     location.hash ||
     '#home';
 
+
   currentInventoryCategory =
     null;
+
+
+  currentRestrictionStore =
+    null;
+
 
   clearTimeout(
     storeRestrictionTimer
   );
+
 
   if (
     hash.startsWith(
@@ -2147,48 +2693,69 @@ function route() {
   ) {
 
     const store =
-      hash.slice(5);
+      hash.slice(
+        5
+      );
 
-    if (!STORES[store]) {
+
+    if (
+      !STORES[
+        store
+      ]
+    ) {
 
       goHome();
+
       return;
 
     }
 
+
     pendingShoppingPrefillName =
       null;
+
 
     lockedAddStore =
       store;
 
+
     currentStore =
       null;
+
 
     showOnly(
       addScreen
     );
 
+
     pageTitle.textContent =
       'Add Item';
+
 
     backButton.hidden =
       false;
 
+
     storeSelect.disabled =
       true;
+
 
     lockedStoreNote.hidden =
       false;
 
+
     rebuildStoreOptions(
-      [store],
+      [
+        store
+      ],
       store
     );
+
 
     setAddQuantity(
       1
     );
+
 
     setTimeout(
       () => {
@@ -2198,6 +2765,7 @@ function route() {
       },
       80
     );
+
 
     return;
 
@@ -2212,34 +2780,44 @@ function route() {
     const prefillName =
       pendingShoppingPrefillName;
 
+
     pendingShoppingPrefillName =
       null;
+
 
     lockedAddStore =
       null;
 
+
     currentStore =
       null;
+
 
     showOnly(
       addScreen
     );
 
+
     pageTitle.textContent =
       'Add Item';
+
 
     backButton.hidden =
       false;
 
+
     storeSelect.disabled =
       false;
+
 
     lockedStoreNote.hidden =
       true;
 
+
     setAddQuantity(
       1
     );
+
 
     if (
       prefillName
@@ -2248,10 +2826,14 @@ function route() {
       itemNameInput.value =
         prefillName;
 
+
       rebuildStoreOptions(
-        Object.keys(STORES),
+        Object.keys(
+          STORES
+        ),
         ''
       );
+
 
       refreshStoreChoicesForItem(
         true
@@ -2260,9 +2842,13 @@ function route() {
     } else {
 
       rebuildStoreOptions(
-        Object.keys(STORES),
-        getLastStore() || ''
+        Object.keys(
+          STORES
+        ),
+        getLastStore() ||
+        ''
       );
+
 
       if (
         normalizeItemName(
@@ -2277,6 +2863,7 @@ function route() {
       }
 
     }
+
 
     setTimeout(
       () => {
@@ -2297,6 +2884,7 @@ function route() {
       80
     );
 
+
     return;
 
   }
@@ -2309,32 +2897,49 @@ function route() {
   ) {
 
     const store =
-      hash.slice(7);
+      hash.slice(
+        7
+      );
 
-    if (!STORES[store]) {
+
+    if (
+      !STORES[
+        store
+      ]
+    ) {
 
       goHome();
+
       return;
 
     }
 
+
     lockedAddStore =
       null;
 
+
     currentStore =
       store;
+
 
     showOnly(
       storeScreen
     );
 
+
     pageTitle.textContent =
-      STORES[store];
+      STORES[
+        store
+      ];
+
 
     backButton.hidden =
       false;
 
+
     loadStoreItems();
+
 
     return;
 
@@ -2349,20 +2954,26 @@ function route() {
     currentStore =
       null;
 
+
     lockedAddStore =
       null;
+
 
     showOnly(
       inventoryScreen
     );
 
+
     pageTitle.textContent =
       'Inventory';
+
 
     backButton.hidden =
       false;
 
+
     renderInventoryCategories();
+
 
     return;
 
@@ -2380,6 +2991,7 @@ function route() {
         '#inventory-add/'.length
       );
 
+
     if (
       !INVENTORY_CATEGORIES[
         category
@@ -2387,38 +2999,49 @@ function route() {
     ) {
 
       goInventory();
+
       return;
 
     }
 
+
     currentStore =
       null;
+
 
     lockedAddStore =
       null;
 
+
     currentInventoryCategory =
       category;
+
 
     showOnly(
       inventoryAddScreen
     );
 
+
     pageTitle.textContent =
       'Add Inventory Item';
+
 
     backButton.hidden =
       false;
 
+
     inventoryItemName.value =
       '';
+
 
     setInventoryAddQuantity(
       1
     );
 
+
     inventoryCategoryNote.textContent =
       `Category: ${INVENTORY_CATEGORIES[category]}`;
+
 
     setTimeout(
       () => {
@@ -2428,6 +3051,7 @@ function route() {
       },
       80
     );
+
 
     return;
 
@@ -2445,6 +3069,7 @@ function route() {
         '#inventory/'.length
       );
 
+
     if (
       !INVENTORY_CATEGORIES[
         category
@@ -2452,32 +3077,183 @@ function route() {
     ) {
 
       goInventory();
+
       return;
 
     }
 
+
     currentStore =
       null;
+
 
     lockedAddStore =
       null;
 
+
     currentInventoryCategory =
       category;
+
 
     showOnly(
       inventoryCategoryScreen
     );
+
 
     pageTitle.textContent =
       INVENTORY_CATEGORIES[
         category
       ];
 
+
     backButton.hidden =
       false;
 
+
     loadInventoryItems();
+
+
+    return;
+
+  }
+
+
+  if (
+    hash ===
+    '#restrictions/items'
+  ) {
+
+    currentStore =
+      null;
+
+
+    lockedAddStore =
+      null;
+
+
+    editingRestrictionOriginalName =
+      null;
+
+
+    showOnly(
+      restrictionsByItemScreen
+    );
+
+
+    pageTitle.textContent =
+      'Restrictions by Item';
+
+
+    backButton.hidden =
+      false;
+
+
+    loadRestrictions();
+
+
+    return;
+
+  }
+
+
+  if (
+    hash ===
+    '#restrictions/stores'
+  ) {
+
+    currentStore =
+      null;
+
+
+    lockedAddStore =
+      null;
+
+
+    editingRestrictionOriginalName =
+      null;
+
+
+    showOnly(
+      restrictionsByStoreScreen
+    );
+
+
+    pageTitle.textContent =
+      'Restrictions by Store';
+
+
+    backButton.hidden =
+      false;
+
+
+    renderRestrictionStores();
+
+
+    return;
+
+  }
+
+
+  if (
+    hash.startsWith(
+      '#restrictions/store/'
+    )
+  ) {
+
+    const store =
+      hash.slice(
+        '#restrictions/store/'.length
+      );
+
+
+    if (
+      !STORES[
+        store
+      ]
+    ) {
+
+      goRestrictionsByStore();
+
+      return;
+
+    }
+
+
+    currentStore =
+      null;
+
+
+    lockedAddStore =
+      null;
+
+
+    editingRestrictionOriginalName =
+      null;
+
+
+    currentRestrictionStore =
+      store;
+
+
+    showOnly(
+      restrictionStoreScreen
+    );
+
+
+    pageTitle.textContent =
+      STORES[
+        store
+      ];
+
+
+    backButton.hidden =
+      false;
+
+
+    loadRestrictionsByStore(
+      store
+    );
+
 
     return;
 
@@ -2492,23 +3268,27 @@ function route() {
     currentStore =
       null;
 
+
     lockedAddStore =
       null;
 
+
     editingRestrictionOriginalName =
       null;
+
 
     showOnly(
       restrictionsScreen
     );
 
+
     pageTitle.textContent =
       'Manage Restrictions';
+
 
     backButton.hidden =
       false;
 
-    loadRestrictions();
 
     return;
 
@@ -2523,23 +3303,30 @@ function route() {
     currentStore =
       null;
 
+
     lockedAddStore =
       null;
 
+
     editingRestrictionOriginalName =
       null;
+
 
     showOnly(
       restrictionEditScreen
     );
 
+
     pageTitle.textContent =
       'Add Restriction';
+
 
     backButton.hidden =
       false;
 
+
     clearRestrictionForm();
+
 
     setTimeout(
       () => {
@@ -2549,6 +3336,7 @@ function route() {
       },
       80
     );
+
 
     return;
 
@@ -2561,7 +3349,9 @@ function route() {
     )
   ) {
 
-    let itemName = '';
+    let itemName =
+      '';
+
 
     try {
 
@@ -2572,32 +3362,41 @@ function route() {
           )
         );
 
+
     } catch (_) {
 
-      goRestrictions();
+      goRestrictionReturn();
+
       return;
 
     }
 
+
     currentStore =
       null;
 
+
     lockedAddStore =
       null;
+
 
     showOnly(
       restrictionEditScreen
     );
 
+
     pageTitle.textContent =
       'Edit Restriction';
+
 
     backButton.hidden =
       false;
 
+
     loadRestrictionForEdit(
       itemName
     );
+
 
     return;
 
@@ -2607,145 +3406,235 @@ function route() {
   currentStore =
     null;
 
+
   lockedAddStore =
     null;
 
+
   editingRestrictionOriginalName =
     null;
+
 
   showOnly(
     homeScreen
   );
 
+
   pageTitle.textContent =
     'Uno Club Shopping';
 
+
   backButton.hidden =
     true;
+
 
   loadHomeCounts();
 
 }
 
 
-backButton.addEventListener(
-  'click',
-  () => {
 
-    const hash =
-      location.hash;
+backButton
+  .addEventListener(
+    'click',
+    () => {
 
-    if (
-      hash.startsWith(
-        '#add/'
-      )
-    ) {
+      const hash =
+        location.hash;
 
-      const store =
-        hash.slice(5);
 
       if (
-        STORES[store]
+        hash.startsWith(
+          '#add/'
+        )
       ) {
 
-        goStore(
-          store
-        );
+        const store =
+          hash.slice(
+            5
+          );
+
+
+        if (
+          STORES[
+            store
+          ]
+        ) {
+
+          goStore(
+            store
+          );
+
+
+          return;
+
+        }
+
+      }
+
+
+      if (
+        hash.startsWith(
+          '#inventory-add/'
+        )
+      ) {
+
+        const category =
+          hash.slice(
+            '#inventory-add/'.length
+          );
+
+
+        if (
+          INVENTORY_CATEGORIES[
+            category
+          ]
+        ) {
+
+          goInventoryCategory(
+            category
+          );
+
+
+          return;
+
+        }
+
+      }
+
+
+      if (
+        hash.startsWith(
+          '#inventory/'
+        )
+      ) {
+
+        goInventory();
 
         return;
 
       }
 
-    }
-
-    if (
-      hash.startsWith(
-        '#inventory-add/'
-      )
-    ) {
-
-      const category =
-        hash.slice(
-          '#inventory-add/'.length
-        );
 
       if (
-        INVENTORY_CATEGORIES[
-          category
-        ]
+        hash ===
+        '#inventory'
       ) {
 
-        goInventoryCategory(
-          category
-        );
+        goHome();
 
         return;
 
       }
 
-    }
 
-    if (
-      hash.startsWith(
-        '#inventory/'
-      )
-    ) {
+      if (
+        hash.startsWith(
+          '#restrictions/store/'
+        )
+      ) {
 
-      goInventory();
-      return;
+        goRestrictionsByStore();
 
-    }
+        return;
 
-    if (
-      hash ===
-      '#inventory'
-    ) {
+      }
+
+
+      if (
+        hash ===
+          '#restrictions/items' ||
+        hash ===
+          '#restrictions/stores'
+      ) {
+
+        goRestrictions();
+
+        return;
+
+      }
+
+
+      if (
+        hash ===
+        '#restrictions'
+      ) {
+
+        goHome();
+
+        return;
+
+      }
+
+
+      if (
+        hash ===
+          '#restriction/new' ||
+        hash.startsWith(
+          '#restriction/edit/'
+        )
+      ) {
+
+        goRestrictionReturn();
+
+        return;
+
+      }
+
 
       goHome();
-      return;
 
     }
-
-    if (
-      hash === '#restriction/new' ||
-      hash.startsWith(
-        '#restriction/edit/'
-      )
-    ) {
-
-      goRestrictions();
-      return;
-
-    }
-
-    goHome();
-
-  }
-);
+  );
 
 
-addItemButton.addEventListener(
-  'click',
-  goAdd
-);
+
+addItemButton
+  .addEventListener(
+    'click',
+    goAdd
+  );
 
 
-inventoryButton.addEventListener(
-  'click',
-  goInventory
-);
+
+inventoryButton
+  .addEventListener(
+    'click',
+    goInventory
+  );
 
 
-manageRestrictionsButton.addEventListener(
-  'click',
-  goRestrictions
-);
+
+manageRestrictionsButton
+  .addEventListener(
+    'click',
+    goRestrictions
+  );
 
 
-addRestrictionButton.addEventListener(
-  'click',
-  goNewRestriction
-);
+
+restrictionsByItemButton
+  .addEventListener(
+    'click',
+    goRestrictionsByItem
+  );
+
+
+
+restrictionsByStoreButton
+  .addEventListener(
+    'click',
+    goRestrictionsByStore
+  );
+
+
+
+addRestrictionButton
+  .addEventListener(
+    'click',
+    goNewRestriction
+  );
+
 
 
 document
@@ -2770,55 +3659,74 @@ document
   );
 
 
-storeAddItemButton.addEventListener(
-  'click',
-  () => {
 
-    if (
-      currentStore &&
-      STORES[currentStore]
-    ) {
+storeAddItemButton
+  .addEventListener(
+    'click',
+    () => {
 
-      goAddForStore(
-        currentStore
-      );
+      if (
+        currentStore &&
+        STORES[
+          currentStore
+        ]
+      ) {
 
-    }
+        goAddForStore(
+          currentStore
+        );
 
-  }
-);
-
-
-inventoryAddItemButton.addEventListener(
-  'click',
-  () => {
-
-    if (
-      currentInventoryCategory &&
-      INVENTORY_CATEGORIES[
-        currentInventoryCategory
-      ]
-    ) {
-
-      goInventoryAdd(
-        currentInventoryCategory
-      );
+      }
 
     }
+  );
 
-  }
-);
+
+
+inventoryAddItemButton
+  .addEventListener(
+    'click',
+    () => {
+
+      if (
+        currentInventoryCategory &&
+        INVENTORY_CATEGORIES[
+          currentInventoryCategory
+        ]
+      ) {
+
+        goInventoryAdd(
+          currentInventoryCategory
+        );
+
+      }
+
+    }
+  );
+
 
 
 async function loadHomeCounts() {
 
   const counts = {
-    sams_costco:1,
-    walmart:0,
-    alcohol:0,
-    sodas:0,
-    amazon:0
+
+    sams_costco:
+      1,
+
+    walmart:
+      0,
+
+    alcohol:
+      0,
+
+    sodas:
+      0,
+
+    amazon:
+      0
+
   };
+
 
   try {
 
@@ -2827,8 +3735,11 @@ async function loadHomeCounts() {
         '/rest/v1/shopping_items?select=store'
       );
 
+
     if (
-      Array.isArray(data)
+      Array.isArray(
+        data
+      )
     ) {
 
       data.forEach(
@@ -2854,6 +3765,7 @@ async function loadHomeCounts() {
 
     }
 
+
     document
       .querySelectorAll(
         '.count-badge'
@@ -2864,39 +3776,46 @@ async function loadHomeCounts() {
           badge.textContent =
             counts[
               badge.dataset.countStore
-            ] ?? 0;
+            ] ??
+            0;
 
         }
       );
 
+
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
 
   }
 
 }
 
 
-storeSelect.addEventListener(
-  'change',
-  () => {
 
-    if (
-      !lockedAddStore &&
-      STORES[
-        storeSelect.value
-      ]
-    ) {
+storeSelect
+  .addEventListener(
+    'change',
+    () => {
 
-      rememberLastStore(
-        storeSelect.value
-      );
+      if (
+        !lockedAddStore &&
+        STORES[
+          storeSelect.value
+        ]
+      ) {
+
+        rememberLastStore(
+          storeSelect.value
+        );
+
+      }
 
     }
+  );
 
-  }
-);
 
 
 function getBoundedQuantity(
@@ -2910,14 +3829,18 @@ function getBoundedQuantity(
       10
     );
 
+
   if (
-    !Number.isInteger(value) ||
+    !Number.isInteger(
+      value
+    ) ||
     value < min
   ) {
 
     return min;
 
   }
+
 
   return Math.min(
     value,
@@ -2927,7 +3850,10 @@ function getBoundedQuantity(
 }
 
 
-function setAddQuantity(value) {
+
+function setAddQuantity(
+  value
+) {
 
   quantityInput.value =
     Math.min(
@@ -2938,9 +3864,11 @@ function setAddQuantity(value) {
       )
     );
 
+
   refreshAddQuantityButtons();
 
 }
+
 
 
 function getAddQuantity() {
@@ -2953,13 +3881,16 @@ function getAddQuantity() {
 }
 
 
+
 function refreshAddQuantityButtons() {
 
   const q =
     getAddQuantity();
 
+
   addQtyMinus.disabled =
     q <= 1;
+
 
   addQtyPlus.disabled =
     q >= 9999;
@@ -2967,46 +3898,57 @@ function refreshAddQuantityButtons() {
 }
 
 
-addQtyMinus.addEventListener(
-  'click',
-  () => {
 
-    setAddQuantity(
-      getAddQuantity() - 1
-    );
+addQtyMinus
+  .addEventListener(
+    'click',
+    () => {
 
-  }
-);
+      setAddQuantity(
+        getAddQuantity() -
+        1
+      );
 
-
-addQtyPlus.addEventListener(
-  'click',
-  () => {
-
-    setAddQuantity(
-      getAddQuantity() + 1
-    );
-
-  }
-);
+    }
+  );
 
 
-quantityInput.addEventListener(
-  'input',
-  refreshAddQuantityButtons
-);
+
+addQtyPlus
+  .addEventListener(
+    'click',
+    () => {
+
+      setAddQuantity(
+        getAddQuantity() +
+        1
+      );
+
+    }
+  );
 
 
-quantityInput.addEventListener(
-  'blur',
-  () => {
 
-    setAddQuantity(
-      getAddQuantity()
-    );
+quantityInput
+  .addEventListener(
+    'input',
+    refreshAddQuantityButtons
+  );
 
-  }
-);
+
+
+quantityInput
+  .addEventListener(
+    'blur',
+    () => {
+
+      setAddQuantity(
+        getAddQuantity()
+      );
+
+    }
+  );
+
 
 
 function setInventoryAddQuantity(
@@ -3022,9 +3964,11 @@ function setInventoryAddQuantity(
       )
     );
 
+
   refreshInventoryAddQuantityButtons();
 
 }
+
 
 
 function getInventoryAddQuantity() {
@@ -3037,13 +3981,16 @@ function getInventoryAddQuantity() {
 }
 
 
+
 function refreshInventoryAddQuantityButtons() {
 
   const q =
     getInventoryAddQuantity();
 
+
   inventoryQtyMinus.disabled =
     q <= 0;
+
 
   inventoryQtyPlus.disabled =
     q >= 9999;
@@ -3051,46 +3998,57 @@ function refreshInventoryAddQuantityButtons() {
 }
 
 
-inventoryQtyMinus.addEventListener(
-  'click',
-  () => {
 
-    setInventoryAddQuantity(
-      getInventoryAddQuantity() - 1
-    );
+inventoryQtyMinus
+  .addEventListener(
+    'click',
+    () => {
 
-  }
-);
+      setInventoryAddQuantity(
+        getInventoryAddQuantity() -
+        1
+      );
 
-
-inventoryQtyPlus.addEventListener(
-  'click',
-  () => {
-
-    setInventoryAddQuantity(
-      getInventoryAddQuantity() + 1
-    );
-
-  }
-);
+    }
+  );
 
 
-inventoryQuantity.addEventListener(
-  'input',
-  refreshInventoryAddQuantityButtons
-);
+
+inventoryQtyPlus
+  .addEventListener(
+    'click',
+    () => {
+
+      setInventoryAddQuantity(
+        getInventoryAddQuantity() +
+        1
+      );
+
+    }
+  );
 
 
-inventoryQuantity.addEventListener(
-  'blur',
-  () => {
 
-    setInventoryAddQuantity(
-      getInventoryAddQuantity()
-    );
+inventoryQuantity
+  .addEventListener(
+    'input',
+    refreshInventoryAddQuantityButtons
+  );
 
-  }
-);
+
+
+inventoryQuantity
+  .addEventListener(
+    'blur',
+    () => {
+
+      setInventoryAddQuantity(
+        getInventoryAddQuantity()
+      );
+
+    }
+  );
+
 
 
 function formatAllowedStores(
@@ -3101,22 +4059,37 @@ function formatAllowedStores(
     storeKeys
       .map(
         store =>
-          STORES[store]
+          STORES[
+            store
+          ]
       )
-      .filter(Boolean);
+      .filter(
+        Boolean
+      );
 
-  if (!names.length) {
-    return 'the correct store';
-  }
 
   if (
-    names.length === 1
+    !names.length
   ) {
-    return names[0];
+
+    return 'the correct store';
+
   }
 
+
   if (
-    names.length === 2
+    names.length ===
+    1
+  ) {
+
+    return names[0];
+
+  }
+
+
+  if (
+    names.length ===
+    2
   ) {
 
     return (
@@ -3127,229 +4100,295 @@ function formatAllowedStores(
 
   }
 
+
   return (
     names
-      .slice(0,-1)
-      .join(', ') +
+      .slice(
+        0,
+        -1
+      )
+      .join(
+        ', '
+      ) +
     ', or ' +
     names[
-      names.length - 1
+      names.length -
+      1
     ]
   );
 
 }
 
 
-addItemForm.addEventListener(
-  'submit',
-  async event => {
 
-    event.preventDefault();
+addItemForm
+  .addEventListener(
+    'submit',
+    async event => {
 
-    const itemName =
-      normalizeItemName(
-        itemNameInput.value
-      );
+      event.preventDefault();
 
-    const store =
-      lockedAddStore ||
-      storeSelect.value;
 
-    const quantity =
-      getAddQuantity();
-
-    if (!itemName) {
-
-      showToast(
-        'Please enter an item.',
-        true
-      );
-
-      itemNameInput.focus();
-      return;
-
-    }
-
-    if (
-      !store ||
-      !STORES[store]
-    ) {
-
-      showToast(
-        'Please choose a store.',
-        true
-      );
-
-      storeSelect.focus();
-      return;
-
-    }
-
-    if (
-      normalizedKey(
-        itemName
-      ) ===
-      'case of water'
-    ) {
-
-      showToast(
-        'Case of Water is already on the Sam’s / CostCo list.',
-        true
-      );
-
-      return;
-
-    }
-
-    if (
-      !lockedAddStore
-    ) {
-
-      rememberLastStore(
-        store
-      );
-
-    }
-
-    saveItemButton.disabled =
-      true;
-
-    saveItemButton.textContent =
-      'Adding…';
-
-    try {
-
-      const result =
-        unwrapRpcResult(
-          await api(
-            '/rest/v1/rpc/add_shopping_item',
-            {
-              method:'POST',
-
-              body:JSON.stringify({
-                p_item_name:
-                  itemName,
-
-                p_quantity:
-                  quantity,
-
-                p_store:
-                  store
-              })
-            }
-          )
+      const itemName =
+        normalizeItemName(
+          itemNameInput.value
         );
 
+
+      const store =
+        lockedAddStore ||
+        storeSelect.value;
+
+
+      const quantity =
+        getAddQuantity();
+
+
       if (
-        result &&
-        result.added === false &&
-        result.reason ===
-          'duplicate'
+        !itemName
       ) {
 
         showToast(
-          `${itemName} is already on the ${STORES[result.existing_store] || 'another'} list.`,
+          'Please enter an item.',
           true
         );
 
-        return;
-
-      }
-
-      if (
-        result &&
-        result.added === false &&
-        result.reason ===
-          'restricted'
-      ) {
-
-        showToast(
-          `${itemName} can only be added to ${formatAllowedStores(Array.isArray(result.allowed_stores) ? result.allowed_stores : [])}.`,
-          true
-        );
-
-        refreshStoreChoicesForItem(
-          false
-        );
-
-        return;
-
-      }
-
-      if (
-        result &&
-        result.added === true
-      ) {
-
-        itemNameInput.value =
-          '';
-
-        setAddQuantity(
-          1
-        );
-
-        rebuildStoreOptions(
-          Object.keys(STORES),
-          store
-        );
-
-        showToast(
-          `${itemName} added to ${STORES[store]}.`
-        );
-
-        loadHomeCounts();
 
         itemNameInput.focus();
 
+
         return;
 
       }
 
-      showToast(
-        'Could not add the item. Please try again.',
-        true
-      );
 
-    } catch (error) {
+      if (
+        !store ||
+        !STORES[
+          store
+        ]
+      ) {
 
-      console.error(error);
+        showToast(
+          'Please choose a store.',
+          true
+        );
 
-      showToast(
-        'Could not add the item. Please try again.',
-        true
-      );
 
-    } finally {
+        storeSelect.focus();
+
+
+        return;
+
+      }
+
+
+      if (
+        normalizedKey(
+          itemName
+        ) ===
+        'case of water'
+      ) {
+
+        showToast(
+          'Case of Water is already on the Sam’s / CostCo list.',
+          true
+        );
+
+
+        return;
+
+      }
+
+
+      if (
+        !lockedAddStore
+      ) {
+
+        rememberLastStore(
+          store
+        );
+
+      }
+
 
       saveItemButton.disabled =
-        false;
+        true;
+
 
       saveItemButton.textContent =
-        'Add Item';
+        'Adding…';
+
+
+      try {
+
+        const result =
+          unwrapRpcResult(
+
+            await api(
+              '/rest/v1/rpc/add_shopping_item',
+              {
+                method:
+                  'POST',
+
+                body:
+                  JSON.stringify({
+                    p_item_name:
+                      itemName,
+
+                    p_quantity:
+                      quantity,
+
+                    p_store:
+                      store
+                  })
+              }
+            )
+
+          );
+
+
+        if (
+          result &&
+          result.added === false &&
+          result.reason ===
+            'duplicate'
+        ) {
+
+          showToast(
+            `${itemName} is already on the ${STORES[result.existing_store] || 'another'} list.`,
+            true
+          );
+
+
+          return;
+
+        }
+
+
+        if (
+          result &&
+          result.added === false &&
+          result.reason ===
+            'restricted'
+        ) {
+
+          showToast(
+            `${itemName} can only be added to ${formatAllowedStores(Array.isArray(result.allowed_stores) ? result.allowed_stores : [])}.`,
+            true
+          );
+
+
+          refreshStoreChoicesForItem(
+            false
+          );
+
+
+          return;
+
+        }
+
+
+        if (
+          result &&
+          result.added ===
+            true
+        ) {
+
+          itemNameInput.value =
+            '';
+
+
+          setAddQuantity(
+            1
+          );
+
+
+          rebuildStoreOptions(
+            Object.keys(
+              STORES
+            ),
+            store
+          );
+
+
+          showToast(
+            `${itemName} added to ${STORES[store]}.`
+          );
+
+
+          loadHomeCounts();
+
+
+          itemNameInput.focus();
+
+
+          return;
+
+        }
+
+
+        showToast(
+          'Could not add the item. Please try again.',
+          true
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          error
+        );
+
+
+        showToast(
+          'Could not add the item. Please try again.',
+          true
+        );
+
+
+      } finally {
+
+        saveItemButton.disabled =
+          false;
+
+
+        saveItemButton.textContent =
+          'Add Item';
+
+      }
 
     }
+  );
 
-  }
-);
 
 
 async function loadStoreItems(
   quiet = false
 ) {
 
-  if (!currentStore) {
+  if (
+    !currentStore
+  ) {
+
     return;
+
   }
+
 
   const storeAtStart =
     currentStore;
 
-  if (!quiet) {
+
+  if (
+    !quiet
+  ) {
 
     storeList.innerHTML =
       '<div class="loading-state">Loading…</div>';
 
   }
+
 
   try {
 
@@ -3363,6 +4402,7 @@ async function loadStoreItems(
         )
       );
 
+
     if (
       currentStore !==
       storeAtStart
@@ -3372,17 +4412,26 @@ async function loadStoreItems(
 
     }
 
+
     renderStoreList(
+
       sortByName(
-        Array.isArray(data)
+        Array.isArray(
+          data
+        )
           ? data
           : []
       )
+
     );
+
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
+
 
     if (
       !quiet &&
@@ -3400,12 +4449,14 @@ async function loadStoreItems(
 }
 
 
+
 function renderStoreList(
   items
 ) {
 
   storeList.innerHTML =
     '';
+
 
   if (
     currentStore ===
@@ -3417,6 +4468,7 @@ function renderStoreList(
     );
 
   }
+
 
   items.forEach(
     item => {
@@ -3430,22 +4482,29 @@ function renderStoreList(
     }
   );
 
+
   if (
-    items.length === 0
+    items.length ===
+    0
   ) {
 
     appendEmpty(
+
       storeList,
 
       currentStore ===
         'sams_costco'
+
         ? 'No other items on this list.'
+
         : 'No items on this list.'
+
     );
 
   }
 
 }
+
 
 
 function appendEmpty(
@@ -3458,17 +4517,21 @@ function appendEmpty(
       'div'
     );
 
+
   empty.className =
     'empty-state';
 
+
   empty.textContent =
     message;
+
 
   container.appendChild(
     empty
   );
 
 }
+
 
 
 function createPermanentWaterRow() {
@@ -3478,56 +4541,70 @@ function createPermanentWaterRow() {
       'div'
     );
 
+
   row.className =
     'item-row permanent-row';
+
 
   const wrap =
     document.createElement(
       'div'
     );
 
+
   const name =
     document.createElement(
       'div'
     );
+
 
   const note =
     document.createElement(
       'div'
     );
 
+
   const qty =
     document.createElement(
       'div'
     );
+
 
   const spacer =
     document.createElement(
       'div'
     );
 
+
   name.className =
     'item-name';
+
 
   name.textContent =
     'Case of Water';
 
+
   note.className =
     'fixed-note';
 
+
   note.textContent =
     'Always on list';
+
 
   wrap.append(
     name,
     note
   );
 
+
   qty.className =
     'qty-fixed';
 
+
   qty.textContent =
     '1';
+
 
   row.append(
     wrap,
@@ -3535,9 +4612,11 @@ function createPermanentWaterRow() {
     spacer
   );
 
+
   return row;
 
 }
+
 
 
 function createShoppingItemRow(
@@ -3578,6 +4657,7 @@ function createShoppingItemRow(
   );
 
 }
+
 
 
 function createInventoryItemRow(
@@ -3630,6 +4710,7 @@ function createInventoryItemRow(
             `${item.item_name} is out of stock.\n\nWould you like to add it to the shopping list?`
           );
 
+
         if (
           addToShoppingList
         ) {
@@ -3640,9 +4721,11 @@ function createInventoryItemRow(
 
         }
 
+
         return true;
 
       }
+
 
       return false;
 
@@ -3651,6 +4734,7 @@ function createInventoryItemRow(
   );
 
 }
+
 
 
 function createDataItemRow(
@@ -3666,91 +4750,116 @@ function createDataItemRow(
       'div'
     );
 
+
   row.className =
     'item-row db-row';
 
+
   row.dataset.id =
     item.id;
+
 
   const name =
     document.createElement(
       'div'
     );
 
+
   name.className =
     'item-name';
 
+
   name.textContent =
     item.item_name;
+
 
   const control =
     document.createElement(
       'div'
     );
 
+
   control.className =
     'qty-control';
+
 
   const minus =
     document.createElement(
       'button'
     );
 
+
   const qty =
     document.createElement(
       'input'
     );
+
 
   const plus =
     document.createElement(
       'button'
     );
 
+
   minus.type =
     'button';
+
 
   plus.type =
     'button';
 
+
   minus.className =
     'qty-step-button';
+
 
   plus.className =
     'qty-step-button';
 
+
   minus.textContent =
     '−';
+
 
   plus.textContent =
     '+';
 
+
   qty.className =
     'qty-input';
 
+
   qty.type =
     'number';
+
 
   qty.min =
     String(
       minQuantity
     );
 
+
   qty.max =
     '9999';
+
 
   qty.step =
     '1';
 
+
   qty.inputMode =
     'numeric';
 
+
   qty.value =
     item.quantity;
+
 
   qty.dataset.savedValue =
     String(
       item.quantity
     );
+
 
   const getQty =
     () =>
@@ -3759,21 +4868,25 @@ function createDataItemRow(
         minQuantity
       );
 
+
   const refresh =
     () => {
 
       const value =
         getQty();
 
+
       minus.disabled =
         value <=
         minQuantity;
+
 
       plus.disabled =
         value >=
         9999;
 
     };
+
 
   const save =
     async () => {
@@ -3784,11 +4897,14 @@ function createDataItemRow(
           10
         );
 
+
       const newValue =
         getQty();
 
+
       qty.value =
         newValue;
+
 
       if (
         newValue ===
@@ -3796,21 +4912,27 @@ function createDataItemRow(
       ) {
 
         refresh();
+
         return;
 
       }
 
+
       minus.disabled =
         true;
+
 
       plus.disabled =
         true;
 
+
       qty.disabled =
         true;
 
+
       let saveSucceeded =
         false;
+
 
       try {
 
@@ -3818,20 +4940,27 @@ function createDataItemRow(
           newValue
         );
 
+
         qty.dataset.savedValue =
           String(
             newValue
           );
 
+
         saveSucceeded =
           true;
 
+
       } catch (error) {
 
-        console.error(error);
+        console.error(
+          error
+        );
+
 
         qty.value =
           oldValue;
+
 
         showToast(
           'Could not update the quantity.',
@@ -3840,10 +4969,13 @@ function createDataItemRow(
 
       }
 
+
       qty.disabled =
         false;
 
+
       refresh();
+
 
       if (
         !saveSucceeded
@@ -3853,8 +4985,10 @@ function createDataItemRow(
 
       }
 
+
       let handledAfterSave =
         false;
+
 
       if (
         typeof afterSaveQuantity ===
@@ -3869,6 +5003,7 @@ function createDataItemRow(
 
       }
 
+
       if (
         !handledAfterSave
       ) {
@@ -3881,12 +5016,14 @@ function createDataItemRow(
 
     };
 
+
   minus.addEventListener(
     'click',
     async () => {
 
       const value =
         getQty();
+
 
       if (
         value <=
@@ -3897,13 +5034,16 @@ function createDataItemRow(
 
       }
 
+
       qty.value =
         value - 1;
+
 
       await save();
 
     }
   );
+
 
   plus.addEventListener(
     'click',
@@ -3911,6 +5051,7 @@ function createDataItemRow(
 
       const value =
         getQty();
+
 
       if (
         value >=
@@ -3921,13 +5062,16 @@ function createDataItemRow(
 
       }
 
+
       qty.value =
         value + 1;
+
 
       await save();
 
     }
   );
+
 
   qty.addEventListener(
     'focus',
@@ -3938,15 +5082,18 @@ function createDataItemRow(
     }
   );
 
+
   qty.addEventListener(
     'input',
     refresh
   );
 
+
   qty.addEventListener(
     'change',
     save
   );
+
 
   control.append(
     minus,
@@ -3954,21 +5101,27 @@ function createDataItemRow(
     plus
   );
 
+
   refresh();
+
 
   const del =
     document.createElement(
       'button'
     );
 
+
   del.type =
     'button';
+
 
   del.className =
     'delete-button';
 
+
   del.textContent =
     '×';
+
 
   del.addEventListener(
     'click',
@@ -3976,6 +5129,7 @@ function createDataItemRow(
 
       del.disabled =
         true;
+
 
       await deleteHandler(
         row,
@@ -3986,15 +5140,18 @@ function createDataItemRow(
     }
   );
 
+
   row.append(
     name,
     control,
     del
   );
 
+
   return row;
 
 }
+
 
 
 async function updateQuantity(
@@ -4006,19 +5163,23 @@ async function updateQuantity(
   await api(
     `/rest/v1/${table}?id=eq.${encodeURIComponent(id)}`,
     {
-      method:'PATCH',
+      method:
+        'PATCH',
 
       headers:{
-        Prefer:'return=minimal'
+        Prefer:
+          'return=minimal'
       },
 
-      body:JSON.stringify({
-        quantity
-      })
+      body:
+        JSON.stringify({
+          quantity
+        })
     }
   );
 
 }
+
 
 
 async function deleteShoppingItem(
@@ -4036,26 +5197,33 @@ async function deleteShoppingItem(
         item.id
       ),
       {
-        method:'DELETE',
+        method:
+          'DELETE',
 
         headers:{
-          Prefer:'return=minimal'
+          Prefer:
+            'return=minimal'
         }
       }
     );
 
+
     row.remove();
+
 
     showUndoToast(
       {
         ...item,
+
         quantity:
           currentQuantity
       },
       'shopping'
     );
 
+
     loadHomeCounts();
+
 
     if (
       !storeList.querySelector(
@@ -4064,22 +5232,31 @@ async function deleteShoppingItem(
     ) {
 
       appendEmpty(
+
         storeList,
 
         currentStore ===
           'sams_costco'
+
           ? 'No other items on this list.'
+
           : 'No items on this list.'
+
       );
 
     }
 
+
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
+
 
     button.disabled =
       false;
+
 
     showToast(
       'Could not remove the item.',
@@ -4091,6 +5268,7 @@ async function deleteShoppingItem(
 }
 
 
+
 /* INVENTORY */
 
 
@@ -4098,6 +5276,7 @@ function renderInventoryCategories() {
 
   inventoryCategoryButtons.innerHTML =
     '';
+
 
   Object.entries(
     INVENTORY_CATEGORIES
@@ -4110,14 +5289,18 @@ function renderInventoryCategories() {
           'button'
         );
 
+
       button.className =
         'main-button category-button';
+
 
       button.type =
         'button';
 
+
       button.textContent =
         label;
+
 
       button.addEventListener(
         'click',
@@ -4130,6 +5313,7 @@ function renderInventoryCategories() {
         }
       );
 
+
       inventoryCategoryButtons.appendChild(
         button
       );
@@ -4138,6 +5322,7 @@ function renderInventoryCategories() {
   );
 
 }
+
 
 
 async function loadInventoryItems(
@@ -4152,15 +5337,20 @@ async function loadInventoryItems(
 
   }
 
+
   const categoryAtStart =
     currentInventoryCategory;
 
-  if (!quiet) {
+
+  if (
+    !quiet
+  ) {
 
     inventoryList.innerHTML =
       '<div class="loading-state">Loading…</div>';
 
   }
+
 
   try {
 
@@ -4174,6 +5364,7 @@ async function loadInventoryItems(
         )
       );
 
+
     if (
       currentInventoryCategory !==
       categoryAtStart
@@ -4183,17 +5374,26 @@ async function loadInventoryItems(
 
     }
 
+
     renderInventoryList(
+
       sortByName(
-        Array.isArray(data)
+        Array.isArray(
+          data
+        )
           ? data
           : []
       )
+
     );
+
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
+
 
     if (
       !quiet &&
@@ -4211,12 +5411,14 @@ async function loadInventoryItems(
 }
 
 
+
 function renderInventoryList(
   items
 ) {
 
   inventoryList.innerHTML =
     '';
+
 
   items.forEach(
     item => {
@@ -4230,8 +5432,10 @@ function renderInventoryList(
     }
   );
 
+
   if (
-    items.length === 0
+    items.length ===
+    0
   ) {
 
     appendEmpty(
@@ -4244,144 +5448,180 @@ function renderInventoryList(
 }
 
 
-inventoryAddForm.addEventListener(
-  'submit',
-  async event => {
 
-    event.preventDefault();
+inventoryAddForm
+  .addEventListener(
+    'submit',
+    async event => {
 
-    const itemName =
-      normalizeItemName(
-        inventoryItemName.value
-      );
+      event.preventDefault();
 
-    const quantity =
-      getInventoryAddQuantity();
 
-    const category =
-      currentInventoryCategory;
-
-    if (!itemName) {
-
-      showToast(
-        'Please enter an item.',
-        true
-      );
-
-      inventoryItemName.focus();
-      return;
-
-    }
-
-    if (
-      !category ||
-      !INVENTORY_CATEGORIES[
-        category
-      ]
-    ) {
-
-      showToast(
-        'Inventory category not found.',
-        true
-      );
-
-      return;
-
-    }
-
-    saveInventoryItemButton.disabled =
-      true;
-
-    saveInventoryItemButton.textContent =
-      'Adding…';
-
-    try {
-
-      const result =
-        unwrapRpcResult(
-          await api(
-            '/rest/v1/rpc/add_inventory_item',
-            {
-              method:'POST',
-
-              body:JSON.stringify({
-                p_item_name:
-                  itemName,
-
-                p_quantity:
-                  quantity,
-
-                p_category:
-                  category
-              })
-            }
-          )
+      const itemName =
+        normalizeItemName(
+          inventoryItemName.value
         );
 
+
+      const quantity =
+        getInventoryAddQuantity();
+
+
+      const category =
+        currentInventoryCategory;
+
+
       if (
-        result &&
-        result.added === false &&
-        result.reason ===
-          'duplicate'
+        !itemName
       ) {
 
         showToast(
-          `${itemName} is already in ${INVENTORY_CATEGORIES[result.existing_category] || 'Inventory'}.`,
+          'Please enter an item.',
           true
         );
 
-        return;
-
-      }
-
-      if (
-        result &&
-        result.added === true
-      ) {
-
-        inventoryItemName.value =
-          '';
-
-        setInventoryAddQuantity(
-          1
-        );
-
-        showToast(
-          `${itemName} added to ${INVENTORY_CATEGORIES[category]}.`
-        );
 
         inventoryItemName.focus();
 
+
         return;
 
       }
 
-      showToast(
-        'Could not add the inventory item.',
-        true
-      );
 
-    } catch (error) {
+      if (
+        !category ||
+        !INVENTORY_CATEGORIES[
+          category
+        ]
+      ) {
 
-      console.error(error);
+        showToast(
+          'Inventory category not found.',
+          true
+        );
 
-      showToast(
-        'Could not add the inventory item.',
-        true
-      );
 
-    } finally {
+        return;
+
+      }
+
 
       saveInventoryItemButton.disabled =
-        false;
+        true;
+
 
       saveInventoryItemButton.textContent =
-        'Add to Inventory';
+        'Adding…';
+
+
+      try {
+
+        const result =
+          unwrapRpcResult(
+
+            await api(
+              '/rest/v1/rpc/add_inventory_item',
+              {
+                method:
+                  'POST',
+
+                body:
+                  JSON.stringify({
+                    p_item_name:
+                      itemName,
+
+                    p_quantity:
+                      quantity,
+
+                    p_category:
+                      category
+                  })
+              }
+            )
+
+          );
+
+
+        if (
+          result &&
+          result.added === false &&
+          result.reason ===
+            'duplicate'
+        ) {
+
+          showToast(
+            `${itemName} is already in ${INVENTORY_CATEGORIES[result.existing_category] || 'Inventory'}.`,
+            true
+          );
+
+
+          return;
+
+        }
+
+
+        if (
+          result &&
+          result.added ===
+            true
+        ) {
+
+          inventoryItemName.value =
+            '';
+
+
+          setInventoryAddQuantity(
+            1
+          );
+
+
+          showToast(
+            `${itemName} added to ${INVENTORY_CATEGORIES[category]}.`
+          );
+
+
+          inventoryItemName.focus();
+
+
+          return;
+
+        }
+
+
+        showToast(
+          'Could not add the inventory item.',
+          true
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          error
+        );
+
+
+        showToast(
+          'Could not add the inventory item.',
+          true
+        );
+
+
+      } finally {
+
+        saveInventoryItemButton.disabled =
+          false;
+
+
+        saveInventoryItemButton.textContent =
+          'Add to Inventory';
+
+      }
 
     }
+  );
 
-  }
-);
 
 
 async function deleteInventoryItem(
@@ -4399,24 +5639,30 @@ async function deleteInventoryItem(
         item.id
       ),
       {
-        method:'DELETE',
+        method:
+          'DELETE',
 
         headers:{
-          Prefer:'return=minimal'
+          Prefer:
+            'return=minimal'
         }
       }
     );
 
+
     row.remove();
+
 
     showUndoToast(
       {
         ...item,
+
         quantity:
           currentQuantity
       },
       'inventory'
     );
+
 
     if (
       !inventoryList.querySelector(
@@ -4431,12 +5677,17 @@ async function deleteInventoryItem(
 
     }
 
+
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
+
 
     button.disabled =
       false;
+
 
     showToast(
       'Could not remove the inventory item.',
@@ -4446,6 +5697,7 @@ async function deleteInventoryItem(
   }
 
 }
+
 
 
 /* RESTRICTIONS */
@@ -4459,11 +5711,15 @@ async function fetchRestrictionRows() {
       '?select=item_name,allowed_store'
     );
 
-  return Array.isArray(data)
+
+  return Array.isArray(
+    data
+  )
     ? data
     : [];
 
 }
+
 
 
 function groupRestrictions(
@@ -4473,6 +5729,7 @@ function groupRestrictions(
   const grouped =
     new Map();
 
+
   rows.forEach(
     row => {
 
@@ -4481,8 +5738,11 @@ function groupRestrictions(
           row.item_name
         );
 
+
       if (
-        !grouped.has(key)
+        !grouped.has(
+          key
+        )
       ) {
 
         grouped.set(
@@ -4498,8 +5758,12 @@ function groupRestrictions(
 
       }
 
+
       const item =
-        grouped.get(key);
+        grouped.get(
+          key
+        );
+
 
       if (
         !item.allowed_stores
@@ -4517,6 +5781,7 @@ function groupRestrictions(
     }
   );
 
+
   return sortByName(
     Array.from(
       grouped.values()
@@ -4526,22 +5791,198 @@ function groupRestrictions(
 }
 
 
+
+function renderRestrictionStores() {
+
+  restrictionStoreButtons.innerHTML =
+    '';
+
+
+  Object.entries(
+    STORES
+  )
+  .forEach(
+    ([key,label]) => {
+
+      const button =
+        document.createElement(
+          'button'
+        );
+
+
+      button.type =
+        'button';
+
+
+      button.className =
+        'main-button category-button';
+
+
+      button.textContent =
+        label;
+
+
+      button.addEventListener(
+        'click',
+        () => {
+
+          goRestrictionStore(
+            key
+          );
+
+        }
+      );
+
+
+      restrictionStoreButtons.appendChild(
+        button
+      );
+
+    }
+  );
+
+}
+
+
+
+function createRestrictionRow(
+  item
+) {
+
+  const button =
+    document.createElement(
+      'button'
+    );
+
+
+  const wrap =
+    document.createElement(
+      'div'
+    );
+
+
+  const name =
+    document.createElement(
+      'div'
+    );
+
+
+  const stores =
+    document.createElement(
+      'div'
+    );
+
+
+  const chevron =
+    document.createElement(
+      'div'
+    );
+
+
+  button.type =
+    'button';
+
+
+  button.className =
+    'restriction-row';
+
+
+  name.className =
+    'restriction-name';
+
+
+  name.textContent =
+    item.item_name;
+
+
+  stores.className =
+    'restriction-stores';
+
+
+  stores.textContent =
+    Object.keys(
+      STORES
+    )
+    .filter(
+      store =>
+        item.allowed_stores
+          .includes(
+            store
+          )
+    )
+    .map(
+      store =>
+        STORES[
+          store
+        ]
+    )
+    .join(
+      ' • '
+    );
+
+
+  wrap.append(
+    name,
+    stores
+  );
+
+
+  chevron.className =
+    'restriction-chevron';
+
+
+  chevron.textContent =
+    '›';
+
+
+  button.append(
+    wrap,
+    chevron
+  );
+
+
+  button.addEventListener(
+    'click',
+    () => {
+
+      goEditRestriction(
+        item.item_name,
+        location.hash
+      );
+
+    }
+  );
+
+
+  return button;
+
+}
+
+
+
 async function loadRestrictions() {
 
   restrictionList.innerHTML =
     '<div class="loading-state">Loading…</div>';
 
+
   try {
 
     renderRestrictions(
+
       groupRestrictions(
         await fetchRestrictionRows()
       )
+
     );
+
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
+
 
     restrictionList.innerHTML =
       '<div class="error-state">Could not load restrictions.</div>';
@@ -4551,6 +5992,7 @@ async function loadRestrictions() {
 }
 
 
+
 function renderRestrictions(
   items
 ) {
@@ -4558,110 +6000,132 @@ function renderRestrictions(
   restrictionList.innerHTML =
     '';
 
-  if (!items.length) {
+
+  if (
+    !items.length
+  ) {
 
     restrictionList.innerHTML =
       '<div class="empty-state">No restricted items yet.</div>';
+
 
     return;
 
   }
 
+
   items.forEach(
     item => {
 
-      const button =
-        document.createElement(
-          'button'
-        );
-
-      const wrap =
-        document.createElement(
-          'div'
-        );
-
-      const name =
-        document.createElement(
-          'div'
-        );
-
-      const stores =
-        document.createElement(
-          'div'
-        );
-
-      const chevron =
-        document.createElement(
-          'div'
-        );
-
-      button.type =
-        'button';
-
-      button.className =
-        'restriction-row';
-
-      name.className =
-        'restriction-name';
-
-      name.textContent =
-        item.item_name;
-
-      stores.className =
-        'restriction-stores';
-
-      stores.textContent =
-        Object.keys(
-          STORES
-        )
-        .filter(
-          store =>
-            item.allowed_stores
-              .includes(
-                store
-              )
-        )
-        .map(
-          store =>
-            STORES[store]
-        )
-        .join(' • ');
-
-      wrap.append(
-        name,
-        stores
-      );
-
-      chevron.className =
-        'restriction-chevron';
-
-      chevron.textContent =
-        '›';
-
-      button.append(
-        wrap,
-        chevron
-      );
-
-      button.addEventListener(
-        'click',
-        () => {
-
-          goEditRestriction(
-            item.item_name
-          );
-
-        }
-      );
-
       restrictionList.appendChild(
-        button
+        createRestrictionRow(
+          item
+        )
       );
 
     }
   );
 
 }
+
+
+
+async function loadRestrictionsByStore(
+  store
+) {
+
+  restrictionStoreList.innerHTML =
+    '<div class="loading-state">Loading…</div>';
+
+
+  try {
+
+    const items =
+      groupRestrictions(
+        await fetchRestrictionRows()
+      )
+      .filter(
+        item =>
+          item.allowed_stores
+            .includes(
+              store
+            )
+      );
+
+
+    if (
+      currentRestrictionStore !==
+      store
+    ) {
+
+      return;
+
+    }
+
+
+    renderRestrictionsByStore(
+      items
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      error
+    );
+
+
+    if (
+      currentRestrictionStore ===
+      store
+    ) {
+
+      restrictionStoreList.innerHTML =
+        '<div class="error-state">Could not load restrictions for this store.</div>';
+
+    }
+
+  }
+
+}
+
+
+
+function renderRestrictionsByStore(
+  items
+) {
+
+  restrictionStoreList.innerHTML =
+    '';
+
+
+  if (
+    !items.length
+  ) {
+
+    restrictionStoreList.innerHTML =
+      '<div class="empty-state">No restricted items are assigned to this store.</div>';
+
+
+    return;
+
+  }
+
+
+  items.forEach(
+    item => {
+
+      restrictionStoreList.appendChild(
+        createRestrictionRow(
+          item
+        )
+      );
+
+    }
+  );
+
+}
+
 
 
 function clearRestrictionChecks() {
@@ -4682,26 +6146,33 @@ function clearRestrictionChecks() {
 }
 
 
+
 function clearRestrictionForm() {
 
   editingRestrictionOriginalName =
     null;
 
+
   restrictionItemName.value =
     '';
 
+
   clearRestrictionChecks();
+
 
   deleteRestrictionButton.hidden =
     true;
 
+
   saveRestrictionButton.disabled =
     false;
+
 
   saveRestrictionButton.textContent =
     'Save Restriction';
 
 }
+
 
 
 async function loadRestrictionForEdit(
@@ -4711,49 +6182,65 @@ async function loadRestrictionForEdit(
   restrictionItemName.value =
     '';
 
+
   clearRestrictionChecks();
+
 
   deleteRestrictionButton.hidden =
     true;
+
 
   try {
 
     const rows =
       await fetchRestrictionRows();
 
+
     const targetKey =
       normalizedKey(
         itemName
       );
+
 
     const matches =
       rows.filter(
         row =>
           normalizedKey(
             row.item_name
-          ) === targetKey
+          ) ===
+          targetKey
       );
 
-    if (!matches.length) {
+
+    if (
+      !matches.length
+    ) {
 
       showToast(
         'That restriction no longer exists.',
         true
       );
 
-      goRestrictions();
+
+      goRestrictionReturn();
+
+
       return;
 
     }
 
+
     const displayName =
       matches[0].item_name;
+
 
     editingRestrictionOriginalName =
       displayName;
 
+
     restrictionItemName.value =
       displayName;
+
 
     matches.forEach(
       row => {
@@ -4763,7 +6250,10 @@ async function loadRestrictionForEdit(
             `input[name="allowedStore"][value="${row.allowed_store}"]`
           );
 
-        if (checkbox) {
+
+        if (
+          checkbox
+        ) {
 
           checkbox.checked =
             true;
@@ -4773,23 +6263,30 @@ async function loadRestrictionForEdit(
       }
     );
 
+
     deleteRestrictionButton.hidden =
       false;
 
+
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
+
 
     showToast(
       'Could not load this restriction.',
       true
     );
 
-    goRestrictions();
+
+    goRestrictionReturn();
 
   }
 
 }
+
 
 
 function getCheckedStores() {
@@ -4807,278 +6304,339 @@ function getCheckedStores() {
 }
 
 
-restrictionForm.addEventListener(
-  'submit',
-  async event => {
 
-    event.preventDefault();
+restrictionForm
+  .addEventListener(
+    'submit',
+    async event => {
 
-    const itemName =
-      normalizeItemName(
-        restrictionItemName.value
-      );
+      event.preventDefault();
 
-    const allowedStores =
-      getCheckedStores();
 
-    if (!itemName) {
-
-      showToast(
-        'Please enter an item.',
-        true
-      );
-
-      restrictionItemName.focus();
-      return;
-
-    }
-
-    if (
-      normalizedKey(
-        itemName
-      ) ===
-      'case of water'
-    ) {
-
-      showToast(
-        'Case of Water is permanently assigned to Sam’s / CostCo.',
-        true
-      );
-
-      return;
-
-    }
-
-    if (
-      !allowedStores.length
-    ) {
-
-      showToast(
-        'Choose at least one allowed store.',
-        true
-      );
-
-      return;
-
-    }
-
-    saveRestrictionButton.disabled =
-      true;
-
-    saveRestrictionButton.textContent =
-      'Saving…';
-
-    try {
-
-      const result =
-        unwrapRpcResult(
-          await api(
-            '/rest/v1/rpc/save_item_store_restriction',
-            {
-              method:'POST',
-
-              body:JSON.stringify({
-                p_original_item_name:
-                  editingRestrictionOriginalName,
-
-                p_item_name:
-                  itemName,
-
-                p_allowed_stores:
-                  allowedStores
-              })
-            }
-          )
+      const itemName =
+        normalizeItemName(
+          restrictionItemName.value
         );
 
+
+      const allowedStores =
+        getCheckedStores();
+
+
       if (
-        result &&
-        result.saved === false
+        !itemName
       ) {
 
+        showToast(
+          'Please enter an item.',
+          true
+        );
+
+
+        restrictionItemName.focus();
+
+
+        return;
+
+      }
+
+
+      if (
+        normalizedKey(
+          itemName
+        ) ===
+        'case of water'
+      ) {
+
+        showToast(
+          'Case of Water is permanently assigned to Sam’s / CostCo.',
+          true
+        );
+
+
+        return;
+
+      }
+
+
+      if (
+        !allowedStores.length
+      ) {
+
+        showToast(
+          'Choose at least one allowed store.',
+          true
+        );
+
+
+        return;
+
+      }
+
+
+      saveRestrictionButton.disabled =
+        true;
+
+
+      saveRestrictionButton.textContent =
+        'Saving…';
+
+
+      try {
+
+        const result =
+          unwrapRpcResult(
+
+            await api(
+              '/rest/v1/rpc/save_item_store_restriction',
+              {
+                method:
+                  'POST',
+
+                body:
+                  JSON.stringify({
+                    p_original_item_name:
+                      editingRestrictionOriginalName,
+
+                    p_item_name:
+                      itemName,
+
+                    p_allowed_stores:
+                      allowedStores
+                  })
+              }
+            )
+
+          );
+
+
         if (
-          result.reason ===
-          'restriction_exists'
+          result &&
+          result.saved ===
+            false
         ) {
 
+          if (
+            result.reason ===
+            'restriction_exists'
+          ) {
+
+            showToast(
+              'A restriction for that item already exists.',
+              true
+            );
+
+
+            return;
+
+          }
+
+
+          if (
+            result.reason ===
+            'item_on_disallowed_store'
+          ) {
+
+            showToast(
+              `${itemName} is currently on the ${STORES[result.existing_store] || 'another store'} list. Remove it from that list before applying this restriction.`,
+              true
+            );
+
+
+            return;
+
+          }
+
+
+          if (
+            result.reason ===
+            'no_stores'
+          ) {
+
+            showToast(
+              'Choose at least one allowed store.',
+              true
+            );
+
+
+            return;
+
+          }
+
+
           showToast(
-            'A restriction for that item already exists.',
+            'Could not save the restriction.',
             true
           );
+
 
           return;
 
         }
 
-        if (
-          result.reason ===
-          'item_on_disallowed_store'
-        ) {
 
-          showToast(
-            `${itemName} is currently on the ${STORES[result.existing_store] || 'another store'} list. Remove it from that list before applying this restriction.`,
-            true
-          );
+        goRestrictionReturn();
 
-          return;
 
-        }
+        setTimeout(
+          () => {
 
-        if (
-          result.reason ===
-          'no_stores'
-        ) {
+            showToast(
+              `${itemName} restriction saved.`
+            );
 
-          showToast(
-            'Choose at least one allowed store.',
-            true
-          );
+          },
+          80
+        );
 
-          return;
 
-        }
+      } catch (error) {
+
+        console.error(
+          error
+        );
+
 
         showToast(
           'Could not save the restriction.',
           true
         );
 
+
+      } finally {
+
+        saveRestrictionButton.disabled =
+          false;
+
+
+        saveRestrictionButton.textContent =
+          'Save Restriction';
+
+      }
+
+    }
+  );
+
+
+
+deleteRestrictionButton
+  .addEventListener(
+    'click',
+    async () => {
+
+      if (
+        !editingRestrictionOriginalName
+      ) {
+
         return;
 
       }
 
-      goRestrictions();
 
-      setTimeout(
-        () => {
+      const itemName =
+        editingRestrictionOriginalName;
 
-          showToast(
-            `${itemName} restriction saved.`
-          );
-
-        },
-        80
-      );
-
-    } catch (error) {
-
-      console.error(error);
-
-      showToast(
-        'Could not save the restriction.',
-        true
-      );
-
-    } finally {
-
-      saveRestrictionButton.disabled =
-        false;
-
-      saveRestrictionButton.textContent =
-        'Save Restriction';
-
-    }
-
-  }
-);
-
-
-deleteRestrictionButton.addEventListener(
-  'click',
-  async () => {
-
-    if (
-      !editingRestrictionOriginalName
-    ) {
-
-      return;
-
-    }
-
-    const itemName =
-      editingRestrictionOriginalName;
-
-    if (
-      !window.confirm(
-        `Delete the restriction for ${itemName}?`
-      )
-    ) {
-
-      return;
-
-    }
-
-    deleteRestrictionButton.disabled =
-      true;
-
-    deleteRestrictionButton.textContent =
-      'Deleting…';
-
-    try {
-
-      const result =
-        unwrapRpcResult(
-          await api(
-            '/rest/v1/rpc/delete_item_store_restriction',
-            {
-              method:'POST',
-
-              body:JSON.stringify({
-                p_item_name:
-                  itemName
-              })
-            }
-          )
-        );
 
       if (
-        !result ||
-        result.deleted !== true
+        !window.confirm(
+          `Delete the restriction for ${itemName}?`
+        )
       ) {
+
+        return;
+
+      }
+
+
+      deleteRestrictionButton.disabled =
+        true;
+
+
+      deleteRestrictionButton.textContent =
+        'Deleting…';
+
+
+      try {
+
+        const result =
+          unwrapRpcResult(
+
+            await api(
+              '/rest/v1/rpc/delete_item_store_restriction',
+              {
+                method:
+                  'POST',
+
+                body:
+                  JSON.stringify({
+                    p_item_name:
+                      itemName
+                  })
+              }
+            )
+
+          );
+
+
+        if (
+          !result ||
+          result.deleted !==
+            true
+        ) {
+
+          showToast(
+            'Could not delete the restriction.',
+            true
+          );
+
+
+          return;
+
+        }
+
+
+        goRestrictionReturn();
+
+
+        setTimeout(
+          () => {
+
+            showToast(
+              `${itemName} restriction deleted.`
+            );
+
+          },
+          80
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          error
+        );
+
 
         showToast(
           'Could not delete the restriction.',
           true
         );
 
-        return;
+
+      } finally {
+
+        deleteRestrictionButton.disabled =
+          false;
+
+
+        deleteRestrictionButton.textContent =
+          'Delete Restriction';
 
       }
 
-      goRestrictions();
-
-      setTimeout(
-        () => {
-
-          showToast(
-            `${itemName} restriction deleted.`
-          );
-
-        },
-        80
-      );
-
-    } catch (error) {
-
-      console.error(error);
-
-      showToast(
-        'Could not delete the restriction.',
-        true
-      );
-
-    } finally {
-
-      deleteRestrictionButton.disabled =
-        false;
-
-      deleteRestrictionButton.textContent =
-        'Delete Restriction';
-
     }
+  );
 
-  }
-);
 
 
 window.addEventListener(
@@ -5087,13 +6645,19 @@ window.addEventListener(
 );
 
 
+
 document.addEventListener(
   'visibilitychange',
   () => {
 
-    if (document.hidden) {
+    if (
+      document.hidden
+    ) {
+
       return;
+
     }
+
 
     if (
       currentStore
@@ -5103,9 +6667,11 @@ document.addEventListener(
         true
       );
 
+
       return;
 
     }
+
 
     if (
       currentInventoryCategory &&
@@ -5118,19 +6684,41 @@ document.addEventListener(
         true
       );
 
+
       return;
 
     }
+
 
     if (
       location.hash ===
-      '#restrictions'
+      '#restrictions/items'
     ) {
 
       loadRestrictions();
+
+
       return;
 
     }
+
+
+    if (
+      currentRestrictionStore &&
+      location.hash.startsWith(
+        '#restrictions/store/'
+      )
+    ) {
+
+      loadRestrictionsByStore(
+        currentRestrictionStore
+      );
+
+
+      return;
+
+    }
+
 
     if (
       location.hash ===
@@ -5145,7 +6733,10 @@ document.addEventListener(
 );
 
 
-if (!location.hash) {
+
+if (
+  !location.hash
+) {
 
   history.replaceState(
     null,
