@@ -3,133 +3,759 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<!-- APP VERSION: 1.0.16 -->
-<meta name="app-version" content="1.0.16">
+
+<!-- APP VERSION: 1.0.17 -->
+<meta name="app-version" content="1.0.17">
+
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
+
 <meta name="theme-color" content="#0b0b0b">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
+
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.16">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.16">
+
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.17">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.17">
 
 <style>
-:root{--black:#0b0b0b;--page:#f5f6f8;--white:#fff;--blue:#1e5acb;--blue-dark:#15459f;--border:#d9d9d9;--text:#171717;--muted:#6b7280;--danger:#c62828;--shadow:0 8px 24px rgba(0,0,0,.10);--radius:16px}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--page);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%}body{min-height:100vh;min-height:100dvh}button,input,select{font:inherit}button{touch-action:manipulation}
+:root{
+  --black:#0b0b0b;
+  --page:#f5f6f8;
+  --white:#fff;
+  --blue:#1e5acb;
+  --blue-dark:#15459f;
+  --green:#218c4f;
+  --green-dark:#176b3a;
+  --red:#c62828;
+  --red-dark:#991f1f;
+  --border:#d9d9d9;
+  --text:#171717;
+  --muted:#6b7280;
+  --danger:#c62828;
+  --shadow:0 8px 24px rgba(0,0,0,.10);
+  --radius:16px
+}
 
-.app-header{height:calc(82px + env(safe-area-inset-top));padding:calc(9px + env(safe-area-inset-top)) 14px 9px;background:var(--black);color:var(--white);display:flex;align-items:center;gap:10px;position:fixed;inset:0 0 auto 0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.22)}
-.app-header h1{flex:1;min-width:0;margin:0;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:22px;line-height:1.1;font-weight:850}
-.header-logo{width:58px;height:58px;flex:0 0 58px;object-fit:cover;border-radius:12px;box-shadow:0 0 0 1px rgba(255,255,255,.14),0 4px 12px rgba(0,0,0,.35)}
+*{
+  box-sizing:border-box
+}
 
-.back-button{width:44px;height:44px;flex:0 0 44px;border:0;border-radius:12px;background:transparent;color:var(--white);font-size:32px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.back-button[hidden]{display:none!important}
-.back-button:active{background:rgba(255,255,255,.12)}
+html,
+body{
+  margin:0;
+  min-height:100%;
+  background:var(--page);
+  color:var(--text);
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  -webkit-text-size-adjust:100%
+}
 
-main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inset-top)) 16px calc(42px + env(safe-area-inset-bottom))}
-.screen[hidden]{display:none!important}
+body{
+  min-height:100vh;
+  min-height:100dvh
+}
 
-#homeScreen:not([hidden]){display:flex;flex-direction:column;min-height:calc(100dvh - 155px - env(safe-area-inset-top))}
-.button-stack,.category-stack,.home-bottom-menu{display:grid;gap:13px}
-.home-bottom-menu{margin-top:auto;padding-top:22px;margin-bottom:24px}
+button,
+input,
+select{
+  font:inherit
+}
 
-.main-button,.save-button{width:100%;min-height:62px;border:2px solid var(--black);border-radius:14px;background:var(--blue);color:var(--white);font-size:20px;font-weight:800;box-shadow:0 5px 14px rgba(30,90,203,.24);cursor:pointer;transition:transform .08s ease,background .15s ease}
-.main-button:active,.save-button:active{transform:scale(.985);background:var(--blue-dark)}
-.main-button.add-item,.store-add-button,.inventory-add-button{background:var(--black);box-shadow:0 5px 14px rgba(0,0,0,.20)}
-.store-button{position:relative}
-.store-add-button,.inventory-add-button{margin-bottom:13px}
-.secondary-menu-button{min-height:54px;font-size:17px}
+button{
+  touch-action:manipulation
+}
 
-.count-badge{position:absolute;top:7px;right:8px;min-width:29px;height:29px;padding:0 7px;border-radius:15px;background:var(--white);color:var(--blue);border:2px solid var(--black);font-size:15px;font-weight:900;line-height:25px;text-align:center;box-shadow:0 2px 5px rgba(0,0,0,.18);pointer-events:none}
+.app-header{
+  height:calc(82px + env(safe-area-inset-top));
+  padding:
+    calc(9px + env(safe-area-inset-top))
+    14px
+    9px;
+  background:var(--black);
+  color:var(--white);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  position:fixed;
+  inset:0 0 auto 0;
+  z-index:1000;
+  box-shadow:
+    0 2px 10px rgba(0,0,0,.22)
+}
 
-.version-label{position:fixed;left:10px;bottom:calc(7px + env(safe-area-inset-bottom));color:#000;font-size:11px;font-weight:500;z-index:10;pointer-events:none}
+.app-header h1{
+  flex:1;
+  min-width:0;
+  margin:0;
+  text-align:center;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  font-size:22px;
+  line-height:1.1;
+  font-weight:850
+}
 
-.card,.restriction-list{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-.form-card{padding:18px}
+.header-logo{
+  width:58px;
+  height:58px;
+  flex:0 0 58px;
+  object-fit:cover;
+  border-radius:12px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.14),
+    0 4px 12px rgba(0,0,0,.35)
+}
 
-.field{margin-bottom:18px}
-.field label,.field-label{display:block;margin-bottom:7px;font-size:15px;font-weight:800}
-.field input,.field select{width:100%;min-height:54px;padding:12px 13px;border:1.5px solid var(--border);border-radius:12px;background:var(--white);color:var(--text);font-size:18px;outline:none}
-.field input:focus,.field select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,90,203,.12)}
-.field select:disabled{opacity:1;background:#eee;color:#4b5563;-webkit-text-fill-color:#4b5563;border-color:#b8b8b8}
+.back-button{
+  width:44px;
+  height:44px;
+  flex:0 0 44px;
+  border:0;
+  border-radius:12px;
+  background:transparent;
+  color:var(--white);
+  font-size:32px;
+  line-height:1;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
 
-.locked-note,.form-note{margin-top:7px;color:var(--muted);font-size:13px;font-weight:650}
-.locked-note[hidden]{display:none!important}
+.back-button[hidden]{
+  display:none!important
+}
 
-.qty-control{display:flex;align-items:center;justify-content:center;gap:5px}
-.qty-step-button{width:36px;height:44px;flex:0 0 36px;border:2px solid var(--black);border-radius:10px;background:var(--white);color:var(--black);font-size:24px;font-weight:900;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.qty-step-button:active{background:#e7e7e7}
-.qty-step-button:disabled{opacity:.35}
+.back-button:active{
+  background:rgba(255,255,255,.12)
+}
 
-.qty-input{width:48px;min-height:44px;padding:4px;border:1.5px solid var(--border);border-radius:10px;background:var(--white);color:var(--text);text-align:center;font-size:18px;font-weight:800;outline:none;-moz-appearance:textfield}
-.qty-input::-webkit-outer-spin-button,.qty-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-.qty-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,90,203,.12)}
+main{
+  width:min(100%,620px);
+  margin:0 auto;
+  padding:
+    calc(104px + env(safe-area-inset-top))
+    16px
+    calc(42px + env(safe-area-inset-bottom))
+}
 
-.add-qty-control{justify-content:flex-start}
-.add-qty-control .qty-step-button{width:48px;height:52px;flex:0 0 48px}
-.add-qty-control .qty-input{width:76px;min-height:52px;font-size:20px}
+.screen[hidden]{
+  display:none!important
+}
 
-.list-card{padding:0}
-.list-heading,.item-row{display:grid;grid-template-columns:minmax(0,1fr) 132px 48px;gap:8px;align-items:center}
-.list-heading{padding:12px 14px;background:#edf3ff;border-bottom:1px solid var(--border);color:#364152;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.7px}
-.list-heading span:nth-child(2){text-align:center}
+#homeScreen:not([hidden]){
+  display:flex;
+  flex-direction:column;
+  min-height:
+    calc(
+      100dvh -
+      155px -
+      env(safe-area-inset-top)
+    )
+}
 
-.item-row{min-height:66px;padding:9px 14px;border-bottom:1px solid #ececec}
-.item-row:last-child{border-bottom:0}
-.item-name{min-width:0;font-size:17px;font-weight:750;overflow-wrap:anywhere}
+.button-stack,
+.category-stack,
+.home-bottom-menu{
+  display:grid;
+  gap:13px
+}
 
-.qty-fixed{width:48px;min-height:44px;margin:0 auto;border:1.5px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;background:#f1f3f6;color:#515865;font-size:18px;font-weight:800}
+.home-bottom-menu{
+  margin-top:auto;
+  padding-top:22px;
+  margin-bottom:24px
+}
 
-.delete-button{width:44px;height:44px;border:2px solid var(--black);border-radius:11px;background:#fff1f1;color:var(--danger);font-size:28px;line-height:1;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.delete-button:active{background:#ffdede}
-.delete-button:disabled{opacity:.45}
+.main-button,
+.save-button{
+  width:100%;
+  min-height:62px;
+  border:2px solid var(--black);
+  border-radius:14px;
+  background:var(--blue);
+  color:var(--white);
+  font-size:20px;
+  font-weight:800;
+  box-shadow:
+    0 5px 14px rgba(30,90,203,.24);
+  cursor:pointer;
+  transition:
+    transform .08s ease,
+    background .15s ease
+}
 
-.permanent-row{background:#f7faff}
-.fixed-note{color:var(--blue);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-top:3px}
+.main-button:active,
+.save-button:active{
+  transform:scale(.985);
+  background:var(--blue-dark)
+}
 
-.category-button{text-align:left;padding:0 18px}
-.category-button::after{content:'›';float:right;font-size:29px;font-weight:500;line-height:24px}
+.main-button.add-item,
+.store-add-button,
+.inventory-add-button{
+  background:var(--black);
+  box-shadow:
+    0 5px 14px rgba(0,0,0,.20)
+}
 
-.inventory-category-note{margin:0 0 13px;color:var(--muted);font-size:13px;font-weight:650;text-align:center}
+.store-button{
+  position:relative
+}
 
-.restrictions-toolbar{margin-bottom:13px}
+.store-add-button,
+.inventory-add-button{
+  margin-bottom:13px
+}
 
-.restriction-row{width:100%;border:0;border-bottom:1px solid #ececec;background:var(--white);color:var(--text);padding:14px 15px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;text-align:left;cursor:pointer}
-.restriction-row:last-child{border-bottom:0}
-.restriction-row:active{background:#edf3ff}
+.secondary-menu-button{
+  min-height:54px;
+  font-size:17px
+}
 
-.restriction-name{font-size:17px;font-weight:800;overflow-wrap:anywhere}
-.restriction-stores{margin-top:4px;color:var(--muted);font-size:13px;font-weight:650}
-.restriction-chevron{color:var(--blue);font-size:30px;line-height:1;font-weight:500}
+#inventoryButton{
+  background:var(--green);
+  box-shadow:
+    0 5px 14px rgba(33,140,79,.24)
+}
 
-.store-checks{display:grid;gap:9px}
-.store-check-row{min-height:50px;padding:8px 12px;border:1.5px solid var(--border);border-radius:12px;background:#fafafa;display:flex!important;align-items:center;gap:11px;cursor:pointer;font-size:17px!important;font-weight:700!important}
-.store-check-row input{width:23px;height:23px;margin:0;accent-color:var(--blue)}
+#inventoryButton:active{
+  background:var(--green-dark)
+}
 
-.delete-restriction-button{width:100%;min-height:54px;margin-top:14px;border:2px solid var(--black);border-radius:14px;background:#fff1f1;color:var(--danger);font-size:18px;font-weight:850;cursor:pointer}
-.delete-restriction-button[hidden]{display:none!important}
-.delete-restriction-button:active{background:#ffdede}
+#manageRestrictionsButton{
+  background:var(--red);
+  box-shadow:
+    0 5px 14px rgba(198,40,40,.24)
+}
 
-.empty-state,.loading-state,.error-state{padding:28px 18px;text-align:center;color:var(--muted);font-size:16px}
-.error-state{color:var(--danger)}
+#manageRestrictionsButton:active{
+  background:var(--red-dark)
+}
 
-.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translate(-50%,18px);width:min(calc(100% - 32px),520px);min-height:52px;padding:9px 10px 9px 16px;border-radius:12px;background:var(--black);color:var(--white);display:flex;align-items:center;justify-content:center;gap:14px;text-align:center;font-weight:700;box-shadow:0 8px 30px rgba(0,0,0,.26);opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:2000}
-.toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}
-.toast.error{background:#8f1d1d}
-.toast-message{min-width:0}
+.count-badge{
+  position:absolute;
+  top:7px;
+  right:8px;
+  min-width:29px;
+  height:29px;
+  padding:0 7px;
+  border-radius:15px;
+  background:var(--white);
+  color:var(--blue);
+  border:2px solid var(--black);
+  font-size:15px;
+  font-weight:900;
+  line-height:25px;
+  text-align:center;
+  box-shadow:
+    0 2px 5px rgba(0,0,0,.18);
+  pointer-events:none
+}
 
-.toast-undo-button{flex:0 0 auto;min-height:36px;padding:6px 12px;border:1.5px solid var(--white);border-radius:9px;background:transparent;color:var(--white);font-size:14px;font-weight:900;cursor:pointer}
-.toast-undo-button[hidden]{display:none!important}
-.toast-undo-button:active{background:rgba(255,255,255,.18)}
-.toast-undo-button:disabled{opacity:.5}
+.version-label{
+  position:fixed;
+  left:10px;
+  bottom:
+    calc(
+      7px +
+      env(safe-area-inset-bottom)
+    );
+  color:#000;
+  font-size:11px;
+  font-weight:500;
+  z-index:10;
+  pointer-events:none
+}
+
+.card,
+.restriction-list{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden
+}
+
+.form-card{
+  padding:18px
+}
+
+.field{
+  margin-bottom:18px
+}
+
+.field label,
+.field-label{
+  display:block;
+  margin-bottom:7px;
+  font-size:15px;
+  font-weight:800
+}
+
+.field input,
+.field select{
+  width:100%;
+  min-height:54px;
+  padding:12px 13px;
+  border:1.5px solid var(--border);
+  border-radius:12px;
+  background:var(--white);
+  color:var(--text);
+  font-size:18px;
+  outline:none
+}
+
+.field input:focus,
+.field select:focus{
+  border-color:var(--blue);
+  box-shadow:
+    0 0 0 3px rgba(30,90,203,.12)
+}
+
+.field select:disabled{
+  opacity:1;
+  background:#eee;
+  color:#4b5563;
+  -webkit-text-fill-color:#4b5563;
+  border-color:#b8b8b8
+}
+
+.locked-note,
+.form-note{
+  margin-top:7px;
+  color:var(--muted);
+  font-size:13px;
+  font-weight:650
+}
+
+.locked-note[hidden]{
+  display:none!important
+}
+
+.qty-control{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px
+}
+
+.qty-step-button{
+  width:36px;
+  height:44px;
+  flex:0 0 36px;
+  border:2px solid var(--black);
+  border-radius:10px;
+  background:var(--white);
+  color:var(--black);
+  font-size:24px;
+  font-weight:900;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer
+}
+
+.qty-step-button:active{
+  background:#e7e7e7
+}
+
+.qty-step-button:disabled{
+  opacity:.35
+}
+
+.qty-input{
+  width:48px;
+  min-height:44px;
+  padding:4px;
+  border:1.5px solid var(--border);
+  border-radius:10px;
+  background:var(--white);
+  color:var(--text);
+  text-align:center;
+  font-size:18px;
+  font-weight:800;
+  outline:none;
+  -moz-appearance:textfield
+}
+
+.qty-input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button{
+  -webkit-appearance:none;
+  margin:0
+}
+
+.qty-input:focus{
+  border-color:var(--blue);
+  box-shadow:
+    0 0 0 3px rgba(30,90,203,.12)
+}
+
+.add-qty-control{
+  justify-content:flex-start
+}
+
+.add-qty-control .qty-step-button{
+  width:48px;
+  height:52px;
+  flex:0 0 48px
+}
+
+.add-qty-control .qty-input{
+  width:76px;
+  min-height:52px;
+  font-size:20px
+}
+
+.list-card{
+  padding:0
+}
+
+.list-heading,
+.item-row{
+  display:grid;
+  grid-template-columns:
+    minmax(0,1fr)
+    132px
+    48px;
+  gap:8px;
+  align-items:center
+}
+
+.list-heading{
+  padding:12px 14px;
+  background:#edf3ff;
+  border-bottom:1px solid var(--border);
+  color:#364152;
+  font-size:12px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.7px
+}
+
+.list-heading span:nth-child(2){
+  text-align:center
+}
+
+.item-row{
+  min-height:66px;
+  padding:9px 14px;
+  border-bottom:1px solid #ececec
+}
+
+.item-row:last-child{
+  border-bottom:0
+}
+
+.item-name{
+  min-width:0;
+  font-size:17px;
+  font-weight:750;
+  overflow-wrap:anywhere
+}
+
+.qty-fixed{
+  width:48px;
+  min-height:44px;
+  margin:0 auto;
+  border:1.5px solid var(--border);
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#f1f3f6;
+  color:#515865;
+  font-size:18px;
+  font-weight:800
+}
+
+.delete-button{
+  width:44px;
+  height:44px;
+  border:2px solid var(--black);
+  border-radius:11px;
+  background:#fff1f1;
+  color:var(--danger);
+  font-size:28px;
+  line-height:1;
+  font-weight:700;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+
+.delete-button:active{
+  background:#ffdede
+}
+
+.delete-button:disabled{
+  opacity:.45
+}
+
+.permanent-row{
+  background:#f7faff
+}
+
+.fixed-note{
+  color:var(--blue);
+  font-size:11px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  margin-top:3px
+}
+
+.category-button{
+  text-align:left;
+  padding:0 18px
+}
+
+.category-button::after{
+  content:'›';
+  float:right;
+  font-size:29px;
+  font-weight:500;
+  line-height:24px
+}
+
+.inventory-category-note{
+  margin:0 0 13px;
+  color:var(--muted);
+  font-size:13px;
+  font-weight:650;
+  text-align:center
+}
+
+.restrictions-toolbar{
+  margin-bottom:13px
+}
+
+.restriction-row{
+  width:100%;
+  border:0;
+  border-bottom:1px solid #ececec;
+  background:var(--white);
+  color:var(--text);
+  padding:14px 15px;
+  display:grid;
+  grid-template-columns:
+    minmax(0,1fr)
+    auto;
+  gap:12px;
+  align-items:center;
+  text-align:left;
+  cursor:pointer
+}
+
+.restriction-row:last-child{
+  border-bottom:0
+}
+
+.restriction-row:active{
+  background:#edf3ff
+}
+
+.restriction-name{
+  font-size:17px;
+  font-weight:800;
+  overflow-wrap:anywhere
+}
+
+.restriction-stores{
+  margin-top:4px;
+  color:var(--muted);
+  font-size:13px;
+  font-weight:650
+}
+
+.restriction-chevron{
+  color:var(--blue);
+  font-size:30px;
+  line-height:1;
+  font-weight:500
+}
+
+.store-checks{
+  display:grid;
+  gap:9px
+}
+
+.store-check-row{
+  min-height:50px;
+  padding:8px 12px;
+  border:1.5px solid var(--border);
+  border-radius:12px;
+  background:#fafafa;
+  display:flex!important;
+  align-items:center;
+  gap:11px;
+  cursor:pointer;
+  font-size:17px!important;
+  font-weight:700!important
+}
+
+.store-check-row input{
+  width:23px;
+  height:23px;
+  margin:0;
+  accent-color:var(--blue)
+}
+
+.delete-restriction-button{
+  width:100%;
+  min-height:54px;
+  margin-top:14px;
+  border:2px solid var(--black);
+  border-radius:14px;
+  background:#fff1f1;
+  color:var(--danger);
+  font-size:18px;
+  font-weight:850;
+  cursor:pointer
+}
+
+.delete-restriction-button[hidden]{
+  display:none!important
+}
+
+.delete-restriction-button:active{
+  background:#ffdede
+}
+
+.empty-state,
+.loading-state,
+.error-state{
+  padding:28px 18px;
+  text-align:center;
+  color:var(--muted);
+  font-size:16px
+}
+
+.error-state{
+  color:var(--danger)
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:
+    calc(
+      20px +
+      env(safe-area-inset-bottom)
+    );
+  transform:
+    translate(-50%,18px);
+  width:
+    min(
+      calc(100% - 32px),
+      520px
+    );
+  min-height:52px;
+  padding:
+    9px
+    10px
+    9px
+    16px;
+  border-radius:12px;
+  background:var(--black);
+  color:var(--white);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  text-align:center;
+  font-weight:700;
+  box-shadow:
+    0 8px 30px rgba(0,0,0,.26);
+  opacity:0;
+  pointer-events:none;
+  transition:
+    opacity .18s ease,
+    transform .18s ease;
+  z-index:2000
+}
+
+.toast.show{
+  opacity:1;
+  transform:
+    translate(-50%,0);
+  pointer-events:auto
+}
+
+.toast.error{
+  background:#8f1d1d
+}
+
+.toast-message{
+  min-width:0
+}
+
+.toast-undo-button{
+  flex:0 0 auto;
+  min-height:36px;
+  padding:6px 12px;
+  border:1.5px solid var(--white);
+  border-radius:9px;
+  background:transparent;
+  color:var(--white);
+  font-size:14px;
+  font-weight:900;
+  cursor:pointer
+}
+
+.toast-undo-button[hidden]{
+  display:none!important
+}
+
+.toast-undo-button:active{
+  background:
+    rgba(255,255,255,.18)
+}
+
+.toast-undo-button:disabled{
+  opacity:.5
+}
 
 @media(max-width:390px){
-  .app-header h1{font-size:19px}
-  .list-heading,.item-row{grid-template-columns:minmax(0,1fr) 124px 44px;gap:5px;padding-left:10px;padding-right:10px}
-  .qty-step-button{width:34px;flex-basis:34px}
-  .qty-input{width:44px}
+
+  .app-header h1{
+    font-size:19px
+  }
+
+  .list-heading,
+  .item-row{
+    grid-template-columns:
+      minmax(0,1fr)
+      124px
+      44px;
+    gap:5px;
+    padding-left:10px;
+    padding-right:10px
+  }
+
+  .qty-step-button{
+    width:34px;
+    flex-basis:34px
+  }
+
+  .qty-input{
+    width:44px
+  }
+
 }
 </style>
 </head>
@@ -137,91 +763,221 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 <body>
 
 <header class="app-header">
-  <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
-  <h1 id="pageTitle">Uno Club Shopping</h1>
-  <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.16" alt="Uno Club Shopping logo">
+
+  <button
+    id="backButton"
+    class="back-button"
+    type="button"
+    aria-label="Back"
+    hidden
+  >
+    &larr;
+  </button>
+
+  <h1 id="pageTitle">
+    Uno Club Shopping
+  </h1>
+
+  <img
+    class="header-logo"
+    src="uno-club-shopping.PNG?v=1.0.17"
+    alt="Uno Club Shopping logo"
+  >
+
 </header>
+
 
 <main>
 
-  <section id="homeScreen" class="screen">
+  <section
+    id="homeScreen"
+    class="screen"
+  >
 
     <div class="button-stack">
 
-      <button id="addItemButton" class="main-button add-item" type="button">
+      <button
+        id="addItemButton"
+        class="main-button add-item"
+        type="button"
+      >
         Add Item
       </button>
 
-      <button class="main-button store-button" type="button" data-store="sams_costco">
+
+      <button
+        class="main-button store-button"
+        type="button"
+        data-store="sams_costco"
+      >
         Sam’s / CostCo
-        <span class="count-badge" data-count-store="sams_costco">1</span>
+
+        <span
+          class="count-badge"
+          data-count-store="sams_costco"
+        >
+          1
+        </span>
       </button>
 
-      <button class="main-button store-button" type="button" data-store="walmart">
+
+      <button
+        class="main-button store-button"
+        type="button"
+        data-store="walmart"
+      >
         Walmart
-        <span class="count-badge" data-count-store="walmart">0</span>
+
+        <span
+          class="count-badge"
+          data-count-store="walmart"
+        >
+          0
+        </span>
       </button>
 
-      <button class="main-button store-button" type="button" data-store="alcohol">
+
+      <button
+        class="main-button store-button"
+        type="button"
+        data-store="alcohol"
+      >
         Alcohol
-        <span class="count-badge" data-count-store="alcohol">0</span>
+
+        <span
+          class="count-badge"
+          data-count-store="alcohol"
+        >
+          0
+        </span>
       </button>
 
-      <button class="main-button store-button" type="button" data-store="sodas">
+
+      <button
+        class="main-button store-button"
+        type="button"
+        data-store="sodas"
+      >
         Sodas
-        <span class="count-badge" data-count-store="sodas">0</span>
+
+        <span
+          class="count-badge"
+          data-count-store="sodas"
+        >
+          0
+        </span>
       </button>
 
-      <button class="main-button store-button" type="button" data-store="amazon">
+
+      <button
+        class="main-button store-button"
+        type="button"
+        data-store="amazon"
+      >
         Amazon
-        <span class="count-badge" data-count-store="amazon">0</span>
+
+        <span
+          class="count-badge"
+          data-count-store="amazon"
+        >
+          0
+        </span>
       </button>
 
     </div>
 
+
     <div class="home-bottom-menu">
 
-      <button id="inventoryButton" class="main-button secondary-menu-button" type="button">
+      <button
+        id="inventoryButton"
+        class="main-button secondary-menu-button"
+        type="button"
+      >
         Inventory
       </button>
 
-      <button id="manageRestrictionsButton" class="main-button secondary-menu-button" type="button">
+
+      <button
+        id="manageRestrictionsButton"
+        class="main-button secondary-menu-button"
+        type="button"
+      >
         Manage Restrictions
       </button>
 
     </div>
 
+
     <div class="version-label">
-      v1.0.16
+      v1.0.17
     </div>
 
   </section>
 
 
-  <section id="addScreen" class="screen" hidden>
+  <section
+    id="addScreen"
+    class="screen"
+    hidden
+  >
 
     <div class="card form-card">
 
       <form id="addItemForm">
 
         <div class="field">
-          <label for="itemName">What item would you like to add?</label>
-          <input id="itemName" type="text" maxlength="100" autocomplete="off" required>
+
+          <label for="itemName">
+            What item would you like to add?
+          </label>
+
+          <input
+            id="itemName"
+            type="text"
+            maxlength="100"
+            autocomplete="off"
+            required
+          >
+
         </div>
+
 
         <div class="field">
 
-          <label>Quantity</label>
+          <label>
+            Quantity
+          </label>
 
           <div class="qty-control add-qty-control">
 
-            <button id="addQtyMinus" class="qty-step-button" type="button" aria-label="Decrease quantity">
+            <button
+              id="addQtyMinus"
+              class="qty-step-button"
+              type="button"
+              aria-label="Decrease quantity"
+            >
               −
             </button>
 
-            <input id="quantity" class="qty-input" type="number" min="1" max="9999" step="1" inputmode="numeric" value="1" aria-label="Quantity">
+            <input
+              id="quantity"
+              class="qty-input"
+              type="number"
+              min="1"
+              max="9999"
+              step="1"
+              inputmode="numeric"
+              value="1"
+              aria-label="Quantity"
+            >
 
-            <button id="addQtyPlus" class="qty-step-button" type="button" aria-label="Increase quantity">
+            <button
+              id="addQtyPlus"
+              class="qty-step-button"
+              type="button"
+              aria-label="Increase quantity"
+            >
               +
             </button>
 
@@ -229,13 +985,23 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 
         </div>
 
+
         <div class="field">
 
-          <label for="store">Store</label>
+          <label for="store">
+            Store
+          </label>
 
-          <select id="store" required>
+          <select
+            id="store"
+            required
+          >
 
-            <option value="" selected disabled>
+            <option
+              value=""
+              selected
+              disabled
+            >
               Choose a store
             </option>
 
@@ -261,13 +1027,22 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 
           </select>
 
-          <div id="lockedStoreNote" class="locked-note" hidden>
+          <div
+            id="lockedStoreNote"
+            class="locked-note"
+            hidden
+          >
             This item will be added to this store.
           </div>
 
         </div>
 
-        <button id="saveItemButton" class="save-button" type="submit">
+
+        <button
+          id="saveItemButton"
+          class="save-button"
+          type="submit"
+        >
           Add Item
         </button>
 
@@ -278,56 +1053,97 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
   </section>
 
 
-  <section id="storeScreen" class="screen" hidden>
+  <section
+    id="storeScreen"
+    class="screen"
+    hidden
+  >
 
-    <button id="storeAddItemButton" class="main-button store-add-button" type="button">
+    <button
+      id="storeAddItemButton"
+      class="main-button store-add-button"
+      type="button"
+    >
       Add Item
     </button>
 
+
     <div class="card list-card">
 
-      <div class="list-heading" aria-hidden="true">
+      <div
+        class="list-heading"
+        aria-hidden="true"
+      >
         <span>Item</span>
         <span>Qty</span>
         <span></span>
       </div>
 
-      <div id="storeList" aria-live="polite"></div>
+      <div
+        id="storeList"
+        aria-live="polite"
+      ></div>
 
     </div>
 
   </section>
 
 
-  <section id="inventoryScreen" class="screen" hidden>
+  <section
+    id="inventoryScreen"
+    class="screen"
+    hidden
+  >
 
-    <div id="inventoryCategoryButtons" class="category-stack"></div>
+    <div
+      id="inventoryCategoryButtons"
+      class="category-stack"
+    ></div>
 
   </section>
 
 
-  <section id="inventoryCategoryScreen" class="screen" hidden>
+  <section
+    id="inventoryCategoryScreen"
+    class="screen"
+    hidden
+  >
 
-    <button id="inventoryAddItemButton" class="main-button inventory-add-button" type="button">
+    <button
+      id="inventoryAddItemButton"
+      class="main-button inventory-add-button"
+      type="button"
+    >
       Add Item
     </button>
 
+
     <div class="card list-card">
 
-      <div class="list-heading" aria-hidden="true">
+      <div
+        class="list-heading"
+        aria-hidden="true"
+      >
         <span>Item</span>
         <span>Qty</span>
         <span></span>
       </div>
 
-      <div id="inventoryList" aria-live="polite"></div>
+      <div
+        id="inventoryList"
+        aria-live="polite"
+      ></div>
 
     </div>
 
   </section>
 
 
-  <section id="inventoryAddScreen" class="screen" hidden>
+  <section
+    id="inventoryAddScreen"
+    class="screen"
+    hidden
+  >
 
     <div class="card form-card">
 
@@ -339,9 +1155,16 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
             Item
           </label>
 
-          <input id="inventoryItemName" type="text" maxlength="100" autocomplete="off" required>
+          <input
+            id="inventoryItemName"
+            type="text"
+            maxlength="100"
+            autocomplete="off"
+            required
+          >
 
         </div>
+
 
         <div class="field">
 
@@ -351,13 +1174,33 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 
           <div class="qty-control add-qty-control">
 
-            <button id="inventoryQtyMinus" class="qty-step-button" type="button" aria-label="Decrease quantity">
+            <button
+              id="inventoryQtyMinus"
+              class="qty-step-button"
+              type="button"
+              aria-label="Decrease quantity"
+            >
               −
             </button>
 
-            <input id="inventoryQuantity" class="qty-input" type="number" min="0" max="9999" step="1" inputmode="numeric" value="1" aria-label="Quantity in stock">
+            <input
+              id="inventoryQuantity"
+              class="qty-input"
+              type="number"
+              min="0"
+              max="9999"
+              step="1"
+              inputmode="numeric"
+              value="1"
+              aria-label="Quantity in stock"
+            >
 
-            <button id="inventoryQtyPlus" class="qty-step-button" type="button" aria-label="Increase quantity">
+            <button
+              id="inventoryQtyPlus"
+              class="qty-step-button"
+              type="button"
+              aria-label="Increase quantity"
+            >
               +
             </button>
 
@@ -365,9 +1208,18 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 
         </div>
 
-        <div id="inventoryCategoryNote" class="inventory-category-note"></div>
 
-        <button id="saveInventoryItemButton" class="save-button" type="submit">
+        <div
+          id="inventoryCategoryNote"
+          class="inventory-category-note"
+        ></div>
+
+
+        <button
+          id="saveInventoryItemButton"
+          class="save-button"
+          type="submit"
+        >
           Add to Inventory
         </button>
 
@@ -378,22 +1230,38 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
   </section>
 
 
-  <section id="restrictionsScreen" class="screen" hidden>
+  <section
+    id="restrictionsScreen"
+    class="screen"
+    hidden
+  >
 
     <div class="restrictions-toolbar">
 
-      <button id="addRestrictionButton" class="main-button add-item" type="button">
+      <button
+        id="addRestrictionButton"
+        class="main-button add-item"
+        type="button"
+      >
         Add Restriction
       </button>
 
     </div>
 
-    <div id="restrictionList" class="restriction-list"></div>
+
+    <div
+      id="restrictionList"
+      class="restriction-list"
+    ></div>
 
   </section>
 
 
-  <section id="restrictionEditScreen" class="screen" hidden>
+  <section
+    id="restrictionEditScreen"
+    class="screen"
+    hidden
+  >
 
     <div class="card form-card">
 
@@ -405,9 +1273,16 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
             Item
           </label>
 
-          <input id="restrictionItemName" type="text" maxlength="100" autocomplete="off" required>
+          <input
+            id="restrictionItemName"
+            type="text"
+            maxlength="100"
+            autocomplete="off"
+            required
+          >
 
         </div>
+
 
         <div class="field">
 
@@ -415,34 +1290,60 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
             Allowed Stores
           </div>
 
+
           <div class="store-checks">
 
             <label class="store-check-row">
-              <input type="checkbox" name="allowedStore" value="sams_costco">
+              <input
+                type="checkbox"
+                name="allowedStore"
+                value="sams_costco"
+              >
               <span>Sam’s / CostCo</span>
             </label>
 
+
             <label class="store-check-row">
-              <input type="checkbox" name="allowedStore" value="walmart">
+              <input
+                type="checkbox"
+                name="allowedStore"
+                value="walmart"
+              >
               <span>Walmart</span>
             </label>
 
+
             <label class="store-check-row">
-              <input type="checkbox" name="allowedStore" value="alcohol">
+              <input
+                type="checkbox"
+                name="allowedStore"
+                value="alcohol"
+              >
               <span>Alcohol</span>
             </label>
 
+
             <label class="store-check-row">
-              <input type="checkbox" name="allowedStore" value="sodas">
+              <input
+                type="checkbox"
+                name="allowedStore"
+                value="sodas"
+              >
               <span>Sodas</span>
             </label>
 
+
             <label class="store-check-row">
-              <input type="checkbox" name="allowedStore" value="amazon">
+              <input
+                type="checkbox"
+                name="allowedStore"
+                value="amazon"
+              >
               <span>Amazon</span>
             </label>
 
           </div>
+
 
           <div class="form-note">
             Check every store where this item is allowed.
@@ -450,11 +1351,22 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 
         </div>
 
-        <button id="saveRestrictionButton" class="save-button" type="submit">
+
+        <button
+          id="saveRestrictionButton"
+          class="save-button"
+          type="submit"
+        >
           Save Restriction
         </button>
 
-        <button id="deleteRestrictionButton" class="delete-restriction-button" type="button" hidden>
+
+        <button
+          id="deleteRestrictionButton"
+          class="delete-restriction-button"
+          type="button"
+          hidden
+        >
           Delete Restriction
         </button>
 
@@ -467,11 +1379,24 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 </main>
 
 
-<div id="toast" class="toast" role="status" aria-live="polite">
+<div
+  id="toast"
+  class="toast"
+  role="status"
+  aria-live="polite"
+>
 
-  <span id="toastMessage" class="toast-message"></span>
+  <span
+    id="toastMessage"
+    class="toast-message"
+  ></span>
 
-  <button id="toastUndoButton" class="toast-undo-button" type="button" hidden>
+  <button
+    id="toastUndoButton"
+    class="toast-undo-button"
+    type="button"
+    hidden
+  >
     UNDO
   </button>
 
@@ -484,7 +1409,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 
 
 const APP_VERSION =
-  '1.0.16';
+  '1.0.17';
 
 
 console.info(
@@ -4011,7 +4936,8 @@ inventoryAddForm
 
         if (
           result &&
-          result.added === true
+          result.added ===
+            true
         ) {
 
           inventoryItemName.value =
