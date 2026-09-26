@@ -8,8 +8,8 @@
     content="width=device-width, initial-scale=1, viewport-fit=cover"
   >
 
-  <!-- APP VERSION: 1.0.14 -->
-  <meta name="app-version" content="1.0.14">
+  <!-- APP VERSION: 1.0.15 -->
+  <meta name="app-version" content="1.0.15">
 
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
@@ -25,12 +25,12 @@
   <link
     rel="icon"
     type="image/png"
-    href="uno-club-shopping.PNG?v=1.0.14"
+    href="uno-club-shopping.PNG?v=1.0.15"
   >
 
   <link
     rel="apple-touch-icon"
-    href="uno-club-shopping.PNG?v=1.0.14"
+    href="uno-club-shopping.PNG?v=1.0.15"
   >
 
   <style>
@@ -746,6 +746,8 @@
       color: var(--danger);
     }
 
+    /* TOAST / UNDO */
+
     .toast {
       position: fixed;
 
@@ -760,12 +762,19 @@
       width:
         min(calc(100% - 32px), 520px);
 
-      padding: 13px 16px;
+      min-height: 52px;
+
+      padding: 9px 10px 9px 16px;
 
       border-radius: 12px;
 
       background: var(--black);
       color: var(--white);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
 
       text-align: center;
       font-weight: 700;
@@ -789,10 +798,47 @@
 
       transform:
         translate(-50%, 0);
+
+      pointer-events: auto;
     }
 
     .toast.error {
       background: #8f1d1d;
+    }
+
+    .toast-message {
+      min-width: 0;
+    }
+
+    .toast-undo-button {
+      flex: 0 0 auto;
+
+      min-height: 36px;
+
+      padding: 6px 12px;
+
+      border: 1.5px solid var(--white);
+      border-radius: 9px;
+
+      background: transparent;
+      color: var(--white);
+
+      font-size: 14px;
+      font-weight: 900;
+
+      cursor: pointer;
+    }
+
+    .toast-undo-button[hidden] {
+      display: none !important;
+    }
+
+    .toast-undo-button:active {
+      background: rgba(255,255,255,.18);
+    }
+
+    .toast-undo-button:disabled {
+      opacity: .5;
     }
 
     @media (max-width: 390px) {
@@ -846,7 +892,7 @@
 
   <img
     class="header-logo"
-    src="uno-club-shopping.PNG?v=1.0.14"
+    src="uno-club-shopping.PNG?v=1.0.15"
     alt="Uno Club Shopping logo"
   >
 
@@ -956,7 +1002,7 @@
     </button>
 
     <div class="version-label">
-      v1.0.14
+      v1.0.15
     </div>
 
   </section>
@@ -1278,7 +1324,21 @@
   class="toast"
   role="status"
   aria-live="polite"
-></div>
+>
+  <span
+    id="toastMessage"
+    class="toast-message"
+  ></span>
+
+  <button
+    id="toastUndoButton"
+    class="toast-undo-button"
+    type="button"
+    hidden
+  >
+    UNDO
+  </button>
+</div>
 
 
 <script>
@@ -1286,7 +1346,7 @@
 'use strict';
 
 
-const APP_VERSION = '1.0.14';
+const APP_VERSION = '1.0.15';
 
 console.info(
   `Uno Club Shopping v${APP_VERSION}`
@@ -1321,6 +1381,8 @@ let lockedAddStore = null;
 let editingRestrictionOriginalName = null;
 
 let toastTimer = null;
+
+let pendingUndo = null;
 
 
 const homeScreen =
@@ -1401,6 +1463,12 @@ const deleteRestrictionButton =
 const toast =
   document.getElementById('toast');
 
+const toastMessage =
+  document.getElementById('toastMessage');
+
+const toastUndoButton =
+  document.getElementById('toastUndoButton');
+
 
 function normalizeItemName(value) {
 
@@ -1472,15 +1540,27 @@ function unwrapRpcResult(result) {
 }
 
 
+/* NORMAL TOAST */
+
 function showToast(
   message,
-  isError = false
+  isError = false,
+  duration = 3200
 ) {
 
   clearTimeout(toastTimer);
 
-  toast.textContent =
+  pendingUndo =
+    null;
+
+  toastMessage.textContent =
     message;
+
+  toastUndoButton.hidden =
+    true;
+
+  toastUndoButton.disabled =
+    false;
 
   toast.classList.toggle(
     'error',
@@ -1500,10 +1580,250 @@ function showToast(
         );
 
       },
-      3200
+      duration
     );
 
 }
+
+
+/* DELETE + 5 SECOND UNDO */
+
+function showUndoToast(
+  deletedItem
+) {
+
+  clearTimeout(toastTimer);
+
+
+  pendingUndo = {
+    item_name:
+      deletedItem.item_name,
+
+    quantity:
+      deletedItem.quantity,
+
+    store:
+      deletedItem.store
+  };
+
+
+  toastMessage.textContent =
+    `${deletedItem.item_name} removed`;
+
+
+  toast.classList.remove(
+    'error'
+  );
+
+
+  toastUndoButton.hidden =
+    false;
+
+  toastUndoButton.disabled =
+    false;
+
+  toastUndoButton.textContent =
+    'UNDO';
+
+
+  toast.classList.add(
+    'show'
+  );
+
+
+  toastTimer =
+    setTimeout(
+      () => {
+
+        pendingUndo =
+          null;
+
+        toastUndoButton.hidden =
+          true;
+
+        toast.classList.remove(
+          'show'
+        );
+
+      },
+      5000
+    );
+
+}
+
+
+toastUndoButton
+  .addEventListener(
+    'click',
+    async () => {
+
+      if (
+        !pendingUndo
+      ) {
+
+        return;
+
+      }
+
+
+      const itemToRestore = {
+        ...pendingUndo
+      };
+
+
+      clearTimeout(
+        toastTimer
+      );
+
+
+      pendingUndo =
+        null;
+
+
+      toastUndoButton.disabled =
+        true;
+
+      toastUndoButton.hidden =
+        true;
+
+
+      toastMessage.textContent =
+        `Restoring ${itemToRestore.item_name}…`;
+
+
+      try {
+
+        const result =
+          unwrapRpcResult(
+            await api(
+              '/rest/v1/rpc/add_shopping_item',
+              {
+                method:
+                  'POST',
+
+                body:
+                  JSON.stringify({
+                    p_item_name:
+                      itemToRestore.item_name,
+
+                    p_quantity:
+                      itemToRestore.quantity,
+
+                    p_store:
+                      itemToRestore.store
+                  })
+              }
+            )
+          );
+
+
+        if (
+          result &&
+          result.added === true
+        ) {
+
+          if (
+            currentStore ===
+            itemToRestore.store
+          ) {
+
+            await loadStoreItems(
+              true
+            );
+
+          }
+
+
+          loadHomeCounts();
+
+
+          showToast(
+            `${itemToRestore.item_name} restored to ${STORES[itemToRestore.store]}.`
+          );
+
+
+          return;
+
+        }
+
+
+        if (
+          result &&
+          result.reason ===
+            'duplicate'
+        ) {
+
+          const existingStore =
+            STORES[
+              result.existing_store
+            ] ||
+            'another store';
+
+
+          showToast(
+            `${itemToRestore.item_name} is already on the ${existingStore} list.`,
+            true
+          );
+
+
+          if (
+            currentStore
+          ) {
+
+            loadStoreItems(
+              true
+            );
+
+          }
+
+
+          loadHomeCounts();
+
+
+          return;
+
+        }
+
+
+        if (
+          result &&
+          result.reason ===
+            'restricted'
+        ) {
+
+          showToast(
+            `${itemToRestore.item_name} could not be restored because its store restriction has changed.`,
+            true
+          );
+
+
+          return;
+
+        }
+
+
+        showToast(
+          `Could not restore ${itemToRestore.item_name}.`,
+          true
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          error
+        );
+
+
+        showToast(
+          `Could not restore ${itemToRestore.item_name}.`,
+          true
+        );
+
+      }
+
+    }
+  );
 
 
 async function api(
@@ -3077,8 +3397,19 @@ function createItemRow(item) {
     () => {
 
       deleteItem(
-        item.id,
-        item.item_name,
+        {
+          id:
+            item.id,
+
+          item_name:
+            item.item_name,
+
+          quantity:
+            getRowQuantity(qty),
+
+          store:
+            item.store
+        },
         row,
         del
       );
@@ -3240,9 +3571,10 @@ async function saveRowQuantity(
 }
 
 
+/* DELETE ITEM WITH UNDO */
+
 async function deleteItem(
-  id,
-  itemName,
+  item,
   row,
   button
 ) {
@@ -3255,9 +3587,12 @@ async function deleteItem(
 
     await api(
       '/rest/v1/shopping_items?id=eq.' +
-      encodeURIComponent(id),
+      encodeURIComponent(
+        item.id
+      ),
       {
-        method: 'DELETE',
+        method:
+          'DELETE',
 
         headers: {
           Prefer:
@@ -3270,8 +3605,8 @@ async function deleteItem(
     row.remove();
 
 
-    showToast(
-      `${itemName} removed.`
+    showUndoToast(
+      item
     );
 
 
