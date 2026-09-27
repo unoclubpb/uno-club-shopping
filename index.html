@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.33 -->
-<meta name="app-version" content="1.0.33">
+<!-- APP VERSION: 1.0.34 -->
+<meta name="app-version" content="1.0.34">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.33">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.33">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.34">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.34">
 
 <style>
 :root{
@@ -72,10 +72,10 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .restriction-row{width:100%;border:0;border-bottom:1px solid #ececec;background:var(--white);color:var(--text);padding:14px 15px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;text-align:left;cursor:pointer}.restriction-row:last-child{border-bottom:0}.restriction-row:active{background:#edf3ff}.restriction-name{font-size:17px;font-weight:800;overflow-wrap:anywhere}.restriction-stores{margin-top:4px;color:var(--muted);font-size:13px;font-weight:650}.restriction-chevron{color:var(--blue);font-size:30px;line-height:1;font-weight:500}
 .store-checks{display:grid;gap:9px}.store-check-row{min-height:50px;padding:8px 12px;border:1.5px solid var(--border);border-radius:12px;background:#fafafa;display:flex!important;align-items:center;gap:11px;cursor:pointer;font-size:17px!important;font-weight:700!important}.store-check-row input{width:23px;height:23px;margin:0;accent-color:var(--blue)}
 .delete-restriction-button,.delete-item-button{width:100%;min-height:54px;margin-top:14px;border:2px solid var(--black);border-radius:14px;background:#fff1f1;color:var(--danger);font-size:18px;font-weight:850;cursor:pointer}.delete-restriction-button[hidden],.delete-item-button[hidden]{display:none!important}.delete-restriction-button:active,.delete-item-button:active{background:#ffdede}
-.master-row{min-height:60px;padding:8px 10px 8px 15px;border-bottom:1px solid #ececec;display:grid;grid-template-columns:minmax(0,1fr) 44px 48px;gap:8px;align-items:center}.master-row.has-restriction{box-shadow:inset 0 0 0 2px var(--blue);border-radius:10px}.master-row:last-child{border-bottom:0}.master-name-button{border:0;background:transparent;color:var(--blue);padding:8px 0;text-align:left;font-size:17px;font-weight:800;cursor:pointer;overflow-wrap:anywhere}.master-name-button:active{color:var(--blue-dark)}.master-qty{min-height:44px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:850;color:var(--text)}
+.master-row{min-height:60px;padding:8px 10px 8px 15px;border-bottom:1px solid #ececec;display:grid;grid-template-columns:minmax(0,1fr) 76px 48px;gap:8px;align-items:center}.master-row.has-restriction{box-shadow:inset 0 0 0 2px var(--blue);border-radius:10px}.master-row:last-child{border-bottom:0}.master-name-button{border:0;background:transparent;color:var(--blue);padding:8px 0;text-align:left;font-size:17px;font-weight:800;cursor:pointer;overflow-wrap:anywhere}.master-name-button:active{color:var(--blue-dark)}.master-status{min-height:44px;display:flex;align-items:center;justify-content:center;gap:6px}.master-list-icon{width:30px;height:36px;flex:0 0 30px;border:0;border-radius:7px;padding:2px;background:transparent;color:var(--black);cursor:pointer;display:flex;align-items:center;justify-content:center}.master-list-icon:active{background:#e8eef9;color:var(--blue)}.master-list-icon svg{width:25px;height:31px;display:block}.master-qty{min-width:16px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:850;color:var(--text)}.db-row.focus-flash{animation:storeItemFlash 1.8s ease}@keyframes storeItemFlash{0%,100%{background:transparent}25%,70%{background:#fff4bf}}
 .empty-state,.loading-state,.error-state{padding:28px 18px;text-align:center;color:var(--muted);font-size:16px}.error-state{color:var(--danger)}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translate(-50%,18px);width:min(calc(100% - 32px),520px);min-height:52px;padding:9px 10px 9px 16px;border-radius:12px;background:var(--black);color:var(--white);display:flex;align-items:center;justify-content:center;gap:14px;text-align:center;font-weight:700;box-shadow:0 8px 30px rgba(0,0,0,.26);opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:2000}.toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}.toast.error{background:#8f1d1d}.toast-message{min-width:0}.toast-undo-button{flex:0 0 auto;min-height:36px;padding:6px 12px;border:1.5px solid var(--white);border-radius:9px;background:transparent;color:var(--white);font-size:14px;font-weight:900;cursor:pointer}.toast-undo-button[hidden]{display:none!important}.toast-undo-button:active{background:rgba(255,255,255,.18)}.toast-undo-button:disabled{opacity:.5}
-@media(max-width:390px){.app-header h1{font-size:19px}.list-heading,.item-row{grid-template-columns:minmax(0,1fr) 124px 94px;gap:5px;padding-left:10px;padding-right:10px}.row-actions{gap:4px}.qty-step-button{width:34px;flex-basis:34px}.qty-input{width:44px}}
+@media(max-width:390px){.app-header h1{font-size:19px}.list-heading,.item-row{grid-template-columns:minmax(0,1fr) 124px 94px;gap:5px;padding-left:10px;padding-right:10px}.master-row{grid-template-columns:minmax(0,1fr) 72px 44px;gap:5px}.row-actions{gap:4px}.qty-step-button{width:34px;flex-basis:34px}.qty-input{width:44px}}
 </style>
 </head>
 <body>
@@ -83,7 +83,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 <header class="app-header">
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
-  <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.33" alt="Uno Club Shopping logo">
+  <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.34" alt="Uno Club Shopping logo">
 </header>
 
 <main>
@@ -100,7 +100,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
       <button id="inventoryButton" class="main-button secondary-menu-button" type="button">Inventory</button>
       <button id="adminButton" class="main-button secondary-menu-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.0.33</div>
+    <div class="version-label">v1.0.34</div>
   </section>
 
   <section id="addScreen" class="screen" hidden>
@@ -291,7 +291,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 <script>
 'use strict';
 
-const APP_VERSION='1.0.33';
+const APP_VERSION='1.0.34';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -319,6 +319,7 @@ let pendingShoppingAddReturnHash=null;
 let activeShoppingAddReturnHash=null;
 let pendingMasterAddName=null;
 let pendingPurchaseItem=null;
+let pendingStoreFocusItemName=null;
 let storeRestrictionTimer=null;
 let storeRestrictionRequestNumber=0;
 let masterItemsCache=null;
@@ -520,7 +521,8 @@ function goHome(){location.hash='#home'}
 function goAdd(){pendingShoppingPrefillName=null;pendingShoppingAddReturnHash=null;location.hash='#add'}
 function goAddWithItem(name,returnHash=null){pendingShoppingPrefillName=normalizeItemName(name);pendingShoppingAddReturnHash=returnHash;location.hash='#add'}
 function goAddForStore(store){pendingShoppingAddReturnHash=null;location.hash='#add/'+store}
-function goStore(store){location.hash='#store/'+store}
+function goStore(store){pendingStoreFocusItemName=null;location.hash='#store/'+store}
+function goStoreAndFocus(store,itemName){if(!STORES[store])return;pendingStoreFocusItemName=normalizeItemName(itemName);location.hash='#store/'+store}
 function goPurchaseCategory(){location.hash='#purchase-category'}
 function goMoveShoppingItem(id){location.hash='#shopping/move/'+encodeURIComponent(id)}
 function goInventory(){location.hash='#inventory'}
@@ -695,13 +697,21 @@ async function loadStoreItems(quiet=false){
   if(!currentStore)return;const storeAtStart=currentStore;if(!quiet)storeList.innerHTML='<div class="loading-state">Loading…</div>';
   try{
     const data=await api('/rest/v1/shopping_items?select=id,item_name,quantity,store&store=eq.'+encodeURIComponent(storeAtStart));let rows=null;try{rows=await fetchRestrictionRows()}catch(e){console.error(e)}
-    if(currentStore!==storeAtStart)return;renderStoreList(sortByName(Array.isArray(data)?data:[]),rows);
+    if(currentStore!==storeAtStart)return;renderStoreList(sortByName(Array.isArray(data)?data:[]),rows);focusStoreItemIfNeeded(storeAtStart);
   }catch(error){console.error(error);if(!quiet&&currentStore===storeAtStart)storeList.innerHTML='<div class="error-state">Could not load this list. Please try again.</div>'}
 }
 
 function renderStoreList(items,restrictionRows){
   storeList.innerHTML='';if(currentStore==='sams_costco')storeList.appendChild(createPermanentWaterRow());items.forEach(item=>storeList.appendChild(createShoppingItemRow(item,restrictionRows)));
   if(items.length===0)appendEmpty(storeList,currentStore==='sams_costco'?'No other items on this list.':'No items on this list.');
+}
+function focusStoreItemIfNeeded(store){
+  if(!pendingStoreFocusItemName||currentStore!==store)return;
+  const key=normalizedKey(pendingStoreFocusItemName);
+  pendingStoreFocusItemName=null;
+  const row=Array.from(storeList.querySelectorAll('.db-row')).find(itemRow=>itemRow.dataset.itemKey===key);
+  if(!row)return;
+  setTimeout(()=>{row.scrollIntoView({behavior:'smooth',block:'center'});row.classList.remove('focus-flash');void row.offsetWidth;row.classList.add('focus-flash')},100);
 }
 function appendEmpty(container,message){const d=document.createElement('div');d.className='empty-state';d.textContent=message;container.appendChild(d)}
 function createPermanentWaterRow(){
@@ -717,7 +727,7 @@ function createInventoryItemRow(item){
   });
 }
 function createDataItemRow(item,minQuantity,saveQuantity,deleteHandler,afterSaveQuantity=null,itemNameClickHandler=null,purchaseHandler=null){
-  const row=document.createElement('div');row.className='item-row db-row';row.dataset.id=item.id;
+  const row=document.createElement('div');row.className='item-row db-row';row.dataset.id=item.id;row.dataset.itemKey=normalizedKey(item.item_name);
   let name;if(typeof itemNameClickHandler==='function'){name=document.createElement('button');name.type='button';name.className='clickable-item-name';name.addEventListener('click',itemNameClickHandler)}else{name=document.createElement('div');name.className='item-name'}name.textContent=item.item_name;
   const control=document.createElement('div');control.className='qty-control';const minus=document.createElement('button'),qty=document.createElement('input'),plus=document.createElement('button');minus.type=plus.type='button';minus.className=plus.className='qty-step-button';minus.textContent='−';plus.textContent='+';qty.className='qty-input';qty.type='number';qty.min=String(minQuantity);qty.max='9999';qty.step='1';qty.inputMode='numeric';qty.value=item.quantity;qty.dataset.savedValue=String(item.quantity);
   const getQty=()=>getBoundedQuantity(qty,minQuantity);const refresh=()=>{const v=getQty();minus.disabled=v<=minQuantity;plus.disabled=v>=9999};
@@ -847,22 +857,38 @@ async function fetchInventoryQuantityMap(){
   });
   return quantities;
 }
+async function fetchShoppingStoreMap(){
+  const data=await api('/rest/v1/shopping_items?select=item_name,store');
+  const stores=new Map();
+  (Array.isArray(data)?data:[]).forEach(item=>{if(STORES[item.store])stores.set(normalizedKey(item.item_name),item.store)});
+  return stores;
+}
+function createMasterShoppingIcon(itemName,store){
+  const button=document.createElement('button');
+  button.type='button';button.className='master-list-icon';button.setAttribute('aria-label',`Open ${itemName} on ${STORES[store]}`);button.title=`On ${STORES[store]}`;
+  button.innerHTML='<svg viewBox="0 0 36 44" aria-hidden="true"><rect x="5" y="2.5" width="26" height="39" rx="1" fill="none" stroke="currentColor" stroke-width="2.4"/><line x1="5" y1="9" x2="31" y2="9" stroke="currentColor" stroke-width="2.2"/><path d="M9 17l3 3 5-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><line x1="20" y1="18" x2="28" y2="18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M9 26l3 3 5-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><line x1="20" y1="27" x2="28" y2="27" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M9 35l3 3 5-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><line x1="20" y1="36" x2="28" y2="36" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
+  button.addEventListener('click',event=>{event.stopPropagation();goStoreAndFocus(store,itemName)});
+  return button;
+}
 async function loadMasterList(){
   masterList.innerHTML='<div class="loading-state">Loading…</div>';
   try{
-    const [items,inventoryQuantities,restrictionRows]=await Promise.all([fetchMasterItems(true),fetchInventoryQuantityMap(),fetchRestrictionRows()]);
+    const [items,inventoryQuantities,restrictionRows,shoppingStores]=await Promise.all([fetchMasterItems(true),fetchInventoryQuantityMap(),fetchRestrictionRows(),fetchShoppingStoreMap()]);
     const restrictedItems=new Set(restrictionRows.map(row=>normalizedKey(row.item_name)));
-    renderMasterList(items,inventoryQuantities,restrictedItems);
+    renderMasterList(items,inventoryQuantities,restrictedItems,shoppingStores);
   }catch(error){console.error(error);masterList.innerHTML='<div class="error-state">Could not load the Master List.</div>'}
 }
-function renderMasterList(items,inventoryQuantities,restrictedItems){
+function renderMasterList(items,inventoryQuantities,restrictedItems,shoppingStores){
   masterList.innerHTML='';if(!items.length){appendEmpty(masterList,'No items have been remembered yet.');return}
   items.forEach(item=>{
-    const row=document.createElement('div');row.className='master-row';if(restrictedItems.has(normalizedKey(item.item_name)))row.classList.add('has-restriction');
+    const key=normalizedKey(item.item_name);
+    const row=document.createElement('div');row.className='master-row';if(restrictedItems.has(key))row.classList.add('has-restriction');
     const name=document.createElement('button');name.type='button';name.className='master-name-button';name.textContent=item.item_name;name.addEventListener('click',()=>goMasterRestriction(item.item_name));
-    const quantity=document.createElement('div');quantity.className='master-qty';const inventoryQuantity=inventoryQuantities.get(normalizedKey(item.item_name))||0;quantity.textContent=inventoryQuantity>0?String(inventoryQuantity):'';
+    const status=document.createElement('div');status.className='master-status';
+    const shoppingStore=shoppingStores.get(key);if(shoppingStore)status.appendChild(createMasterShoppingIcon(item.item_name,shoppingStore));
+    const quantity=document.createElement('div');quantity.className='master-qty';const inventoryQuantity=inventoryQuantities.get(key)||0;quantity.textContent=inventoryQuantity>0?String(inventoryQuantity):'';status.appendChild(quantity);
     const del=document.createElement('button');del.type='button';del.className='delete-button';del.textContent='×';del.setAttribute('aria-label',`Forget ${item.item_name}`);del.addEventListener('click',()=>forgetMasterItem(item,row,del));
-    row.append(name,quantity,del);masterList.appendChild(row);
+    row.append(name,status,del);masterList.appendChild(row);
   });
 }
 function describeMasterUsage(result){
