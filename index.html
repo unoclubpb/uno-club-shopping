@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.23 -->
-<meta name="app-version" content="1.0.23">
+<!-- APP VERSION: 1.0.24 -->
+<meta name="app-version" content="1.0.24">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.23">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.23">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.24">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.24">
 
 <style>
 :root{
@@ -68,7 +68,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .restriction-row{width:100%;border:0;border-bottom:1px solid #ececec;background:var(--white);color:var(--text);padding:14px 15px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;text-align:left;cursor:pointer}.restriction-row:last-child{border-bottom:0}.restriction-row:active{background:#edf3ff}.restriction-name{font-size:17px;font-weight:800;overflow-wrap:anywhere}.restriction-stores{margin-top:4px;color:var(--muted);font-size:13px;font-weight:650}.restriction-chevron{color:var(--blue);font-size:30px;line-height:1;font-weight:500}
 .store-checks{display:grid;gap:9px}.store-check-row{min-height:50px;padding:8px 12px;border:1.5px solid var(--border);border-radius:12px;background:#fafafa;display:flex!important;align-items:center;gap:11px;cursor:pointer;font-size:17px!important;font-weight:700!important}.store-check-row input{width:23px;height:23px;margin:0;accent-color:var(--blue)}
 .delete-restriction-button{width:100%;min-height:54px;margin-top:14px;border:2px solid var(--black);border-radius:14px;background:#fff1f1;color:var(--danger);font-size:18px;font-weight:850;cursor:pointer}.delete-restriction-button[hidden]{display:none!important}.delete-restriction-button:active{background:#ffdede}
-.master-row{min-height:60px;padding:8px 10px 8px 15px;border-bottom:1px solid #ececec;display:grid;grid-template-columns:minmax(0,1fr) 48px;gap:10px;align-items:center}.master-row:last-child{border-bottom:0}.master-name-button{border:0;background:transparent;color:var(--blue);padding:8px 0;text-align:left;font-size:17px;font-weight:800;cursor:pointer;overflow-wrap:anywhere}.master-name-button:active{color:var(--blue-dark)}
+.master-row{min-height:60px;padding:8px 10px 8px 15px;border-bottom:1px solid #ececec;display:grid;grid-template-columns:minmax(0,1fr) 44px 48px;gap:8px;align-items:center}.master-row:last-child{border-bottom:0}.master-name-button{border:0;background:transparent;color:var(--blue);padding:8px 0;text-align:left;font-size:17px;font-weight:800;cursor:pointer;overflow-wrap:anywhere}.master-name-button:active{color:var(--blue-dark)}.master-qty{min-height:44px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:850;color:var(--text)}
 .empty-state,.loading-state,.error-state{padding:28px 18px;text-align:center;color:var(--muted);font-size:16px}.error-state{color:var(--danger)}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translate(-50%,18px);width:min(calc(100% - 32px),520px);min-height:52px;padding:9px 10px 9px 16px;border-radius:12px;background:var(--black);color:var(--white);display:flex;align-items:center;justify-content:center;gap:14px;text-align:center;font-weight:700;box-shadow:0 8px 30px rgba(0,0,0,.26);opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:2000}.toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}.toast.error{background:#8f1d1d}.toast-message{min-width:0}.toast-undo-button{flex:0 0 auto;min-height:36px;padding:6px 12px;border:1.5px solid var(--white);border-radius:9px;background:transparent;color:var(--white);font-size:14px;font-weight:900;cursor:pointer}.toast-undo-button[hidden]{display:none!important}.toast-undo-button:active{background:rgba(255,255,255,.18)}.toast-undo-button:disabled{opacity:.5}
 @media(max-width:390px){.app-header h1{font-size:19px}.list-heading,.item-row{grid-template-columns:minmax(0,1fr) 124px 44px;gap:5px;padding-left:10px;padding-right:10px}.qty-step-button{width:34px;flex-basis:34px}.qty-input{width:44px}}
@@ -79,7 +79,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 <header class="app-header">
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
-  <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.23" alt="Uno Club Shopping logo">
+  <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.24" alt="Uno Club Shopping logo">
 </header>
 
 <main>
@@ -96,7 +96,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
       <button id="inventoryButton" class="main-button secondary-menu-button" type="button">Inventory</button>
       <button id="adminButton" class="main-button secondary-menu-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.0.23</div>
+    <div class="version-label">v1.0.24</div>
   </section>
 
   <section id="addScreen" class="screen" hidden>
@@ -187,7 +187,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
     </div>
   </section>
 
-  <section id="masterListScreen" class="screen" hidden">
+  <section id="masterListScreen" class="screen" hidden>
     <div id="masterList" class="master-list"></div>
   </section>
 
@@ -240,7 +240,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 <script>
 'use strict';
 
-const APP_VERSION='1.0.23';
+const APP_VERSION='1.0.24';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -637,17 +637,29 @@ async function deleteInventoryItem(item,row,button,currentQuantity){
 }
 
 /* MASTER LIST */
+async function fetchInventoryQuantityMap(){
+  const data=await api('/rest/v1/inventory_items?select=item_name,quantity');
+  const quantities=new Map();
+  (Array.isArray(data)?data:[]).forEach(item=>{
+    quantities.set(normalizedKey(item.item_name),Number(item.quantity)||0);
+  });
+  return quantities;
+}
 async function loadMasterList(){
   masterList.innerHTML='<div class="loading-state">Loading…</div>';
-  try{renderMasterList(await fetchMasterItems(true))}catch(error){console.error(error);masterList.innerHTML='<div class="error-state">Could not load the Master List.</div>'}
+  try{
+    const [items,inventoryQuantities]=await Promise.all([fetchMasterItems(true),fetchInventoryQuantityMap()]);
+    renderMasterList(items,inventoryQuantities);
+  }catch(error){console.error(error);masterList.innerHTML='<div class="error-state">Could not load the Master List.</div>'}
 }
-function renderMasterList(items){
+function renderMasterList(items,inventoryQuantities){
   masterList.innerHTML='';if(!items.length){appendEmpty(masterList,'No items have been remembered yet.');return}
   items.forEach(item=>{
     const row=document.createElement('div');row.className='master-row';
     const name=document.createElement('button');name.type='button';name.className='master-name-button';name.textContent=item.item_name;name.addEventListener('click',()=>goMasterRestriction(item.item_name));
+    const quantity=document.createElement('div');quantity.className='master-qty';const inventoryQuantity=inventoryQuantities.get(normalizedKey(item.item_name))||0;quantity.textContent=inventoryQuantity>0?String(inventoryQuantity):'';
     const del=document.createElement('button');del.type='button';del.className='delete-button';del.textContent='×';del.setAttribute('aria-label',`Forget ${item.item_name}`);del.addEventListener('click',()=>forgetMasterItem(item,row,del));
-    row.append(name,del);masterList.appendChild(row);
+    row.append(name,quantity,del);masterList.appendChild(row);
   });
 }
 function describeMasterUsage(result){
