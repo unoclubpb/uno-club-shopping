@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.28 -->
-<meta name="app-version" content="1.0.28">
+<!-- APP VERSION: 1.0.29 -->
+<meta name="app-version" content="1.0.29">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.28">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.28">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.29">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.29">
 
 <style>
 :root{
@@ -81,7 +81,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 <header class="app-header">
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
-  <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.28" alt="Uno Club Shopping logo">
+  <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.29" alt="Uno Club Shopping logo">
 </header>
 
 <main>
@@ -98,7 +98,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
       <button id="inventoryButton" class="main-button secondary-menu-button" type="button">Inventory</button>
       <button id="adminButton" class="main-button secondary-menu-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.0.28</div>
+    <div class="version-label">v1.0.29</div>
   </section>
 
   <section id="addScreen" class="screen" hidden>
@@ -262,7 +262,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 <script>
 'use strict';
 
-const APP_VERSION='1.0.28';
+const APP_VERSION='1.0.29';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -785,17 +785,32 @@ async function loadRestrictionForEdit(itemName){
   }catch(error){console.error(error);showToast('Could not load this restriction.',true);goRestrictionReturn()}
 }
 async function loadMasterItemRestriction(itemName){
-  restrictionItemName.readOnly=true;restrictionItemName.value=normalizeItemName(itemName);hideSuggestions(restrictionItemSuggestions);clearRestrictionChecks();deleteRestrictionButton.hidden=true;editingRestrictionOriginalName=null;
+  const originalName=normalizeItemName(itemName);
+  restrictionItemName.readOnly=false;restrictionItemName.value=originalName;hideSuggestions(restrictionItemSuggestions);clearRestrictionChecks();deleteRestrictionButton.hidden=true;editingRestrictionOriginalName=originalName;saveRestrictionButton.textContent='Save Changes';
   try{
-    const rows=await fetchRestrictionRows(),key=normalizedKey(itemName),matches=rows.filter(r=>normalizedKey(r.item_name)===key);if(matches.length){editingRestrictionOriginalName=matches[0].item_name;matches.forEach(r=>{const c=document.querySelector(`input[name="allowedStore"][value="${r.allowed_store}"]`);if(c)c.checked=true});deleteRestrictionButton.hidden=false}
+    const rows=await fetchRestrictionRows(),key=normalizedKey(originalName),matches=rows.filter(r=>normalizedKey(r.item_name)===key);if(matches.length){matches.forEach(r=>{const c=document.querySelector(`input[name="allowedStore"][value="${r.allowed_store}"]`);if(c)c.checked=true});deleteRestrictionButton.hidden=false}
   }catch(error){console.error(error);showToast('Could not load this item’s restrictions.',true);goMasterList()}
 }
 function getCheckedStores(){return Array.from(document.querySelectorAll('input[name="allowedStore"]:checked')).map(c=>c.value)}
 restrictionForm.addEventListener('submit',async event=>{
-  event.preventDefault();const itemName=normalizeItemName(restrictionItemName.value),allowedStores=getCheckedStores();if(!itemName){showToast('Please enter an item.',true);restrictionItemName.focus();return}if(normalizedKey(itemName)==='case of water'){showToast('Case of Water is permanently assigned to Sam’s / CostCo.',true);return}if(!allowedStores.length){showToast('Choose at least one allowed store.',true);return}
+  event.preventDefault();const itemName=normalizeItemName(restrictionItemName.value),allowedStores=getCheckedStores();if(!itemName){showToast('Please enter an item.',true);restrictionItemName.focus();return}if(normalizedKey(itemName)==='case of water'){showToast('Case of Water is permanently assigned to Sam’s / CostCo.',true);return}if(!restrictionFromMaster&&!allowedStores.length){showToast('Choose at least one allowed store.',true);return}
   saveRestrictionButton.disabled=true;saveRestrictionButton.textContent='Saving…';
   try{
-    const result=unwrapRpcResult(await api('/rest/v1/rpc/save_item_store_restriction',{method:'POST',body:JSON.stringify({p_original_item_name:editingRestrictionOriginalName,p_item_name:itemName,p_allowed_stores:allowedStores})}));
+    let result;
+    if(restrictionFromMaster){
+      result=unwrapRpcResult(await api('/rest/v1/rpc/save_master_item_details',{method:'POST',body:JSON.stringify({p_original_item_name:editingRestrictionOriginalName,p_item_name:itemName,p_allowed_stores:allowedStores})}));
+      if(result?.saved===false){
+        if(result.reason==='duplicate'){showToast(`${itemName} already exists.`,true);return}
+        if(result.reason==='protected_name'){showToast('Case of Water cannot be renamed.',true);return}
+        if(result.reason==='not_found'){showToast('That Master List item no longer exists.',true);goMasterList();return}
+        if(result.reason==='item_on_disallowed_store'){showToast(`${itemName} is currently on the ${STORES[result.existing_store]||'another store'} list. Keep that store allowed or remove the item from that shopping list first.`,true);return}
+        if(result.reason==='invalid_name'){showToast('Please enter a valid item name.',true);return}
+        showToast('Could not save the item.',true);return;
+      }
+      invalidateMasterItems();invalidateInventorySearch();goMasterList();setTimeout(()=>showToast(`${itemName} saved.`),80);return;
+    }
+
+    result=unwrapRpcResult(await api('/rest/v1/rpc/save_item_store_restriction',{method:'POST',body:JSON.stringify({p_original_item_name:editingRestrictionOriginalName,p_item_name:itemName,p_allowed_stores:allowedStores})}));
     if(result?.saved===false){
       if(result.reason==='restriction_exists'){showToast('A restriction for that item already exists.',true);return}
       if(result.reason==='item_on_disallowed_store'){showToast(`${itemName} is currently on the ${STORES[result.existing_store]||'another store'} list. Remove it from that list before applying this restriction.`,true);return}
@@ -803,7 +818,7 @@ restrictionForm.addEventListener('submit',async event=>{
       showToast('Could not save the restriction.',true);return;
     }
     invalidateMasterItems();goRestrictionReturn();setTimeout(()=>showToast(`${itemName} restriction saved.`),80);
-  }catch(error){console.error(error);showToast('Could not save the restriction.',true)}finally{saveRestrictionButton.disabled=false;saveRestrictionButton.textContent='Save Restriction'}
+  }catch(error){console.error(error);showToast(restrictionFromMaster?'Could not save the item.':'Could not save the restriction.',true)}finally{saveRestrictionButton.disabled=false;saveRestrictionButton.textContent=restrictionFromMaster?'Save Changes':'Save Restriction'}
 });
 deleteRestrictionButton.addEventListener('click',async()=>{
   if(!editingRestrictionOriginalName)return;const itemName=editingRestrictionOriginalName;if(!window.confirm(`Delete the restriction for ${itemName}?`))return;deleteRestrictionButton.disabled=true;deleteRestrictionButton.textContent='Deleting…';
