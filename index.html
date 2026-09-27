@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.44 -->
-<meta name="app-version" content="1.0.44">
+<!-- APP VERSION: 1.0.45 -->
+<meta name="app-version" content="1.0.45">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -101,7 +101,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.0.44</div>
+    <div class="version-label">v1.0.45</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -344,7 +344,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 <script>
 'use strict';
 
-const APP_VERSION='1.0.44';
+const APP_VERSION='1.0.45';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -1132,33 +1132,38 @@ function getCheckedStores(){return Array.from(document.querySelectorAll('input[n
 itemDetailCategoryButton.addEventListener('click',()=>{
   const itemName=normalizeItemName(editingRestrictionOriginalName||restrictionItemName.value);
   if(!itemName){showToast('Please enter an item first.',true);return}
-  if(itemDetailCategory&&INVENTORY_CATEGORIES[itemDetailCategory]){goInventoryCategory(itemDetailCategory,location.hash);return}
   goItemCategoryChooser(itemName);
 });
 async function renderItemCategoryButtons(itemName){
   await loadInventoryCategories(true);
+  itemCategoryButtons.innerHTML='<div class="loading-state">Loading…</div>';
+  let currentCategory=null;
+  try{
+    const inventoryItems=await fetchInventoryItemMap();
+    const inventoryItem=inventoryItems.get(normalizedKey(itemName))||null;
+    currentCategory=inventoryItem?.category&&INVENTORY_CATEGORIES[inventoryItem.category]?inventoryItem.category:null;
+  }catch(error){console.error(error)}
   itemCategoryButtons.innerHTML='';
   Object.entries(INVENTORY_CATEGORIES).forEach(([key,label])=>{
-    const button=document.createElement('button');button.type='button';button.className='main-button category-button';button.textContent=label;button.addEventListener('click',()=>assignItemCategory(itemName,key));itemCategoryButtons.appendChild(button);
+    const button=document.createElement('button');button.type='button';button.className='main-button category-button';button.textContent=key===currentCategory?`${label} (Current)`:label;button.addEventListener('click',()=>assignItemCategory(itemName,key));itemCategoryButtons.appendChild(button);
   });
 }
 async function assignItemCategory(itemName,category){
   if(!itemName||!INVENTORY_CATEGORIES[category])return;
   const buttons=Array.from(itemCategoryButtons.querySelectorAll('button'));buttons.forEach(button=>button.disabled=true);
   try{
-    const result=unwrapRpcResult(await api('/rest/v1/rpc/add_inventory_item',{method:'POST',body:JSON.stringify({p_item_name:itemName,p_quantity:0,p_category:category})}));
-    if(result?.added===true){
+    const result=unwrapRpcResult(await api('/rest/v1/rpc/set_inventory_item_category',{method:'POST',body:JSON.stringify({p_item_name:itemName,p_category:category})}));
+    if(result?.saved===true){
       invalidateMasterItems();invalidateInventorySearch();
+      const label=INVENTORY_CATEGORIES[result.category]||INVENTORY_CATEGORIES[category];
+      const wasMoved=result.reason==='moved';
       history.back();
-      setTimeout(()=>showToast(`${itemName} assigned to ${INVENTORY_CATEGORIES[category]}.`),80);return;
+      setTimeout(()=>showToast(wasMoved?`${itemName} moved to ${label}.`:`${itemName} assigned to ${label}.`),80);return;
     }
-    if(result?.reason==='duplicate'){
-      invalidateInventorySearch();
-      const existing=result.existing_category;history.back();
-      setTimeout(()=>showToast(`${itemName} is already in ${INVENTORY_CATEGORIES[existing]||'Inventory'}.`),80);return;
-    }
-    showToast('Could not assign that category.',true);
-  }catch(error){console.error(error);showToast('Could not assign that category.',true)}finally{buttons.forEach(button=>button.disabled=false)}
+    if(result?.reason==='invalid_category'){showToast('That category is no longer available.',true);await renderItemCategoryButtons(itemName);return}
+    if(result?.reason==='invalid_name'){showToast('Please enter a valid item name.',true);return}
+    showToast('Could not change that category.',true);
+  }catch(error){console.error(error);showToast('Could not change that category.',true)}finally{buttons.forEach(button=>button.disabled=false)}
 }
 addRestrictionItemToShoppingButton.addEventListener('click',()=>{
   const itemName=normalizeItemName(editingRestrictionOriginalName||restrictionItemName.value);
