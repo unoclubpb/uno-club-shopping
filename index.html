@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.32 -->
-<meta name="app-version" content="1.0.32">
+<!-- APP VERSION: 1.0.33 -->
+<meta name="app-version" content="1.0.33">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.32">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.32">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.33">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.33">
 
 <style>
 :root{
@@ -62,7 +62,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .qty-control{display:flex;align-items:center;justify-content:center;gap:5px}.qty-step-button{width:36px;height:44px;flex:0 0 36px;border:2px solid var(--black);border-radius:10px;background:var(--white);color:var(--black);font-size:24px;font-weight:900;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer}.qty-step-button:active{background:#e7e7e7}.qty-step-button:disabled{opacity:.35}
 .qty-input{width:48px;min-height:44px;padding:4px;border:1.5px solid var(--border);border-radius:10px;background:var(--white);color:var(--text);text-align:center;font-size:18px;font-weight:800;outline:none;-moz-appearance:textfield}.qty-input::-webkit-outer-spin-button,.qty-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}.qty-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,90,203,.12)}
 .add-qty-control{justify-content:flex-start}.add-qty-control .qty-step-button{width:48px;height:52px;flex:0 0 48px}.add-qty-control .qty-input{width:76px;min-height:52px;font-size:20px}
-.list-card{padding:0}.list-heading,.item-row{display:grid;grid-template-columns:minmax(0,1fr) 132px 48px;gap:8px;align-items:center}.list-heading{padding:12px 14px;background:#edf3ff;border-bottom:1px solid var(--border);color:#364152;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.7px}.list-heading span:nth-child(2){text-align:center}.item-row{min-height:66px;padding:9px 14px;border-bottom:1px solid #ececec}.item-row:last-child{border-bottom:0}
+.list-card{padding:0}.list-heading,.item-row{display:grid;grid-template-columns:minmax(0,1fr) 132px 100px;gap:8px;align-items:center}.list-heading{padding:12px 14px;background:#edf3ff;border-bottom:1px solid var(--border);color:#364152;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.7px}.list-heading span:nth-child(2){text-align:center}.item-row{min-height:66px;padding:9px 14px;border-bottom:1px solid #ececec}.item-row:last-child{border-bottom:0}.row-actions{display:flex;align-items:center;justify-content:flex-end;gap:6px}.purchase-button{width:44px;height:44px;border:2px solid var(--black);border-radius:11px;background:#eaf8ef;color:var(--green);font-size:25px;line-height:1;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center}.purchase-button:active{background:#d8f1e2}.purchase-button:disabled{opacity:.45}
 .item-name{min-width:0;font-size:17px;font-weight:750;overflow-wrap:anywhere}.clickable-item-name{min-width:0;max-width:100%;border:0;margin:0;padding:0;background:transparent;color:var(--blue);font-size:17px;font-weight:750;text-align:left;overflow-wrap:anywhere;cursor:pointer}.clickable-item-name:active{color:var(--blue-dark)}
 .qty-fixed{width:48px;min-height:44px;margin:0 auto;border:1.5px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;background:#f1f3f6;color:#515865;font-size:18px;font-weight:800}
 .delete-button{width:44px;height:44px;border:2px solid var(--black);border-radius:11px;background:#fff1f1;color:var(--danger);font-size:28px;line-height:1;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center}.delete-button:active{background:#ffdede}.delete-button:disabled{opacity:.45}
@@ -75,7 +75,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .master-row{min-height:60px;padding:8px 10px 8px 15px;border-bottom:1px solid #ececec;display:grid;grid-template-columns:minmax(0,1fr) 44px 48px;gap:8px;align-items:center}.master-row.has-restriction{box-shadow:inset 0 0 0 2px var(--blue);border-radius:10px}.master-row:last-child{border-bottom:0}.master-name-button{border:0;background:transparent;color:var(--blue);padding:8px 0;text-align:left;font-size:17px;font-weight:800;cursor:pointer;overflow-wrap:anywhere}.master-name-button:active{color:var(--blue-dark)}.master-qty{min-height:44px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:850;color:var(--text)}
 .empty-state,.loading-state,.error-state{padding:28px 18px;text-align:center;color:var(--muted);font-size:16px}.error-state{color:var(--danger)}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translate(-50%,18px);width:min(calc(100% - 32px),520px);min-height:52px;padding:9px 10px 9px 16px;border-radius:12px;background:var(--black);color:var(--white);display:flex;align-items:center;justify-content:center;gap:14px;text-align:center;font-weight:700;box-shadow:0 8px 30px rgba(0,0,0,.26);opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:2000}.toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}.toast.error{background:#8f1d1d}.toast-message{min-width:0}.toast-undo-button{flex:0 0 auto;min-height:36px;padding:6px 12px;border:1.5px solid var(--white);border-radius:9px;background:transparent;color:var(--white);font-size:14px;font-weight:900;cursor:pointer}.toast-undo-button[hidden]{display:none!important}.toast-undo-button:active{background:rgba(255,255,255,.18)}.toast-undo-button:disabled{opacity:.5}
-@media(max-width:390px){.app-header h1{font-size:19px}.list-heading,.item-row{grid-template-columns:minmax(0,1fr) 124px 44px;gap:5px;padding-left:10px;padding-right:10px}.qty-step-button{width:34px;flex-basis:34px}.qty-input{width:44px}}
+@media(max-width:390px){.app-header h1{font-size:19px}.list-heading,.item-row{grid-template-columns:minmax(0,1fr) 124px 94px;gap:5px;padding-left:10px;padding-right:10px}.row-actions{gap:4px}.qty-step-button{width:34px;flex-basis:34px}.qty-input{width:44px}}
 </style>
 </head>
 <body>
@@ -83,7 +83,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 <header class="app-header">
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
-  <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.32" alt="Uno Club Shopping logo">
+  <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.33" alt="Uno Club Shopping logo">
 </header>
 
 <main>
@@ -100,7 +100,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
       <button id="inventoryButton" class="main-button secondary-menu-button" type="button">Inventory</button>
       <button id="adminButton" class="main-button secondary-menu-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.0.32</div>
+    <div class="version-label">v1.0.33</div>
   </section>
 
   <section id="addScreen" class="screen" hidden>
@@ -147,6 +147,17 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
         <div class="field"><label for="moveStoreSelect">Move To</label><select id="moveStoreSelect" required></select></div>
         <button id="saveMoveButton" class="save-button" type="submit">Move Item</button>
       </form>
+    </div>
+  </section>
+
+  <section id="purchaseCategoryScreen" class="screen" hidden>
+    <div class="card form-card">
+      <div class="field">
+        <div class="field-label">Purchased Item</div>
+        <div id="purchaseItemName" class="readonly-value"></div>
+      </div>
+      <div class="field-label">Choose Inventory Category</div>
+      <div id="purchaseCategoryButtons" class="category-stack"></div>
     </div>
   </section>
 
@@ -280,7 +291,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 <script>
 'use strict';
 
-const APP_VERSION='1.0.32';
+const APP_VERSION='1.0.33';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -307,13 +318,14 @@ let pendingShoppingPrefillName=null;
 let pendingShoppingAddReturnHash=null;
 let activeShoppingAddReturnHash=null;
 let pendingMasterAddName=null;
+let pendingPurchaseItem=null;
 let storeRestrictionTimer=null;
 let storeRestrictionRequestNumber=0;
 let masterItemsCache=null;
 let inventorySearchCache=null;
 
 const $=id=>document.getElementById(id);
-const homeScreen=$('homeScreen'),addScreen=$('addScreen'),storeScreen=$('storeScreen'),shoppingMoveScreen=$('shoppingMoveScreen');
+const homeScreen=$('homeScreen'),addScreen=$('addScreen'),storeScreen=$('storeScreen'),shoppingMoveScreen=$('shoppingMoveScreen'),purchaseCategoryScreen=$('purchaseCategoryScreen');
 const inventoryScreen=$('inventoryScreen'),inventoryCategoryScreen=$('inventoryCategoryScreen'),inventoryAddScreen=$('inventoryAddScreen');
 const adminScreen=$('adminScreen'),masterListScreen=$('masterListScreen'),masterAddScreen=$('masterAddScreen');
 const restrictionsScreen=$('restrictionsScreen'),restrictionsByItemScreen=$('restrictionsByItemScreen'),restrictionsByStoreScreen=$('restrictionsByStoreScreen');
@@ -324,6 +336,7 @@ const adminButton=$('adminButton'),adminRestrictionsButton=$('adminRestrictionsB
 const restrictionsByItemButton=$('restrictionsByItemButton'),restrictionsByStoreButton=$('restrictionsByStoreButton'),addRestrictionButton=$('addRestrictionButton');
 const addItemForm=$('addItemForm'),itemNameInput=$('itemName'),itemNameSuggestions=$('itemNameSuggestions'),quantityInput=$('quantity'),addQtyMinus=$('addQtyMinus'),addQtyPlus=$('addQtyPlus'),storeSelect=$('store'),lockedStoreNote=$('lockedStoreNote'),saveItemButton=$('saveItemButton');
 const storeList=$('storeList');
+const purchaseItemName=$('purchaseItemName'),purchaseCategoryButtons=$('purchaseCategoryButtons');
 const moveShoppingForm=$('moveShoppingForm'),moveItemName=$('moveItemName'),moveCurrentStore=$('moveCurrentStore'),moveStoreSelect=$('moveStoreSelect'),saveMoveButton=$('saveMoveButton');
 const inventorySearchInput=$('inventorySearchInput'),inventorySearchSuggestions=$('inventorySearchSuggestions');
 const inventoryCategoryButtons=$('inventoryCategoryButtons'),inventoryList=$('inventoryList');
@@ -355,7 +368,7 @@ async function api(path,options={}){
   const text=await response.text();return text?JSON.parse(text):null;
 }
 
-function showOnly(screen){[homeScreen,addScreen,storeScreen,shoppingMoveScreen,inventoryScreen,inventoryCategoryScreen,inventoryAddScreen,adminScreen,masterListScreen,masterAddScreen,restrictionsScreen,restrictionsByItemScreen,restrictionsByStoreScreen,restrictionStoreScreen,restrictionEditScreen].forEach(s=>s.hidden=s!==screen)}
+function showOnly(screen){[homeScreen,addScreen,storeScreen,shoppingMoveScreen,purchaseCategoryScreen,inventoryScreen,inventoryCategoryScreen,inventoryAddScreen,adminScreen,masterListScreen,masterAddScreen,restrictionsScreen,restrictionsByItemScreen,restrictionsByStoreScreen,restrictionStoreScreen,restrictionEditScreen].forEach(s=>s.hidden=s!==screen)}
 
 function showToast(message,isError=false,duration=3200){
   clearTimeout(toastTimer);pendingUndo=null;toastMessage.textContent=message;toastUndoButton.hidden=true;toastUndoButton.disabled=false;toast.classList.toggle('error',isError);toast.classList.add('show');
@@ -508,6 +521,7 @@ function goAdd(){pendingShoppingPrefillName=null;pendingShoppingAddReturnHash=nu
 function goAddWithItem(name,returnHash=null){pendingShoppingPrefillName=normalizeItemName(name);pendingShoppingAddReturnHash=returnHash;location.hash='#add'}
 function goAddForStore(store){pendingShoppingAddReturnHash=null;location.hash='#add/'+store}
 function goStore(store){location.hash='#store/'+store}
+function goPurchaseCategory(){location.hash='#purchase-category'}
 function goMoveShoppingItem(id){location.hash='#shopping/move/'+encodeURIComponent(id)}
 function goInventory(){location.hash='#inventory'}
 function goInventoryCategory(category){location.hash='#inventory/'+category}
@@ -529,6 +543,11 @@ function route(){
 
   if(hash.startsWith('#shopping/move/')){
     const id=decodeURIComponent(hash.slice('#shopping/move/'.length));currentStore=null;lockedAddStore=null;showOnly(shoppingMoveScreen);pageTitle.textContent='Move Item';backButton.hidden=false;loadShoppingItemForMove(id);return;
+  }
+
+  if(hash==='#purchase-category'){
+    if(!pendingPurchaseItem||!STORES[pendingPurchaseItem.store]){goHome();return}
+    currentStore=null;lockedAddStore=null;showOnly(purchaseCategoryScreen);pageTitle.textContent='Choose Inventory Category';backButton.hidden=false;purchaseItemName.textContent=pendingPurchaseItem.item_name;renderPurchaseCategoryButtons();return;
   }
 
   if(hash.startsWith('#add/')){
@@ -606,6 +625,7 @@ function route(){
 backButton.addEventListener('click',()=>{
   const hash=location.hash;
   if(hash.startsWith('#shopping/move/')){if(movingShoppingItem&&STORES[movingShoppingItem.store])goStore(movingShoppingItem.store);else goHome();return}
+  if(hash==='#purchase-category'){if(pendingPurchaseItem&&STORES[pendingPurchaseItem.store])goStore(pendingPurchaseItem.store);else goHome();return}
   if(hash.startsWith('#add/')){const store=hash.slice(5);if(STORES[store]){goStore(store);return}}
   if(hash.startsWith('#inventory-add/')){const category=hash.slice('#inventory-add/'.length);if(INVENTORY_CATEGORIES[category]){goInventoryCategory(category);return}}
   if(hash.startsWith('#inventory/')){goInventory();return}
@@ -689,25 +709,67 @@ function createPermanentWaterRow(){
 }
 function createShoppingItemRow(item,restrictionRows){
   const allowed=getAllowedStoresForItemName(item.item_name,restrictionRows),movable=Array.isArray(allowed)&&allowed.length>1;
-  return createDataItemRow(item,1,newQ=>updateQuantity('shopping_items',item.id,newQ),(row,button,q)=>deleteShoppingItem(item,row,button,q),null,movable?()=>goMoveShoppingItem(item.id):null);
+  return createDataItemRow(item,1,newQ=>updateQuantity('shopping_items',item.id,newQ),(row,button,q)=>deleteShoppingItem(item,row,button,q),null,movable?()=>goMoveShoppingItem(item.id):null,(row,button)=>purchaseShoppingItem(item,row,button));
 }
 function createInventoryItemRow(item){
   return createDataItemRow(item,0,newQ=>updateQuantity('inventory_items',item.id,newQ),(row,button,q)=>deleteInventoryItem(item,row,button,q),(oldQ,newQ)=>{
     if(oldQ>0&&newQ===0){const yes=window.confirm(`${item.item_name} is out of stock.\n\nWould you like to add it to the shopping list?`);if(yes)goAddWithItem(item.item_name);return true}return false;
   });
 }
-function createDataItemRow(item,minQuantity,saveQuantity,deleteHandler,afterSaveQuantity=null,itemNameClickHandler=null){
+function createDataItemRow(item,minQuantity,saveQuantity,deleteHandler,afterSaveQuantity=null,itemNameClickHandler=null,purchaseHandler=null){
   const row=document.createElement('div');row.className='item-row db-row';row.dataset.id=item.id;
   let name;if(typeof itemNameClickHandler==='function'){name=document.createElement('button');name.type='button';name.className='clickable-item-name';name.addEventListener('click',itemNameClickHandler)}else{name=document.createElement('div');name.className='item-name'}name.textContent=item.item_name;
   const control=document.createElement('div');control.className='qty-control';const minus=document.createElement('button'),qty=document.createElement('input'),plus=document.createElement('button');minus.type=plus.type='button';minus.className=plus.className='qty-step-button';minus.textContent='−';plus.textContent='+';qty.className='qty-input';qty.type='number';qty.min=String(minQuantity);qty.max='9999';qty.step='1';qty.inputMode='numeric';qty.value=item.quantity;qty.dataset.savedValue=String(item.quantity);
   const getQty=()=>getBoundedQuantity(qty,minQuantity);const refresh=()=>{const v=getQty();minus.disabled=v<=minQuantity;plus.disabled=v>=9999};
-  const save=async()=>{const oldV=Number.parseInt(qty.dataset.savedValue,10),newV=getQty();qty.value=newV;if(newV===oldV){refresh();return}minus.disabled=plus.disabled=qty.disabled=true;let ok=false;try{await saveQuantity(newV);qty.dataset.savedValue=String(newV);ok=true}catch(error){console.error(error);qty.value=oldV;showToast('Could not update the quantity.',true)}qty.disabled=false;refresh();if(!ok)return;const handled=typeof afterSaveQuantity==='function'&&afterSaveQuantity(oldV,newV)===true;if(!handled)showToast('Quantity updated.')};
+  const save=async()=>{const oldV=Number.parseInt(qty.dataset.savedValue,10),newV=getQty();qty.value=newV;if(newV===oldV){refresh();return true}minus.disabled=plus.disabled=qty.disabled=true;let ok=false;try{await saveQuantity(newV);qty.dataset.savedValue=String(newV);ok=true}catch(error){console.error(error);qty.value=oldV;showToast('Could not update the quantity.',true)}qty.disabled=false;refresh();if(!ok)return false;const handled=typeof afterSaveQuantity==='function'&&afterSaveQuantity(oldV,newV)===true;if(!handled)showToast('Quantity updated.');return true};
   minus.addEventListener('click',async()=>{const v=getQty();if(v<=minQuantity)return;qty.value=v-1;await save()});plus.addEventListener('click',async()=>{const v=getQty();if(v>=9999)return;qty.value=v+1;await save()});qty.addEventListener('focus',()=>qty.select());qty.addEventListener('input',refresh);qty.addEventListener('change',save);control.append(minus,qty,plus);refresh();
-  const del=document.createElement('button');del.type='button';del.className='delete-button';del.textContent='×';del.addEventListener('click',async()=>{del.disabled=true;await deleteHandler(row,del,getQty())});row.append(name,control,del);return row;
+  const actions=document.createElement('div');actions.className='row-actions';
+  if(typeof purchaseHandler==='function'){
+    const purchase=document.createElement('button');purchase.type='button';purchase.className='purchase-button';purchase.textContent='✓';purchase.setAttribute('aria-label',`Purchased ${item.item_name}`);purchase.title='Purchased';purchase.addEventListener('click',async()=>{purchase.disabled=true;const current=getQty(),saved=Number.parseInt(qty.dataset.savedValue,10);if(current!==saved){const savedOkay=await save();if(!savedOkay||Number.parseInt(qty.dataset.savedValue,10)!==current){purchase.disabled=false;return}}await purchaseHandler(row,purchase,current)});actions.appendChild(purchase);
+  }
+  const del=document.createElement('button');del.type='button';del.className='delete-button';del.textContent='×';del.setAttribute('aria-label',`Remove ${item.item_name}`);del.addEventListener('click',async()=>{del.disabled=true;await deleteHandler(row,del,getQty())});actions.appendChild(del);row.append(name,control,actions);return row;
 }
 async function updateQuantity(table,id,quantity){await api(`/rest/v1/${table}?id=eq.${encodeURIComponent(id)}`,{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify({quantity})})}
 async function deleteShoppingItem(item,row,button,currentQuantity){
   try{await api('/rest/v1/shopping_items?id=eq.'+encodeURIComponent(item.id),{method:'DELETE',headers:{Prefer:'return=minimal'}});row.remove();showUndoToast({...item,quantity:currentQuantity},'shopping');loadHomeCounts();if(!storeList.querySelector('.db-row'))appendEmpty(storeList,currentStore==='sams_costco'?'No other items on this list.':'No items on this list.')}catch(error){console.error(error);button.disabled=false;showToast('Could not remove the item.',true)}
+}
+
+async function purchaseShoppingItem(item,row,button){
+  try{
+    const result=unwrapRpcResult(await api('/rest/v1/rpc/purchase_shopping_item',{method:'POST',body:JSON.stringify({p_id:item.id,p_category:null})}));
+    if(result?.purchased===true){
+      row.remove();invalidateMasterItems();invalidateInventorySearch();loadHomeCounts();
+      if(!storeList.querySelector('.db-row'))appendEmpty(storeList,currentStore==='sams_costco'?'No other items on this list.':'No items on this list.');
+      showToast(`${item.item_name} purchased and added to Inventory.`);return;
+    }
+    if(result?.reason==='category_required'){
+      pendingPurchaseItem={...item,quantity:Number(result.quantity)||item.quantity,store:result.store||item.store};
+      goPurchaseCategory();return;
+    }
+    if(result?.reason==='inventory_limit'){showToast(`Inventory quantity for ${item.item_name} would exceed 9,999.`,true,4500);return}
+    if(result?.reason==='not_found'){row.remove();loadHomeCounts();showToast(`${item.item_name} is no longer on the shopping list.`,true);return}
+    showToast(`Could not mark ${item.item_name} as purchased.`,true);
+  }catch(error){console.error(error);showToast(`Could not mark ${item.item_name} as purchased.`,true)}finally{button.disabled=false}
+}
+function renderPurchaseCategoryButtons(){
+  purchaseCategoryButtons.innerHTML='';
+  Object.entries(INVENTORY_CATEGORIES).forEach(([key,label])=>{
+    const button=document.createElement('button');button.type='button';button.className='main-button category-button';button.textContent=label;button.addEventListener('click',()=>completePurchaseWithCategory(key));purchaseCategoryButtons.appendChild(button);
+  });
+}
+async function completePurchaseWithCategory(category){
+  if(!pendingPurchaseItem||!INVENTORY_CATEGORIES[category])return;
+  const item={...pendingPurchaseItem};
+  const buttons=Array.from(purchaseCategoryButtons.querySelectorAll('button'));buttons.forEach(button=>button.disabled=true);
+  try{
+    const result=unwrapRpcResult(await api('/rest/v1/rpc/purchase_shopping_item',{method:'POST',body:JSON.stringify({p_id:item.id,p_category:category})}));
+    if(result?.purchased===true){
+      pendingPurchaseItem=null;invalidateMasterItems();invalidateInventorySearch();loadHomeCounts();goStore(item.store);setTimeout(()=>showToast(`${item.item_name} purchased and added to ${INVENTORY_CATEGORIES[result.category]||INVENTORY_CATEGORIES[category]}.`),80);return;
+    }
+    if(result?.reason==='inventory_limit'){showToast(`Inventory quantity for ${item.item_name} would exceed 9,999.`,true,4500);return}
+    if(result?.reason==='not_found'){pendingPurchaseItem=null;goStore(item.store);setTimeout(()=>showToast(`${item.item_name} is no longer on the shopping list.`,true),80);return}
+    showToast(`Could not add ${item.item_name} to Inventory.`,true);
+  }catch(error){console.error(error);showToast(`Could not add ${item.item_name} to Inventory.`,true)}finally{buttons.forEach(button=>button.disabled=false)}
 }
 
 function rebuildMoveStoreOptions(allowed,current){
@@ -883,7 +945,6 @@ restrictionForm.addEventListener('submit',async event=>{
     invalidateMasterItems();goRestrictionReturn();setTimeout(()=>showToast(`${itemName} restriction saved.`),80);
   }catch(error){console.error(error);showToast(restrictionFromMaster?'Could not save the item.':'Could not save the restriction.',true)}finally{saveRestrictionButton.disabled=false;saveRestrictionButton.textContent=editingRestrictionOriginalName?'Save Changes':'Save Restriction'}
 });
-
 deleteRestrictionItemButton.addEventListener('click',async()=>{
   const itemName=normalizeItemName(editingRestrictionOriginalName||restrictionItemName.value);
   if(!itemName)return;
