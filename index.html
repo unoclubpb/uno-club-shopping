@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.36 -->
-<meta name="app-version" content="1.0.36">
+<!-- APP VERSION: 1.0.37 -->
+<meta name="app-version" content="1.0.37">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.36">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.36">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.37">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.37">
 
 <style>
 :root{
@@ -162,7 +162,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 <header class="app-header">
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
-  <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.36" alt="Uno Club Shopping logo">
+  <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.37" alt="Uno Club Shopping logo">
 </header>
 
 <main>
@@ -176,7 +176,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
 
-    <div class="version-label">v1.0.36</div>
+    <div class="version-label">v1.0.37</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -426,7 +426,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 <script>
 'use strict';
 
-const APP_VERSION='1.0.36';
+const APP_VERSION='1.0.37';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -578,9 +578,52 @@ const toast=$('toast');
 const toastMessage=$('toastMessage');
 const toastUndoButton=$('toastUndoButton');
 
-function normalizeItemName(value){
-  return String(value??'').trim().replace(/\s+/g,' ');
+function capitalizeItemWords(value){
+  return String(value??'').replace(
+    /(^|[\s\-\/(])([a-z])/g,
+    (match,prefix,letter)=>prefix+letter.toUpperCase()
+  );
 }
+
+function normalizeItemName(value){
+  return capitalizeItemWords(
+    String(value??'')
+      .trim()
+      .replace(/\s+/g,' ')
+  );
+}
+
+function enableLiveItemCapitalization(input){
+  input.addEventListener('input',()=>{
+    const start=input.selectionStart;
+    const end=input.selectionEnd;
+    const updated=capitalizeItemWords(input.value);
+
+    if(updated===input.value)return;
+
+    input.value=updated;
+
+    if(
+      typeof start==='number'&&
+      typeof end==='number'
+    ){
+      try{
+        input.setSelectionRange(start,end);
+      }catch(_){}
+    }
+  });
+
+  input.addEventListener('blur',()=>{
+    input.value=normalizeItemName(input.value);
+  });
+}
+
+[
+  itemNameInput,
+  inventoryItemName,
+  masterAddItemName,
+  restrictionItemName
+].forEach(enableLiveItemCapitalization);
 
 function normalizedKey(value){
   return normalizeItemName(value).toLocaleLowerCase();
@@ -602,6 +645,7 @@ function sortByName(items){
 
 function rememberLastStore(store){
   if(!STORES[store])return;
+
   try{
     localStorage.setItem(LAST_STORE_KEY,store);
   }catch(_){}
@@ -2355,6 +2399,8 @@ addItemForm.addEventListener(
     const itemName=
       normalizeItemName(itemNameInput.value);
 
+    itemNameInput.value=itemName;
+
     const store=
       lockedAddStore||
       storeSelect.value;
@@ -3595,6 +3641,8 @@ inventoryAddForm.addEventListener(
     const itemName=
       normalizeItemName(inventoryItemName.value);
 
+    inventoryItemName.value=itemName;
+
     const quantity=
       getInventoryAddQuantity();
 
@@ -3743,6 +3791,8 @@ masterAddForm.addEventListener(
 
     const itemName=
       normalizeItemName(masterAddItemName.value);
+
+    masterAddItemName.value=itemName;
 
     if(!itemName){
       showToast(
@@ -4374,7 +4424,6 @@ function clearRestrictionForm(){
 async function loadRestrictionForEdit(itemName){
   restrictionItemName.readOnly=false;
   restrictionItemName.value='';
-
   hideSuggestions(restrictionItemSuggestions);
   clearRestrictionChecks();
 
@@ -4385,7 +4434,6 @@ async function loadRestrictionForEdit(itemName){
 
   try{
     const rows=await fetchRestrictionRows();
-
     const key=normalizedKey(itemName);
 
     const matches=
@@ -4534,6 +4582,8 @@ restrictionForm.addEventListener(
       normalizeItemName(
         restrictionItemName.value
       );
+
+    restrictionItemName.value=itemName;
 
     const allowedStores=
       getCheckedStores();
