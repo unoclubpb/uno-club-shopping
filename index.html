@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.30 -->
-<meta name="app-version" content="1.0.30">
+<!-- APP VERSION: 1.0.31 -->
+<meta name="app-version" content="1.0.31">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,74 +14,766 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.30">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.30">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.31">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.31">
 
 <style>
 :root{
-  --black:#0b0b0b;--page:#f5f6f8;--white:#fff;--blue:#1e5acb;--blue-dark:#15459f;
-  --green:#218c4f;--green-dark:#176b3a;--red:#c62828;--red-dark:#991f1f;
-  --border:#d9d9d9;--text:#171717;--muted:#6b7280;--danger:#c62828;
-  --shadow:0 8px 24px rgba(0,0,0,.10);--radius:16px
+  --black:#0b0b0b;
+  --page:#f5f6f8;
+  --white:#fff;
+  --blue:#1e5acb;
+  --blue-dark:#15459f;
+  --green:#218c4f;
+  --green-dark:#176b3a;
+  --red:#c62828;
+  --red-dark:#991f1f;
+  --border:#d9d9d9;
+  --text:#171717;
+  --muted:#6b7280;
+  --danger:#c62828;
+  --shadow:0 8px 24px rgba(0,0,0,.10);
+  --radius:16px
 }
+
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;background:var(--page);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%}
-body{min-height:100vh;min-height:100dvh}
-button,input,select{font:inherit}button{touch-action:manipulation}
-.app-header{height:calc(82px + env(safe-area-inset-top));padding:calc(9px + env(safe-area-inset-top)) 14px 9px;background:var(--black);color:var(--white);display:flex;align-items:center;gap:10px;position:fixed;inset:0 0 auto 0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.22)}
-.app-header h1{flex:1;min-width:0;margin:0;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:22px;line-height:1.1;font-weight:850}
-.header-logo{width:58px;height:58px;flex:0 0 58px;object-fit:cover;border-radius:12px;box-shadow:0 0 0 1px rgba(255,255,255,.14),0 4px 12px rgba(0,0,0,.35)}
-.back-button{width:44px;height:44px;flex:0 0 44px;border:0;border-radius:12px;background:transparent;color:var(--white);font-size:32px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.back-button[hidden]{display:none!important}.back-button:active{background:rgba(255,255,255,.12)}
-main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inset-top)) 16px calc(42px + env(safe-area-inset-bottom))}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  background:var(--page);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-text-size-adjust:100%
+}
+
+body{
+  min-height:100vh;
+  min-height:100dvh
+}
+
+button,input,select{font:inherit}
+button{touch-action:manipulation}
+
+.app-header{
+  height:calc(82px + env(safe-area-inset-top));
+  padding:calc(9px + env(safe-area-inset-top)) 14px 9px;
+  background:var(--black);
+  color:var(--white);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  position:fixed;
+  inset:0 0 auto 0;
+  z-index:1000;
+  box-shadow:0 2px 10px rgba(0,0,0,.22)
+}
+
+.app-header h1{
+  flex:1;
+  min-width:0;
+  margin:0;
+  text-align:center;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  font-size:22px;
+  line-height:1.1;
+  font-weight:850
+}
+
+.header-logo{
+  width:58px;
+  height:58px;
+  flex:0 0 58px;
+  object-fit:cover;
+  border-radius:12px;
+  box-shadow:0 0 0 1px rgba(255,255,255,.14),0 4px 12px rgba(0,0,0,.35)
+}
+
+.back-button{
+  width:44px;
+  height:44px;
+  flex:0 0 44px;
+  border:0;
+  border-radius:12px;
+  background:transparent;
+  color:var(--white);
+  font-size:32px;
+  line-height:1;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+
+.back-button[hidden]{display:none!important}
+.back-button:active{background:rgba(255,255,255,.12)}
+
+main{
+  width:min(100%,620px);
+  margin:0 auto;
+  padding:calc(104px + env(safe-area-inset-top)) 16px calc(42px + env(safe-area-inset-bottom))
+}
+
 .screen[hidden]{display:none!important}
-#homeScreen:not([hidden]){display:flex;flex-direction:column;min-height:calc(100dvh - 155px - env(safe-area-inset-top))}
-.button-stack,.category-stack,.home-bottom-menu{display:grid;gap:13px}
-.home-bottom-menu{margin-top:auto;padding-top:22px;margin-bottom:24px}
-.main-button,.save-button{width:100%;min-height:62px;border:2px solid var(--black);border-radius:14px;background:var(--blue);color:var(--white);font-size:20px;font-weight:800;box-shadow:0 5px 14px rgba(30,90,203,.24);cursor:pointer;transition:transform .08s ease,background .15s ease}
-.main-button:active,.save-button:active{transform:scale(.985);background:var(--blue-dark)}
-.main-button.add-item,.store-add-button,.inventory-add-button{background:var(--black);box-shadow:0 5px 14px rgba(0,0,0,.20)}
-.store-button{position:relative}.store-add-button,.inventory-add-button{margin-bottom:13px}.secondary-menu-button{min-height:54px;font-size:17px}
-#inventoryButton{background:var(--green);box-shadow:0 5px 14px rgba(33,140,79,.24)}#inventoryButton:active{background:var(--green-dark)}
-#adminButton{background:var(--red);box-shadow:0 5px 14px rgba(198,40,40,.24)}#adminButton:active{background:var(--red-dark)}
-.count-badge{position:absolute;top:7px;right:8px;min-width:29px;height:29px;padding:0 7px;border-radius:15px;background:var(--white);color:var(--blue);border:2px solid var(--black);font-size:15px;font-weight:900;line-height:25px;text-align:center;box-shadow:0 2px 5px rgba(0,0,0,.18);pointer-events:none}
-.version-label{position:fixed;left:10px;bottom:calc(7px + env(safe-area-inset-bottom));color:#000;font-size:11px;font-weight:500;z-index:10;pointer-events:none}
-.card,.restriction-list,.master-list{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-.form-card{padding:18px}.field{margin-bottom:18px}.field label,.field-label{display:block;margin-bottom:7px;font-size:15px;font-weight:800}
-.field input,.field select{width:100%;min-height:54px;padding:12px 13px;border:1.5px solid var(--border);border-radius:12px;background:var(--white);color:var(--text);font-size:18px;outline:none}
-.field input:focus,.field select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,90,203,.12)}
-.field select:disabled,.field input[readonly]{opacity:1;background:#eee;color:#4b5563;-webkit-text-fill-color:#4b5563;border-color:#b8b8b8}
-.readonly-value{width:100%;min-height:54px;padding:14px 13px;border:1.5px solid var(--border);border-radius:12px;background:#f1f3f6;color:var(--text);font-size:18px;font-weight:700;display:flex;align-items:center}
-.locked-note,.form-note{margin-top:7px;color:var(--muted);font-size:13px;font-weight:650}.locked-note[hidden]{display:none!important}
-.autocomplete-wrap{position:relative}.autocomplete-list{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:1500;background:var(--white);border:1.5px solid var(--border);border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,.16);max-height:260px;overflow-y:auto}.autocomplete-list[hidden]{display:none!important}
-.autocomplete-option{width:100%;border:0;border-bottom:1px solid #ececec;background:var(--white);padding:12px 13px;text-align:left;color:var(--text);font-size:17px;font-weight:700;cursor:pointer}.autocomplete-option:last-child{border-bottom:0}.autocomplete-option:active{background:#edf3ff}
-.autocomplete-empty{padding:14px 13px;color:var(--muted);font-size:16px;font-weight:700;text-align:left}
-.inventory-search-card,.master-search-card{margin-bottom:13px;padding:16px;overflow:visible}.inventory-search-card .field,.master-search-card .field{margin-bottom:0}.master-add-button{margin-bottom:13px}.restriction-shopping-button{min-height:54px;margin-top:14px;font-size:18px}.restriction-shopping-button[hidden]{display:none!important}
-.qty-control{display:flex;align-items:center;justify-content:center;gap:5px}.qty-step-button{width:36px;height:44px;flex:0 0 36px;border:2px solid var(--black);border-radius:10px;background:var(--white);color:var(--black);font-size:24px;font-weight:900;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer}.qty-step-button:active{background:#e7e7e7}.qty-step-button:disabled{opacity:.35}
-.qty-input{width:48px;min-height:44px;padding:4px;border:1.5px solid var(--border);border-radius:10px;background:var(--white);color:var(--text);text-align:center;font-size:18px;font-weight:800;outline:none;-moz-appearance:textfield}.qty-input::-webkit-outer-spin-button,.qty-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}.qty-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,90,203,.12)}
-.add-qty-control{justify-content:flex-start}.add-qty-control .qty-step-button{width:48px;height:52px;flex:0 0 48px}.add-qty-control .qty-input{width:76px;min-height:52px;font-size:20px}
-.list-card{padding:0}.list-heading,.item-row{display:grid;grid-template-columns:minmax(0,1fr) 132px 48px;gap:8px;align-items:center}.list-heading{padding:12px 14px;background:#edf3ff;border-bottom:1px solid var(--border);color:#364152;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.7px}.list-heading span:nth-child(2){text-align:center}.item-row{min-height:66px;padding:9px 14px;border-bottom:1px solid #ececec}.item-row:last-child{border-bottom:0}
-.item-name{min-width:0;font-size:17px;font-weight:750;overflow-wrap:anywhere}.clickable-item-name{min-width:0;max-width:100%;border:0;margin:0;padding:0;background:transparent;color:var(--blue);font-size:17px;font-weight:750;text-align:left;overflow-wrap:anywhere;cursor:pointer}.clickable-item-name:active{color:var(--blue-dark)}
-.qty-fixed{width:48px;min-height:44px;margin:0 auto;border:1.5px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;background:#f1f3f6;color:#515865;font-size:18px;font-weight:800}
-.delete-button{width:44px;height:44px;border:2px solid var(--black);border-radius:11px;background:#fff1f1;color:var(--danger);font-size:28px;line-height:1;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center}.delete-button:active{background:#ffdede}.delete-button:disabled{opacity:.45}
-.permanent-row{background:#f7faff}.fixed-note{color:var(--blue);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-top:3px}
-.category-button{text-align:left;padding:0 18px}.category-button::after{content:'›';float:right;font-size:29px;font-weight:500;line-height:24px}
-.inventory-category-note{margin:0 0 13px;color:var(--muted);font-size:13px;font-weight:650;text-align:center}.restrictions-toolbar{margin-bottom:13px}
-.restriction-row{width:100%;border:0;border-bottom:1px solid #ececec;background:var(--white);color:var(--text);padding:14px 15px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;text-align:left;cursor:pointer}.restriction-row:last-child{border-bottom:0}.restriction-row:active{background:#edf3ff}.restriction-name{font-size:17px;font-weight:800;overflow-wrap:anywhere}.restriction-stores{margin-top:4px;color:var(--muted);font-size:13px;font-weight:650}.restriction-chevron{color:var(--blue);font-size:30px;line-height:1;font-weight:500}
-.store-checks{display:grid;gap:9px}.store-check-row{min-height:50px;padding:8px 12px;border:1.5px solid var(--border);border-radius:12px;background:#fafafa;display:flex!important;align-items:center;gap:11px;cursor:pointer;font-size:17px!important;font-weight:700!important}.store-check-row input{width:23px;height:23px;margin:0;accent-color:var(--blue)}
-.delete-restriction-button{width:100%;min-height:54px;margin-top:14px;border:2px solid var(--black);border-radius:14px;background:#fff1f1;color:var(--danger);font-size:18px;font-weight:850;cursor:pointer}.delete-restriction-button[hidden]{display:none!important}.delete-restriction-button:active{background:#ffdede}
-.master-row{min-height:60px;padding:8px 10px 8px 15px;border-bottom:1px solid #ececec;display:grid;grid-template-columns:minmax(0,1fr) 44px 48px;gap:8px;align-items:center}.master-row.has-restriction{box-shadow:inset 0 0 0 2px var(--blue);border-radius:10px}.master-row:last-child{border-bottom:0}.master-name-button{border:0;background:transparent;color:var(--blue);padding:8px 0;text-align:left;font-size:17px;font-weight:800;cursor:pointer;overflow-wrap:anywhere}.master-name-button:active{color:var(--blue-dark)}.master-qty{min-height:44px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:850;color:var(--text)}
-.empty-state,.loading-state,.error-state{padding:28px 18px;text-align:center;color:var(--muted);font-size:16px}.error-state{color:var(--danger)}
-.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translate(-50%,18px);width:min(calc(100% - 32px),520px);min-height:52px;padding:9px 10px 9px 16px;border-radius:12px;background:var(--black);color:var(--white);display:flex;align-items:center;justify-content:center;gap:14px;text-align:center;font-weight:700;box-shadow:0 8px 30px rgba(0,0,0,.26);opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:2000}.toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}.toast.error{background:#8f1d1d}.toast-message{min-width:0}.toast-undo-button{flex:0 0 auto;min-height:36px;padding:6px 12px;border:1.5px solid var(--white);border-radius:9px;background:transparent;color:var(--white);font-size:14px;font-weight:900;cursor:pointer}.toast-undo-button[hidden]{display:none!important}.toast-undo-button:active{background:rgba(255,255,255,.18)}.toast-undo-button:disabled{opacity:.5}
-@media(max-width:390px){.app-header h1{font-size:19px}.list-heading,.item-row{grid-template-columns:minmax(0,1fr) 124px 44px;gap:5px;padding-left:10px;padding-right:10px}.qty-step-button{width:34px;flex-basis:34px}.qty-input{width:44px}}
+
+#homeScreen:not([hidden]){
+  display:flex;
+  flex-direction:column;
+  min-height:calc(100dvh - 155px - env(safe-area-inset-top))
+}
+
+.button-stack,
+.category-stack,
+.home-bottom-menu{
+  display:grid;
+  gap:13px
+}
+
+.home-bottom-menu{
+  margin-top:auto;
+  padding-top:22px;
+  margin-bottom:24px
+}
+
+.main-button,
+.save-button{
+  width:100%;
+  min-height:62px;
+  border:2px solid var(--black);
+  border-radius:14px;
+  background:var(--blue);
+  color:var(--white);
+  font-size:20px;
+  font-weight:800;
+  box-shadow:0 5px 14px rgba(30,90,203,.24);
+  cursor:pointer;
+  transition:transform .08s ease,background .15s ease
+}
+
+.main-button:active,
+.save-button:active{
+  transform:scale(.985);
+  background:var(--blue-dark)
+}
+
+.main-button.add-item,
+.store-add-button,
+.inventory-add-button{
+  background:var(--black);
+  box-shadow:0 5px 14px rgba(0,0,0,.20)
+}
+
+.store-button{position:relative}
+
+.store-add-button,
+.inventory-add-button{
+  margin-bottom:13px
+}
+
+.secondary-menu-button{
+  min-height:54px;
+  font-size:17px
+}
+
+#inventoryButton{
+  background:var(--green);
+  box-shadow:0 5px 14px rgba(33,140,79,.24)
+}
+
+#inventoryButton:active{
+  background:var(--green-dark)
+}
+
+#adminButton{
+  background:var(--red);
+  box-shadow:0 5px 14px rgba(198,40,40,.24)
+}
+
+#adminButton:active{
+  background:var(--red-dark)
+}
+
+#masterListButton{
+  background:var(--green);
+  box-shadow:0 5px 14px rgba(33,140,79,.24)
+}
+
+#masterListButton:active{
+  background:var(--green-dark)
+}
+
+#adminRestrictionsButton{
+  background:var(--red);
+  box-shadow:0 5px 14px rgba(198,40,40,.24)
+}
+
+#adminRestrictionsButton:active{
+  background:var(--red-dark)
+}
+
+.count-badge{
+  position:absolute;
+  top:7px;
+  right:8px;
+  min-width:29px;
+  height:29px;
+  padding:0 7px;
+  border-radius:15px;
+  background:var(--white);
+  color:var(--blue);
+  border:2px solid var(--black);
+  font-size:15px;
+  font-weight:900;
+  line-height:25px;
+  text-align:center;
+  box-shadow:0 2px 5px rgba(0,0,0,.18);
+  pointer-events:none
+}
+
+.version-label{
+  position:fixed;
+  left:10px;
+  bottom:calc(7px + env(safe-area-inset-bottom));
+  color:#000;
+  font-size:11px;
+  font-weight:500;
+  z-index:10;
+  pointer-events:none
+}
+
+.card,
+.restriction-list,
+.master-list{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden
+}
+
+.form-card{padding:18px}
+.field{margin-bottom:18px}
+
+.field label,
+.field-label{
+  display:block;
+  margin-bottom:7px;
+  font-size:15px;
+  font-weight:800
+}
+
+.field input,
+.field select{
+  width:100%;
+  min-height:54px;
+  padding:12px 13px;
+  border:1.5px solid var(--border);
+  border-radius:12px;
+  background:var(--white);
+  color:var(--text);
+  font-size:18px;
+  outline:none
+}
+
+.field input:focus,
+.field select:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px rgba(30,90,203,.12)
+}
+
+.field select:disabled,
+.field input[readonly]{
+  opacity:1;
+  background:#eee;
+  color:#4b5563;
+  -webkit-text-fill-color:#4b5563;
+  border-color:#b8b8b8
+}
+
+.readonly-value{
+  width:100%;
+  min-height:54px;
+  padding:14px 13px;
+  border:1.5px solid var(--border);
+  border-radius:12px;
+  background:#f1f3f6;
+  color:var(--text);
+  font-size:18px;
+  font-weight:700;
+  display:flex;
+  align-items:center
+}
+
+.locked-note,
+.form-note{
+  margin-top:7px;
+  color:var(--muted);
+  font-size:13px;
+  font-weight:650
+}
+
+.locked-note[hidden]{display:none!important}
+
+.autocomplete-wrap{position:relative}
+
+.autocomplete-list{
+  position:absolute;
+  left:0;
+  right:0;
+  top:calc(100% + 4px);
+  z-index:1500;
+  background:var(--white);
+  border:1.5px solid var(--border);
+  border-radius:12px;
+  box-shadow:0 10px 24px rgba(0,0,0,.16);
+  max-height:260px;
+  overflow-y:auto
+}
+
+.autocomplete-list[hidden]{display:none!important}
+
+.autocomplete-option{
+  width:100%;
+  border:0;
+  border-bottom:1px solid #ececec;
+  background:var(--white);
+  padding:12px 13px;
+  text-align:left;
+  color:var(--text);
+  font-size:17px;
+  font-weight:700;
+  cursor:pointer
+}
+
+.autocomplete-option:last-child{border-bottom:0}
+.autocomplete-option:active{background:#edf3ff}
+
+.autocomplete-empty{
+  padding:14px 13px;
+  color:var(--muted);
+  font-size:16px;
+  font-weight:700;
+  text-align:left
+}
+
+.inventory-search-card,
+.master-search-card{
+  margin-bottom:13px;
+  padding:16px;
+  overflow:visible
+}
+
+.inventory-search-card .field,
+.master-search-card .field{
+  margin-bottom:0
+}
+
+.master-add-button{margin-bottom:13px}
+
+.restriction-shopping-button{
+  min-height:54px;
+  margin-top:14px;
+  font-size:18px
+}
+
+.restriction-shopping-button[hidden]{display:none!important}
+
+.qty-control{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px
+}
+
+.qty-step-button{
+  width:36px;
+  height:44px;
+  flex:0 0 36px;
+  border:2px solid var(--black);
+  border-radius:10px;
+  background:var(--white);
+  color:var(--black);
+  font-size:24px;
+  font-weight:900;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer
+}
+
+.qty-step-button:active{background:#e7e7e7}
+.qty-step-button:disabled{opacity:.35}
+
+.qty-input{
+  width:48px;
+  min-height:44px;
+  padding:4px;
+  border:1.5px solid var(--border);
+  border-radius:10px;
+  background:var(--white);
+  color:var(--text);
+  text-align:center;
+  font-size:18px;
+  font-weight:800;
+  outline:none;
+  -moz-appearance:textfield
+}
+
+.qty-input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button{
+  -webkit-appearance:none;
+  margin:0
+}
+
+.qty-input:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px rgba(30,90,203,.12)
+}
+
+.add-qty-control{justify-content:flex-start}
+
+.add-qty-control .qty-step-button{
+  width:48px;
+  height:52px;
+  flex:0 0 48px
+}
+
+.add-qty-control .qty-input{
+  width:76px;
+  min-height:52px;
+  font-size:20px
+}
+
+.list-card{padding:0}
+
+.list-heading,
+.item-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 132px 48px;
+  gap:8px;
+  align-items:center
+}
+
+.list-heading{
+  padding:12px 14px;
+  background:#edf3ff;
+  border-bottom:1px solid var(--border);
+  color:#364152;
+  font-size:12px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.7px
+}
+
+.list-heading span:nth-child(2){text-align:center}
+
+.item-row{
+  min-height:66px;
+  padding:9px 14px;
+  border-bottom:1px solid #ececec
+}
+
+.item-row:last-child{border-bottom:0}
+
+.item-name{
+  min-width:0;
+  font-size:17px;
+  font-weight:750;
+  overflow-wrap:anywhere
+}
+
+.clickable-item-name{
+  min-width:0;
+  max-width:100%;
+  border:0;
+  margin:0;
+  padding:0;
+  background:transparent;
+  color:var(--blue);
+  font-size:17px;
+  font-weight:750;
+  text-align:left;
+  overflow-wrap:anywhere;
+  cursor:pointer
+}
+
+.clickable-item-name:active{color:var(--blue-dark)}
+
+.qty-fixed{
+  width:48px;
+  min-height:44px;
+  margin:0 auto;
+  border:1.5px solid var(--border);
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#f1f3f6;
+  color:#515865;
+  font-size:18px;
+  font-weight:800
+}
+
+.delete-button{
+  width:44px;
+  height:44px;
+  border:2px solid var(--black);
+  border-radius:11px;
+  background:#fff1f1;
+  color:var(--danger);
+  font-size:28px;
+  line-height:1;
+  font-weight:700;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+
+.delete-button:active{background:#ffdede}
+.delete-button:disabled{opacity:.45}
+
+.permanent-row{background:#f7faff}
+
+.fixed-note{
+  color:var(--blue);
+  font-size:11px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  margin-top:3px
+}
+
+.category-button{
+  text-align:left;
+  padding:0 18px
+}
+
+.category-button::after{
+  content:'›';
+  float:right;
+  font-size:29px;
+  font-weight:500;
+  line-height:24px
+}
+
+.inventory-category-note{
+  margin:0 0 13px;
+  color:var(--muted);
+  font-size:13px;
+  font-weight:650;
+  text-align:center
+}
+
+.restrictions-toolbar{margin-bottom:13px}
+
+.restriction-row{
+  width:100%;
+  border:0;
+  border-bottom:1px solid #ececec;
+  background:var(--white);
+  color:var(--text);
+  padding:14px 15px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:12px;
+  align-items:center;
+  text-align:left;
+  cursor:pointer
+}
+
+.restriction-row:last-child{border-bottom:0}
+.restriction-row:active{background:#edf3ff}
+
+.restriction-name{
+  font-size:17px;
+  font-weight:800;
+  overflow-wrap:anywhere
+}
+
+.restriction-stores{
+  margin-top:4px;
+  color:var(--muted);
+  font-size:13px;
+  font-weight:650
+}
+
+.restriction-chevron{
+  color:var(--blue);
+  font-size:30px;
+  line-height:1;
+  font-weight:500
+}
+
+.store-checks{
+  display:grid;
+  gap:9px
+}
+
+.store-check-row{
+  min-height:50px;
+  padding:8px 12px;
+  border:1.5px solid var(--border);
+  border-radius:12px;
+  background:#fafafa;
+  display:flex!important;
+  align-items:center;
+  gap:11px;
+  cursor:pointer;
+  font-size:17px!important;
+  font-weight:700!important
+}
+
+.store-check-row input{
+  width:23px;
+  height:23px;
+  margin:0;
+  accent-color:var(--blue)
+}
+
+.delete-restriction-button{
+  width:100%;
+  min-height:54px;
+  margin-top:14px;
+  border:2px solid var(--black);
+  border-radius:14px;
+  background:#fff1f1;
+  color:var(--danger);
+  font-size:18px;
+  font-weight:850;
+  cursor:pointer
+}
+
+.delete-restriction-button[hidden]{display:none!important}
+.delete-restriction-button:active{background:#ffdede}
+
+.master-row{
+  min-height:60px;
+  padding:8px 10px 8px 15px;
+  border-bottom:1px solid #ececec;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 44px 48px;
+  gap:8px;
+  align-items:center
+}
+
+.master-row.has-restriction{
+  box-shadow:inset 0 0 0 2px var(--blue);
+  border-radius:10px
+}
+
+.master-row:last-child{border-bottom:0}
+
+.master-name-button{
+  border:0;
+  background:transparent;
+  color:var(--blue);
+  padding:8px 0;
+  text-align:left;
+  font-size:17px;
+  font-weight:800;
+  cursor:pointer;
+  overflow-wrap:anywhere
+}
+
+.master-name-button:active{color:var(--blue-dark)}
+
+.master-qty{
+  min-height:44px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:17px;
+  font-weight:850;
+  color:var(--text)
+}
+
+.empty-state,
+.loading-state,
+.error-state{
+  padding:28px 18px;
+  text-align:center;
+  color:var(--muted);
+  font-size:16px
+}
+
+.error-state{color:var(--danger)}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:calc(20px + env(safe-area-inset-bottom));
+  transform:translate(-50%,18px);
+  width:min(calc(100% - 32px),520px);
+  min-height:52px;
+  padding:9px 10px 9px 16px;
+  border-radius:12px;
+  background:var(--black);
+  color:var(--white);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  text-align:center;
+  font-weight:700;
+  box-shadow:0 8px 30px rgba(0,0,0,.26);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .18s ease,transform .18s ease;
+  z-index:2000
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+  pointer-events:auto
+}
+
+.toast.error{background:#8f1d1d}
+.toast-message{min-width:0}
+
+.toast-undo-button{
+  flex:0 0 auto;
+  min-height:36px;
+  padding:6px 12px;
+  border:1.5px solid var(--white);
+  border-radius:9px;
+  background:transparent;
+  color:var(--white);
+  font-size:14px;
+  font-weight:900;
+  cursor:pointer
+}
+
+.toast-undo-button[hidden]{display:none!important}
+.toast-undo-button:active{background:rgba(255,255,255,.18)}
+.toast-undo-button:disabled{opacity:.5}
+
+@media(max-width:390px){
+  .app-header h1{font-size:19px}
+  .list-heading,.item-row{
+    grid-template-columns:minmax(0,1fr) 124px 44px;
+    gap:5px;
+    padding-left:10px;
+    padding-right:10px
+  }
+  .qty-step-button{
+    width:34px;
+    flex-basis:34px
+  }
+  .qty-input{width:44px}
+}
 </style>
 </head>
 <body>
 
 <header class="app-header">
-  <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
+  <button id="backButton" class="back-button" type="button" aria-label="Back">&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
-  <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.30" alt="Uno Club Shopping logo">
+  <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.31" alt="Uno Club Shopping logo">
 </header>
 
 <main>
@@ -94,11 +786,13 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
       <button class="main-button store-button" type="button" data-store="sodas">Sodas<span class="count-badge" data-count-store="sodas">0</span></button>
       <button class="main-button store-button" type="button" data-store="amazon">Amazon<span class="count-badge" data-count-store="amazon">0</span></button>
     </div>
+
     <div class="home-bottom-menu">
       <button id="inventoryButton" class="main-button secondary-menu-button" type="button">Inventory</button>
       <button id="adminButton" class="main-button secondary-menu-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.0.30</div>
+
+    <div class="version-label">v1.0.31</div>
   </section>
 
   <section id="addScreen" class="screen" hidden>
@@ -111,6 +805,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
             <div id="itemNameSuggestions" class="autocomplete-list" hidden></div>
           </div>
         </div>
+
         <div class="field">
           <label>Quantity</label>
           <div class="qty-control add-qty-control">
@@ -119,11 +814,13 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
             <button id="addQtyPlus" class="qty-step-button" type="button">+</button>
           </div>
         </div>
+
         <div class="field">
           <label for="store">Store</label>
           <select id="store" required></select>
           <div id="lockedStoreNote" class="locked-note" hidden>This item will be added to this store.</div>
         </div>
+
         <button id="saveItemButton" class="save-button" type="submit">Add Item</button>
       </form>
     </div>
@@ -131,8 +828,13 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 
   <section id="storeScreen" class="screen" hidden>
     <button id="storeAddItemButton" class="main-button store-add-button" type="button">Add Item</button>
+
     <div class="card list-card">
-      <div class="list-heading"><span>Item</span><span>Qty</span><span></span></div>
+      <div class="list-heading">
+        <span>Item</span>
+        <span>Qty</span>
+        <span></span>
+      </div>
       <div id="storeList"></div>
     </div>
   </section>
@@ -140,9 +842,21 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
   <section id="shoppingMoveScreen" class="screen" hidden>
     <div class="card form-card">
       <form id="moveShoppingForm">
-        <div class="field"><div class="field-label">Item</div><div id="moveItemName" class="readonly-value"></div></div>
-        <div class="field"><div class="field-label">Current Store</div><div id="moveCurrentStore" class="readonly-value"></div></div>
-        <div class="field"><label for="moveStoreSelect">Move To</label><select id="moveStoreSelect" required></select></div>
+        <div class="field">
+          <div class="field-label">Item</div>
+          <div id="moveItemName" class="readonly-value"></div>
+        </div>
+
+        <div class="field">
+          <div class="field-label">Current Store</div>
+          <div id="moveCurrentStore" class="readonly-value"></div>
+        </div>
+
+        <div class="field">
+          <label for="moveStoreSelect">Move To</label>
+          <select id="moveStoreSelect" required></select>
+        </div>
+
         <button id="saveMoveButton" class="save-button" type="submit">Move Item</button>
       </form>
     </div>
@@ -158,13 +872,19 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
         </div>
       </div>
     </div>
+
     <div id="inventoryCategoryButtons" class="category-stack"></div>
   </section>
 
   <section id="inventoryCategoryScreen" class="screen" hidden>
     <button id="inventoryAddItemButton" class="main-button inventory-add-button" type="button">Add Item</button>
+
     <div class="card list-card">
-      <div class="list-heading"><span>Item</span><span>Qty</span><span></span></div>
+      <div class="list-heading">
+        <span>Item</span>
+        <span>Qty</span>
+        <span></span>
+      </div>
       <div id="inventoryList"></div>
     </div>
   </section>
@@ -179,6 +899,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
             <div id="inventoryItemSuggestions" class="autocomplete-list" hidden></div>
           </div>
         </div>
+
         <div class="field">
           <label>Quantity in Stock</label>
           <div class="qty-control add-qty-control">
@@ -187,7 +908,9 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
             <button id="inventoryQtyPlus" class="qty-step-button" type="button">+</button>
           </div>
         </div>
+
         <div id="inventoryCategoryNote" class="inventory-category-note"></div>
+
         <button id="saveInventoryItemButton" class="save-button" type="submit">Add to Inventory</button>
       </form>
     </div>
@@ -195,8 +918,8 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 
   <section id="adminScreen" class="screen" hidden>
     <div class="category-stack">
-      <button id="adminRestrictionsButton" class="main-button category-button" type="button">Manage Restrictions</button>
       <button id="masterListButton" class="main-button category-button" type="button">Master List</button>
+      <button id="adminRestrictionsButton" class="main-button category-button" type="button">Manage Restrictions</button>
     </div>
   </section>
 
@@ -212,6 +935,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
         </div>
       </div>
     </div>
+
     <div id="masterList" class="master-list"></div>
   </section>
 
@@ -222,6 +946,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
           <label for="masterAddItemName">Item</label>
           <input id="masterAddItemName" type="text" maxlength="100" autocomplete="off" required>
         </div>
+
         <button id="saveMasterItemButton" class="save-button" type="submit">Add to Master List</button>
       </form>
     </div>
@@ -235,13 +960,20 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
   </section>
 
   <section id="restrictionsByItemScreen" class="screen" hidden>
-    <div class="restrictions-toolbar"><button id="addRestrictionButton" class="main-button add-item" type="button">Add Restriction</button></div>
+    <div class="restrictions-toolbar">
+      <button id="addRestrictionButton" class="main-button add-item" type="button">Add Restriction</button>
+    </div>
+
     <div id="restrictionList" class="restriction-list"></div>
   </section>
 
-  <section id="restrictionsByStoreScreen" class="screen" hidden><div id="restrictionStoreButtons" class="category-stack"></div></section>
+  <section id="restrictionsByStoreScreen" class="screen" hidden>
+    <div id="restrictionStoreButtons" class="category-stack"></div>
+  </section>
 
-  <section id="restrictionStoreScreen" class="screen" hidden><div id="restrictionStoreList" class="restriction-list"></div></section>
+  <section id="restrictionStoreScreen" class="screen" hidden>
+    <div id="restrictionStoreList" class="restriction-list"></div>
+  </section>
 
   <section id="restrictionEditScreen" class="screen" hidden>
     <div class="card form-card">
@@ -253,41 +985,91 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
             <div id="restrictionItemSuggestions" class="autocomplete-list" hidden></div>
           </div>
         </div>
+
         <div class="field">
           <div class="field-label">Allowed Stores</div>
+
           <div class="store-checks">
-            <label class="store-check-row"><input type="checkbox" name="allowedStore" value="sams_costco"><span>Sam’s / CostCo</span></label>
-            <label class="store-check-row"><input type="checkbox" name="allowedStore" value="walmart"><span>Walmart</span></label>
-            <label class="store-check-row"><input type="checkbox" name="allowedStore" value="alcohol"><span>Alcohol</span></label>
-            <label class="store-check-row"><input type="checkbox" name="allowedStore" value="sodas"><span>Sodas</span></label>
-            <label class="store-check-row"><input type="checkbox" name="allowedStore" value="amazon"><span>Amazon</span></label>
+            <label class="store-check-row">
+              <input type="checkbox" name="allowedStore" value="sams_costco">
+              <span>Sam’s / CostCo</span>
+            </label>
+
+            <label class="store-check-row">
+              <input type="checkbox" name="allowedStore" value="walmart">
+              <span>Walmart</span>
+            </label>
+
+            <label class="store-check-row">
+              <input type="checkbox" name="allowedStore" value="alcohol">
+              <span>Alcohol</span>
+            </label>
+
+            <label class="store-check-row">
+              <input type="checkbox" name="allowedStore" value="sodas">
+              <span>Sodas</span>
+            </label>
+
+            <label class="store-check-row">
+              <input type="checkbox" name="allowedStore" value="amazon">
+              <span>Amazon</span>
+            </label>
           </div>
+
           <div class="form-note">Check every store where this item is allowed.</div>
         </div>
+
         <button id="saveRestrictionButton" class="save-button" type="submit">Save Restriction</button>
-        <button id="addRestrictionItemToShoppingButton" class="main-button add-item restriction-shopping-button" type="button" hidden>Add to Shopping List</button>
-        <button id="deleteRestrictionButton" class="delete-restriction-button" type="button" hidden>Delete Restriction</button>
+
+        <button id="addRestrictionItemToShoppingButton" class="main-button add-item restriction-shopping-button" type="button" hidden>
+          Add to Shopping List
+        </button>
+
+        <button id="deleteRestrictionButton" class="delete-restriction-button" type="button" hidden>
+          Delete Restriction
+        </button>
       </form>
     </div>
   </section>
 </main>
 
-<div id="toast" class="toast"><span id="toastMessage" class="toast-message"></span><button id="toastUndoButton" class="toast-undo-button" type="button" hidden>UNDO</button></div>
+<div id="toast" class="toast">
+  <span id="toastMessage" class="toast-message"></span>
+  <button id="toastUndoButton" class="toast-undo-button" type="button" hidden>UNDO</button>
+</div>
 
 <script>
 'use strict';
 
-const APP_VERSION='1.0.30';
+const APP_VERSION='1.0.31';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY='sb_publishable_gh0acghIDuQDgh24ZIm8Mw_c1bpvIM6';
-const STORES={sams_costco:'Sam’s / CostCo',walmart:'Walmart',alcohol:'Alcohol',sodas:'Sodas',amazon:'Amazon'};
-const INVENTORY_CATEGORIES={
-  meats:'Meats',frozen_foods:'Frozen Foods',canned_jarred_items:'Canned & Jarred Items',boxed_items:'Boxed Items',
-  pasta_sauces:'Pasta & Sauces',condiments:'Condiments',salad_dressings:'Salad Dressings',cooking_supplies:'Cooking Supplies',
-  desserts:'Desserts',seasonings_spices:'Seasonings & Spices',toppings_extras:'Toppings & Extras',miscellaneous_items:'Miscellaneous Items'
+
+const STORES={
+  sams_costco:'Sam’s / CostCo',
+  walmart:'Walmart',
+  alcohol:'Alcohol',
+  sodas:'Sodas',
+  amazon:'Amazon'
 };
+
+const INVENTORY_CATEGORIES={
+  meats:'Meats',
+  frozen_foods:'Frozen Foods',
+  canned_jarred_items:'Canned & Jarred Items',
+  boxed_items:'Boxed Items',
+  pasta_sauces:'Pasta & Sauces',
+  condiments:'Condiments',
+  salad_dressings:'Salad Dressings',
+  cooking_supplies:'Cooking Supplies',
+  desserts:'Desserts',
+  seasonings_spices:'Seasonings & Spices',
+  toppings_extras:'Toppings & Extras',
+  miscellaneous_items:'Miscellaneous Items'
+};
+
 const LAST_STORE_KEY='unoClubShoppingLastStore';
 
 let currentStore=null;
@@ -300,7 +1082,11 @@ let restrictionFromMaster=false;
 let movingShoppingItem=null;
 let toastTimer=null;
 let pendingUndo=null;
+
 let pendingShoppingPrefillName=null;
+let pendingShoppingAddReturnHash=null;
+let activeShoppingAddReturnHash=null;
+
 let pendingMasterAddName=null;
 let storeRestrictionTimer=null;
 let storeRestrictionRequestNumber=0;
@@ -308,579 +1094,4641 @@ let masterItemsCache=null;
 let inventorySearchCache=null;
 
 const $=id=>document.getElementById(id);
-const homeScreen=$('homeScreen'),addScreen=$('addScreen'),storeScreen=$('storeScreen'),shoppingMoveScreen=$('shoppingMoveScreen');
-const inventoryScreen=$('inventoryScreen'),inventoryCategoryScreen=$('inventoryCategoryScreen'),inventoryAddScreen=$('inventoryAddScreen');
-const adminScreen=$('adminScreen'),masterListScreen=$('masterListScreen'),masterAddScreen=$('masterAddScreen');
-const restrictionsScreen=$('restrictionsScreen'),restrictionsByItemScreen=$('restrictionsByItemScreen'),restrictionsByStoreScreen=$('restrictionsByStoreScreen');
-const restrictionStoreScreen=$('restrictionStoreScreen'),restrictionEditScreen=$('restrictionEditScreen');
-const pageTitle=$('pageTitle'),backButton=$('backButton');
-const addItemButton=$('addItemButton'),storeAddItemButton=$('storeAddItemButton'),inventoryButton=$('inventoryButton'),inventoryAddItemButton=$('inventoryAddItemButton');
-const adminButton=$('adminButton'),adminRestrictionsButton=$('adminRestrictionsButton'),masterListButton=$('masterListButton');
-const restrictionsByItemButton=$('restrictionsByItemButton'),restrictionsByStoreButton=$('restrictionsByStoreButton'),addRestrictionButton=$('addRestrictionButton');
-const addItemForm=$('addItemForm'),itemNameInput=$('itemName'),itemNameSuggestions=$('itemNameSuggestions'),quantityInput=$('quantity'),addQtyMinus=$('addQtyMinus'),addQtyPlus=$('addQtyPlus'),storeSelect=$('store'),lockedStoreNote=$('lockedStoreNote'),saveItemButton=$('saveItemButton');
+
+const homeScreen=$('homeScreen');
+const addScreen=$('addScreen');
+const storeScreen=$('storeScreen');
+const shoppingMoveScreen=$('shoppingMoveScreen');
+
+const inventoryScreen=$('inventoryScreen');
+const inventoryCategoryScreen=$('inventoryCategoryScreen');
+const inventoryAddScreen=$('inventoryAddScreen');
+
+const adminScreen=$('adminScreen');
+const masterListScreen=$('masterListScreen');
+const masterAddScreen=$('masterAddScreen');
+
+const restrictionsScreen=$('restrictionsScreen');
+const restrictionsByItemScreen=$('restrictionsByItemScreen');
+const restrictionsByStoreScreen=$('restrictionsByStoreScreen');
+const restrictionStoreScreen=$('restrictionStoreScreen');
+const restrictionEditScreen=$('restrictionEditScreen');
+
+const pageTitle=$('pageTitle');
+const backButton=$('backButton');
+
+const addItemButton=$('addItemButton');
+const storeAddItemButton=$('storeAddItemButton');
+const inventoryButton=$('inventoryButton');
+const inventoryAddItemButton=$('inventoryAddItemButton');
+
+const adminButton=$('adminButton');
+const adminRestrictionsButton=$('adminRestrictionsButton');
+const masterListButton=$('masterListButton');
+
+const restrictionsByItemButton=$('restrictionsByItemButton');
+const restrictionsByStoreButton=$('restrictionsByStoreButton');
+const addRestrictionButton=$('addRestrictionButton');
+
+const addItemForm=$('addItemForm');
+const itemNameInput=$('itemName');
+const itemNameSuggestions=$('itemNameSuggestions');
+const quantityInput=$('quantity');
+const addQtyMinus=$('addQtyMinus');
+const addQtyPlus=$('addQtyPlus');
+const storeSelect=$('store');
+const lockedStoreNote=$('lockedStoreNote');
+const saveItemButton=$('saveItemButton');
+
 const storeList=$('storeList');
-const moveShoppingForm=$('moveShoppingForm'),moveItemName=$('moveItemName'),moveCurrentStore=$('moveCurrentStore'),moveStoreSelect=$('moveStoreSelect'),saveMoveButton=$('saveMoveButton');
-const inventorySearchInput=$('inventorySearchInput'),inventorySearchSuggestions=$('inventorySearchSuggestions');
-const inventoryCategoryButtons=$('inventoryCategoryButtons'),inventoryList=$('inventoryList');
-const inventoryAddForm=$('inventoryAddForm'),inventoryItemName=$('inventoryItemName'),inventoryItemSuggestions=$('inventoryItemSuggestions'),inventoryQuantity=$('inventoryQuantity'),inventoryQtyMinus=$('inventoryQtyMinus'),inventoryQtyPlus=$('inventoryQtyPlus'),inventoryCategoryNote=$('inventoryCategoryNote'),saveInventoryItemButton=$('saveInventoryItemButton');
-const masterAddItemButton=$('masterAddItemButton'),masterSearchInput=$('masterSearchInput'),masterSearchSuggestions=$('masterSearchSuggestions');
-const masterList=$('masterList'),masterAddForm=$('masterAddForm'),masterAddItemName=$('masterAddItemName'),saveMasterItemButton=$('saveMasterItemButton');
-const restrictionList=$('restrictionList'),restrictionStoreButtons=$('restrictionStoreButtons'),restrictionStoreList=$('restrictionStoreList');
-const restrictionForm=$('restrictionForm'),restrictionItemName=$('restrictionItemName'),restrictionItemSuggestions=$('restrictionItemSuggestions'),saveRestrictionButton=$('saveRestrictionButton'),addRestrictionItemToShoppingButton=$('addRestrictionItemToShoppingButton'),deleteRestrictionButton=$('deleteRestrictionButton');
-const toast=$('toast'),toastMessage=$('toastMessage'),toastUndoButton=$('toastUndoButton');
 
-function normalizeItemName(value){return String(value??'').trim().replace(/\s+/g,' ')}
-function normalizedKey(value){return normalizeItemName(value).toLocaleLowerCase()}
-function unwrapRpcResult(result){return Array.isArray(result)?result[0]:result}
-function sortByName(items){return items.sort((a,b)=>a.item_name.localeCompare(b.item_name,undefined,{sensitivity:'base',numeric:true}))}
-function rememberLastStore(store){if(!STORES[store])return;try{localStorage.setItem(LAST_STORE_KEY,store)}catch(_){}}
-function getLastStore(){try{const s=localStorage.getItem(LAST_STORE_KEY);return s&&STORES[s]?s:null}catch(_){return null}}
-function invalidateMasterItems(){masterItemsCache=null}
-function invalidateInventorySearch(){inventorySearchCache=null}
+const moveShoppingForm=$('moveShoppingForm');
+const moveItemName=$('moveItemName');
+const moveCurrentStore=$('moveCurrentStore');
+const moveStoreSelect=$('moveStoreSelect');
+const saveMoveButton=$('saveMoveButton');
 
-async function api(path,options={}){
-  const headers={apikey:SUPABASE_PUBLISHABLE_KEY,Accept:'application/json',...(options.body?{'Content-Type':'application/json'}:{}),...(options.headers||{})};
-  const response=await fetch(SUPABASE_URL+path,{...options,headers});
-  if(!response.ok){
-    let message=`Request failed (${response.status})`;
-    try{const data=await response.json();message=data.message||data.error_description||data.hint||message}catch(_){const text=await response.text();if(text)message=text}
-    throw new Error(message);
-  }
-  if(response.status===204)return null;
-  const text=await response.text();return text?JSON.parse(text):null;
+const inventorySearchInput=$('inventorySearchInput');
+const inventorySearchSuggestions=$('inventorySearchSuggestions');
+
+const inventoryCategoryButtons=$('inventoryCategoryButtons');
+const inventoryList=$('inventoryList');
+
+const inventoryAddForm=$('inventoryAddForm');
+const inventoryItemName=$('inventoryItemName');
+const inventoryItemSuggestions=$('inventoryItemSuggestions');
+const inventoryQuantity=$('inventoryQuantity');
+const inventoryQtyMinus=$('inventoryQtyMinus');
+const inventoryQtyPlus=$('inventoryQtyPlus');
+const inventoryCategoryNote=$('inventoryCategoryNote');
+const saveInventoryItemButton=$('saveInventoryItemButton');
+
+const masterAddItemButton=$('masterAddItemButton');
+const masterSearchInput=$('masterSearchInput');
+const masterSearchSuggestions=$('masterSearchSuggestions');
+
+const masterList=$('masterList');
+const masterAddForm=$('masterAddForm');
+const masterAddItemName=$('masterAddItemName');
+const saveMasterItemButton=$('saveMasterItemButton');
+
+const restrictionList=$('restrictionList');
+const restrictionStoreButtons=$('restrictionStoreButtons');
+const restrictionStoreList=$('restrictionStoreList');
+
+const restrictionForm=$('restrictionForm');
+const restrictionItemName=$('restrictionItemName');
+const restrictionItemSuggestions=$('restrictionItemSuggestions');
+const saveRestrictionButton=$('saveRestrictionButton');
+const addRestrictionItemToShoppingButton=$('addRestrictionItemToShoppingButton');
+const deleteRestrictionButton=$('deleteRestrictionButton');
+
+const toast=$('toast');
+const toastMessage=$('toastMessage');
+const toastUndoButton=$('toastUndoButton');
+
+function normalizeItemName(value){
+  return String(value??'').trim().replace(/\s+/g,' ');
 }
 
-function showOnly(screen){[homeScreen,addScreen,storeScreen,shoppingMoveScreen,inventoryScreen,inventoryCategoryScreen,inventoryAddScreen,adminScreen,masterListScreen,masterAddScreen,restrictionsScreen,restrictionsByItemScreen,restrictionsByStoreScreen,restrictionStoreScreen,restrictionEditScreen].forEach(s=>s.hidden=s!==screen)}
+function normalizedKey(value){
+  return normalizeItemName(value).toLocaleLowerCase();
+}
+
+function unwrapRpcResult(result){
+  return Array.isArray(result)?result[0]:result;
+}
+
+function sortByName(items){
+  return items.sort((a,b)=>
+    a.item_name.localeCompare(
+      b.item_name,
+      undefined,
+      {sensitivity:'base',numeric:true}
+    )
+  );
+}
+
+function rememberLastStore(store){
+  if(!STORES[store])return;
+
+  try{
+    localStorage.setItem(LAST_STORE_KEY,store);
+  }catch(_){}
+}
+
+function getLastStore(){
+  try{
+    const store=localStorage.getItem(LAST_STORE_KEY);
+    return store&&STORES[store]?store:null;
+  }catch(_){
+    return null;
+  }
+}
+
+function invalidateMasterItems(){
+  masterItemsCache=null;
+}
+
+function invalidateInventorySearch(){
+  inventorySearchCache=null;
+}
+
+async function api(path,options={}){
+  const headers={
+    apikey:SUPABASE_PUBLISHABLE_KEY,
+    Accept:'application/json',
+    ...(options.body?{'Content-Type':'application/json'}:{}),
+    ...(options.headers||{})
+  };
+
+  const response=await fetch(
+    SUPABASE_URL+path,
+    {
+      ...options,
+      headers
+    }
+  );
+
+  if(!response.ok){
+    let message=`Request failed (${response.status})`;
+
+    try{
+      const data=await response.json();
+      message=
+        data.message||
+        data.error_description||
+        data.hint||
+        message;
+    }catch(_){
+      const text=await response.text();
+      if(text)message=text;
+    }
+
+    throw new Error(message);
+  }
+
+  if(response.status===204)return null;
+
+  const text=await response.text();
+  return text?JSON.parse(text):null;
+}
+
+function showOnly(screen){
+  [
+    homeScreen,
+    addScreen,
+    storeScreen,
+    shoppingMoveScreen,
+    inventoryScreen,
+    inventoryCategoryScreen,
+    inventoryAddScreen,
+    adminScreen,
+    masterListScreen,
+    masterAddScreen,
+    restrictionsScreen,
+    restrictionsByItemScreen,
+    restrictionsByStoreScreen,
+    restrictionStoreScreen,
+    restrictionEditScreen
+  ].forEach(item=>{
+    item.hidden=item!==screen;
+  });
+}
 
 function showToast(message,isError=false,duration=3200){
-  clearTimeout(toastTimer);pendingUndo=null;toastMessage.textContent=message;toastUndoButton.hidden=true;toastUndoButton.disabled=false;toast.classList.toggle('error',isError);toast.classList.add('show');
-  toastTimer=setTimeout(()=>toast.classList.remove('show'),duration);
+  clearTimeout(toastTimer);
+  pendingUndo=null;
+
+  toastMessage.textContent=message;
+  toastUndoButton.hidden=true;
+  toastUndoButton.disabled=false;
+
+  toast.classList.toggle('error',isError);
+  toast.classList.add('show');
+
+  toastTimer=setTimeout(
+    ()=>toast.classList.remove('show'),
+    duration
+  );
 }
 
 function showUndoToast(item,type){
-  clearTimeout(toastTimer);pendingUndo={type,item:{...item}};toastMessage.textContent=`${item.item_name} removed`;toast.classList.remove('error');toastUndoButton.hidden=false;toastUndoButton.disabled=false;toastUndoButton.textContent='UNDO';toast.classList.add('show');
-  toastTimer=setTimeout(()=>{pendingUndo=null;toastUndoButton.hidden=true;toast.classList.remove('show')},5000);
+  clearTimeout(toastTimer);
+
+  pendingUndo={
+    type,
+    item:{...item}
+  };
+
+  toastMessage.textContent=`${item.item_name} removed`;
+  toast.classList.remove('error');
+
+  toastUndoButton.hidden=false;
+  toastUndoButton.disabled=false;
+  toastUndoButton.textContent='UNDO';
+
+  toast.classList.add('show');
+
+  toastTimer=setTimeout(
+    ()=>{
+      pendingUndo=null;
+      toastUndoButton.hidden=true;
+      toast.classList.remove('show');
+    },
+    5000
+  );
 }
 
-toastUndoButton.addEventListener('click',async()=>{
-  if(!pendingUndo)return;
-  const undo={...pendingUndo,item:{...pendingUndo.item}};clearTimeout(toastTimer);pendingUndo=null;toastUndoButton.disabled=true;toastUndoButton.hidden=true;toastMessage.textContent=`Restoring ${undo.item.item_name}…`;
-  try{
-    let result;
-    if(undo.type==='shopping'){
-      result=unwrapRpcResult(await api('/rest/v1/rpc/add_shopping_item',{method:'POST',body:JSON.stringify({p_item_name:undo.item.item_name,p_quantity:undo.item.quantity,p_store:undo.item.store})}));
-      if(result?.added===true){invalidateMasterItems();if(currentStore===undo.item.store)await loadStoreItems(true);loadHomeCounts();showToast(`${undo.item.item_name} restored to ${STORES[undo.item.store]}.`);return}
-    }else if(undo.type==='inventory'){
-      result=unwrapRpcResult(await api('/rest/v1/rpc/add_inventory_item',{method:'POST',body:JSON.stringify({p_item_name:undo.item.item_name,p_quantity:undo.item.quantity,p_category:undo.item.category})}));
-      if(result?.added===true){invalidateMasterItems();invalidateInventorySearch();if(currentInventoryCategory===undo.item.category)await loadInventoryItems(true);showToast(`${undo.item.item_name} restored to ${INVENTORY_CATEGORIES[undo.item.category]}.`);return}
+toastUndoButton.addEventListener(
+  'click',
+  async()=>{
+    if(!pendingUndo)return;
+
+    const undo={
+      ...pendingUndo,
+      item:{...pendingUndo.item}
+    };
+
+    clearTimeout(toastTimer);
+
+    pendingUndo=null;
+    toastUndoButton.disabled=true;
+    toastUndoButton.hidden=true;
+    toastMessage.textContent=
+      `Restoring ${undo.item.item_name}…`;
+
+    try{
+      let result;
+
+      if(undo.type==='shopping'){
+        result=unwrapRpcResult(
+          await api(
+            '/rest/v1/rpc/add_shopping_item',
+            {
+              method:'POST',
+              body:JSON.stringify({
+                p_item_name:undo.item.item_name,
+                p_quantity:undo.item.quantity,
+                p_store:undo.item.store
+              })
+            }
+          )
+        );
+
+        if(result?.added===true){
+          invalidateMasterItems();
+
+          if(currentStore===undo.item.store){
+            await loadStoreItems(true);
+          }
+
+          loadHomeCounts();
+
+          showToast(
+            `${undo.item.item_name} restored to ${STORES[undo.item.store]}.`
+          );
+
+          return;
+        }
+      }else if(undo.type==='inventory'){
+        result=unwrapRpcResult(
+          await api(
+            '/rest/v1/rpc/add_inventory_item',
+            {
+              method:'POST',
+              body:JSON.stringify({
+                p_item_name:undo.item.item_name,
+                p_quantity:undo.item.quantity,
+                p_category:undo.item.category
+              })
+            }
+          )
+        );
+
+        if(result?.added===true){
+          invalidateMasterItems();
+          invalidateInventorySearch();
+
+          if(currentInventoryCategory===undo.item.category){
+            await loadInventoryItems(true);
+          }
+
+          showToast(
+            `${undo.item.item_name} restored to ${INVENTORY_CATEGORIES[undo.item.category]}.`
+          );
+
+          return;
+        }
+      }
+
+      if(result?.reason==='duplicate'){
+        showToast(
+          `${undo.item.item_name} is already on a list.`,
+          true
+        );
+
+        return;
+      }
+
+      showToast(
+        `Could not restore ${undo.item.item_name}.`,
+        true
+      );
+    }catch(error){
+      console.error(error);
+
+      showToast(
+        `Could not restore ${undo.item.item_name}.`,
+        true
+      );
     }
-    if(result?.reason==='duplicate'){showToast(`${undo.item.item_name} is already on a list.`,true);return}
-    showToast(`Could not restore ${undo.item.item_name}.`,true);
-  }catch(error){console.error(error);showToast(`Could not restore ${undo.item.item_name}.`,true)}
-});
+  }
+);
 
 async function fetchMasterItems(force=false){
-  if(masterItemsCache&&!force)return masterItemsCache;
-  const data=await api('/rest/v1/master_items?select=id,item_name');
-  masterItemsCache=sortByName(Array.isArray(data)?data:[]);
+  if(masterItemsCache&&!force){
+    return masterItemsCache;
+  }
+
+  const data=await api(
+    '/rest/v1/master_items?select=id,item_name'
+  );
+
+  masterItemsCache=
+    sortByName(
+      Array.isArray(data)?data:[]
+    );
+
   return masterItemsCache;
 }
 
-function hideSuggestions(box){box.hidden=true;box.innerHTML=''}
+function hideSuggestions(box){
+  box.hidden=true;
+  box.innerHTML='';
+}
+
 async function renderAutocomplete(input,box,onPick){
-  if(input.readOnly||input.disabled){hideSuggestions(box);return}
+  if(input.readOnly||input.disabled){
+    hideSuggestions(box);
+    return;
+  }
+
   const query=normalizedKey(input.value);
-  if(!query){hideSuggestions(box);return}
+
+  if(!query){
+    hideSuggestions(box);
+    return;
+  }
+
   try{
     const items=await fetchMasterItems();
-    if(document.activeElement!==input){hideSuggestions(box);return}
-    const matches=items.filter(x=>normalizedKey(x.item_name).includes(query)).slice(0,8);
-    if(!matches.length){hideSuggestions(box);return}
+
+    if(document.activeElement!==input){
+      hideSuggestions(box);
+      return;
+    }
+
+    const matches=
+      items
+        .filter(
+          item=>
+            normalizedKey(item.item_name)
+              .includes(query)
+        )
+        .slice(0,8);
+
+    if(!matches.length){
+      hideSuggestions(box);
+      return;
+    }
+
     box.innerHTML='';
+
     matches.forEach(item=>{
-      const button=document.createElement('button');button.type='button';button.className='autocomplete-option';button.textContent=item.item_name;
-      button.addEventListener('mousedown',e=>e.preventDefault());
-      button.addEventListener('click',()=>{input.value=item.item_name;hideSuggestions(box);if(onPick)onPick(item.item_name);input.focus()});
+      const button=document.createElement('button');
+
+      button.type='button';
+      button.className='autocomplete-option';
+      button.textContent=item.item_name;
+
+      button.addEventListener(
+        'mousedown',
+        event=>event.preventDefault()
+      );
+
+      button.addEventListener(
+        'click',
+        ()=>{
+          input.value=item.item_name;
+          hideSuggestions(box);
+
+          if(onPick){
+            onPick(item.item_name);
+          }
+
+          input.focus();
+        }
+      );
+
       box.appendChild(button);
     });
+
     box.hidden=false;
-  }catch(error){console.error(error);hideSuggestions(box)}
+  }catch(error){
+    console.error(error);
+    hideSuggestions(box);
+  }
 }
 
 function setupAutocomplete(input,box,onPick){
-  const update=()=>renderAutocomplete(input,box,onPick);
-  input.addEventListener('input',update);input.addEventListener('focus',update);input.addEventListener('blur',()=>setTimeout(()=>hideSuggestions(box),180));
+  const update=
+    ()=>renderAutocomplete(
+      input,
+      box,
+      onPick
+    );
+
+  input.addEventListener(
+    'input',
+    update
+  );
+
+  input.addEventListener(
+    'focus',
+    update
+  );
+
+  input.addEventListener(
+    'blur',
+    ()=>{
+      setTimeout(
+        ()=>hideSuggestions(box),
+        180
+      );
+    }
+  );
 }
 
 function rebuildStoreOptions(storeKeys,selectedStore=''){
-  storeSelect.innerHTML='';const p=document.createElement('option');p.value='';p.textContent='Choose a store';p.disabled=true;storeSelect.appendChild(p);
-  storeKeys.forEach(key=>{if(!STORES[key])return;const o=document.createElement('option');o.value=key;o.textContent=STORES[key];storeSelect.appendChild(o)});
-  storeSelect.value=selectedStore&&storeKeys.includes(selectedStore)?selectedStore:'';
+  storeSelect.innerHTML='';
+
+  const placeholder=
+    document.createElement('option');
+
+  placeholder.value='';
+  placeholder.textContent='Choose a store';
+  placeholder.disabled=true;
+
+  storeSelect.appendChild(placeholder);
+
+  storeKeys.forEach(key=>{
+    if(!STORES[key])return;
+
+    const option=
+      document.createElement('option');
+
+    option.value=key;
+    option.textContent=STORES[key];
+
+    storeSelect.appendChild(option);
+  });
+
+  storeSelect.value=
+    selectedStore&&
+    storeKeys.includes(selectedStore)
+      ? selectedStore
+      : '';
 }
 
-async function fetchRestrictionRows(){const data=await api('/rest/v1/item_store_restrictions?select=item_name,allowed_store');return Array.isArray(data)?data:[]}
+async function fetchRestrictionRows(){
+  const data=await api(
+    '/rest/v1/item_store_restrictions?select=item_name,allowed_store'
+  );
+
+  return Array.isArray(data)
+    ? data
+    : [];
+}
+
 function getAllowedStoresForItemName(itemName,rows){
-  if(!Array.isArray(rows))return null;const key=normalizedKey(itemName);const matches=rows.filter(r=>normalizedKey(r.item_name)===key);
-  if(!matches.length)return Object.keys(STORES);const set=new Set(matches.map(r=>r.allowed_store));return Object.keys(STORES).filter(s=>set.has(s));
+  if(!Array.isArray(rows)){
+    return null;
+  }
+
+  const key=normalizedKey(itemName);
+
+  const matches=
+    rows.filter(
+      row=>
+        normalizedKey(row.item_name)===key
+    );
+
+  if(!matches.length){
+    return Object.keys(STORES);
+  }
+
+  const set=
+    new Set(
+      matches.map(
+        row=>row.allowed_store
+      )
+    );
+
+  return Object
+    .keys(STORES)
+    .filter(store=>set.has(store));
 }
 
 async function refreshStoreChoicesForItem(preferBlank=false){
-  if(lockedAddStore){rebuildStoreOptions([lockedAddStore],lockedAddStore);return}
-  const itemName=normalizeItemName(itemNameInput.value),previous=storeSelect.value,request=++storeRestrictionRequestNumber;
-  if(!itemName){rebuildStoreOptions(Object.keys(STORES),preferBlank?'':(previous||getLastStore()||''));return}
+  if(lockedAddStore){
+    rebuildStoreOptions(
+      [lockedAddStore],
+      lockedAddStore
+    );
+
+    return;
+  }
+
+  const itemName=
+    normalizeItemName(itemNameInput.value);
+
+  const previous=storeSelect.value;
+  const request=
+    ++storeRestrictionRequestNumber;
+
+  if(!itemName){
+    rebuildStoreOptions(
+      Object.keys(STORES),
+      preferBlank
+        ? ''
+        : (
+          previous||
+          getLastStore()||
+          ''
+        )
+    );
+
+    return;
+  }
+
   try{
-    const rows=await fetchRestrictionRows();if(request!==storeRestrictionRequestNumber)return;
-    const allowed=getAllowedStoresForItemName(itemName,rows);let selected='';
-    if(allowed.length===1)selected=allowed[0];else if(!preferBlank&&previous&&allowed.includes(previous))selected=previous;else if(!preferBlank){const last=getLastStore();if(last&&allowed.includes(last))selected=last}
-    rebuildStoreOptions(allowed,selected);
-  }catch(error){console.error(error);if(request!==storeRestrictionRequestNumber)return;rebuildStoreOptions(Object.keys(STORES),preferBlank?'':(previous||getLastStore()||''))}
+    const rows=
+      await fetchRestrictionRows();
+
+    if(request!==storeRestrictionRequestNumber){
+      return;
+    }
+
+    const allowed=
+      getAllowedStoresForItemName(
+        itemName,
+        rows
+      );
+
+    let selected='';
+
+    if(allowed.length===1){
+      selected=allowed[0];
+    }else if(
+      !preferBlank&&
+      previous&&
+      allowed.includes(previous)
+    ){
+      selected=previous;
+    }else if(!preferBlank){
+      const last=getLastStore();
+
+      if(
+        last&&
+        allowed.includes(last)
+      ){
+        selected=last;
+      }
+    }
+
+    rebuildStoreOptions(
+      allowed,
+      selected
+    );
+  }catch(error){
+    console.error(error);
+
+    if(request!==storeRestrictionRequestNumber){
+      return;
+    }
+
+    rebuildStoreOptions(
+      Object.keys(STORES),
+      preferBlank
+        ? ''
+        : (
+          previous||
+          getLastStore()||
+          ''
+        )
+    );
+  }
 }
 
-function scheduleStoreRestrictionCheck(){clearTimeout(storeRestrictionTimer);if(lockedAddStore)return;storeRestrictionTimer=setTimeout(()=>refreshStoreChoicesForItem(false),300)}
-itemNameInput.addEventListener('input',scheduleStoreRestrictionCheck);
-setupAutocomplete(itemNameInput,itemNameSuggestions,()=>refreshStoreChoicesForItem(false));
-setupAutocomplete(inventoryItemName,inventoryItemSuggestions,null);
-setupAutocomplete(restrictionItemName,restrictionItemSuggestions,null);
+function scheduleStoreRestrictionCheck(){
+  clearTimeout(storeRestrictionTimer);
+
+  if(lockedAddStore)return;
+
+  storeRestrictionTimer=
+    setTimeout(
+      ()=>refreshStoreChoicesForItem(false),
+      300
+    );
+}
+
+itemNameInput.addEventListener(
+  'input',
+  scheduleStoreRestrictionCheck
+);
+
+setupAutocomplete(
+  itemNameInput,
+  itemNameSuggestions,
+  ()=>refreshStoreChoicesForItem(false)
+);
+
+setupAutocomplete(
+  inventoryItemName,
+  inventoryItemSuggestions,
+  null
+);
+
+setupAutocomplete(
+  restrictionItemName,
+  restrictionItemSuggestions,
+  null
+);
 
 /* INVENTORY SEARCH */
+
 async function fetchInventorySearchItems(force=false){
-  if(inventorySearchCache&&!force)return inventorySearchCache;
-  const data=await api('/rest/v1/inventory_items?select=item_name,category');
-  inventorySearchCache=sortByName(Array.isArray(data)?data:[]);
+  if(
+    inventorySearchCache&&
+    !force
+  ){
+    return inventorySearchCache;
+  }
+
+  const data=await api(
+    '/rest/v1/inventory_items?select=item_name,category'
+  );
+
+  inventorySearchCache=
+    sortByName(
+      Array.isArray(data)?data:[]
+    );
+
   return inventorySearchCache;
 }
+
 async function renderInventorySearchSuggestions(){
-  const query=normalizedKey(inventorySearchInput.value);
-  if(!query){hideSuggestions(inventorySearchSuggestions);return}
+  const query=
+    normalizedKey(
+      inventorySearchInput.value
+    );
+
+  if(!query){
+    hideSuggestions(
+      inventorySearchSuggestions
+    );
+
+    return;
+  }
+
   try{
-    const items=await fetchInventorySearchItems();
-    if(document.activeElement!==inventorySearchInput){hideSuggestions(inventorySearchSuggestions);return}
-    const matches=items.filter(item=>normalizedKey(item.item_name).includes(query)).slice(0,8);
-    inventorySearchSuggestions.innerHTML='';
-    if(!matches.length){
-      const empty=document.createElement('div');empty.className='autocomplete-empty';empty.textContent='No inventory item found';inventorySearchSuggestions.appendChild(empty);inventorySearchSuggestions.hidden=false;return;
+    const items=
+      await fetchInventorySearchItems();
+
+    if(
+      document.activeElement!==
+      inventorySearchInput
+    ){
+      hideSuggestions(
+        inventorySearchSuggestions
+      );
+
+      return;
     }
+
+    const matches=
+      items
+        .filter(
+          item=>
+            normalizedKey(item.item_name)
+              .includes(query)
+        )
+        .slice(0,8);
+
+    inventorySearchSuggestions.innerHTML='';
+
+    if(!matches.length){
+      const empty=
+        document.createElement('div');
+
+      empty.className=
+        'autocomplete-empty';
+
+      empty.textContent=
+        'No inventory item found';
+
+      inventorySearchSuggestions
+        .appendChild(empty);
+
+      inventorySearchSuggestions.hidden=false;
+
+      return;
+    }
+
     matches.forEach(item=>{
-      const button=document.createElement('button');button.type='button';button.className='autocomplete-option';button.textContent=item.item_name;
-      button.addEventListener('mousedown',event=>event.preventDefault());
-      button.addEventListener('click',()=>{inventorySearchInput.value=item.item_name;hideSuggestions(inventorySearchSuggestions);goInventoryCategory(item.category)});
-      inventorySearchSuggestions.appendChild(button);
+      const button=
+        document.createElement('button');
+
+      button.type='button';
+      button.className='autocomplete-option';
+      button.textContent=item.item_name;
+
+      button.addEventListener(
+        'mousedown',
+        event=>event.preventDefault()
+      );
+
+      button.addEventListener(
+        'click',
+        ()=>{
+          inventorySearchInput.value=
+            item.item_name;
+
+          hideSuggestions(
+            inventorySearchSuggestions
+          );
+
+          goInventoryCategory(
+            item.category
+          );
+        }
+      );
+
+      inventorySearchSuggestions
+        .appendChild(button);
     });
+
     inventorySearchSuggestions.hidden=false;
-  }catch(error){console.error(error);hideSuggestions(inventorySearchSuggestions)}
+  }catch(error){
+    console.error(error);
+
+    hideSuggestions(
+      inventorySearchSuggestions
+    );
+  }
 }
-inventorySearchInput.addEventListener('input',renderInventorySearchSuggestions);
-inventorySearchInput.addEventListener('focus',renderInventorySearchSuggestions);
-inventorySearchInput.addEventListener('blur',()=>setTimeout(()=>hideSuggestions(inventorySearchSuggestions),180));
+
+inventorySearchInput.addEventListener(
+  'input',
+  renderInventorySearchSuggestions
+);
+
+inventorySearchInput.addEventListener(
+  'focus',
+  renderInventorySearchSuggestions
+);
+
+inventorySearchInput.addEventListener(
+  'blur',
+  ()=>{
+    setTimeout(
+      ()=>hideSuggestions(
+        inventorySearchSuggestions
+      ),
+      180
+    );
+  }
+);
 
 /* MASTER LIST SEARCH */
-async function renderMasterSearchSuggestions(){
-  const query=normalizedKey(masterSearchInput.value);
-  if(!query){hideSuggestions(masterSearchSuggestions);return}
-  try{
-    const items=await fetchMasterItems();
-    if(document.activeElement!==masterSearchInput){hideSuggestions(masterSearchSuggestions);return}
-    const matches=items.filter(item=>normalizedKey(item.item_name).includes(query)).slice(0,8);
-    masterSearchSuggestions.innerHTML='';
-    if(!matches.length){
-      const empty=document.createElement('div');empty.className='autocomplete-empty';empty.textContent='No master list item found';masterSearchSuggestions.appendChild(empty);masterSearchSuggestions.hidden=false;return;
-    }
-    matches.forEach(item=>{
-      const button=document.createElement('button');button.type='button';button.className='autocomplete-option';button.textContent=item.item_name;
-      button.addEventListener('mousedown',event=>event.preventDefault());
-      button.addEventListener('click',()=>{masterSearchInput.value=item.item_name;hideSuggestions(masterSearchSuggestions);goMasterRestriction(item.item_name)});
-      masterSearchSuggestions.appendChild(button);
-    });
-    masterSearchSuggestions.hidden=false;
-  }catch(error){console.error(error);hideSuggestions(masterSearchSuggestions)}
-}
-masterSearchInput.addEventListener('input',renderMasterSearchSuggestions);
-masterSearchInput.addEventListener('focus',renderMasterSearchSuggestions);
-masterSearchInput.addEventListener('blur',()=>setTimeout(()=>hideSuggestions(masterSearchSuggestions),180));
 
-function goHome(){location.hash='#home'}
-function goAdd(){location.hash='#add'}
-function goAddWithItem(name){pendingShoppingPrefillName=normalizeItemName(name);location.hash='#add'}
-function goAddForStore(store){location.hash='#add/'+store}
-function goStore(store){location.hash='#store/'+store}
-function goMoveShoppingItem(id){location.hash='#shopping/move/'+encodeURIComponent(id)}
-function goInventory(){location.hash='#inventory'}
-function goInventoryCategory(category){location.hash='#inventory/'+category}
-function goInventoryAdd(category){location.hash='#inventory-add/'+category}
-function goAdmin(){location.hash='#admin'}
-function goMasterList(){location.hash='#master'}
-function goMasterAdd(name=''){pendingMasterAddName=normalizeItemName(name);location.hash='#master/add'}
-function goMasterRestriction(name){restrictionReturnHash='#master';location.hash='#master/restriction/'+encodeURIComponent(name)}
-function goRestrictions(){location.hash='#restrictions'}
-function goRestrictionsByItem(){location.hash='#restrictions/items'}
-function goRestrictionsByStore(){location.hash='#restrictions/stores'}
-function goRestrictionStore(store){if(STORES[store])location.hash='#restrictions/store/'+store}
-function goNewRestriction(){restrictionReturnHash='#restrictions/items';location.hash='#restriction/new'}
-function goEditRestriction(name,returnHash=location.hash){if(returnHash?.startsWith('#restrictions'))restrictionReturnHash=returnHash;location.hash='#restriction/edit/'+encodeURIComponent(name)}
-function goRestrictionReturn(){location.hash=restrictionReturnHash||'#restrictions/items'}
+async function renderMasterSearchSuggestions(){
+  const query=
+    normalizedKey(
+      masterSearchInput.value
+    );
+
+  if(!query){
+    hideSuggestions(
+      masterSearchSuggestions
+    );
+
+    return;
+  }
+
+  try{
+    const items=
+      await fetchMasterItems();
+
+    if(
+      document.activeElement!==
+      masterSearchInput
+    ){
+      hideSuggestions(
+        masterSearchSuggestions
+      );
+
+      return;
+    }
+
+    const matches=
+      items
+        .filter(
+          item=>
+            normalizedKey(item.item_name)
+              .includes(query)
+        )
+        .slice(0,8);
+
+    masterSearchSuggestions.innerHTML='';
+
+    if(!matches.length){
+      const empty=
+        document.createElement('div');
+
+      empty.className=
+        'autocomplete-empty';
+
+      empty.textContent=
+        'No master list item found';
+
+      masterSearchSuggestions
+        .appendChild(empty);
+
+      masterSearchSuggestions.hidden=false;
+
+      return;
+    }
+
+    matches.forEach(item=>{
+      const button=
+        document.createElement('button');
+
+      button.type='button';
+      button.className='autocomplete-option';
+      button.textContent=item.item_name;
+
+      button.addEventListener(
+        'mousedown',
+        event=>event.preventDefault()
+      );
+
+      button.addEventListener(
+        'click',
+        ()=>{
+          masterSearchInput.value=
+            item.item_name;
+
+          hideSuggestions(
+            masterSearchSuggestions
+          );
+
+          goMasterRestriction(
+            item.item_name
+          );
+        }
+      );
+
+      masterSearchSuggestions
+        .appendChild(button);
+    });
+
+    masterSearchSuggestions.hidden=false;
+  }catch(error){
+    console.error(error);
+
+    hideSuggestions(
+      masterSearchSuggestions
+    );
+  }
+}
+
+masterSearchInput.addEventListener(
+  'input',
+  renderMasterSearchSuggestions
+);
+
+masterSearchInput.addEventListener(
+  'focus',
+  renderMasterSearchSuggestions
+);
+
+masterSearchInput.addEventListener(
+  'blur',
+  ()=>{
+    setTimeout(
+      ()=>hideSuggestions(
+        masterSearchSuggestions
+      ),
+      180
+    );
+  }
+);
+
+function goHome(){
+  location.hash='#home';
+}
+
+function goAdd(){
+  pendingShoppingPrefillName=null;
+  pendingShoppingAddReturnHash=null;
+  location.hash='#add';
+}
+
+function goAddWithItem(name,returnHash=null){
+  pendingShoppingPrefillName=
+    normalizeItemName(name);
+
+  pendingShoppingAddReturnHash=
+    returnHash;
+
+  location.hash='#add';
+}
+
+function goAddForStore(store){
+  pendingShoppingAddReturnHash=null;
+  location.hash='#add/'+store;
+}
+
+function goStore(store){
+  location.hash='#store/'+store;
+}
+
+function goMoveShoppingItem(id){
+  location.hash=
+    '#shopping/move/'+
+    encodeURIComponent(id);
+}
+
+function goInventory(){
+  location.hash='#inventory';
+}
+
+function goInventoryCategory(category){
+  location.hash=
+    '#inventory/'+category;
+}
+
+function goInventoryAdd(category){
+  location.hash=
+    '#inventory-add/'+category;
+}
+
+function goAdmin(){
+  location.hash='#admin';
+}
+
+function goMasterList(){
+  location.hash='#master';
+}
+
+function goMasterAdd(name=''){
+  pendingMasterAddName=
+    normalizeItemName(name);
+
+  location.hash='#master/add';
+}
+
+function goMasterRestriction(name){
+  restrictionReturnHash='#master';
+
+  location.hash=
+    '#master/restriction/'+
+    encodeURIComponent(name);
+}
+
+function goRestrictions(){
+  location.hash='#restrictions';
+}
+
+function goRestrictionsByItem(){
+  location.hash='#restrictions/items';
+}
+
+function goRestrictionsByStore(){
+  location.hash='#restrictions/stores';
+}
+
+function goRestrictionStore(store){
+  if(STORES[store]){
+    location.hash=
+      '#restrictions/store/'+store;
+  }
+}
+
+function goNewRestriction(){
+  restrictionReturnHash=
+    '#restrictions/items';
+
+  location.hash='#restriction/new';
+}
+
+function goEditRestriction(
+  name,
+  returnHash=location.hash
+){
+  if(
+    returnHash?.
+      startsWith('#restrictions')
+  ){
+    restrictionReturnHash=
+      returnHash;
+  }
+
+  location.hash=
+    '#restriction/edit/'+
+    encodeURIComponent(name);
+}
+
+function goRestrictionReturn(){
+  location.hash=
+    restrictionReturnHash||
+    '#restrictions/items';
+}
 
 function route(){
-  const hash=location.hash||'#home';currentInventoryCategory=null;currentRestrictionStore=null;clearTimeout(storeRestrictionTimer);
+  const hash=
+    location.hash||
+    '#home';
 
-  if(hash.startsWith('#shopping/move/')){
-    const id=decodeURIComponent(hash.slice('#shopping/move/'.length));currentStore=null;lockedAddStore=null;showOnly(shoppingMoveScreen);pageTitle.textContent='Move Item';backButton.hidden=false;loadShoppingItemForMove(id);return;
+  currentInventoryCategory=null;
+  currentRestrictionStore=null;
+
+  clearTimeout(storeRestrictionTimer);
+
+  if(
+    hash.startsWith(
+      '#shopping/move/'
+    )
+  ){
+    const id=
+      decodeURIComponent(
+        hash.slice(
+          '#shopping/move/'.length
+        )
+      );
+
+    currentStore=null;
+    lockedAddStore=null;
+
+    showOnly(
+      shoppingMoveScreen
+    );
+
+    pageTitle.textContent=
+      'Move Item';
+
+    backButton.hidden=false;
+
+    loadShoppingItemForMove(id);
+
+    return;
   }
 
   if(hash.startsWith('#add/')){
-    const store=hash.slice(5);if(!STORES[store]){goHome();return}movingShoppingItem=null;pendingShoppingPrefillName=null;lockedAddStore=store;currentStore=null;showOnly(addScreen);pageTitle.textContent='Add Item';backButton.hidden=false;storeSelect.disabled=true;lockedStoreNote.hidden=false;rebuildStoreOptions([store],store);setAddQuantity(1);setTimeout(()=>itemNameInput.focus(),80);return;
+    const store=
+      hash.slice(5);
+
+    if(!STORES[store]){
+      goHome();
+      return;
+    }
+
+    movingShoppingItem=null;
+    pendingShoppingPrefillName=null;
+    pendingShoppingAddReturnHash=null;
+    activeShoppingAddReturnHash=null;
+    lockedAddStore=store;
+    currentStore=null;
+
+    showOnly(addScreen);
+
+    pageTitle.textContent=
+      'Add Item';
+
+    backButton.hidden=false;
+    storeSelect.disabled=true;
+    lockedStoreNote.hidden=false;
+
+    rebuildStoreOptions(
+      [store],
+      store
+    );
+
+    setAddQuantity(1);
+
+    setTimeout(
+      ()=>itemNameInput.focus(),
+      80
+    );
+
+    return;
   }
 
   if(hash==='#add'){
-    movingShoppingItem=null;const prefill=pendingShoppingPrefillName;pendingShoppingPrefillName=null;lockedAddStore=null;currentStore=null;showOnly(addScreen);pageTitle.textContent='Add Item';backButton.hidden=false;storeSelect.disabled=false;lockedStoreNote.hidden=true;setAddQuantity(1);
-    if(prefill){itemNameInput.value=prefill;rebuildStoreOptions(Object.keys(STORES),'');refreshStoreChoicesForItem(true)}
-    else{rebuildStoreOptions(Object.keys(STORES),getLastStore()||'');if(normalizeItemName(itemNameInput.value))refreshStoreChoicesForItem(false)}
-    setTimeout(()=>prefill?storeSelect.focus():itemNameInput.focus(),80);return;
+    movingShoppingItem=null;
+
+    const prefill=
+      pendingShoppingPrefillName;
+
+    activeShoppingAddReturnHash=
+      pendingShoppingAddReturnHash;
+
+    pendingShoppingPrefillName=null;
+    pendingShoppingAddReturnHash=null;
+
+    lockedAddStore=null;
+    currentStore=null;
+
+    showOnly(addScreen);
+
+    pageTitle.textContent='Add Item';
+    backButton.hidden=false;
+    storeSelect.disabled=false;
+    lockedStoreNote.hidden=true;
+
+    setAddQuantity(1);
+
+    if(prefill){
+      itemNameInput.value=prefill;
+
+      rebuildStoreOptions(
+        Object.keys(STORES),
+        ''
+      );
+
+      refreshStoreChoicesForItem(
+        true
+      );
+    }else{
+      rebuildStoreOptions(
+        Object.keys(STORES),
+        getLastStore()||''
+      );
+
+      if(
+        normalizeItemName(
+          itemNameInput.value
+        )
+      ){
+        refreshStoreChoicesForItem(
+          false
+        );
+      }
+    }
+
+    setTimeout(
+      ()=>{
+        if(prefill){
+          storeSelect.focus();
+        }else{
+          itemNameInput.focus();
+        }
+      },
+      80
+    );
+
+    return;
   }
 
   if(hash.startsWith('#store/')){
-    const store=hash.slice(7);if(!STORES[store]){goHome();return}movingShoppingItem=null;lockedAddStore=null;currentStore=store;showOnly(storeScreen);pageTitle.textContent=STORES[store];backButton.hidden=false;loadStoreItems();return;
+    const store=
+      hash.slice(7);
+
+    if(!STORES[store]){
+      goHome();
+      return;
+    }
+
+    movingShoppingItem=null;
+    lockedAddStore=null;
+    currentStore=store;
+
+    showOnly(storeScreen);
+
+    pageTitle.textContent=
+      STORES[store];
+
+    backButton.hidden=false;
+
+    loadStoreItems();
+
+    return;
   }
 
   if(hash==='#inventory'){
-    movingShoppingItem=null;currentStore=null;lockedAddStore=null;showOnly(inventoryScreen);pageTitle.textContent='Inventory';backButton.hidden=false;inventorySearchInput.value='';hideSuggestions(inventorySearchSuggestions);renderInventoryCategories();fetchInventorySearchItems(true).catch(error=>console.error(error));return;
+    movingShoppingItem=null;
+    currentStore=null;
+    lockedAddStore=null;
+
+    showOnly(inventoryScreen);
+
+    pageTitle.textContent=
+      'Inventory';
+
+    backButton.hidden=false;
+
+    inventorySearchInput.value='';
+
+    hideSuggestions(
+      inventorySearchSuggestions
+    );
+
+    renderInventoryCategories();
+
+    fetchInventorySearchItems(true)
+      .catch(
+        error=>console.error(error)
+      );
+
+    return;
   }
 
-  if(hash.startsWith('#inventory-add/')){
-    const category=hash.slice('#inventory-add/'.length);if(!INVENTORY_CATEGORIES[category]){goInventory();return}movingShoppingItem=null;currentStore=null;lockedAddStore=null;currentInventoryCategory=category;showOnly(inventoryAddScreen);pageTitle.textContent='Add Inventory Item';backButton.hidden=false;inventoryItemName.value='';hideSuggestions(inventoryItemSuggestions);setInventoryAddQuantity(1);inventoryCategoryNote.textContent=`Category: ${INVENTORY_CATEGORIES[category]}`;setTimeout(()=>inventoryItemName.focus(),80);return;
+  if(
+    hash.startsWith(
+      '#inventory-add/'
+    )
+  ){
+    const category=
+      hash.slice(
+        '#inventory-add/'.length
+      );
+
+    if(
+      !INVENTORY_CATEGORIES[
+        category
+      ]
+    ){
+      goInventory();
+      return;
+    }
+
+    movingShoppingItem=null;
+    currentStore=null;
+    lockedAddStore=null;
+    currentInventoryCategory=
+      category;
+
+    showOnly(inventoryAddScreen);
+
+    pageTitle.textContent=
+      'Add Inventory Item';
+
+    backButton.hidden=false;
+
+    inventoryItemName.value='';
+
+    hideSuggestions(
+      inventoryItemSuggestions
+    );
+
+    setInventoryAddQuantity(1);
+
+    inventoryCategoryNote.textContent=
+      `Category: ${INVENTORY_CATEGORIES[category]}`;
+
+    setTimeout(
+      ()=>inventoryItemName.focus(),
+      80
+    );
+
+    return;
   }
 
-  if(hash.startsWith('#inventory/')){
-    const category=hash.slice('#inventory/'.length);if(!INVENTORY_CATEGORIES[category]){goInventory();return}movingShoppingItem=null;currentStore=null;lockedAddStore=null;currentInventoryCategory=category;showOnly(inventoryCategoryScreen);pageTitle.textContent=INVENTORY_CATEGORIES[category];backButton.hidden=false;loadInventoryItems();return;
+  if(
+    hash.startsWith(
+      '#inventory/'
+    )
+  ){
+    const category=
+      hash.slice(
+        '#inventory/'.length
+      );
+
+    if(
+      !INVENTORY_CATEGORIES[
+        category
+      ]
+    ){
+      goInventory();
+      return;
+    }
+
+    movingShoppingItem=null;
+    currentStore=null;
+    lockedAddStore=null;
+    currentInventoryCategory=
+      category;
+
+    showOnly(
+      inventoryCategoryScreen
+    );
+
+    pageTitle.textContent=
+      INVENTORY_CATEGORIES[
+        category
+      ];
+
+    backButton.hidden=false;
+
+    loadInventoryItems();
+
+    return;
   }
 
   if(hash==='#admin'){
-    movingShoppingItem=null;currentStore=null;lockedAddStore=null;showOnly(adminScreen);pageTitle.textContent='Admin';backButton.hidden=false;return;
+    movingShoppingItem=null;
+    currentStore=null;
+    lockedAddStore=null;
+
+    showOnly(adminScreen);
+
+    pageTitle.textContent='Admin';
+    backButton.hidden=false;
+
+    return;
   }
 
   if(hash==='#master/add'){
-    movingShoppingItem=null;currentStore=null;lockedAddStore=null;restrictionFromMaster=false;showOnly(masterAddScreen);pageTitle.textContent='Add Master Item';backButton.hidden=false;masterAddItemName.value=pendingMasterAddName||'';pendingMasterAddName=null;setTimeout(()=>masterAddItemName.focus(),80);return;
+    movingShoppingItem=null;
+    currentStore=null;
+    lockedAddStore=null;
+    restrictionFromMaster=false;
+
+    showOnly(masterAddScreen);
+
+    pageTitle.textContent=
+      'Add Master Item';
+
+    backButton.hidden=false;
+
+    masterAddItemName.value=
+      pendingMasterAddName||'';
+
+    pendingMasterAddName=null;
+
+    setTimeout(
+      ()=>masterAddItemName.focus(),
+      80
+    );
+
+    return;
   }
 
-  if(hash.startsWith('#master/restriction/')){
-    let name='';try{name=decodeURIComponent(hash.slice('#master/restriction/'.length))}catch(_){goMasterList();return}
-    movingShoppingItem=null;currentStore=null;lockedAddStore=null;restrictionFromMaster=true;restrictionReturnHash='#master';showOnly(restrictionEditScreen);pageTitle.textContent='Item Restrictions';backButton.hidden=false;loadMasterItemRestriction(name);return;
+  if(
+    hash.startsWith(
+      '#master/restriction/'
+    )
+  ){
+    let name='';
+
+    try{
+      name=
+        decodeURIComponent(
+          hash.slice(
+            '#master/restriction/'.length
+          )
+        );
+    }catch(_){
+      goMasterList();
+      return;
+    }
+
+    movingShoppingItem=null;
+    currentStore=null;
+    lockedAddStore=null;
+    restrictionFromMaster=true;
+    restrictionReturnHash='#master';
+
+    showOnly(
+      restrictionEditScreen
+    );
+
+    pageTitle.textContent=
+      'Item Restrictions';
+
+    backButton.hidden=false;
+
+    loadMasterItemRestriction(
+      name
+    );
+
+    return;
   }
 
   if(hash==='#master'){
-    movingShoppingItem=null;currentStore=null;lockedAddStore=null;restrictionFromMaster=false;showOnly(masterListScreen);pageTitle.textContent='Master List';backButton.hidden=false;masterSearchInput.value='';hideSuggestions(masterSearchSuggestions);loadMasterList();return;
+    movingShoppingItem=null;
+    currentStore=null;
+    lockedAddStore=null;
+    restrictionFromMaster=false;
+
+    showOnly(masterListScreen);
+
+    pageTitle.textContent=
+      'Master List';
+
+    backButton.hidden=false;
+
+    masterSearchInput.value='';
+
+    hideSuggestions(
+      masterSearchSuggestions
+    );
+
+    loadMasterList();
+
+    return;
   }
 
-  if(hash==='#restrictions/items'){
-    movingShoppingItem=null;currentStore=null;lockedAddStore=null;editingRestrictionOriginalName=null;restrictionFromMaster=false;showOnly(restrictionsByItemScreen);pageTitle.textContent='Restrictions by Item';backButton.hidden=false;loadRestrictions();return;
+  if(
+    hash==='#restrictions/items'
+  ){
+    movingShoppingItem=null;
+    currentStore=null;
+    lockedAddStore=null;
+    editingRestrictionOriginalName=null;
+    restrictionFromMaster=false;
+
+    showOnly(
+      restrictionsByItemScreen
+    );
+
+    pageTitle.textContent=
+      'Restrictions by Item';
+
+    backButton.hidden=false;
+
+    loadRestrictions();
+
+    return;
   }
 
-  if(hash==='#restrictions/stores'){
-    movingShoppingItem=null;currentStore=null;lockedAddStore=null;editingRestrictionOriginalName=null;restrictionFromMaster=false;showOnly(restrictionsByStoreScreen);pageTitle.textContent='Restrictions by Store';backButton.hidden=false;renderRestrictionStores();return;
+  if(
+    hash==='#restrictions/stores'
+  ){
+    movingShoppingItem=null;
+    currentStore=null;
+    lockedAddStore=null;
+    editingRestrictionOriginalName=null;
+    restrictionFromMaster=false;
+
+    showOnly(
+      restrictionsByStoreScreen
+    );
+
+    pageTitle.textContent=
+      'Restrictions by Store';
+
+    backButton.hidden=false;
+
+    renderRestrictionStores();
+
+    return;
   }
 
-  if(hash.startsWith('#restrictions/store/')){
-    const store=hash.slice('#restrictions/store/'.length);if(!STORES[store]){goRestrictionsByStore();return}movingShoppingItem=null;currentStore=null;lockedAddStore=null;editingRestrictionOriginalName=null;restrictionFromMaster=false;currentRestrictionStore=store;showOnly(restrictionStoreScreen);pageTitle.textContent=STORES[store];backButton.hidden=false;loadRestrictionsByStore(store);return;
+  if(
+    hash.startsWith(
+      '#restrictions/store/'
+    )
+  ){
+    const store=
+      hash.slice(
+        '#restrictions/store/'.length
+      );
+
+    if(!STORES[store]){
+      goRestrictionsByStore();
+      return;
+    }
+
+    movingShoppingItem=null;
+    currentStore=null;
+    lockedAddStore=null;
+    editingRestrictionOriginalName=null;
+    restrictionFromMaster=false;
+    currentRestrictionStore=store;
+
+    showOnly(
+      restrictionStoreScreen
+    );
+
+    pageTitle.textContent=
+      STORES[store];
+
+    backButton.hidden=false;
+
+    loadRestrictionsByStore(
+      store
+    );
+
+    return;
   }
 
   if(hash==='#restrictions'){
-    movingShoppingItem=null;currentStore=null;lockedAddStore=null;editingRestrictionOriginalName=null;restrictionFromMaster=false;showOnly(restrictionsScreen);pageTitle.textContent='Manage Restrictions';backButton.hidden=false;return;
+    movingShoppingItem=null;
+    currentStore=null;
+    lockedAddStore=null;
+    editingRestrictionOriginalName=null;
+    restrictionFromMaster=false;
+
+    showOnly(
+      restrictionsScreen
+    );
+
+    pageTitle.textContent=
+      'Manage Restrictions';
+
+    backButton.hidden=false;
+
+    return;
   }
 
   if(hash==='#restriction/new'){
-    movingShoppingItem=null;currentStore=null;lockedAddStore=null;editingRestrictionOriginalName=null;restrictionFromMaster=false;showOnly(restrictionEditScreen);pageTitle.textContent='Add Restriction';backButton.hidden=false;clearRestrictionForm();setTimeout(()=>restrictionItemName.focus(),80);return;
+    movingShoppingItem=null;
+    currentStore=null;
+    lockedAddStore=null;
+    editingRestrictionOriginalName=null;
+    restrictionFromMaster=false;
+
+    showOnly(
+      restrictionEditScreen
+    );
+
+    pageTitle.textContent=
+      'Add Restriction';
+
+    backButton.hidden=false;
+
+    clearRestrictionForm();
+
+    setTimeout(
+      ()=>restrictionItemName.focus(),
+      80
+    );
+
+    return;
   }
 
-  if(hash.startsWith('#restriction/edit/')){
-    let name='';try{name=decodeURIComponent(hash.slice('#restriction/edit/'.length))}catch(_){goRestrictionReturn();return}
-    movingShoppingItem=null;currentStore=null;lockedAddStore=null;restrictionFromMaster=false;showOnly(restrictionEditScreen);pageTitle.textContent='Edit Restriction';backButton.hidden=false;loadRestrictionForEdit(name);return;
+  if(
+    hash.startsWith(
+      '#restriction/edit/'
+    )
+  ){
+    let name='';
+
+    try{
+      name=
+        decodeURIComponent(
+          hash.slice(
+            '#restriction/edit/'.length
+          )
+        );
+    }catch(_){
+      goRestrictionReturn();
+      return;
+    }
+
+    movingShoppingItem=null;
+    currentStore=null;
+    lockedAddStore=null;
+    restrictionFromMaster=false;
+
+    showOnly(
+      restrictionEditScreen
+    );
+
+    pageTitle.textContent=
+      'Edit Restriction';
+
+    backButton.hidden=false;
+
+    loadRestrictionForEdit(name);
+
+    return;
   }
 
-  movingShoppingItem=null;currentStore=null;lockedAddStore=null;editingRestrictionOriginalName=null;restrictionFromMaster=false;showOnly(homeScreen);pageTitle.textContent='Uno Club Shopping';backButton.hidden=true;loadHomeCounts();
+  movingShoppingItem=null;
+  currentStore=null;
+  lockedAddStore=null;
+  editingRestrictionOriginalName=null;
+  restrictionFromMaster=false;
+
+  showOnly(homeScreen);
+
+  pageTitle.textContent=
+    'Uno Club Shopping';
+
+  backButton.hidden=true;
+
+  loadHomeCounts();
 }
 
-backButton.addEventListener('click',()=>{
-  const hash=location.hash;
-  if(hash.startsWith('#shopping/move/')){if(movingShoppingItem&&STORES[movingShoppingItem.store])goStore(movingShoppingItem.store);else goHome();return}
-  if(hash.startsWith('#add/')){const store=hash.slice(5);if(STORES[store]){goStore(store);return}}
-  if(hash.startsWith('#inventory-add/')){const category=hash.slice('#inventory-add/'.length);if(INVENTORY_CATEGORIES[category]){goInventoryCategory(category);return}}
-  if(hash.startsWith('#inventory/')){goInventory();return}
-  if(hash==='#inventory'){goHome();return}
-  if(hash==='#master/add'){goMasterList();return}
-  if(hash.startsWith('#master/restriction/')){goMasterList();return}
-  if(hash==='#master'){goAdmin();return}
-  if(hash.startsWith('#restrictions/store/')){goRestrictionsByStore();return}
-  if(hash==='#restrictions/items'||hash==='#restrictions/stores'){goRestrictions();return}
-  if(hash==='#restrictions'){goAdmin();return}
-  if(hash==='#admin'){goHome();return}
-  if(hash==='#restriction/new'||hash.startsWith('#restriction/edit/')){goRestrictionReturn();return}
-  goHome();
-});
+backButton.addEventListener(
+  'click',
+  ()=>{
+    const hash=location.hash;
 
-addItemButton.addEventListener('click',goAdd);inventoryButton.addEventListener('click',goInventory);adminButton.addEventListener('click',goAdmin);adminRestrictionsButton.addEventListener('click',goRestrictions);masterListButton.addEventListener('click',goMasterList);restrictionsByItemButton.addEventListener('click',goRestrictionsByItem);restrictionsByStoreButton.addEventListener('click',goRestrictionsByStore);addRestrictionButton.addEventListener('click',goNewRestriction);
-document.querySelectorAll('.store-button').forEach(button=>button.addEventListener('click',()=>goStore(button.dataset.store)));
-storeAddItemButton.addEventListener('click',()=>{if(currentStore&&STORES[currentStore])goAddForStore(currentStore)});
-inventoryAddItemButton.addEventListener('click',()=>{if(currentInventoryCategory&&INVENTORY_CATEGORIES[currentInventoryCategory])goInventoryAdd(currentInventoryCategory)});
-masterAddItemButton.addEventListener('click',()=>goMasterAdd(masterSearchInput.value));
+    if(
+      hash.startsWith(
+        '#shopping/move/'
+      )
+    ){
+      if(
+        movingShoppingItem&&
+        STORES[
+          movingShoppingItem.store
+        ]
+      ){
+        goStore(
+          movingShoppingItem.store
+        );
+      }else{
+        goHome();
+      }
+
+      return;
+    }
+
+    if(hash.startsWith('#add/')){
+      const store=hash.slice(5);
+
+      if(STORES[store]){
+        goStore(store);
+        return;
+      }
+    }
+
+    if(
+      hash.startsWith(
+        '#inventory-add/'
+      )
+    ){
+      const category=
+        hash.slice(
+          '#inventory-add/'.length
+        );
+
+      if(
+        INVENTORY_CATEGORIES[
+          category
+        ]
+      ){
+        goInventoryCategory(
+          category
+        );
+
+        return;
+      }
+    }
+
+    if(
+      hash.startsWith(
+        '#inventory/'
+      )
+    ){
+      goInventory();
+      return;
+    }
+
+    if(hash==='#inventory'){
+      goHome();
+      return;
+    }
+
+    if(hash==='#master/add'){
+      goMasterList();
+      return;
+    }
+
+    if(
+      hash.startsWith(
+        '#master/restriction/'
+      )
+    ){
+      goMasterList();
+      return;
+    }
+
+    if(hash==='#master'){
+      goAdmin();
+      return;
+    }
+
+    if(
+      hash.startsWith(
+        '#restrictions/store/'
+      )
+    ){
+      goRestrictionsByStore();
+      return;
+    }
+
+    if(
+      hash==='#restrictions/items'||
+      hash==='#restrictions/stores'
+    ){
+      goRestrictions();
+      return;
+    }
+
+    if(hash==='#restrictions'){
+      goAdmin();
+      return;
+    }
+
+    if(hash==='#admin'){
+      goHome();
+      return;
+    }
+
+    if(
+      hash==='#restriction/new'||
+      hash.startsWith(
+        '#restriction/edit/'
+      )
+    ){
+      goRestrictionReturn();
+      return;
+    }
+
+    goHome();
+  }
+);
+
+addItemButton.addEventListener(
+  'click',
+  goAdd
+);
+
+inventoryButton.addEventListener(
+  'click',
+  goInventory
+);
+
+adminButton.addEventListener(
+  'click',
+  goAdmin
+);
+
+adminRestrictionsButton.addEventListener(
+  'click',
+  goRestrictions
+);
+
+masterListButton.addEventListener(
+  'click',
+  goMasterList
+);
+
+restrictionsByItemButton.addEventListener(
+  'click',
+  goRestrictionsByItem
+);
+
+restrictionsByStoreButton.addEventListener(
+  'click',
+  goRestrictionsByStore
+);
+
+addRestrictionButton.addEventListener(
+  'click',
+  goNewRestriction
+);
+
+document
+  .querySelectorAll(
+    '.store-button'
+  )
+  .forEach(button=>{
+    button.addEventListener(
+      'click',
+      ()=>goStore(
+        button.dataset.store
+      )
+    );
+  });
+
+storeAddItemButton.addEventListener(
+  'click',
+  ()=>{
+    if(
+      currentStore&&
+      STORES[currentStore]
+    ){
+      goAddForStore(currentStore);
+    }
+  }
+);
+
+inventoryAddItemButton.addEventListener(
+  'click',
+  ()=>{
+    if(
+      currentInventoryCategory&&
+      INVENTORY_CATEGORIES[
+        currentInventoryCategory
+      ]
+    ){
+      goInventoryAdd(
+        currentInventoryCategory
+      );
+    }
+  }
+);
+
+masterAddItemButton.addEventListener(
+  'click',
+  ()=>{
+    goMasterAdd(
+      masterSearchInput.value
+    );
+  }
+);
 
 async function loadHomeCounts(){
-  const counts={sams_costco:1,walmart:0,alcohol:0,sodas:0,amazon:0};
-  try{const data=await api('/rest/v1/shopping_items?select=store');if(Array.isArray(data))data.forEach(item=>{if(Object.prototype.hasOwnProperty.call(counts,item.store))counts[item.store]++});document.querySelectorAll('.count-badge').forEach(b=>b.textContent=counts[b.dataset.countStore]??0)}catch(error){console.error(error)}
+  const counts={
+    sams_costco:1,
+    walmart:0,
+    alcohol:0,
+    sodas:0,
+    amazon:0
+  };
+
+  try{
+    const data=await api(
+      '/rest/v1/shopping_items?select=store'
+    );
+
+    if(Array.isArray(data)){
+      data.forEach(item=>{
+        if(
+          Object.prototype
+            .hasOwnProperty.call(
+              counts,
+              item.store
+            )
+        ){
+          counts[item.store]++;
+        }
+      });
+    }
+
+    document
+      .querySelectorAll(
+        '.count-badge'
+      )
+      .forEach(badge=>{
+        badge.textContent=
+          counts[
+            badge.dataset.countStore
+          ]??0;
+      });
+  }catch(error){
+    console.error(error);
+  }
 }
 
-storeSelect.addEventListener('change',()=>{if(!lockedAddStore&&STORES[storeSelect.value])rememberLastStore(storeSelect.value)});
-function getBoundedQuantity(input,min){const value=Number.parseInt(input.value,10);if(!Number.isInteger(value)||value<min)return min;return Math.min(value,9999)}
-function setAddQuantity(value){quantityInput.value=Math.min(9999,Math.max(1,value));refreshAddQuantityButtons()}
-function getAddQuantity(){return getBoundedQuantity(quantityInput,1)}
-function refreshAddQuantityButtons(){const q=getAddQuantity();addQtyMinus.disabled=q<=1;addQtyPlus.disabled=q>=9999}
-addQtyMinus.addEventListener('click',()=>setAddQuantity(getAddQuantity()-1));addQtyPlus.addEventListener('click',()=>setAddQuantity(getAddQuantity()+1));quantityInput.addEventListener('input',refreshAddQuantityButtons);quantityInput.addEventListener('blur',()=>setAddQuantity(getAddQuantity()));
-function setInventoryAddQuantity(value){inventoryQuantity.value=Math.min(9999,Math.max(0,value));refreshInventoryAddQuantityButtons()}
-function getInventoryAddQuantity(){return getBoundedQuantity(inventoryQuantity,0)}
-function refreshInventoryAddQuantityButtons(){const q=getInventoryAddQuantity();inventoryQtyMinus.disabled=q<=0;inventoryQtyPlus.disabled=q>=9999}
-inventoryQtyMinus.addEventListener('click',()=>setInventoryAddQuantity(getInventoryAddQuantity()-1));inventoryQtyPlus.addEventListener('click',()=>setInventoryAddQuantity(getInventoryAddQuantity()+1));inventoryQuantity.addEventListener('input',refreshInventoryAddQuantityButtons);inventoryQuantity.addEventListener('blur',()=>setInventoryAddQuantity(getInventoryAddQuantity()));
+storeSelect.addEventListener(
+  'change',
+  ()=>{
+    if(
+      !lockedAddStore&&
+      STORES[storeSelect.value]
+    ){
+      rememberLastStore(
+        storeSelect.value
+      );
+    }
+  }
+);
+
+function getBoundedQuantity(input,min){
+  const value=
+    Number.parseInt(
+      input.value,
+      10
+    );
+
+  if(
+    !Number.isInteger(value)||
+    value<min
+  ){
+    return min;
+  }
+
+  return Math.min(
+    value,
+    9999
+  );
+}
+
+function setAddQuantity(value){
+  quantityInput.value=
+    Math.min(
+      9999,
+      Math.max(1,value)
+    );
+
+  refreshAddQuantityButtons();
+}
+
+function getAddQuantity(){
+  return getBoundedQuantity(
+    quantityInput,
+    1
+  );
+}
+
+function refreshAddQuantityButtons(){
+  const quantity=
+    getAddQuantity();
+
+  addQtyMinus.disabled=
+    quantity<=1;
+
+  addQtyPlus.disabled=
+    quantity>=9999;
+}
+
+addQtyMinus.addEventListener(
+  'click',
+  ()=>{
+    setAddQuantity(
+      getAddQuantity()-1
+    );
+  }
+);
+
+addQtyPlus.addEventListener(
+  'click',
+  ()=>{
+    setAddQuantity(
+      getAddQuantity()+1
+    );
+  }
+);
+
+quantityInput.addEventListener(
+  'input',
+  refreshAddQuantityButtons
+);
+
+quantityInput.addEventListener(
+  'blur',
+  ()=>{
+    setAddQuantity(
+      getAddQuantity()
+    );
+  }
+);
+
+function setInventoryAddQuantity(value){
+  inventoryQuantity.value=
+    Math.min(
+      9999,
+      Math.max(0,value)
+    );
+
+  refreshInventoryAddQuantityButtons();
+}
+
+function getInventoryAddQuantity(){
+  return getBoundedQuantity(
+    inventoryQuantity,
+    0
+  );
+}
+
+function refreshInventoryAddQuantityButtons(){
+  const quantity=
+    getInventoryAddQuantity();
+
+  inventoryQtyMinus.disabled=
+    quantity<=0;
+
+  inventoryQtyPlus.disabled=
+    quantity>=9999;
+}
+
+inventoryQtyMinus.addEventListener(
+  'click',
+  ()=>{
+    setInventoryAddQuantity(
+      getInventoryAddQuantity()-1
+    );
+  }
+);
+
+inventoryQtyPlus.addEventListener(
+  'click',
+  ()=>{
+    setInventoryAddQuantity(
+      getInventoryAddQuantity()+1
+    );
+  }
+);
+
+inventoryQuantity.addEventListener(
+  'input',
+  refreshInventoryAddQuantityButtons
+);
+
+inventoryQuantity.addEventListener(
+  'blur',
+  ()=>{
+    setInventoryAddQuantity(
+      getInventoryAddQuantity()
+    );
+  }
+);
 
 function formatAllowedStores(keys){
-  const names=keys.map(k=>STORES[k]).filter(Boolean);if(!names.length)return'the correct store';if(names.length===1)return names[0];if(names.length===2)return`${names[0]} or ${names[1]}`;return`${names.slice(0,-1).join(', ')}, or ${names[names.length-1]}`;
+  const names=
+    keys
+      .map(key=>STORES[key])
+      .filter(Boolean);
+
+  if(!names.length){
+    return 'the correct store';
+  }
+
+  if(names.length===1){
+    return names[0];
+  }
+
+  if(names.length===2){
+    return `${names[0]} or ${names[1]}`;
+  }
+
+  return `${
+    names.slice(0,-1).join(', ')
+  }, or ${
+    names[names.length-1]
+  }`;
 }
 
-addItemForm.addEventListener('submit',async event=>{
-  event.preventDefault();const itemName=normalizeItemName(itemNameInput.value),store=lockedAddStore||storeSelect.value,quantity=getAddQuantity();
-  if(!itemName){showToast('Please enter an item.',true);itemNameInput.focus();return}
-  if(!store||!STORES[store]){showToast('Please choose a store.',true);storeSelect.focus();return}
-  if(normalizedKey(itemName)==='case of water'){showToast('Case of Water is already on the Sam’s / CostCo list.',true);return}
-  if(!lockedAddStore)rememberLastStore(store);saveItemButton.disabled=true;saveItemButton.textContent='Adding…';
-  try{
-    const result=unwrapRpcResult(await api('/rest/v1/rpc/add_shopping_item',{method:'POST',body:JSON.stringify({p_item_name:itemName,p_quantity:quantity,p_store:store})}));
-    if(result?.added===false&&result.reason==='duplicate'){showToast(`${itemName} is already on the ${STORES[result.existing_store]||'another'} list.`,true);return}
-    if(result?.added===false&&result.reason==='restricted'){showToast(`${itemName} can only be added to ${formatAllowedStores(Array.isArray(result.allowed_stores)?result.allowed_stores:[])}.`,true);refreshStoreChoicesForItem(false);return}
-    if(result?.added===true){invalidateMasterItems();itemNameInput.value='';hideSuggestions(itemNameSuggestions);setAddQuantity(1);rebuildStoreOptions(Object.keys(STORES),store);showToast(`${itemName} added to ${STORES[store]}.`);loadHomeCounts();itemNameInput.focus();return}
-    showToast('Could not add the item. Please try again.',true);
-  }catch(error){console.error(error);showToast('Could not add the item. Please try again.',true)}finally{saveItemButton.disabled=false;saveItemButton.textContent='Add Item'}
-});
+addItemForm.addEventListener(
+  'submit',
+  async event=>{
+    event.preventDefault();
+
+    const itemName=
+      normalizeItemName(
+        itemNameInput.value
+      );
+
+    const store=
+      lockedAddStore||
+      storeSelect.value;
+
+    const quantity=
+      getAddQuantity();
+
+    if(!itemName){
+      showToast(
+        'Please enter an item.',
+        true
+      );
+
+      itemNameInput.focus();
+      return;
+    }
+
+    if(
+      !store||
+      !STORES[store]
+    ){
+      showToast(
+        'Please choose a store.',
+        true
+      );
+
+      storeSelect.focus();
+      return;
+    }
+
+    if(
+      normalizedKey(itemName)===
+      'case of water'
+    ){
+      showToast(
+        'Case of Water is already on the Sam’s / CostCo list.',
+        true
+      );
+
+      return;
+    }
+
+    if(!lockedAddStore){
+      rememberLastStore(store);
+    }
+
+    saveItemButton.disabled=true;
+    saveItemButton.textContent=
+      'Adding…';
+
+    try{
+      const result=
+        unwrapRpcResult(
+          await api(
+            '/rest/v1/rpc/add_shopping_item',
+            {
+              method:'POST',
+              body:JSON.stringify({
+                p_item_name:itemName,
+                p_quantity:quantity,
+                p_store:store
+              })
+            }
+          )
+        );
+
+      if(
+        result?.added===false&&
+        result.reason==='duplicate'
+      ){
+        showToast(
+          `${itemName} is already on the ${STORES[result.existing_store]||'another'} list.`,
+          true
+        );
+
+        return;
+      }
+
+      if(
+        result?.added===false&&
+        result.reason==='restricted'
+      ){
+        showToast(
+          `${itemName} can only be added to ${formatAllowedStores(Array.isArray(result.allowed_stores)?result.allowed_stores:[])}.`,
+          true
+        );
+
+        refreshStoreChoicesForItem(
+          false
+        );
+
+        return;
+      }
+
+      if(result?.added===true){
+        invalidateMasterItems();
+        loadHomeCounts();
+
+        if(
+          activeShoppingAddReturnHash===
+          '#master'
+        ){
+          activeShoppingAddReturnHash=null;
+
+          goMasterList();
+
+          setTimeout(
+            ()=>{
+              showToast(
+                `${itemName} added to ${STORES[store]}.`
+              );
+            },
+            80
+          );
+
+          return;
+        }
+
+        itemNameInput.value='';
+
+        hideSuggestions(
+          itemNameSuggestions
+        );
+
+        setAddQuantity(1);
+
+        rebuildStoreOptions(
+          Object.keys(STORES),
+          store
+        );
+
+        showToast(
+          `${itemName} added to ${STORES[store]}.`
+        );
+
+        itemNameInput.focus();
+
+        return;
+      }
+
+      showToast(
+        'Could not add the item. Please try again.',
+        true
+      );
+    }catch(error){
+      console.error(error);
+
+      showToast(
+        'Could not add the item. Please try again.',
+        true
+      );
+    }finally{
+      saveItemButton.disabled=false;
+      saveItemButton.textContent=
+        'Add Item';
+    }
+  }
+);
 
 async function loadStoreItems(quiet=false){
-  if(!currentStore)return;const storeAtStart=currentStore;if(!quiet)storeList.innerHTML='<div class="loading-state">Loading…</div>';
+  if(!currentStore)return;
+
+  const storeAtStart=
+    currentStore;
+
+  if(!quiet){
+    storeList.innerHTML=
+      '<div class="loading-state">Loading…</div>';
+  }
+
   try{
-    const data=await api('/rest/v1/shopping_items?select=id,item_name,quantity,store&store=eq.'+encodeURIComponent(storeAtStart));let rows=null;try{rows=await fetchRestrictionRows()}catch(e){console.error(e)}
-    if(currentStore!==storeAtStart)return;renderStoreList(sortByName(Array.isArray(data)?data:[]),rows);
-  }catch(error){console.error(error);if(!quiet&&currentStore===storeAtStart)storeList.innerHTML='<div class="error-state">Could not load this list. Please try again.</div>'}
+    const data=await api(
+      '/rest/v1/shopping_items?select=id,item_name,quantity,store&store=eq.'+
+      encodeURIComponent(
+        storeAtStart
+      )
+    );
+
+    let rows=null;
+
+    try{
+      rows=
+        await fetchRestrictionRows();
+    }catch(error){
+      console.error(error);
+    }
+
+    if(
+      currentStore!==
+      storeAtStart
+    ){
+      return;
+    }
+
+    renderStoreList(
+      sortByName(
+        Array.isArray(data)
+          ? data
+          : []
+      ),
+      rows
+    );
+  }catch(error){
+    console.error(error);
+
+    if(
+      !quiet&&
+      currentStore===
+      storeAtStart
+    ){
+      storeList.innerHTML=
+        '<div class="error-state">Could not load this list. Please try again.</div>';
+    }
+  }
 }
 
 function renderStoreList(items,restrictionRows){
-  storeList.innerHTML='';if(currentStore==='sams_costco')storeList.appendChild(createPermanentWaterRow());items.forEach(item=>storeList.appendChild(createShoppingItemRow(item,restrictionRows)));
-  if(items.length===0)appendEmpty(storeList,currentStore==='sams_costco'?'No other items on this list.':'No items on this list.');
-}
-function appendEmpty(container,message){const d=document.createElement('div');d.className='empty-state';d.textContent=message;container.appendChild(d)}
-function createPermanentWaterRow(){
-  const row=document.createElement('div');row.className='item-row permanent-row';const wrap=document.createElement('div'),name=document.createElement('div'),note=document.createElement('div'),qty=document.createElement('div'),spacer=document.createElement('div');name.className='item-name';name.textContent='Case of Water';note.className='fixed-note';note.textContent='Always on list';wrap.append(name,note);qty.className='qty-fixed';qty.textContent='1';row.append(wrap,qty,spacer);return row;
-}
-function createShoppingItemRow(item,restrictionRows){
-  const allowed=getAllowedStoresForItemName(item.item_name,restrictionRows),movable=Array.isArray(allowed)&&allowed.length>1;
-  return createDataItemRow(item,1,newQ=>updateQuantity('shopping_items',item.id,newQ),(row,button,q)=>deleteShoppingItem(item,row,button,q),null,movable?()=>goMoveShoppingItem(item.id):null);
-}
-function createInventoryItemRow(item){
-  return createDataItemRow(item,0,newQ=>updateQuantity('inventory_items',item.id,newQ),(row,button,q)=>deleteInventoryItem(item,row,button,q),(oldQ,newQ)=>{
-    if(oldQ>0&&newQ===0){const yes=window.confirm(`${item.item_name} is out of stock.\n\nWould you like to add it to the shopping list?`);if(yes)goAddWithItem(item.item_name);return true}return false;
+  storeList.innerHTML='';
+
+  if(
+    currentStore===
+    'sams_costco'
+  ){
+    storeList.appendChild(
+      createPermanentWaterRow()
+    );
+  }
+
+  items.forEach(item=>{
+    storeList.appendChild(
+      createShoppingItemRow(
+        item,
+        restrictionRows
+      )
+    );
   });
+
+  if(items.length===0){
+    appendEmpty(
+      storeList,
+      currentStore==='sams_costco'
+        ? 'No other items on this list.'
+        : 'No items on this list.'
+    );
+  }
 }
-function createDataItemRow(item,minQuantity,saveQuantity,deleteHandler,afterSaveQuantity=null,itemNameClickHandler=null){
-  const row=document.createElement('div');row.className='item-row db-row';row.dataset.id=item.id;
-  let name;if(typeof itemNameClickHandler==='function'){name=document.createElement('button');name.type='button';name.className='clickable-item-name';name.addEventListener('click',itemNameClickHandler)}else{name=document.createElement('div');name.className='item-name'}name.textContent=item.item_name;
-  const control=document.createElement('div');control.className='qty-control';const minus=document.createElement('button'),qty=document.createElement('input'),plus=document.createElement('button');minus.type=plus.type='button';minus.className=plus.className='qty-step-button';minus.textContent='−';plus.textContent='+';qty.className='qty-input';qty.type='number';qty.min=String(minQuantity);qty.max='9999';qty.step='1';qty.inputMode='numeric';qty.value=item.quantity;qty.dataset.savedValue=String(item.quantity);
-  const getQty=()=>getBoundedQuantity(qty,minQuantity);const refresh=()=>{const v=getQty();minus.disabled=v<=minQuantity;plus.disabled=v>=9999};
-  const save=async()=>{const oldV=Number.parseInt(qty.dataset.savedValue,10),newV=getQty();qty.value=newV;if(newV===oldV){refresh();return}minus.disabled=plus.disabled=qty.disabled=true;let ok=false;try{await saveQuantity(newV);qty.dataset.savedValue=String(newV);ok=true}catch(error){console.error(error);qty.value=oldV;showToast('Could not update the quantity.',true)}qty.disabled=false;refresh();if(!ok)return;const handled=typeof afterSaveQuantity==='function'&&afterSaveQuantity(oldV,newV)===true;if(!handled)showToast('Quantity updated.')};
-  minus.addEventListener('click',async()=>{const v=getQty();if(v<=minQuantity)return;qty.value=v-1;await save()});plus.addEventListener('click',async()=>{const v=getQty();if(v>=9999)return;qty.value=v+1;await save()});qty.addEventListener('focus',()=>qty.select());qty.addEventListener('input',refresh);qty.addEventListener('change',save);control.append(minus,qty,plus);refresh();
-  const del=document.createElement('button');del.type='button';del.className='delete-button';del.textContent='×';del.addEventListener('click',async()=>{del.disabled=true;await deleteHandler(row,del,getQty())});row.append(name,control,del);return row;
+
+function appendEmpty(container,message){
+  const div=
+    document.createElement('div');
+
+  div.className='empty-state';
+  div.textContent=message;
+
+  container.appendChild(div);
 }
-async function updateQuantity(table,id,quantity){await api(`/rest/v1/${table}?id=eq.${encodeURIComponent(id)}`,{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify({quantity})})}
-async function deleteShoppingItem(item,row,button,currentQuantity){
-  try{await api('/rest/v1/shopping_items?id=eq.'+encodeURIComponent(item.id),{method:'DELETE',headers:{Prefer:'return=minimal'}});row.remove();showUndoToast({...item,quantity:currentQuantity},'shopping');loadHomeCounts();if(!storeList.querySelector('.db-row'))appendEmpty(storeList,currentStore==='sams_costco'?'No other items on this list.':'No items on this list.')}catch(error){console.error(error);button.disabled=false;showToast('Could not remove the item.',true)}
+
+function createPermanentWaterRow(){
+  const row=
+    document.createElement('div');
+
+  row.className=
+    'item-row permanent-row';
+
+  const wrap=
+    document.createElement('div');
+
+  const name=
+    document.createElement('div');
+
+  const note=
+    document.createElement('div');
+
+  const quantity=
+    document.createElement('div');
+
+  const spacer=
+    document.createElement('div');
+
+  name.className='item-name';
+  name.textContent='Case of Water';
+
+  note.className='fixed-note';
+  note.textContent='Always on list';
+
+  wrap.append(
+    name,
+    note
+  );
+
+  quantity.className='qty-fixed';
+  quantity.textContent='1';
+
+  row.append(
+    wrap,
+    quantity,
+    spacer
+  );
+
+  return row;
+}
+
+function createShoppingItemRow(item,restrictionRows){
+  const allowed=
+    getAllowedStoresForItemName(
+      item.item_name,
+      restrictionRows
+    );
+
+  const movable=
+    Array.isArray(allowed)&&
+    allowed.length>1;
+
+  return createDataItemRow(
+    item,
+    1,
+    newQuantity=>
+      updateQuantity(
+        'shopping_items',
+        item.id,
+        newQuantity
+      ),
+    (
+      row,
+      button,
+      quantity
+    )=>
+      deleteShoppingItem(
+        item,
+        row,
+        button,
+        quantity
+      ),
+    null,
+    movable
+      ? ()=>goMoveShoppingItem(
+          item.id
+        )
+      : null
+  );
+}
+
+function createInventoryItemRow(item){
+  return createDataItemRow(
+    item,
+    0,
+    newQuantity=>
+      updateQuantity(
+        'inventory_items',
+        item.id,
+        newQuantity
+      ),
+    (
+      row,
+      button,
+      quantity
+    )=>
+      deleteInventoryItem(
+        item,
+        row,
+        button,
+        quantity
+      ),
+    (
+      oldQuantity,
+      newQuantity
+    )=>{
+      if(
+        oldQuantity>0&&
+        newQuantity===0
+      ){
+        const yes=
+          window.confirm(
+            `${item.item_name} is out of stock.\n\nWould you like to add it to the shopping list?`
+          );
+
+        if(yes){
+          goAddWithItem(
+            item.item_name
+          );
+        }
+
+        return true;
+      }
+
+      return false;
+    }
+  );
+}
+
+function createDataItemRow(
+  item,
+  minQuantity,
+  saveQuantity,
+  deleteHandler,
+  afterSaveQuantity=null,
+  itemNameClickHandler=null
+){
+  const row=
+    document.createElement('div');
+
+  row.className='item-row db-row';
+  row.dataset.id=item.id;
+
+  let name;
+
+  if(
+    typeof itemNameClickHandler===
+    'function'
+  ){
+    name=
+      document.createElement('button');
+
+    name.type='button';
+    name.className=
+      'clickable-item-name';
+
+    name.addEventListener(
+      'click',
+      itemNameClickHandler
+    );
+  }else{
+    name=
+      document.createElement('div');
+
+    name.className='item-name';
+  }
+
+  name.textContent=
+    item.item_name;
+
+  const control=
+    document.createElement('div');
+
+  control.className=
+    'qty-control';
+
+  const minus=
+    document.createElement('button');
+
+  const quantity=
+    document.createElement('input');
+
+  const plus=
+    document.createElement('button');
+
+  minus.type='button';
+  plus.type='button';
+
+  minus.className=
+    'qty-step-button';
+
+  plus.className=
+    'qty-step-button';
+
+  minus.textContent='−';
+  plus.textContent='+';
+
+  quantity.className='qty-input';
+  quantity.type='number';
+  quantity.min=String(minQuantity);
+  quantity.max='9999';
+  quantity.step='1';
+  quantity.inputMode='numeric';
+  quantity.value=item.quantity;
+  quantity.dataset.savedValue=
+    String(item.quantity);
+
+  const getQuantity=
+    ()=>getBoundedQuantity(
+      quantity,
+      minQuantity
+    );
+
+  const refresh=()=>{
+    const value=getQuantity();
+
+    minus.disabled=
+      value<=minQuantity;
+
+    plus.disabled=
+      value>=9999;
+  };
+
+  const save=async()=>{
+    const oldValue=
+      Number.parseInt(
+        quantity.dataset.savedValue,
+        10
+      );
+
+    const newValue=
+      getQuantity();
+
+    quantity.value=newValue;
+
+    if(newValue===oldValue){
+      refresh();
+      return;
+    }
+
+    minus.disabled=true;
+    plus.disabled=true;
+    quantity.disabled=true;
+
+    let okay=false;
+
+    try{
+      await saveQuantity(
+        newValue
+      );
+
+      quantity.dataset.savedValue=
+        String(newValue);
+
+      okay=true;
+    }catch(error){
+      console.error(error);
+
+      quantity.value=
+        oldValue;
+
+      showToast(
+        'Could not update the quantity.',
+        true
+      );
+    }
+
+    quantity.disabled=false;
+    refresh();
+
+    if(!okay)return;
+
+    const handled=
+      typeof afterSaveQuantity===
+      'function'&&
+      afterSaveQuantity(
+        oldValue,
+        newValue
+      )===true;
+
+    if(!handled){
+      showToast(
+        'Quantity updated.'
+      );
+    }
+  };
+
+  minus.addEventListener(
+    'click',
+    async()=>{
+      const value=getQuantity();
+
+      if(value<=minQuantity){
+        return;
+      }
+
+      quantity.value=
+        value-1;
+
+      await save();
+    }
+  );
+
+  plus.addEventListener(
+    'click',
+    async()=>{
+      const value=getQuantity();
+
+      if(value>=9999){
+        return;
+      }
+
+      quantity.value=
+        value+1;
+
+      await save();
+    }
+  );
+
+  quantity.addEventListener(
+    'focus',
+    ()=>quantity.select()
+  );
+
+  quantity.addEventListener(
+    'input',
+    refresh
+  );
+
+  quantity.addEventListener(
+    'change',
+    save
+  );
+
+  control.append(
+    minus,
+    quantity,
+    plus
+  );
+
+  refresh();
+
+  const del=
+    document.createElement('button');
+
+  del.type='button';
+  del.className='delete-button';
+  del.textContent='×';
+
+  del.addEventListener(
+    'click',
+    async()=>{
+      del.disabled=true;
+
+      await deleteHandler(
+        row,
+        del,
+        getQuantity()
+      );
+    }
+  );
+
+  row.append(
+    name,
+    control,
+    del
+  );
+
+  return row;
+}
+
+async function updateQuantity(table,id,quantity){
+  await api(
+    `/rest/v1/${table}?id=eq.${encodeURIComponent(id)}`,
+    {
+      method:'PATCH',
+      headers:{
+        Prefer:'return=minimal'
+      },
+      body:JSON.stringify({
+        quantity
+      })
+    }
+  );
+}
+
+async function deleteShoppingItem(
+  item,
+  row,
+  button,
+  currentQuantity
+){
+  try{
+    await api(
+      '/rest/v1/shopping_items?id=eq.'+
+      encodeURIComponent(
+        item.id
+      ),
+      {
+        method:'DELETE',
+        headers:{
+          Prefer:'return=minimal'
+        }
+      }
+    );
+
+    row.remove();
+
+    showUndoToast(
+      {
+        ...item,
+        quantity:currentQuantity
+      },
+      'shopping'
+    );
+
+    loadHomeCounts();
+
+    if(
+      !storeList.querySelector(
+        '.db-row'
+      )
+    ){
+      appendEmpty(
+        storeList,
+        currentStore==='sams_costco'
+          ? 'No other items on this list.'
+          : 'No items on this list.'
+      );
+    }
+  }catch(error){
+    console.error(error);
+
+    button.disabled=false;
+
+    showToast(
+      'Could not remove the item.',
+      true
+    );
+  }
 }
 
 function rebuildMoveStoreOptions(allowed,current){
-  moveStoreSelect.innerHTML='';const p=document.createElement('option');p.value='';p.textContent='Choose a new store';p.disabled=true;p.selected=true;moveStoreSelect.appendChild(p);
-  allowed.forEach(store=>{if(store===current||!STORES[store])return;const o=document.createElement('option');o.value=store;o.textContent=STORES[store];moveStoreSelect.appendChild(o)});
-}
-async function loadShoppingItemForMove(id){
-  movingShoppingItem=null;moveItemName.textContent='Loading…';moveCurrentStore.textContent='Loading…';moveStoreSelect.innerHTML='';saveMoveButton.disabled=true;
-  try{
-    const data=await api('/rest/v1/shopping_items?select=id,item_name,quantity,store&id=eq.'+encodeURIComponent(id)+'&limit=1');if(!Array.isArray(data)||!data.length){showToast('That shopping item no longer exists.',true);goHome();return}
-    const item=data[0],rows=await fetchRestrictionRows(),allowed=getAllowedStoresForItemName(item.item_name,rows);if(!Array.isArray(allowed)||allowed.length<=1){showToast(`${item.item_name} is locked to its store.`,true);goStore(item.store);return}
-    movingShoppingItem={...item,allowedStores:allowed};moveItemName.textContent=item.item_name;moveCurrentStore.textContent=STORES[item.store]||item.store;rebuildMoveStoreOptions(allowed,item.store);saveMoveButton.disabled=false;
-  }catch(error){console.error(error);showToast('Could not load this item.',true);goHome()}
-}
-moveShoppingForm.addEventListener('submit',async event=>{
-  event.preventDefault();if(!movingShoppingItem)return;const newStore=moveStoreSelect.value;if(!newStore||!STORES[newStore]){showToast('Please choose a new store.',true);moveStoreSelect.focus();return}
-  const itemName=movingShoppingItem.item_name;saveMoveButton.disabled=true;saveMoveButton.textContent='Moving…';
-  try{
-    const result=unwrapRpcResult(await api('/rest/v1/rpc/move_shopping_item',{method:'POST',body:JSON.stringify({p_id:movingShoppingItem.id,p_new_store:newStore})}));
-    if(result?.moved===true){loadHomeCounts();goStore(newStore);setTimeout(()=>showToast(`${itemName} moved to ${STORES[newStore]}.`),80);return}
-    if(result?.reason==='locked_to_store'){showToast(`${itemName} is restricted to one store and cannot be moved.`,true);return}
-    if(result?.reason==='restricted'){showToast(`${itemName} cannot be moved to that store.`,true);return}
-    if(result?.reason==='not_found'){showToast('That item no longer exists.',true);goHome();return}
-    showToast('Could not move the item.',true);
-  }catch(error){console.error(error);showToast('Could not move the item.',true)}finally{saveMoveButton.disabled=false;saveMoveButton.textContent='Move Item'}
-});
+  moveStoreSelect.innerHTML='';
 
-function renderInventoryCategories(){inventoryCategoryButtons.innerHTML='';Object.entries(INVENTORY_CATEGORIES).forEach(([key,label])=>{const b=document.createElement('button');b.className='main-button category-button';b.type='button';b.textContent=label;b.addEventListener('click',()=>goInventoryCategory(key));inventoryCategoryButtons.appendChild(b)})}
-async function loadInventoryItems(quiet=false){
-  if(!currentInventoryCategory)return;const categoryAtStart=currentInventoryCategory;if(!quiet)inventoryList.innerHTML='<div class="loading-state">Loading…</div>';
-  try{const data=await api('/rest/v1/inventory_items?select=id,item_name,quantity,category&category=eq.'+encodeURIComponent(categoryAtStart));if(currentInventoryCategory!==categoryAtStart)return;renderInventoryList(sortByName(Array.isArray(data)?data:[]))}catch(error){console.error(error);if(!quiet&&currentInventoryCategory===categoryAtStart)inventoryList.innerHTML='<div class="error-state">Could not load this inventory. Please try again.</div>'}
+  const placeholder=
+    document.createElement('option');
+
+  placeholder.value='';
+  placeholder.textContent=
+    'Choose a new store';
+
+  placeholder.disabled=true;
+  placeholder.selected=true;
+
+  moveStoreSelect.appendChild(
+    placeholder
+  );
+
+  allowed.forEach(store=>{
+    if(
+      store===current||
+      !STORES[store]
+    ){
+      return;
+    }
+
+    const option=
+      document.createElement('option');
+
+    option.value=store;
+    option.textContent=
+      STORES[store];
+
+    moveStoreSelect.appendChild(
+      option
+    );
+  });
 }
-function renderInventoryList(items){inventoryList.innerHTML='';items.forEach(item=>inventoryList.appendChild(createInventoryItemRow(item)));if(!items.length)appendEmpty(inventoryList,'No items in this category yet.')}
-inventoryAddForm.addEventListener('submit',async event=>{
-  event.preventDefault();const itemName=normalizeItemName(inventoryItemName.value),quantity=getInventoryAddQuantity(),category=currentInventoryCategory;if(!itemName){showToast('Please enter an item.',true);inventoryItemName.focus();return}if(!category||!INVENTORY_CATEGORIES[category]){showToast('Inventory category not found.',true);return}
-  saveInventoryItemButton.disabled=true;saveInventoryItemButton.textContent='Adding…';
+
+async function loadShoppingItemForMove(id){
+  movingShoppingItem=null;
+
+  moveItemName.textContent=
+    'Loading…';
+
+  moveCurrentStore.textContent=
+    'Loading…';
+
+  moveStoreSelect.innerHTML='';
+
+  saveMoveButton.disabled=true;
+
   try{
-    const result=unwrapRpcResult(await api('/rest/v1/rpc/add_inventory_item',{method:'POST',body:JSON.stringify({p_item_name:itemName,p_quantity:quantity,p_category:category})}));
-    if(result?.added===false&&result.reason==='duplicate'){showToast(`${itemName} is already in ${INVENTORY_CATEGORIES[result.existing_category]||'Inventory'}.`,true);return}
-    if(result?.added===true){invalidateMasterItems();invalidateInventorySearch();inventoryItemName.value='';hideSuggestions(inventoryItemSuggestions);setInventoryAddQuantity(1);showToast(`${itemName} added to ${INVENTORY_CATEGORIES[category]}.`);inventoryItemName.focus();return}
-    showToast('Could not add the inventory item.',true);
-  }catch(error){console.error(error);showToast('Could not add the inventory item.',true)}finally{saveInventoryItemButton.disabled=false;saveInventoryItemButton.textContent='Add to Inventory'}
-});
-async function deleteInventoryItem(item,row,button,currentQuantity){
-  try{await api('/rest/v1/inventory_items?id=eq.'+encodeURIComponent(item.id),{method:'DELETE',headers:{Prefer:'return=minimal'}});invalidateInventorySearch();row.remove();showUndoToast({...item,quantity:currentQuantity},'inventory');if(!inventoryList.querySelector('.db-row'))appendEmpty(inventoryList,'No items in this category yet.')}catch(error){console.error(error);button.disabled=false;showToast('Could not remove the inventory item.',true)}
+    const data=await api(
+      '/rest/v1/shopping_items?select=id,item_name,quantity,store&id=eq.'+
+      encodeURIComponent(id)+
+      '&limit=1'
+    );
+
+    if(
+      !Array.isArray(data)||
+      !data.length
+    ){
+      showToast(
+        'That shopping item no longer exists.',
+        true
+      );
+
+      goHome();
+      return;
+    }
+
+    const item=data[0];
+
+    const rows=
+      await fetchRestrictionRows();
+
+    const allowed=
+      getAllowedStoresForItemName(
+        item.item_name,
+        rows
+      );
+
+    if(
+      !Array.isArray(allowed)||
+      allowed.length<=1
+    ){
+      showToast(
+        `${item.item_name} is locked to its store.`,
+        true
+      );
+
+      goStore(item.store);
+      return;
+    }
+
+    movingShoppingItem={
+      ...item,
+      allowedStores:allowed
+    };
+
+    moveItemName.textContent=
+      item.item_name;
+
+    moveCurrentStore.textContent=
+      STORES[item.store]||
+      item.store;
+
+    rebuildMoveStoreOptions(
+      allowed,
+      item.store
+    );
+
+    saveMoveButton.disabled=false;
+  }catch(error){
+    console.error(error);
+
+    showToast(
+      'Could not load this item.',
+      true
+    );
+
+    goHome();
+  }
+}
+
+moveShoppingForm.addEventListener(
+  'submit',
+  async event=>{
+    event.preventDefault();
+
+    if(!movingShoppingItem){
+      return;
+    }
+
+    const newStore=
+      moveStoreSelect.value;
+
+    if(
+      !newStore||
+      !STORES[newStore]
+    ){
+      showToast(
+        'Please choose a new store.',
+        true
+      );
+
+      moveStoreSelect.focus();
+
+      return;
+    }
+
+    const itemName=
+      movingShoppingItem.item_name;
+
+    saveMoveButton.disabled=true;
+    saveMoveButton.textContent=
+      'Moving…';
+
+    try{
+      const result=
+        unwrapRpcResult(
+          await api(
+            '/rest/v1/rpc/move_shopping_item',
+            {
+              method:'POST',
+              body:JSON.stringify({
+                p_id:movingShoppingItem.id,
+                p_new_store:newStore
+              })
+            }
+          )
+        );
+
+      if(result?.moved===true){
+        loadHomeCounts();
+
+        goStore(newStore);
+
+        setTimeout(
+          ()=>{
+            showToast(
+              `${itemName} moved to ${STORES[newStore]}.`
+            );
+          },
+          80
+        );
+
+        return;
+      }
+
+      if(
+        result?.reason===
+        'locked_to_store'
+      ){
+        showToast(
+          `${itemName} is restricted to one store and cannot be moved.`,
+          true
+        );
+
+        return;
+      }
+
+      if(
+        result?.reason===
+        'restricted'
+      ){
+        showToast(
+          `${itemName} cannot be moved to that store.`,
+          true
+        );
+
+        return;
+      }
+
+      if(
+        result?.reason===
+        'not_found'
+      ){
+        showToast(
+          'That item no longer exists.',
+          true
+        );
+
+        goHome();
+
+        return;
+      }
+
+      showToast(
+        'Could not move the item.',
+        true
+      );
+    }catch(error){
+      console.error(error);
+
+      showToast(
+        'Could not move the item.',
+        true
+      );
+    }finally{
+      saveMoveButton.disabled=false;
+      saveMoveButton.textContent=
+        'Move Item';
+    }
+  }
+);
+
+function renderInventoryCategories(){
+  inventoryCategoryButtons.innerHTML='';
+
+  Object
+    .entries(INVENTORY_CATEGORIES)
+    .forEach(
+      ([key,label])=>{
+        const button=
+          document.createElement(
+            'button'
+          );
+
+        button.className=
+          'main-button category-button';
+
+        button.type='button';
+        button.textContent=label;
+
+        button.addEventListener(
+          'click',
+          ()=>goInventoryCategory(
+            key
+          )
+        );
+
+        inventoryCategoryButtons
+          .appendChild(button);
+      }
+    );
+}
+
+async function loadInventoryItems(quiet=false){
+  if(!currentInventoryCategory){
+    return;
+  }
+
+  const categoryAtStart=
+    currentInventoryCategory;
+
+  if(!quiet){
+    inventoryList.innerHTML=
+      '<div class="loading-state">Loading…</div>';
+  }
+
+  try{
+    const data=await api(
+      '/rest/v1/inventory_items?select=id,item_name,quantity,category&category=eq.'+
+      encodeURIComponent(
+        categoryAtStart
+      )
+    );
+
+    if(
+      currentInventoryCategory!==
+      categoryAtStart
+    ){
+      return;
+    }
+
+    renderInventoryList(
+      sortByName(
+        Array.isArray(data)
+          ? data
+          : []
+      )
+    );
+  }catch(error){
+    console.error(error);
+
+    if(
+      !quiet&&
+      currentInventoryCategory===
+      categoryAtStart
+    ){
+      inventoryList.innerHTML=
+        '<div class="error-state">Could not load this inventory. Please try again.</div>';
+    }
+  }
+}
+
+function renderInventoryList(items){
+  inventoryList.innerHTML='';
+
+  items.forEach(item=>{
+    inventoryList.appendChild(
+      createInventoryItemRow(
+        item
+      )
+    );
+  });
+
+  if(!items.length){
+    appendEmpty(
+      inventoryList,
+      'No items in this category yet.'
+    );
+  }
+}
+
+inventoryAddForm.addEventListener(
+  'submit',
+  async event=>{
+    event.preventDefault();
+
+    const itemName=
+      normalizeItemName(
+        inventoryItemName.value
+      );
+
+    const quantity=
+      getInventoryAddQuantity();
+
+    const category=
+      currentInventoryCategory;
+
+    if(!itemName){
+      showToast(
+        'Please enter an item.',
+        true
+      );
+
+      inventoryItemName.focus();
+
+      return;
+    }
+
+    if(
+      !category||
+      !INVENTORY_CATEGORIES[
+        category
+      ]
+    ){
+      showToast(
+        'Inventory category not found.',
+        true
+      );
+
+      return;
+    }
+
+    saveInventoryItemButton.disabled=true;
+
+    saveInventoryItemButton.textContent=
+      'Adding…';
+
+    try{
+      const result=
+        unwrapRpcResult(
+          await api(
+            '/rest/v1/rpc/add_inventory_item',
+            {
+              method:'POST',
+              body:JSON.stringify({
+                p_item_name:itemName,
+                p_quantity:quantity,
+                p_category:category
+              })
+            }
+          )
+        );
+
+      if(
+        result?.added===false&&
+        result.reason==='duplicate'
+      ){
+        showToast(
+          `${itemName} is already in ${INVENTORY_CATEGORIES[result.existing_category]||'Inventory'}.`,
+          true
+        );
+
+        return;
+      }
+
+      if(result?.added===true){
+        invalidateMasterItems();
+        invalidateInventorySearch();
+
+        inventoryItemName.value='';
+
+        hideSuggestions(
+          inventoryItemSuggestions
+        );
+
+        setInventoryAddQuantity(1);
+
+        showToast(
+          `${itemName} added to ${INVENTORY_CATEGORIES[category]}.`
+        );
+
+        inventoryItemName.focus();
+
+        return;
+      }
+
+      showToast(
+        'Could not add the inventory item.',
+        true
+      );
+    }catch(error){
+      console.error(error);
+
+      showToast(
+        'Could not add the inventory item.',
+        true
+      );
+    }finally{
+      saveInventoryItemButton.disabled=false;
+
+      saveInventoryItemButton.textContent=
+        'Add to Inventory';
+    }
+  }
+);
+
+async function deleteInventoryItem(
+  item,
+  row,
+  button,
+  currentQuantity
+){
+  try{
+    await api(
+      '/rest/v1/inventory_items?id=eq.'+
+      encodeURIComponent(
+        item.id
+      ),
+      {
+        method:'DELETE',
+        headers:{
+          Prefer:'return=minimal'
+        }
+      }
+    );
+
+    invalidateInventorySearch();
+
+    row.remove();
+
+    showUndoToast(
+      {
+        ...item,
+        quantity:currentQuantity
+      },
+      'inventory'
+    );
+
+    if(
+      !inventoryList.querySelector(
+        '.db-row'
+      )
+    ){
+      appendEmpty(
+        inventoryList,
+        'No items in this category yet.'
+      );
+    }
+  }catch(error){
+    console.error(error);
+
+    button.disabled=false;
+
+    showToast(
+      'Could not remove the inventory item.',
+      true
+    );
+  }
 }
 
 /* ADD MASTER ITEM */
-masterAddForm.addEventListener('submit',async event=>{
-  event.preventDefault();
-  const itemName=normalizeItemName(masterAddItemName.value);
-  if(!itemName){showToast('Please enter an item.',true);masterAddItemName.focus();return}
-  if(normalizedKey(itemName)==='case of water'){showToast('Case of Water is already a permanent shopping item.',true);return}
-  saveMasterItemButton.disabled=true;saveMasterItemButton.textContent='Adding…';
-  try{
-    const items=await fetchMasterItems(true);
-    if(items.some(item=>normalizedKey(item.item_name)===normalizedKey(itemName))){showToast(`${itemName} is already in the Master List.`,true);return}
-    const result=unwrapRpcResult(await api('/rest/v1/rpc/remember_master_item',{method:'POST',body:JSON.stringify({p_item_name:itemName})}));
-    if(result?.remembered===false){
-      if(result.reason==='empty'||result.reason==='too_long'){showToast('Please enter a valid item name.',true);return}
-      showToast('Could not add the item to the Master List.',true);return;
+
+masterAddForm.addEventListener(
+  'submit',
+  async event=>{
+    event.preventDefault();
+
+    const itemName=
+      normalizeItemName(
+        masterAddItemName.value
+      );
+
+    if(!itemName){
+      showToast(
+        'Please enter an item.',
+        true
+      );
+
+      masterAddItemName.focus();
+
+      return;
     }
-    invalidateMasterItems();
-    goMasterList();
-    setTimeout(()=>showToast(`${itemName} added to the Master List.`),80);
-  }catch(error){console.error(error);showToast('Could not add the item to the Master List.',true)}finally{saveMasterItemButton.disabled=false;saveMasterItemButton.textContent='Add to Master List'}
-});
+
+    if(
+      normalizedKey(itemName)===
+      'case of water'
+    ){
+      showToast(
+        'Case of Water is already a permanent shopping item.',
+        true
+      );
+
+      return;
+    }
+
+    saveMasterItemButton.disabled=true;
+    saveMasterItemButton.textContent=
+      'Adding…';
+
+    try{
+      const items=
+        await fetchMasterItems(true);
+
+      if(
+        items.some(
+          item=>
+            normalizedKey(
+              item.item_name
+            )===
+            normalizedKey(
+              itemName
+            )
+        )
+      ){
+        showToast(
+          `${itemName} is already in the Master List.`,
+          true
+        );
+
+        return;
+      }
+
+      const result=
+        unwrapRpcResult(
+          await api(
+            '/rest/v1/rpc/remember_master_item',
+            {
+              method:'POST',
+              body:JSON.stringify({
+                p_item_name:itemName
+              })
+            }
+          )
+        );
+
+      if(result?.remembered===false){
+        if(
+          result.reason==='empty'||
+          result.reason==='too_long'
+        ){
+          showToast(
+            'Please enter a valid item name.',
+            true
+          );
+
+          return;
+        }
+
+        showToast(
+          'Could not add the item to the Master List.',
+          true
+        );
+
+        return;
+      }
+
+      invalidateMasterItems();
+
+      goMasterList();
+
+      setTimeout(
+        ()=>{
+          showToast(
+            `${itemName} added to the Master List.`
+          );
+        },
+        80
+      );
+    }catch(error){
+      console.error(error);
+
+      showToast(
+        'Could not add the item to the Master List.',
+        true
+      );
+    }finally{
+      saveMasterItemButton.disabled=false;
+
+      saveMasterItemButton.textContent=
+        'Add to Master List';
+    }
+  }
+);
 
 /* MASTER LIST */
+
 async function fetchInventoryQuantityMap(){
-  const data=await api('/rest/v1/inventory_items?select=item_name,quantity');
-  const quantities=new Map();
-  (Array.isArray(data)?data:[]).forEach(item=>{
-    quantities.set(normalizedKey(item.item_name),Number(item.quantity)||0);
+  const data=await api(
+    '/rest/v1/inventory_items?select=item_name,quantity'
+  );
+
+  const quantities=
+    new Map();
+
+  (
+    Array.isArray(data)
+      ? data
+      : []
+  ).forEach(item=>{
+    quantities.set(
+      normalizedKey(
+        item.item_name
+      ),
+      Number(
+        item.quantity
+      )||0
+    );
   });
+
   return quantities;
 }
+
 async function loadMasterList(){
-  masterList.innerHTML='<div class="loading-state">Loading…</div>';
+  masterList.innerHTML=
+    '<div class="loading-state">Loading…</div>';
+
   try{
-    const [items,inventoryQuantities,restrictionRows]=await Promise.all([fetchMasterItems(true),fetchInventoryQuantityMap(),fetchRestrictionRows()]);
-    const restrictedItems=new Set(restrictionRows.map(row=>normalizedKey(row.item_name)));
-    renderMasterList(items,inventoryQuantities,restrictedItems);
-  }catch(error){console.error(error);masterList.innerHTML='<div class="error-state">Could not load the Master List.</div>'}
+    const [
+      items,
+      inventoryQuantities,
+      restrictionRows
+    ]=await Promise.all([
+      fetchMasterItems(true),
+      fetchInventoryQuantityMap(),
+      fetchRestrictionRows()
+    ]);
+
+    const restrictedItems=
+      new Set(
+        restrictionRows.map(
+          row=>
+            normalizedKey(
+              row.item_name
+            )
+        )
+      );
+
+    renderMasterList(
+      items,
+      inventoryQuantities,
+      restrictedItems
+    );
+  }catch(error){
+    console.error(error);
+
+    masterList.innerHTML=
+      '<div class="error-state">Could not load the Master List.</div>';
+  }
 }
-function renderMasterList(items,inventoryQuantities,restrictedItems){
-  masterList.innerHTML='';if(!items.length){appendEmpty(masterList,'No items have been remembered yet.');return}
+
+function renderMasterList(
+  items,
+  inventoryQuantities,
+  restrictedItems
+){
+  masterList.innerHTML='';
+
+  if(!items.length){
+    appendEmpty(
+      masterList,
+      'No items have been remembered yet.'
+    );
+
+    return;
+  }
+
   items.forEach(item=>{
-    const row=document.createElement('div');row.className='master-row';if(restrictedItems.has(normalizedKey(item.item_name)))row.classList.add('has-restriction');
-    const name=document.createElement('button');name.type='button';name.className='master-name-button';name.textContent=item.item_name;name.addEventListener('click',()=>goMasterRestriction(item.item_name));
-    const quantity=document.createElement('div');quantity.className='master-qty';const inventoryQuantity=inventoryQuantities.get(normalizedKey(item.item_name))||0;quantity.textContent=inventoryQuantity>0?String(inventoryQuantity):'';
-    const del=document.createElement('button');del.type='button';del.className='delete-button';del.textContent='×';del.setAttribute('aria-label',`Forget ${item.item_name}`);del.addEventListener('click',()=>forgetMasterItem(item,row,del));
-    row.append(name,quantity,del);masterList.appendChild(row);
+    const row=
+      document.createElement(
+        'div'
+      );
+
+    row.className=
+      'master-row';
+
+    if(
+      restrictedItems.has(
+        normalizedKey(
+          item.item_name
+        )
+      )
+    ){
+      row.classList.add(
+        'has-restriction'
+      );
+    }
+
+    const name=
+      document.createElement(
+        'button'
+      );
+
+    name.type='button';
+
+    name.className=
+      'master-name-button';
+
+    name.textContent=
+      item.item_name;
+
+    name.addEventListener(
+      'click',
+      ()=>{
+        goMasterRestriction(
+          item.item_name
+        );
+      }
+    );
+
+    const quantity=
+      document.createElement(
+        'div'
+      );
+
+    quantity.className=
+      'master-qty';
+
+    const inventoryQuantity=
+      inventoryQuantities.get(
+        normalizedKey(
+          item.item_name
+        )
+      )||0;
+
+    quantity.textContent=
+      inventoryQuantity>0
+        ? String(
+            inventoryQuantity
+          )
+        : '';
+
+    const del=
+      document.createElement(
+        'button'
+      );
+
+    del.type='button';
+    del.className='delete-button';
+    del.textContent='×';
+
+    del.setAttribute(
+      'aria-label',
+      `Forget ${item.item_name}`
+    );
+
+    del.addEventListener(
+      'click',
+      ()=>{
+        forgetMasterItem(
+          item,
+          row,
+          del
+        );
+      }
+    );
+
+    row.append(
+      name,
+      quantity,
+      del
+    );
+
+    masterList.appendChild(
+      row
+    );
   });
 }
+
 function describeMasterUsage(result){
-  const places=[];if(result.shopping)places.push('a shopping list');if(result.inventory)places.push('Inventory');if(result.restriction)places.push('store restrictions');
-  if(!places.length)return'it is still being used';if(places.length===1)return`it is still in ${places[0]}`;if(places.length===2)return`it is still in ${places[0]} and ${places[1]}`;return`it is still in ${places[0]}, ${places[1]}, and ${places[2]}`;
+  const places=[];
+
+  if(result.shopping){
+    places.push(
+      'a shopping list'
+    );
+  }
+
+  if(result.inventory){
+    places.push(
+      'Inventory'
+    );
+  }
+
+  if(result.restriction){
+    places.push(
+      'store restrictions'
+    );
+  }
+
+  if(!places.length){
+    return 'it is still being used';
+  }
+
+  if(places.length===1){
+    return `it is still in ${places[0]}`;
+  }
+
+  if(places.length===2){
+    return `it is still in ${places[0]} and ${places[1]}`;
+  }
+
+  return `it is still in ${places[0]}, ${places[1]}, and ${places[2]}`;
 }
-async function forgetMasterItem(item,row,button){
-  if(!window.confirm(`Forget ${item.item_name} completely?\n\nIt will no longer appear in autocomplete.`))return;
+
+async function forgetMasterItem(
+  item,
+  row,
+  button
+){
+  if(
+    !window.confirm(
+      `Forget ${item.item_name} completely?\n\nIt will no longer appear in autocomplete.`
+    )
+  ){
+    return;
+  }
+
   button.disabled=true;
+
   try{
-    const result=unwrapRpcResult(await api('/rest/v1/rpc/forget_master_item',{method:'POST',body:JSON.stringify({p_item_name:item.item_name})}));
-    if(result?.forgotten===true){row.remove();invalidateMasterItems();showToast(`${item.item_name} removed from the Master List.`);if(!masterList.querySelector('.master-row'))appendEmpty(masterList,'No items have been remembered yet.');return}
-    if(result?.reason==='in_use'){showToast(`${item.item_name} cannot be forgotten because ${describeMasterUsage(result)}.`,true,4500);return}
-    if(result?.reason==='not_found'){row.remove();invalidateMasterItems();showToast(`${item.item_name} was already removed.`);return}
-    showToast(`Could not forget ${item.item_name}.`,true);
-  }catch(error){console.error(error);showToast(`Could not forget ${item.item_name}.`,true)}finally{button.disabled=false}
+    const result=
+      unwrapRpcResult(
+        await api(
+          '/rest/v1/rpc/forget_master_item',
+          {
+            method:'POST',
+            body:JSON.stringify({
+              p_item_name:item.item_name
+            })
+          }
+        )
+      );
+
+    if(
+      result?.forgotten===true
+    ){
+      row.remove();
+
+      invalidateMasterItems();
+
+      showToast(
+        `${item.item_name} removed from the Master List.`
+      );
+
+      if(
+        !masterList.querySelector(
+          '.master-row'
+        )
+      ){
+        appendEmpty(
+          masterList,
+          'No items have been remembered yet.'
+        );
+      }
+
+      return;
+    }
+
+    if(
+      result?.reason==='in_use'
+    ){
+      showToast(
+        `${item.item_name} cannot be forgotten because ${describeMasterUsage(result)}.`,
+        true,
+        4500
+      );
+
+      return;
+    }
+
+    if(
+      result?.reason==='not_found'
+    ){
+      row.remove();
+      invalidateMasterItems();
+
+      showToast(
+        `${item.item_name} was already removed.`
+      );
+
+      return;
+    }
+
+    showToast(
+      `Could not forget ${item.item_name}.`,
+      true
+    );
+  }catch(error){
+    console.error(error);
+
+    showToast(
+      `Could not forget ${item.item_name}.`,
+      true
+    );
+  }finally{
+    button.disabled=false;
+  }
 }
 
 /* RESTRICTIONS */
+
 function groupRestrictions(rows){
-  const grouped=new Map();rows.forEach(row=>{const key=normalizedKey(row.item_name);if(!grouped.has(key))grouped.set(key,{item_name:row.item_name,allowed_stores:[]});const item=grouped.get(key);if(!item.allowed_stores.includes(row.allowed_store))item.allowed_stores.push(row.allowed_store)});return sortByName(Array.from(grouped.values()));
+  const grouped=
+    new Map();
+
+  rows.forEach(row=>{
+    const key=
+      normalizedKey(
+        row.item_name
+      );
+
+    if(!grouped.has(key)){
+      grouped.set(
+        key,
+        {
+          item_name:row.item_name,
+          allowed_stores:[]
+        }
+      );
+    }
+
+    const item=
+      grouped.get(key);
+
+    if(
+      !item.allowed_stores.includes(
+        row.allowed_store
+      )
+    ){
+      item.allowed_stores.push(
+        row.allowed_store
+      );
+    }
+  });
+
+  return sortByName(
+    Array.from(
+      grouped.values()
+    )
+  );
 }
-function renderRestrictionStores(){restrictionStoreButtons.innerHTML='';Object.entries(STORES).forEach(([key,label])=>{const b=document.createElement('button');b.type='button';b.className='main-button category-button';b.textContent=label;b.addEventListener('click',()=>goRestrictionStore(key));restrictionStoreButtons.appendChild(b)})}
-function createRestrictionRow(item){
-  const button=document.createElement('button'),wrap=document.createElement('div'),name=document.createElement('div'),stores=document.createElement('div'),chevron=document.createElement('div');button.type='button';button.className='restriction-row';name.className='restriction-name';name.textContent=item.item_name;stores.className='restriction-stores';stores.textContent=Object.keys(STORES).filter(s=>item.allowed_stores.includes(s)).map(s=>STORES[s]).join(' • ');wrap.append(name,stores);chevron.className='restriction-chevron';chevron.textContent='›';button.append(wrap,chevron);button.addEventListener('click',()=>goEditRestriction(item.item_name,location.hash));return button;
-}
-async function loadRestrictions(){restrictionList.innerHTML='<div class="loading-state">Loading…</div>';try{renderRestrictions(groupRestrictions(await fetchRestrictionRows()))}catch(error){console.error(error);restrictionList.innerHTML='<div class="error-state">Could not load restrictions.</div>'}}
-function renderRestrictions(items){restrictionList.innerHTML='';if(!items.length){appendEmpty(restrictionList,'No restricted items yet.');return}items.forEach(item=>restrictionList.appendChild(createRestrictionRow(item)))}
-async function loadRestrictionsByStore(store){
-  restrictionStoreList.innerHTML='<div class="loading-state">Loading…</div>';try{const items=groupRestrictions(await fetchRestrictionRows()).filter(item=>item.allowed_stores.includes(store));if(currentRestrictionStore!==store)return;renderRestrictionsByStore(items)}catch(error){console.error(error);if(currentRestrictionStore===store)restrictionStoreList.innerHTML='<div class="error-state">Could not load restrictions for this store.</div>'}
-}
-function renderRestrictionsByStore(items){restrictionStoreList.innerHTML='';if(!items.length){appendEmpty(restrictionStoreList,'No restricted items are assigned to this store.');return}items.forEach(item=>restrictionStoreList.appendChild(createRestrictionRow(item)))}
-function clearRestrictionChecks(){document.querySelectorAll('input[name="allowedStore"]').forEach(c=>c.checked=false)}
-function clearRestrictionForm(){editingRestrictionOriginalName=null;restrictionFromMaster=false;restrictionItemName.readOnly=false;restrictionItemName.value='';hideSuggestions(restrictionItemSuggestions);clearRestrictionChecks();deleteRestrictionButton.hidden=true;addRestrictionItemToShoppingButton.hidden=true;saveRestrictionButton.disabled=false;saveRestrictionButton.textContent='Save Restriction'}
-async function loadRestrictionForEdit(itemName){
-  restrictionItemName.readOnly=false;restrictionItemName.value='';hideSuggestions(restrictionItemSuggestions);clearRestrictionChecks();deleteRestrictionButton.hidden=true;addRestrictionItemToShoppingButton.hidden=true;
-  try{
-    const rows=await fetchRestrictionRows(),key=normalizedKey(itemName),matches=rows.filter(r=>normalizedKey(r.item_name)===key);if(!matches.length){showToast('That restriction no longer exists.',true);goRestrictionReturn();return}
-    const display=matches[0].item_name;editingRestrictionOriginalName=display;restrictionItemName.value=display;addRestrictionItemToShoppingButton.hidden=false;matches.forEach(r=>{const c=document.querySelector(`input[name="allowedStore"][value="${r.allowed_store}"]`);if(c)c.checked=true});deleteRestrictionButton.hidden=false;
-  }catch(error){console.error(error);showToast('Could not load this restriction.',true);goRestrictionReturn()}
-}
-async function loadMasterItemRestriction(itemName){
-  const originalName=normalizeItemName(itemName);
-  restrictionItemName.readOnly=false;restrictionItemName.value=originalName;hideSuggestions(restrictionItemSuggestions);clearRestrictionChecks();deleteRestrictionButton.hidden=true;addRestrictionItemToShoppingButton.hidden=false;editingRestrictionOriginalName=originalName;saveRestrictionButton.textContent='Save Changes';
-  try{
-    const rows=await fetchRestrictionRows(),key=normalizedKey(originalName),matches=rows.filter(r=>normalizedKey(r.item_name)===key);if(matches.length){matches.forEach(r=>{const c=document.querySelector(`input[name="allowedStore"][value="${r.allowed_store}"]`);if(c)c.checked=true});deleteRestrictionButton.hidden=false}
-  }catch(error){console.error(error);showToast('Could not load this item’s restrictions.',true);goMasterList()}
-}
-function getCheckedStores(){return Array.from(document.querySelectorAll('input[name="allowedStore"]:checked')).map(c=>c.value)}
-addRestrictionItemToShoppingButton.addEventListener('click',()=>{
-  const itemName=normalizeItemName(editingRestrictionOriginalName||restrictionItemName.value);
-  if(!itemName){showToast('Please enter an item first.',true);return}
-  goAddWithItem(itemName);
-});
-restrictionForm.addEventListener('submit',async event=>{
-  event.preventDefault();const itemName=normalizeItemName(restrictionItemName.value),allowedStores=getCheckedStores();if(!itemName){showToast('Please enter an item.',true);restrictionItemName.focus();return}if(normalizedKey(itemName)==='case of water'){showToast('Case of Water is permanently assigned to Sam’s / CostCo.',true);return}if(!restrictionFromMaster&&!allowedStores.length){showToast('Choose at least one allowed store.',true);return}
-  saveRestrictionButton.disabled=true;saveRestrictionButton.textContent='Saving…';
-  try{
-    let result;
-    if(restrictionFromMaster){
-      result=unwrapRpcResult(await api('/rest/v1/rpc/save_master_item_details',{method:'POST',body:JSON.stringify({p_original_item_name:editingRestrictionOriginalName,p_item_name:itemName,p_allowed_stores:allowedStores})}));
-      if(result?.saved===false){
-        if(result.reason==='duplicate'){showToast(`${itemName} already exists.`,true);return}
-        if(result.reason==='protected_name'){showToast('Case of Water cannot be renamed.',true);return}
-        if(result.reason==='not_found'){showToast('That Master List item no longer exists.',true);goMasterList();return}
-        if(result.reason==='item_on_disallowed_store'){showToast(`${itemName} is currently on the ${STORES[result.existing_store]||'another store'} list. Keep that store allowed or remove the item from that shopping list first.`,true);return}
-        if(result.reason==='invalid_name'){showToast('Please enter a valid item name.',true);return}
-        showToast('Could not save the item.',true);return;
+
+function renderRestrictionStores(){
+  restrictionStoreButtons.innerHTML='';
+
+  Object
+    .entries(STORES)
+    .forEach(
+      ([key,label])=>{
+        const button=
+          document.createElement(
+            'button'
+          );
+
+        button.type='button';
+
+        button.className=
+          'main-button category-button';
+
+        button.textContent=
+          label;
+
+        button.addEventListener(
+          'click',
+          ()=>{
+            goRestrictionStore(
+              key
+            );
+          }
+        );
+
+        restrictionStoreButtons
+          .appendChild(button);
       }
-      invalidateMasterItems();invalidateInventorySearch();goMasterList();setTimeout(()=>showToast(`${itemName} saved.`),80);return;
-    }
+    );
+}
 
-    result=unwrapRpcResult(await api('/rest/v1/rpc/save_item_store_restriction',{method:'POST',body:JSON.stringify({p_original_item_name:editingRestrictionOriginalName,p_item_name:itemName,p_allowed_stores:allowedStores})}));
-    if(result?.saved===false){
-      if(result.reason==='restriction_exists'){showToast('A restriction for that item already exists.',true);return}
-      if(result.reason==='item_on_disallowed_store'){showToast(`${itemName} is currently on the ${STORES[result.existing_store]||'another store'} list. Remove it from that list before applying this restriction.`,true);return}
-      if(result.reason==='no_stores'){showToast('Choose at least one allowed store.',true);return}
-      showToast('Could not save the restriction.',true);return;
+function createRestrictionRow(item){
+  const button=
+    document.createElement(
+      'button'
+    );
+
+  const wrap=
+    document.createElement(
+      'div'
+    );
+
+  const name=
+    document.createElement(
+      'div'
+    );
+
+  const stores=
+    document.createElement(
+      'div'
+    );
+
+  const chevron=
+    document.createElement(
+      'div'
+    );
+
+  button.type='button';
+
+  button.className=
+    'restriction-row';
+
+  name.className=
+    'restriction-name';
+
+  name.textContent=
+    item.item_name;
+
+  stores.className=
+    'restriction-stores';
+
+  stores.textContent=
+    Object
+      .keys(STORES)
+      .filter(
+        store=>
+          item.allowed_stores
+            .includes(store)
+      )
+      .map(
+        store=>STORES[store]
+      )
+      .join(' • ');
+
+  wrap.append(
+    name,
+    stores
+  );
+
+  chevron.className=
+    'restriction-chevron';
+
+  chevron.textContent='›';
+
+  button.append(
+    wrap,
+    chevron
+  );
+
+  button.addEventListener(
+    'click',
+    ()=>{
+      goEditRestriction(
+        item.item_name,
+        location.hash
+      );
     }
-    invalidateMasterItems();goRestrictionReturn();setTimeout(()=>showToast(`${itemName} restriction saved.`),80);
-  }catch(error){console.error(error);showToast(restrictionFromMaster?'Could not save the item.':'Could not save the restriction.',true)}finally{saveRestrictionButton.disabled=false;saveRestrictionButton.textContent=restrictionFromMaster?'Save Changes':'Save Restriction'}
-});
-deleteRestrictionButton.addEventListener('click',async()=>{
-  if(!editingRestrictionOriginalName)return;const itemName=editingRestrictionOriginalName;if(!window.confirm(`Delete the restriction for ${itemName}?`))return;deleteRestrictionButton.disabled=true;deleteRestrictionButton.textContent='Deleting…';
+  );
+
+  return button;
+}
+
+async function loadRestrictions(){
+  restrictionList.innerHTML=
+    '<div class="loading-state">Loading…</div>';
+
   try{
-    const result=unwrapRpcResult(await api('/rest/v1/rpc/delete_item_store_restriction',{method:'POST',body:JSON.stringify({p_item_name:itemName})}));if(!result||result.deleted!==true){showToast('Could not delete the restriction.',true);return}invalidateMasterItems();goRestrictionReturn();setTimeout(()=>showToast(`${itemName} restriction deleted.`),80);
-  }catch(error){console.error(error);showToast('Could not delete the restriction.',true)}finally{deleteRestrictionButton.disabled=false;deleteRestrictionButton.textContent='Delete Restriction'}
-});
+    renderRestrictions(
+      groupRestrictions(
+        await fetchRestrictionRows()
+      )
+    );
+  }catch(error){
+    console.error(error);
 
-window.addEventListener('hashchange',route);
-document.addEventListener('visibilitychange',()=>{
-  if(document.hidden)return;if(currentStore){loadStoreItems(true);return}if(currentInventoryCategory&&location.hash.startsWith('#inventory/')){loadInventoryItems(true);return}if(location.hash==='#inventory'){fetchInventorySearchItems(true).catch(error=>console.error(error));return}if(location.hash==='#master'){loadMasterList();return}if(location.hash==='#restrictions/items'){loadRestrictions();return}if(currentRestrictionStore&&location.hash.startsWith('#restrictions/store/')){loadRestrictionsByStore(currentRestrictionStore);return}if(location.hash==='#home')loadHomeCounts();
-});
-if(!location.hash)history.replaceState(null,'','#home');
+    restrictionList.innerHTML=
+      '<div class="error-state">Could not load restrictions.</div>';
+  }
+}
+
+function renderRestrictions(items){
+  restrictionList.innerHTML='';
+
+  if(!items.length){
+    appendEmpty(
+      restrictionList,
+      'No restricted items yet.'
+    );
+
+    return;
+  }
+
+  items.forEach(item=>{
+    restrictionList.appendChild(
+      createRestrictionRow(
+        item
+      )
+    );
+  });
+}
+
+async function loadRestrictionsByStore(store){
+  restrictionStoreList.innerHTML=
+    '<div class="loading-state">Loading…</div>';
+
+  try{
+    const items=
+      groupRestrictions(
+        await fetchRestrictionRows()
+      )
+      .filter(
+        item=>
+          item.allowed_stores
+            .includes(store)
+      );
+
+    if(
+      currentRestrictionStore!==
+      store
+    ){
+      return;
+    }
+
+    renderRestrictionsByStore(
+      items
+    );
+  }catch(error){
+    console.error(error);
+
+    if(
+      currentRestrictionStore===
+      store
+    ){
+      restrictionStoreList.innerHTML=
+        '<div class="error-state">Could not load restrictions for this store.</div>';
+    }
+  }
+}
+
+function renderRestrictionsByStore(items){
+  restrictionStoreList.innerHTML='';
+
+  if(!items.length){
+    appendEmpty(
+      restrictionStoreList,
+      'No restricted items are assigned to this store.'
+    );
+
+    return;
+  }
+
+  items.forEach(item=>{
+    restrictionStoreList
+      .appendChild(
+        createRestrictionRow(
+          item
+        )
+      );
+  });
+}
+
+function clearRestrictionChecks(){
+  document
+    .querySelectorAll(
+      'input[name="allowedStore"]'
+    )
+    .forEach(
+      checkbox=>{
+        checkbox.checked=false;
+      }
+    );
+}
+
+function clearRestrictionForm(){
+  editingRestrictionOriginalName=null;
+  restrictionFromMaster=false;
+  restrictionItemName.readOnly=false;
+  restrictionItemName.value='';
+
+  hideSuggestions(
+    restrictionItemSuggestions
+  );
+
+  clearRestrictionChecks();
+
+  deleteRestrictionButton.hidden=true;
+  addRestrictionItemToShoppingButton.hidden=true;
+
+  saveRestrictionButton.disabled=false;
+
+  saveRestrictionButton.textContent=
+    'Save Restriction';
+}
+
+async function loadRestrictionForEdit(itemName){
+  restrictionItemName.readOnly=false;
+  restrictionItemName.value='';
+
+  hideSuggestions(
+    restrictionItemSuggestions
+  );
+
+  clearRestrictionChecks();
+
+  deleteRestrictionButton.hidden=true;
+  addRestrictionItemToShoppingButton.hidden=true;
+
+  try{
+    const rows=
+      await fetchRestrictionRows();
+
+    const key=
+      normalizedKey(itemName);
+
+    const matches=
+      rows.filter(
+        row=>
+          normalizedKey(
+            row.item_name
+          )===key
+      );
+
+    if(!matches.length){
+      showToast(
+        'That restriction no longer exists.',
+        true
+      );
+
+      goRestrictionReturn();
+
+      return;
+    }
+
+    const display=
+      matches[0].item_name;
+
+    editingRestrictionOriginalName=
+      display;
+
+    restrictionItemName.value=
+      display;
+
+    addRestrictionItemToShoppingButton.hidden=false;
+
+    matches.forEach(row=>{
+      const checkbox=
+        document.querySelector(
+          `input[name="allowedStore"][value="${row.allowed_store}"]`
+        );
+
+      if(checkbox){
+        checkbox.checked=true;
+      }
+    });
+
+    deleteRestrictionButton.hidden=false;
+  }catch(error){
+    console.error(error);
+
+    showToast(
+      'Could not load this restriction.',
+      true
+    );
+
+    goRestrictionReturn();
+  }
+}
+
+async function loadMasterItemRestriction(itemName){
+  const originalName=
+    normalizeItemName(itemName);
+
+  restrictionItemName.readOnly=false;
+  restrictionItemName.value=
+    originalName;
+
+  hideSuggestions(
+    restrictionItemSuggestions
+  );
+
+  clearRestrictionChecks();
+
+  deleteRestrictionButton.hidden=true;
+  addRestrictionItemToShoppingButton.hidden=false;
+
+  editingRestrictionOriginalName=
+    originalName;
+
+  saveRestrictionButton.textContent=
+    'Save Changes';
+
+  try{
+    const rows=
+      await fetchRestrictionRows();
+
+    const key=
+      normalizedKey(
+        originalName
+      );
+
+    const matches=
+      rows.filter(
+        row=>
+          normalizedKey(
+            row.item_name
+          )===key
+      );
+
+    if(matches.length){
+      matches.forEach(row=>{
+        const checkbox=
+          document.querySelector(
+            `input[name="allowedStore"][value="${row.allowed_store}"]`
+          );
+
+        if(checkbox){
+          checkbox.checked=true;
+        }
+      });
+
+      deleteRestrictionButton.hidden=false;
+    }
+  }catch(error){
+    console.error(error);
+
+    showToast(
+      'Could not load this item’s restrictions.',
+      true
+    );
+
+    goMasterList();
+  }
+}
+
+function getCheckedStores(){
+  return Array
+    .from(
+      document.querySelectorAll(
+        'input[name="allowedStore"]:checked'
+      )
+    )
+    .map(
+      checkbox=>checkbox.value
+    );
+}
+
+addRestrictionItemToShoppingButton
+  .addEventListener(
+    'click',
+    ()=>{
+      const itemName=
+        normalizeItemName(
+          editingRestrictionOriginalName||
+          restrictionItemName.value
+        );
+
+      if(!itemName){
+        showToast(
+          'Please enter an item first.',
+          true
+        );
+
+        return;
+      }
+
+      goAddWithItem(
+        itemName,
+        restrictionFromMaster
+          ? '#master'
+          : null
+      );
+    }
+  );
+
+restrictionForm.addEventListener(
+  'submit',
+  async event=>{
+    event.preventDefault();
+
+    const itemName=
+      normalizeItemName(
+        restrictionItemName.value
+      );
+
+    const allowedStores=
+      getCheckedStores();
+
+    if(!itemName){
+      showToast(
+        'Please enter an item.',
+        true
+      );
+
+      restrictionItemName.focus();
+
+      return;
+    }
+
+    if(
+      normalizedKey(itemName)===
+      'case of water'
+    ){
+      showToast(
+        'Case of Water is permanently assigned to Sam’s / CostCo.',
+        true
+      );
+
+      return;
+    }
+
+    if(
+      !restrictionFromMaster&&
+      !allowedStores.length
+    ){
+      showToast(
+        'Choose at least one allowed store.',
+        true
+      );
+
+      return;
+    }
+
+    saveRestrictionButton.disabled=true;
+
+    saveRestrictionButton.textContent=
+      'Saving…';
+
+    try{
+      let result;
+
+      if(restrictionFromMaster){
+        result=
+          unwrapRpcResult(
+            await api(
+              '/rest/v1/rpc/save_master_item_details',
+              {
+                method:'POST',
+                body:JSON.stringify({
+                  p_original_item_name:
+                    editingRestrictionOriginalName,
+                  p_item_name:
+                    itemName,
+                  p_allowed_stores:
+                    allowedStores
+                })
+              }
+            )
+          );
+
+        if(result?.saved===false){
+          if(
+            result.reason===
+            'duplicate'
+          ){
+            showToast(
+              `${itemName} already exists.`,
+              true
+            );
+
+            return;
+          }
+
+          if(
+            result.reason===
+            'protected_name'
+          ){
+            showToast(
+              'Case of Water cannot be renamed.',
+              true
+            );
+
+            return;
+          }
+
+          if(
+            result.reason===
+            'not_found'
+          ){
+            showToast(
+              'That Master List item no longer exists.',
+              true
+            );
+
+            goMasterList();
+
+            return;
+          }
+
+          if(
+            result.reason===
+            'item_on_disallowed_store'
+          ){
+            showToast(
+              `${itemName} is currently on the ${STORES[result.existing_store]||'another store'} list. Keep that store allowed or remove the item from that shopping list first.`,
+              true
+            );
+
+            return;
+          }
+
+          if(
+            result.reason===
+            'invalid_name'
+          ){
+            showToast(
+              'Please enter a valid item name.',
+              true
+            );
+
+            return;
+          }
+
+          showToast(
+            'Could not save the item.',
+            true
+          );
+
+          return;
+        }
+
+        invalidateMasterItems();
+        invalidateInventorySearch();
+
+        goMasterList();
+
+        setTimeout(
+          ()=>{
+            showToast(
+              `${itemName} saved.`
+            );
+          },
+          80
+        );
+
+        return;
+      }
+
+      result=
+        unwrapRpcResult(
+          await api(
+            '/rest/v1/rpc/save_item_store_restriction',
+            {
+              method:'POST',
+              body:JSON.stringify({
+                p_original_item_name:
+                  editingRestrictionOriginalName,
+                p_item_name:
+                  itemName,
+                p_allowed_stores:
+                  allowedStores
+              })
+            }
+          )
+        );
+
+      if(result?.saved===false){
+        if(
+          result.reason===
+          'restriction_exists'
+        ){
+          showToast(
+            'A restriction for that item already exists.',
+            true
+          );
+
+          return;
+        }
+
+        if(
+          result.reason===
+          'item_on_disallowed_store'
+        ){
+          showToast(
+            `${itemName} is currently on the ${STORES[result.existing_store]||'another store'} list. Remove it from that list before applying this restriction.`,
+            true
+          );
+
+          return;
+        }
+
+        if(
+          result.reason===
+          'no_stores'
+        ){
+          showToast(
+            'Choose at least one allowed store.',
+            true
+          );
+
+          return;
+        }
+
+        showToast(
+          'Could not save the restriction.',
+          true
+        );
+
+        return;
+      }
+
+      invalidateMasterItems();
+
+      goRestrictionReturn();
+
+      setTimeout(
+        ()=>{
+          showToast(
+            `${itemName} restriction saved.`
+          );
+        },
+        80
+      );
+    }catch(error){
+      console.error(error);
+
+      showToast(
+        restrictionFromMaster
+          ? 'Could not save the item.'
+          : 'Could not save the restriction.',
+        true
+      );
+    }finally{
+      saveRestrictionButton.disabled=false;
+
+      saveRestrictionButton.textContent=
+        restrictionFromMaster
+          ? 'Save Changes'
+          : 'Save Restriction';
+    }
+  }
+);
+
+deleteRestrictionButton.addEventListener(
+  'click',
+  async()=>{
+    if(
+      !editingRestrictionOriginalName
+    ){
+      return;
+    }
+
+    const itemName=
+      editingRestrictionOriginalName;
+
+    if(
+      !window.confirm(
+        `Delete the restriction for ${itemName}?`
+      )
+    ){
+      return;
+    }
+
+    deleteRestrictionButton.disabled=true;
+
+    deleteRestrictionButton.textContent=
+      'Deleting…';
+
+    try{
+      const result=
+        unwrapRpcResult(
+          await api(
+            '/rest/v1/rpc/delete_item_store_restriction',
+            {
+              method:'POST',
+              body:JSON.stringify({
+                p_item_name:itemName
+              })
+            }
+          )
+        );
+
+      if(
+        !result||
+        result.deleted!==true
+      ){
+        showToast(
+          'Could not delete the restriction.',
+          true
+        );
+
+        return;
+      }
+
+      invalidateMasterItems();
+
+      goRestrictionReturn();
+
+      setTimeout(
+        ()=>{
+          showToast(
+            `${itemName} restriction deleted.`
+          );
+        },
+        80
+      );
+    }catch(error){
+      console.error(error);
+
+      showToast(
+        'Could not delete the restriction.',
+        true
+      );
+    }finally{
+      deleteRestrictionButton.disabled=false;
+
+      deleteRestrictionButton.textContent=
+        'Delete Restriction';
+    }
+  }
+);
+
+window.addEventListener(
+  'hashchange',
+  route
+);
+
+document.addEventListener(
+  'visibilitychange',
+  ()=>{
+    if(document.hidden){
+      return;
+    }
+
+    if(currentStore){
+      loadStoreItems(true);
+      return;
+    }
+
+    if(
+      currentInventoryCategory&&
+      location.hash.startsWith(
+        '#inventory/'
+      )
+    ){
+      loadInventoryItems(true);
+      return;
+    }
+
+    if(location.hash==='#inventory'){
+      fetchInventorySearchItems(true)
+        .catch(
+          error=>console.error(error)
+        );
+
+      return;
+    }
+
+    if(location.hash==='#master'){
+      loadMasterList();
+      return;
+    }
+
+    if(
+      location.hash===
+      '#restrictions/items'
+    ){
+      loadRestrictions();
+      return;
+    }
+
+    if(
+      currentRestrictionStore&&
+      location.hash.startsWith(
+        '#restrictions/store/'
+      )
+    ){
+      loadRestrictionsByStore(
+        currentRestrictionStore
+      );
+
+      return;
+    }
+
+    if(location.hash==='#home'){
+      loadHomeCounts();
+    }
+  }
+);
+
+if(!location.hash){
+  history.replaceState(
+    null,
+    '',
+    '#home'
+  );
+}
+
 route();
 </script>
 </body>
