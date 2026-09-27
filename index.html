@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.43 -->
-<meta name="app-version" content="1.0.43">
+<!-- APP VERSION: 1.0.44 -->
+<meta name="app-version" content="1.0.44">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -101,7 +101,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.0.43</div>
+    <div class="version-label">v1.0.44</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -344,7 +344,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 <script>
 'use strict';
 
-const APP_VERSION='1.0.43';
+const APP_VERSION='1.0.44';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -383,6 +383,8 @@ let storeRestrictionTimer=null;
 let storeRestrictionRequestNumber=0;
 let masterItemsCache=null;
 let inventorySearchCache=null;
+let masterListReturnScrollY=0;
+let restoreMasterListScroll=false;
 
 const $=id=>document.getElementById(id);
 const homeScreen=$('homeScreen'),shoppingMenuScreen=$('shoppingMenuScreen'),addScreen=$('addScreen'),storeScreen=$('storeScreen'),shoppingMoveScreen=$('shoppingMoveScreen'),purchaseCategoryScreen=$('purchaseCategoryScreen'),itemCategoryScreen=$('itemCategoryScreen');
@@ -605,7 +607,7 @@ masterSearchInput.addEventListener('input',renderMasterSearchSuggestions);
 masterSearchInput.addEventListener('focus',renderMasterSearchSuggestions);
 masterSearchInput.addEventListener('blur',()=>setTimeout(()=>hideSuggestions(masterSearchSuggestions),180));
 
-function goHome(){location.hash='#home'}
+function goHome(){restoreMasterListScroll=false;location.hash='#home'}
 function goShopping(){storeReturnHash='#shopping';location.hash='#shopping'}
 function goAdd(){pendingShoppingPrefillName=null;pendingShoppingAddReturnHash=null;location.hash='#add'}
 function goAddWithItem(name,returnHash=null){pendingShoppingPrefillName=normalizeItemName(name);pendingShoppingAddReturnHash=returnHash;location.hash='#add'}
@@ -624,7 +626,14 @@ function goCategoryManagement(){location.hash='#category-management'}
 function goCategoryAdd(){location.hash='#category-management/add'}
 function goMasterList(){location.hash='#master'}
 function goMasterAdd(name=''){pendingMasterAddName=normalizeItemName(name);location.hash='#master/add'}
-function goMasterRestriction(name){restrictionReturnHash='#master';location.hash='#master/restriction/'+encodeURIComponent(name)}
+function goMasterRestriction(name){
+  if(location.hash==='#master'){
+    masterListReturnScrollY=Math.max(0,window.scrollY||document.documentElement.scrollTop||0);
+    restoreMasterListScroll=true;
+  }
+  restrictionReturnHash='#master';
+  location.hash='#master/restriction/'+encodeURIComponent(name);
+}
 function goRestrictions(){location.hash='#restrictions'}
 function goRestrictionsByItem(){location.hash='#restrictions/items'}
 function goRestrictionsByStore(){location.hash='#restrictions/stores'}
@@ -704,7 +713,7 @@ function route(){
   }
 
   if(hash==='#master'){
-    movingShoppingItem=null;currentStore=null;lockedAddStore=null;restrictionFromMaster=false;showOnly(masterListScreen);pageTitle.textContent='Master List';backButton.hidden=false;masterSearchInput.value='';hideSuggestions(masterSearchSuggestions);loadMasterList();return;
+    movingShoppingItem=null;currentStore=null;lockedAddStore=null;restrictionFromMaster=false;showOnly(masterListScreen);pageTitle.textContent='Master List';backButton.hidden=false;masterSearchInput.value='';hideSuggestions(masterSearchSuggestions);loadMasterList(restoreMasterListScroll);return;
   }
 
   if(hash==='#restrictions/items'){goMasterList();return}
@@ -986,12 +995,17 @@ function createMasterShoppingIcon(itemName,store){
   button.addEventListener('click',event=>{event.stopPropagation();goStoreAndFocus(store,itemName)});
   return button;
 }
-async function loadMasterList(){
+async function loadMasterList(restoreScroll=false){
+  const savedScrollY=restoreScroll?masterListReturnScrollY:0;
   masterList.innerHTML='<div class="loading-state">Loading…</div>';
   try{
     const [items,inventoryQuantities,restrictionRows,shoppingStores]=await Promise.all([fetchMasterItems(true),fetchInventoryQuantityMap(),fetchRestrictionRows(),fetchShoppingStoreMap()]);
     const restrictedItems=new Set(restrictionRows.map(row=>normalizedKey(row.item_name)));
     renderMasterList(items,inventoryQuantities,restrictedItems,shoppingStores);
+    if(restoreScroll){
+      restoreMasterListScroll=false;
+      requestAnimationFrame(()=>requestAnimationFrame(()=>window.scrollTo({top:savedScrollY,left:0,behavior:'auto'})));
+    }
   }catch(error){console.error(error);masterList.innerHTML='<div class="error-state">Could not load the Master List.</div>'}
 }
 function renderMasterList(items,inventoryQuantities,restrictedItems,shoppingStores){
