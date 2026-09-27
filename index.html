@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.25 -->
-<meta name="app-version" content="1.0.25">
+<!-- APP VERSION: 1.0.26 -->
+<meta name="app-version" content="1.0.26">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.25">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.25">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.26">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.26">
 
 <style>
 :root{
@@ -59,7 +59,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .autocomplete-option{width:100%;border:0;border-bottom:1px solid #ececec;background:var(--white);padding:12px 13px;text-align:left;color:var(--text);font-size:17px;font-weight:700;cursor:pointer}
 .autocomplete-option:last-child{border-bottom:0}.autocomplete-option:active{background:#edf3ff}
 .autocomplete-empty{padding:14px 13px;color:var(--muted);font-size:16px;font-weight:700;text-align:left}
-.inventory-search-card{margin-bottom:13px;padding:16px}
+.inventory-search-card{margin-bottom:13px;padding:16px;overflow:visible}
 .inventory-search-card .field{margin-bottom:0}
 .qty-control{display:flex;align-items:center;justify-content:center;gap:5px}.qty-step-button{width:36px;height:44px;flex:0 0 36px;border:2px solid var(--black);border-radius:10px;background:var(--white);color:var(--black);font-size:24px;font-weight:900;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer}.qty-step-button:active{background:#e7e7e7}.qty-step-button:disabled{opacity:.35}
 .qty-input{width:48px;min-height:44px;padding:4px;border:1.5px solid var(--border);border-radius:10px;background:var(--white);color:var(--text);text-align:center;font-size:18px;font-weight:800;outline:none;-moz-appearance:textfield}.qty-input::-webkit-outer-spin-button,.qty-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}.qty-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,90,203,.12)}
@@ -85,7 +85,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 <header class="app-header">
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
-  <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.25" alt="Uno Club Shopping logo">
+  <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.26" alt="Uno Club Shopping logo">
 </header>
 
 <main>
@@ -104,16 +104,14 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
       <button id="adminButton" class="main-button secondary-menu-button" type="button">Admin</button>
     </div>
 
-    <div class="version-label">v1.0.25</div>
+    <div class="version-label">v1.0.26</div>
   </section>
-
 
   <section id="addScreen" class="screen" hidden>
     <div class="card form-card">
       <form id="addItemForm">
         <div class="field">
           <label for="itemName">What item would you like to add?</label>
-
           <div class="autocomplete-wrap">
             <input id="itemName" type="text" maxlength="100" autocomplete="off" required>
             <div id="itemNameSuggestions" class="autocomplete-list" hidden></div>
@@ -122,7 +120,6 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 
         <div class="field">
           <label>Quantity</label>
-
           <div class="qty-control add-qty-control">
             <button id="addQtyMinus" class="qty-step-button" type="button">−</button>
             <input id="quantity" class="qty-input" type="number" min="1" max="9999" step="1" inputmode="numeric" value="1">
@@ -141,21 +138,17 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
     </div>
   </section>
 
-
   <section id="storeScreen" class="screen" hidden>
     <button id="storeAddItemButton" class="main-button store-add-button" type="button">Add Item</button>
-
     <div class="card list-card">
       <div class="list-heading">
         <span>Item</span>
         <span>Qty</span>
         <span></span>
       </div>
-
       <div id="storeList"></div>
     </div>
   </section>
-
 
   <section id="shoppingMoveScreen" class="screen" hidden>
     <div class="card form-card">
@@ -180,9 +173,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
     </div>
   </section>
 
-
   <section id="inventoryScreen" class="screen" hidden>
-
     <div class="card inventory-search-card">
       <div class="field">
         <label for="inventorySearchInput">Search Inventory</label>
@@ -208,7 +199,6 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
     <div id="inventoryCategoryButtons" class="category-stack"></div>
   </section>
 
-
   <section id="inventoryCategoryScreen" class="screen" hidden>
     <button id="inventoryAddItemButton" class="main-button inventory-add-button" type="button">Add Item</button>
 
@@ -222,7 +212,6 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
       <div id="inventoryList"></div>
     </div>
   </section>
-
 
   <section id="inventoryAddScreen" class="screen" hidden>
     <div class="card form-card">
@@ -253,7 +242,6 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
     </div>
   </section>
 
-
   <section id="adminScreen" class="screen" hidden>
     <div class="category-stack">
       <button id="adminRestrictionsButton" class="main-button category-button" type="button">Manage Restrictions</button>
@@ -261,11 +249,9 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
     </div>
   </section>
 
-
   <section id="masterListScreen" class="screen" hidden>
     <div id="masterList" class="master-list"></div>
   </section>
-
 
   <section id="restrictionsScreen" class="screen" hidden>
     <div class="category-stack">
@@ -273,7 +259,6 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
       <button id="restrictionsByStoreButton" class="main-button category-button" type="button">By Store</button>
     </div>
   </section>
-
 
   <section id="restrictionsByItemScreen" class="screen" hidden>
     <div class="restrictions-toolbar">
@@ -283,16 +268,13 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
     <div id="restrictionList" class="restriction-list"></div>
   </section>
 
-
   <section id="restrictionsByStoreScreen" class="screen" hidden>
     <div id="restrictionStoreButtons" class="category-stack"></div>
   </section>
 
-
   <section id="restrictionStoreScreen" class="screen" hidden>
     <div id="restrictionStoreList" class="restriction-list"></div>
   </section>
-
 
   <section id="restrictionEditScreen" class="screen" hidden>
     <div class="card form-card">
@@ -330,17 +312,15 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
   </section>
 </main>
 
-
 <div id="toast" class="toast">
   <span id="toastMessage" class="toast-message"></span>
   <button id="toastUndoButton" class="toast-undo-button" type="button" hidden>UNDO</button>
 </div>
 
-
 <script>
 'use strict';
 
-const APP_VERSION='1.0.25';
+const APP_VERSION='1.0.26';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -478,26 +458,22 @@ const toast=$('toast');
 const toastMessage=$('toastMessage');
 const toastUndoButton=$('toastUndoButton');
 
-
 function normalizeItemName(value){
   return String(value??'')
     .trim()
     .replace(/\s+/g,' ');
 }
 
-
 function normalizedKey(value){
   return normalizeItemName(value)
     .toLocaleLowerCase();
 }
-
 
 function unwrapRpcResult(result){
   return Array.isArray(result)
     ? result[0]
     : result;
 }
-
 
 function sortByName(items){
   return items.sort(
@@ -513,7 +489,6 @@ function sortByName(items){
   );
 }
 
-
 function rememberLastStore(store){
   if(!STORES[store]){
     return;
@@ -526,7 +501,6 @@ function rememberLastStore(store){
     );
   }catch(_){}
 }
-
 
 function getLastStore(){
   try{
@@ -546,16 +520,13 @@ function getLastStore(){
   return null;
 }
 
-
 function invalidateMasterItems(){
   masterItemsCache=null;
 }
 
-
 function invalidateInventorySearch(){
   inventorySearchCache=null;
 }
-
 
 async function api(path,options={}){
   const headers={
@@ -616,7 +587,6 @@ async function api(path,options={}){
     : null;
 }
 
-
 function showOnly(screen){
   [
     homeScreen,
@@ -640,7 +610,6 @@ function showOnly(screen){
     }
   );
 }
-
 
 function showToast(
   message,
@@ -673,7 +642,6 @@ function showToast(
     );
 }
 
-
 function showUndoToast(item,type){
   clearTimeout(toastTimer);
 
@@ -703,7 +671,6 @@ function showUndoToast(item,type){
       5000
     );
 }
-
 
 toastUndoButton.addEventListener(
   'click',
@@ -840,7 +807,6 @@ toastUndoButton.addEventListener(
   }
 );
 
-
 async function fetchMasterItems(force=false){
   if(
     masterItemsCache &&
@@ -864,12 +830,10 @@ async function fetchMasterItems(force=false){
   return masterItemsCache;
 }
 
-
 function hideSuggestions(box){
   box.hidden=true;
   box.innerHTML='';
 }
-
 
 async function renderAutocomplete(
   input,
@@ -973,7 +937,6 @@ async function renderAutocomplete(
   }
 }
 
-
 function setupAutocomplete(
   input,
   box,
@@ -1009,7 +972,6 @@ function setupAutocomplete(
   );
 }
 
-
 setupAutocomplete(
   itemNameInput,
   itemNameSuggestions,
@@ -1018,20 +980,17 @@ setupAutocomplete(
   }
 );
 
-
 setupAutocomplete(
   inventoryItemName,
   inventoryItemSuggestions,
   null
 );
 
-
 setupAutocomplete(
   restrictionItemName,
   restrictionItemSuggestions,
   null
 );
-
 
 /* INVENTORY SEARCH */
 
@@ -1059,7 +1018,6 @@ async function fetchInventorySearchItems(
 
   return inventorySearchCache;
 }
-
 
 async function renderInventorySearchSuggestions(){
   const query=
@@ -1177,18 +1135,15 @@ async function renderInventorySearchSuggestions(){
   }
 }
 
-
 inventorySearchInput.addEventListener(
   'input',
   renderInventorySearchSuggestions
 );
 
-
 inventorySearchInput.addEventListener(
   'focus',
   renderInventorySearchSuggestions
 );
-
 
 inventorySearchInput.addEventListener(
   'blur',
@@ -1203,7 +1158,6 @@ inventorySearchInput.addEventListener(
     );
   }
 );
-
 
 /* ADD ITEM STORE RESTRICTIONS */
 
@@ -1264,7 +1218,6 @@ function rebuildStoreOptions(
   }
 }
 
-
 async function fetchRestrictionRows(){
   const data=
     await api(
@@ -1275,7 +1228,6 @@ async function fetchRestrictionRows(){
     ? data
     : [];
 }
-
 
 function getAllowedStoresForItemName(
   itemName,
@@ -1325,7 +1277,6 @@ function getAllowedStoresForItemName(
       )
   );
 }
-
 
 async function refreshStoreChoicesForItem(
   preferBlank=false
@@ -1443,7 +1394,6 @@ async function refreshStoreChoicesForItem(
   }
 }
 
-
 function scheduleStoreRestrictionCheck(){
   clearTimeout(
     storeRestrictionTimer
@@ -1464,12 +1414,10 @@ function scheduleStoreRestrictionCheck(){
     );
 }
 
-
 itemNameInput.addEventListener(
   'input',
   scheduleStoreRestrictionCheck
 );
-
 
 /* NAVIGATION */
 
@@ -1592,7 +1540,6 @@ function goRestrictionReturn(){
     '#restrictions/items';
 }
 
-
 /* ROUTING */
 
 function route(){
@@ -1606,7 +1553,6 @@ function route(){
   clearTimeout(
     storeRestrictionTimer
   );
-
 
   if(
     hash.startsWith(
@@ -1638,7 +1584,6 @@ function route(){
 
     return;
   }
-
 
   if(
     hash.startsWith(
@@ -1686,7 +1631,6 @@ function route(){
 
     return;
   }
-
 
   if(hash==='#add'){
     movingShoppingItem=null;
@@ -1756,7 +1700,6 @@ function route(){
     return;
   }
 
-
   if(
     hash.startsWith(
       '#store/'
@@ -1787,7 +1730,6 @@ function route(){
 
     return;
   }
-
 
   if(hash==='#inventory'){
     movingShoppingItem=null;
@@ -1820,7 +1762,6 @@ function route(){
 
     return;
   }
-
 
   if(
     hash.startsWith(
@@ -1878,7 +1819,6 @@ function route(){
     return;
   }
 
-
   if(
     hash.startsWith(
       '#inventory/'
@@ -1921,7 +1861,6 @@ function route(){
     return;
   }
 
-
   if(hash==='#admin'){
     movingShoppingItem=null;
     currentStore=null;
@@ -1938,7 +1877,6 @@ function route(){
 
     return;
   }
-
 
   if(
     hash.startsWith(
@@ -1983,7 +1921,6 @@ function route(){
     return;
   }
 
-
   if(hash==='#master'){
     movingShoppingItem=null;
     currentStore=null;
@@ -2003,7 +1940,6 @@ function route(){
 
     return;
   }
-
 
   if(
     hash==='#restrictions/items'
@@ -2028,7 +1964,6 @@ function route(){
     return;
   }
 
-
   if(
     hash==='#restrictions/stores'
   ){
@@ -2051,7 +1986,6 @@ function route(){
 
     return;
   }
-
 
   if(
     hash.startsWith(
@@ -2093,7 +2027,6 @@ function route(){
     return;
   }
 
-
   if(hash==='#restrictions'){
     movingShoppingItem=null;
     currentStore=null;
@@ -2112,7 +2045,6 @@ function route(){
 
     return;
   }
-
 
   if(hash==='#restriction/new'){
     movingShoppingItem=null;
@@ -2141,7 +2073,6 @@ function route(){
 
     return;
   }
-
 
   if(
     hash.startsWith(
@@ -2184,7 +2115,6 @@ function route(){
     return;
   }
 
-
   movingShoppingItem=null;
   currentStore=null;
   lockedAddStore=null;
@@ -2202,7 +2132,6 @@ function route(){
 
   loadHomeCounts();
 }
-
 
 /* BACK BUTTON */
 
@@ -2339,7 +2268,6 @@ backButton.addEventListener(
   }
 );
 
-
 /* MAIN BUTTONS */
 
 addItemButton.addEventListener(
@@ -2382,7 +2310,6 @@ addRestrictionButton.addEventListener(
   goNewRestriction
 );
 
-
 document
   .querySelectorAll(
     '.store-button'
@@ -2400,7 +2327,6 @@ document
     }
   );
 
-
 storeAddItemButton.addEventListener(
   'click',
   ()=>{
@@ -2414,7 +2340,6 @@ storeAddItemButton.addEventListener(
     }
   }
 );
-
 
 inventoryAddItemButton.addEventListener(
   'click',
@@ -2431,7 +2356,6 @@ inventoryAddItemButton.addEventListener(
     }
   }
 );
-
 
 /* HOME COUNTS */
 
@@ -2487,7 +2411,6 @@ async function loadHomeCounts(){
   }
 }
 
-
 storeSelect.addEventListener(
   'change',
   ()=>{
@@ -2503,7 +2426,6 @@ storeSelect.addEventListener(
     }
   }
 );
-
 
 /* QUANTITY HELPERS */
 
@@ -2530,7 +2452,6 @@ function getBoundedQuantity(
   );
 }
 
-
 function setAddQuantity(value){
   quantityInput.value=
     Math.min(
@@ -2544,14 +2465,12 @@ function setAddQuantity(value){
   refreshAddQuantityButtons();
 }
 
-
 function getAddQuantity(){
   return getBoundedQuantity(
     quantityInput,
     1
   );
 }
-
 
 function refreshAddQuantityButtons(){
   const quantity=
@@ -2564,7 +2483,6 @@ function refreshAddQuantityButtons(){
     quantity>=9999;
 }
 
-
 addQtyMinus.addEventListener(
   'click',
   ()=>{
@@ -2573,7 +2491,6 @@ addQtyMinus.addEventListener(
     );
   }
 );
-
 
 addQtyPlus.addEventListener(
   'click',
@@ -2584,12 +2501,10 @@ addQtyPlus.addEventListener(
   }
 );
 
-
 quantityInput.addEventListener(
   'input',
   refreshAddQuantityButtons
 );
-
 
 quantityInput.addEventListener(
   'blur',
@@ -2599,7 +2514,6 @@ quantityInput.addEventListener(
     );
   }
 );
-
 
 function setInventoryAddQuantity(
   value
@@ -2616,14 +2530,12 @@ function setInventoryAddQuantity(
   refreshInventoryAddQuantityButtons();
 }
 
-
 function getInventoryAddQuantity(){
   return getBoundedQuantity(
     inventoryQuantity,
     0
   );
 }
-
 
 function refreshInventoryAddQuantityButtons(){
   const quantity=
@@ -2636,7 +2548,6 @@ function refreshInventoryAddQuantityButtons(){
     quantity>=9999;
 }
 
-
 inventoryQtyMinus.addEventListener(
   'click',
   ()=>{
@@ -2645,7 +2556,6 @@ inventoryQtyMinus.addEventListener(
     );
   }
 );
-
 
 inventoryQtyPlus.addEventListener(
   'click',
@@ -2656,12 +2566,10 @@ inventoryQtyPlus.addEventListener(
   }
 );
 
-
 inventoryQuantity.addEventListener(
   'input',
   refreshInventoryAddQuantityButtons
 );
-
 
 inventoryQuantity.addEventListener(
   'blur',
@@ -2671,7 +2579,6 @@ inventoryQuantity.addEventListener(
     );
   }
 );
-
 
 function formatAllowedStores(
   storeKeys
@@ -2710,7 +2617,6 @@ function formatAllowedStores(
     ]
   );
 }
-
 
 /* ADD SHOPPING ITEM */
 
@@ -2873,7 +2779,6 @@ addItemForm.addEventListener(
   }
 );
 
-
 /* SHOPPING LISTS */
 
 async function loadStoreItems(
@@ -2942,7 +2847,6 @@ async function loadStoreItems(
   }
 }
 
-
 function renderStoreList(
   items,
   restrictionRows
@@ -2983,7 +2887,6 @@ function renderStoreList(
   }
 }
 
-
 function appendEmpty(
   container,
   message
@@ -3003,7 +2906,6 @@ function appendEmpty(
     empty
   );
 }
-
 
 function createPermanentWaterRow(){
   const row=
@@ -3062,7 +2964,6 @@ function createPermanentWaterRow(){
   return row;
 }
 
-
 function createShoppingItemRow(
   item,
   restrictionRows
@@ -3114,7 +3015,6 @@ function createShoppingItemRow(
   );
 }
 
-
 function createInventoryItemRow(item){
   return createDataItemRow(
     item,
@@ -3165,7 +3065,6 @@ function createInventoryItemRow(item){
     }
   );
 }
-
 
 function createDataItemRow(
   item,
@@ -3462,7 +3361,6 @@ function createDataItemRow(
   return row;
 }
 
-
 async function updateQuantity(
   table,
   id,
@@ -3483,7 +3381,6 @@ async function updateQuantity(
     }
   );
 }
-
 
 async function deleteShoppingItem(
   item,
@@ -3547,7 +3444,6 @@ async function deleteShoppingItem(
   }
 }
 
-
 /* MOVE SHOPPING ITEM */
 
 function rebuildMoveStoreOptions(
@@ -3596,7 +3492,6 @@ function rebuildMoveStoreOptions(
     }
   );
 }
-
 
 async function loadShoppingItemForMove(id){
   movingShoppingItem=null;
@@ -3695,7 +3590,6 @@ async function loadShoppingItemForMove(id){
     goHome();
   }
 }
-
 
 moveShoppingForm.addEventListener(
   'submit',
@@ -3826,7 +3720,6 @@ moveShoppingForm.addEventListener(
   }
 );
 
-
 /* INVENTORY */
 
 function renderInventoryCategories(){
@@ -3862,7 +3755,6 @@ function renderInventoryCategories(){
     }
   );
 }
-
 
 async function loadInventoryItems(
   quiet=false
@@ -3921,7 +3813,6 @@ async function loadInventoryItems(
   }
 }
 
-
 function renderInventoryList(items){
   inventoryList.innerHTML='';
 
@@ -3942,7 +3833,6 @@ function renderInventoryList(items){
     );
   }
 }
-
 
 inventoryAddForm.addEventListener(
   'submit',
@@ -4062,7 +3952,6 @@ inventoryAddForm.addEventListener(
   }
 );
 
-
 async function deleteInventoryItem(
   item,
   row,
@@ -4119,7 +4008,6 @@ async function deleteInventoryItem(
   }
 }
 
-
 /* MASTER LIST */
 
 async function fetchInventoryQuantityMap(){
@@ -4151,7 +4039,6 @@ async function fetchInventoryQuantityMap(){
   return quantities;
 }
 
-
 async function loadMasterList(){
   masterList.innerHTML=
     '<div class="loading-state">Loading…</div>';
@@ -4178,7 +4065,6 @@ async function loadMasterList(){
       '<div class="error-state">Could not load the Master List.</div>';
   }
 }
-
 
 function renderMasterList(
   items,
@@ -4290,7 +4176,6 @@ function renderMasterList(
   );
 }
 
-
 function describeMasterUsage(result){
   const places=[];
 
@@ -4332,7 +4217,6 @@ function describeMasterUsage(result){
     `it is still in ${places[0]}, ${places[1]}, and ${places[2]}`
   );
 }
-
 
 async function forgetMasterItem(
   item,
@@ -4436,7 +4320,6 @@ async function forgetMasterItem(
   }
 }
 
-
 /* RESTRICTIONS */
 
 function groupRestrictions(rows){
@@ -4488,7 +4371,6 @@ function groupRestrictions(rows){
   );
 }
 
-
 function renderRestrictionStores(){
   restrictionStoreButtons.innerHTML='';
 
@@ -4524,7 +4406,6 @@ function renderRestrictionStores(){
     }
   );
 }
-
 
 function createRestrictionRow(item){
   const button=
@@ -4608,7 +4489,6 @@ function createRestrictionRow(item){
   return button;
 }
 
-
 async function loadRestrictions(){
   restrictionList.innerHTML=
     '<div class="loading-state">Loading…</div>';
@@ -4627,7 +4507,6 @@ async function loadRestrictions(){
       '<div class="error-state">Could not load restrictions.</div>';
   }
 }
-
 
 function renderRestrictions(items){
   restrictionList.innerHTML='';
@@ -4651,7 +4530,6 @@ function renderRestrictions(items){
     }
   );
 }
-
 
 async function loadRestrictionsByStore(store){
   restrictionStoreList.innerHTML=
@@ -4693,7 +4571,6 @@ async function loadRestrictionsByStore(store){
   }
 }
 
-
 function renderRestrictionsByStore(items){
   restrictionStoreList.innerHTML='';
 
@@ -4717,7 +4594,6 @@ function renderRestrictionsByStore(items){
   );
 }
 
-
 function clearRestrictionChecks(){
   document
     .querySelectorAll(
@@ -4729,7 +4605,6 @@ function clearRestrictionChecks(){
       }
     );
 }
-
 
 function clearRestrictionForm(){
   editingRestrictionOriginalName=null;
@@ -4749,7 +4624,6 @@ function clearRestrictionForm(){
   saveRestrictionButton.disabled=false;
   saveRestrictionButton.textContent='Save Restriction';
 }
-
 
 async function loadRestrictionForEdit(
   itemName
@@ -4829,7 +4703,6 @@ async function loadRestrictionForEdit(
   }
 }
 
-
 async function loadMasterItemRestriction(
   itemName
 ){
@@ -4897,7 +4770,6 @@ async function loadMasterItemRestriction(
   }
 }
 
-
 function getCheckedStores(){
   return Array.from(
     document.querySelectorAll(
@@ -4908,7 +4780,6 @@ function getCheckedStores(){
       checkbox.value
   );
 }
-
 
 restrictionForm.addEventListener(
   'submit',
@@ -5057,7 +4928,6 @@ restrictionForm.addEventListener(
   }
 );
 
-
 deleteRestrictionButton.addEventListener(
   'click',
   async()=>{
@@ -5136,14 +5006,12 @@ deleteRestrictionButton.addEventListener(
   }
 );
 
-
 /* PAGE REFRESH */
 
 window.addEventListener(
   'hashchange',
   route
 );
-
 
 document.addEventListener(
   'visibilitychange',
@@ -5218,7 +5086,6 @@ document.addEventListener(
     }
   }
 );
-
 
 if(!location.hash){
   history.replaceState(
