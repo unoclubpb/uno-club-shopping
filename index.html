@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.49 -->
-<meta name="app-version" content="1.0.49">
+<!-- APP VERSION: 1.0.50 -->
+<meta name="app-version" content="1.0.50">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.49">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.49">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.50">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.50">
 
 <style>
 :root{
@@ -70,6 +70,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .delete-button{width:44px;height:44px;border:2px solid var(--black);border-radius:11px;background:#fff1f1;color:var(--danger);font-size:28px;line-height:1;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center}.delete-button:active{background:#ffdede}.delete-button:disabled{opacity:.45}
 .permanent-row{background:#f7faff}.fixed-note{color:var(--blue);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-top:3px}
 .category-button{text-align:left;padding:0 18px}.category-button::after{content:'›';float:right;font-size:29px;font-weight:500;line-height:24px}
+#adminScreen .category-button{position:relative;text-align:center}#adminScreen .category-button::after{position:absolute;right:18px;top:50%;transform:translateY(-50%);float:none;line-height:1}
 .inventory-category-note{margin:0 0 13px;color:var(--muted);font-size:13px;font-weight:650;text-align:center}.restrictions-toolbar{margin-bottom:13px}
 .restriction-row{width:100%;border:0;border-bottom:1px solid #ececec;background:var(--white);color:var(--text);padding:14px 15px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;text-align:left;cursor:pointer}.restriction-row:last-child{border-bottom:0}.restriction-row:active{background:#edf3ff}.restriction-name{font-size:17px;font-weight:800;overflow-wrap:anywhere}.restriction-stores{margin-top:4px;color:var(--muted);font-size:13px;font-weight:650}.restriction-chevron{color:var(--blue);font-size:30px;line-height:1;font-weight:500}
 .item-detail-category-button{width:100%;min-height:54px;padding:0 14px;border:1.5px solid var(--border);border-radius:12px;background:var(--white);color:var(--blue);display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;font-size:17px;font-weight:800;cursor:pointer}.item-detail-category-button:active{background:#edf3ff}.item-detail-category-chevron{font-size:28px;line-height:1;font-weight:500}.item-detail-inventory-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:end}.item-detail-inventory-value{width:104px;min-height:50px}.item-detail-add-list-button{min-width:132px;min-height:50px;padding:0 16px;border:2px solid var(--black);border-radius:12px;background:var(--blue);color:var(--white);font-size:16px;font-weight:850;white-space:nowrap;cursor:pointer;box-shadow:0 4px 12px rgba(30,90,203,.20)}.item-detail-add-list-button:active{background:var(--blue-dark);transform:scale(.985)}.item-detail-add-list-button[hidden]{display:none!important}
@@ -89,7 +90,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.49" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.50" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -102,7 +103,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.0.49</div>
+    <div class="version-label">v1.0.50</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -349,7 +350,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 <script>
 'use strict';
 
-const APP_VERSION='1.0.49';
+const APP_VERSION='1.0.50';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
