@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.47 -->
-<meta name="app-version" content="1.0.47">
+<!-- APP VERSION: 1.0.48 -->
+<meta name="app-version" content="1.0.48">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.47">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.47">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.48">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.48">
 
 <style>
 :root{
@@ -88,7 +88,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.47" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.48" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -101,7 +101,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.0.47</div>
+    <div class="version-label">v1.0.48</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -348,7 +348,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 <script>
 'use strict';
 
-const APP_VERSION='1.0.47';
+const APP_VERSION='1.0.48';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -389,6 +389,8 @@ let masterItemsCache=null;
 let inventorySearchCache=null;
 let masterListReturnScrollY=0;
 let restoreMasterListScroll=false;
+let categoryManagementReturnScrollY=0;
+let restoreCategoryManagementScroll=false;
 let currentCategoryManagementCategory=null;
 
 const $=id=>document.getElementById(id);
@@ -627,8 +629,15 @@ function goInventoryItemDetail(itemName,category){if(!INVENTORY_CATEGORIES[categ
 function goItemCategoryChooser(itemName){const cleanName=normalizeItemName(itemName);if(!cleanName)return;itemCategoryReturnHash=location.hash||'#master';location.hash='#item-category/'+encodeURIComponent(cleanName)}
 function goInventoryAdd(category){location.hash='#inventory-add/'+category}
 function goAdmin(){location.hash='#admin'}
-function goCategoryManagement(){location.hash='#category-management'}
-function goCategoryManagementItems(category){if(!INVENTORY_CATEGORIES[category])return;location.hash='#category-management/category/'+encodeURIComponent(category)}
+function goCategoryManagement(){restoreCategoryManagementScroll=false;location.hash='#category-management'}
+function goCategoryManagementItems(category){
+  if(!INVENTORY_CATEGORIES[category])return;
+  if(location.hash==='#category-management'){
+    categoryManagementReturnScrollY=Math.max(0,window.scrollY||document.documentElement.scrollTop||0);
+    restoreCategoryManagementScroll=true;
+  }
+  location.hash='#category-management/category/'+encodeURIComponent(category);
+}
 function goCategoryManagementItemDetail(itemName,category){if(!INVENTORY_CATEGORIES[category])return;restrictionReturnHash='#category-management/category/'+encodeURIComponent(category);location.hash='#restriction/edit/'+encodeURIComponent(itemName)}
 function goCategoryAdd(){location.hash='#category-management/add'}
 function goMasterList(){location.hash='#master'}
@@ -709,7 +718,7 @@ function route(){
   }
 
   if(hash==='#category-management'){
-    movingShoppingItem=null;currentStore=null;lockedAddStore=null;showOnly(categoryManagementScreen);pageTitle.textContent='Category Management';backButton.hidden=false;loadCategoryManagement();return;
+    movingShoppingItem=null;currentStore=null;lockedAddStore=null;showOnly(categoryManagementScreen);pageTitle.textContent='Category Management';backButton.hidden=false;loadCategoryManagement(restoreCategoryManagementScroll);return;
   }
 
   if(hash==='#admin'){
@@ -1051,7 +1060,8 @@ async function forgetMasterItem(item,row,button){
 }
 
 /* CATEGORY MANAGEMENT */
-async function loadCategoryManagement(){
+async function loadCategoryManagement(restoreScroll=false){
+  const savedScrollY=restoreScroll?categoryManagementReturnScrollY:0;
   categoryManagementList.innerHTML='<div class="loading-state">Loading…</div>';
   try{
     const [categories,inventoryItems]=await Promise.all([
@@ -1064,7 +1074,7 @@ async function loadCategoryManagement(){
       categoryCounts.set(item.category,(categoryCounts.get(item.category)||0)+1);
     });
     categoryManagementList.innerHTML='';
-    if(!categories.length){appendEmpty(categoryManagementList,'No categories yet.');return}
+    if(!categories.length){restoreCategoryManagementScroll=false;appendEmpty(categoryManagementList,'No categories yet.');return}
     categories.forEach(category=>{
       const row=document.createElement('div');row.className='category-management-row';
       const name=document.createElement('button');name.type='button';name.className='category-management-name-button';name.textContent=category.name;name.setAttribute('aria-label',`View items in ${category.name}`);name.addEventListener('click',()=>goCategoryManagementItems(category.category_key));
@@ -1072,7 +1082,11 @@ async function loadCategoryManagement(){
       const del=document.createElement('button');del.type='button';del.className='delete-button';del.textContent='×';del.setAttribute('aria-label',`Delete ${category.name}`);del.addEventListener('click',()=>deleteInventoryCategory(category,del));
       row.append(name,count,del);categoryManagementList.appendChild(row);
     });
-  }catch(error){console.error(error);categoryManagementList.innerHTML='<div class="error-state">Could not load categories.</div>'}
+    if(restoreScroll){
+      restoreCategoryManagementScroll=false;
+      requestAnimationFrame(()=>requestAnimationFrame(()=>window.scrollTo({top:savedScrollY,left:0,behavior:'auto'})));
+    }
+  }catch(error){restoreCategoryManagementScroll=false;console.error(error);categoryManagementList.innerHTML='<div class="error-state">Could not load categories.</div>'}
 }
 
 async function loadCategoryManagementItems(category){
