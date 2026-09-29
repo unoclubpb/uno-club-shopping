@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.62 -->
-<meta name="app-version" content="1.0.62">
+<!-- APP VERSION: 1.0.63 -->
+<meta name="app-version" content="1.0.63">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.62">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.62">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.63">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.63">
 
 <style>
 :root{
@@ -48,7 +48,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 #adminButton{background:var(--red);box-shadow:0 5px 14px rgba(198,40,40,.24)}#adminButton:active{background:var(--red-dark)}
 #masterListButton{background:var(--green);box-shadow:0 5px 14px rgba(33,140,79,.24)}#masterListButton:active{background:var(--green-dark)}
 #masterListButton,#itemsByStoreButton,#categoryManagementButton{min-height:124px}
-#inventoryButton,#goShoppingButton{min-height:248px}
+#inventoryButton,#goShoppingButton{min-height:186px}
 #adminButton{min-height:124px}
 #addItemButton,#storeAddItemButton,#masterAddItemButton,#saveItemButton{background:var(--yellow);color:var(--black);box-shadow:0 5px 14px rgba(242,201,76,.28)}
 #addItemButton:active,#storeAddItemButton:active,#masterAddItemButton:active,#saveItemButton:active{background:var(--yellow-dark)}
@@ -80,7 +80,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .category-button{text-align:left;padding:0 18px}.category-button::after{content:'›';float:right;font-size:29px;font-weight:500;line-height:24px}
 .inventory-category-note{margin:0 0 13px;color:var(--muted);font-size:13px;font-weight:650;text-align:center}.restrictions-toolbar{margin-bottom:13px}
 .restriction-row{width:100%;border:0;border-bottom:1px solid #ececec;background:var(--white);color:var(--text);padding:14px 15px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;text-align:left;cursor:pointer}.restriction-row:last-child{border-bottom:0}.restriction-row:active{background:#edf3ff}.restriction-name{font-size:17px;font-weight:800;overflow-wrap:anywhere}.restriction-stores{margin-top:4px;color:var(--muted);font-size:13px;font-weight:650}.restriction-chevron{color:var(--blue);font-size:30px;line-height:1;font-weight:500}
-.item-detail-category-button{width:100%;min-height:54px;padding:0 14px;border:1.5px solid var(--border);border-radius:12px;background:var(--white);color:var(--blue);display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;font-size:17px;font-weight:800;cursor:pointer}.item-detail-category-button:active{background:#edf3ff}.item-detail-category-chevron{font-size:28px;line-height:1;font-weight:500}.item-detail-inventory-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:end}.item-detail-inventory-value{width:104px;min-height:50px}.item-detail-last-purchased{margin-top:6px;color:var(--muted);line-height:1.25}.item-detail-last-purchased[hidden]{display:none!important}.item-detail-last-purchased-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.35px}.item-detail-last-purchased-date{margin-top:2px;font-size:13px;font-weight:700}.item-detail-shopping-actions{display:flex;align-items:center;gap:8px;min-height:50px}.item-detail-shopping-icon{width:36px;height:44px;flex:0 0 36px}.item-detail-shopping-icon[hidden]{display:none!important}.item-detail-add-list-button{min-width:132px;min-height:50px;padding:0 16px;border:2px solid var(--black);border-radius:12px;background:var(--blue);color:var(--white);font-size:16px;font-weight:850;white-space:nowrap;cursor:pointer;box-shadow:0 4px 12px rgba(30,90,203,.20)}.item-detail-add-list-button:active{background:var(--blue-dark);transform:scale(.985)}.item-detail-add-list-button[hidden]{display:none!important}
+.item-detail-category-button{width:100%;min-height:54px;padding:0 14px;border:1.5px solid var(--border);border-radius:12px;background:var(--white);color:var(--blue);display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;font-size:17px;font-weight:800;cursor:pointer}.item-detail-category-button:active{background:#edf3ff}.item-detail-category-chevron{font-size:28px;line-height:1;font-weight:500}.item-detail-inventory-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:end}.item-detail-inventory-value{width:104px;min-height:50px}.item-detail-last-purchased{margin-top:6px;color:var(--muted);line-height:1.25}.item-detail-last-purchased[hidden]{display:none!important}.item-detail-last-purchased-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.35px}.item-detail-last-purchased-date{margin-top:2px;font-size:13px;font-weight:700}.item-detail-shopping-actions{display:flex;align-items:center;gap:8px;min-height:50px}.item-detail-shopping-icon{width:36px;height:44px;flex:0 0 36px}.item-detail-shopping-icon[hidden]{display:none!important}.item-detail-add-list-button{min-width:132px;min-height:50px;padding:0 16px;border:2px solid var(--black);border-radius:12px;background:var(--yellow);color:var(--black);font-size:16px;font-weight:850;white-space:nowrap;cursor:pointer;box-shadow:0 4px 12px rgba(242,201,76,.28)}.item-detail-add-list-button:active{background:var(--yellow-dark);transform:scale(.985)}.item-detail-add-list-button[hidden]{display:none!important}
 .inventory-row-add-button{width:44px;height:44px;flex:0 0 44px;border:2px solid var(--black);border-radius:11px;background:var(--green);color:var(--white);font-size:13px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center}.inventory-row-add-button:active{background:var(--green-dark)}.inventory-row-add-button:disabled{opacity:.45}.inventory-row-add-button[hidden]{display:none!important}
 .category-management-list{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}.category-management-row{min-height:60px;padding:8px 10px 8px 15px;border-bottom:1px solid #ececec;display:grid;grid-template-columns:minmax(0,1fr) 44px 48px;gap:8px;align-items:center}.category-management-row:last-child{border-bottom:0}.category-management-name{font-size:17px;font-weight:800;overflow-wrap:anywhere}.category-management-name-button{width:100%;border:0;background:transparent;color:var(--blue);padding:10px 0;text-align:left;font-size:17px;font-weight:800;cursor:pointer;overflow-wrap:anywhere}.category-management-name-button:active{color:var(--blue-dark)}.category-management-count{min-width:36px;text-align:center;font-size:17px;font-weight:850;color:var(--text)}.category-add-button{margin-bottom:13px}
 .store-checks{display:grid;gap:9px}.item-detail-store-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.item-detail-store-grid .store-check-row{padding:8px 9px;font-size:14px!important}.store-check-row{min-height:50px;padding:8px 12px;border:1.5px solid var(--border);border-radius:12px;background:#fafafa;display:flex!important;align-items:center;gap:11px;cursor:pointer;font-size:17px!important;font-weight:700!important}.store-check-row input{width:23px;height:23px;margin:0;accent-color:var(--blue)}
@@ -97,7 +97,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.62" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.63" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -110,7 +110,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.0.62</div>
+    <div class="version-label">v1.0.63</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -260,18 +260,6 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
     <div id="masterList" class="master-list"></div>
   </section>
 
-  <section id="masterAddScreen" class="screen" hidden>
-    <div class="card form-card">
-      <form id="masterAddForm">
-        <div class="field">
-          <label for="masterAddItemName">Item</label>
-          <input id="masterAddItemName" type="text" maxlength="100" autocomplete="off" required>
-        </div>
-        <button id="saveMasterItemButton" class="save-button" type="submit">Add to Master List</button>
-      </form>
-    </div>
-  </section>
-
   <section id="categoryManagementScreen" class="screen" hidden>
     <button id="addCategoryButton" class="main-button add-item category-add-button" type="button">Add Category</button>
     <div id="categoryManagementList" class="category-management-list"></div>
@@ -366,7 +354,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 <script>
 'use strict';
 
-const APP_VERSION='1.0.62';
+const APP_VERSION='1.0.63';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -397,7 +385,6 @@ let pendingUndo=null;
 let pendingShoppingPrefillName=null;
 let pendingShoppingAddReturnHash=null;
 let activeShoppingAddReturnHash=null;
-let pendingMasterAddName=null;
 let pendingPurchaseItem=null;
 let pendingStoreFocusItemName=null;
 let storeReturnHash='#shopping';
@@ -417,7 +404,7 @@ let currentCategoryManagementCategory=null;
 const $=id=>document.getElementById(id);
 const homeScreen=$('homeScreen'),shoppingMenuScreen=$('shoppingMenuScreen'),addScreen=$('addScreen'),storeScreen=$('storeScreen'),shoppingMoveScreen=$('shoppingMoveScreen'),purchaseCategoryScreen=$('purchaseCategoryScreen'),itemCategoryScreen=$('itemCategoryScreen');
 const inventoryScreen=$('inventoryScreen'),inventoryCategoryScreen=$('inventoryCategoryScreen'),inventoryAddScreen=$('inventoryAddScreen');
-const adminScreen=$('adminScreen'),masterListScreen=$('masterListScreen'),masterAddScreen=$('masterAddScreen'),categoryManagementScreen=$('categoryManagementScreen'),categoryManagementItemsScreen=$('categoryManagementItemsScreen'),categoryAddScreen=$('categoryAddScreen');
+const adminScreen=$('adminScreen'),masterListScreen=$('masterListScreen'),categoryManagementScreen=$('categoryManagementScreen'),categoryManagementItemsScreen=$('categoryManagementItemsScreen'),categoryAddScreen=$('categoryAddScreen');
 const restrictionsScreen=$('restrictionsScreen'),restrictionsByItemScreen=$('restrictionsByItemScreen'),restrictionsByStoreScreen=$('restrictionsByStoreScreen');
 const restrictionStoreScreen=$('restrictionStoreScreen'),restrictionEditScreen=$('restrictionEditScreen');
 const pageTitle=$('pageTitle'),backButton=$('backButton'),headerHomeButton=$('headerHomeButton');
@@ -433,7 +420,7 @@ const inventorySearchInput=$('inventorySearchInput'),inventorySearchSuggestions=
 const inventoryCategoryButtons=$('inventoryCategoryButtons'),inventoryList=$('inventoryList');
 const inventoryAddForm=$('inventoryAddForm'),inventoryItemName=$('inventoryItemName'),inventoryItemSuggestions=$('inventoryItemSuggestions'),inventoryQuantity=$('inventoryQuantity'),inventoryQtyMinus=$('inventoryQtyMinus'),inventoryQtyPlus=$('inventoryQtyPlus'),inventoryCategoryNote=$('inventoryCategoryNote'),saveInventoryItemButton=$('saveInventoryItemButton');
 const masterAddItemButton=$('masterAddItemButton'),masterSearchInput=$('masterSearchInput'),masterSearchSuggestions=$('masterSearchSuggestions');
-const masterList=$('masterList'),masterAddForm=$('masterAddForm'),masterAddItemName=$('masterAddItemName'),saveMasterItemButton=$('saveMasterItemButton');
+const masterList=$('masterList');
 const addCategoryButton=$('addCategoryButton'),categoryManagementList=$('categoryManagementList'),categoryManagementItemsList=$('categoryManagementItemsList'),categoryAddForm=$('categoryAddForm'),categoryNameInput=$('categoryNameInput'),saveCategoryButton=$('saveCategoryButton');
 const restrictionList=$('restrictionList'),restrictionStoreButtons=$('restrictionStoreButtons'),restrictionStoreList=$('restrictionStoreList');
 const restrictionForm=$('restrictionForm'),restrictionItemName=$('restrictionItemName'),restrictionItemSuggestions=$('restrictionItemSuggestions'),itemDetailCategoryField=$('itemDetailCategoryField'),itemDetailCategoryButton=$('itemDetailCategoryButton'),itemDetailCategoryText=$('itemDetailCategoryText'),itemDetailInventoryQuantity=$('itemDetailInventoryQuantity'),itemDetailLastPurchasedField=$('itemDetailLastPurchasedField'),itemDetailLastPurchased=$('itemDetailLastPurchased'),saveRestrictionButton=$('saveRestrictionButton'),itemDetailShoppingListIcon=$('itemDetailShoppingListIcon'),addRestrictionItemToShoppingButton=$('addRestrictionItemToShoppingButton'),deleteRestrictionItemButton=$('deleteRestrictionItemButton');
@@ -445,7 +432,7 @@ function enableLiveItemCapitalization(input){
   input.addEventListener('input',()=>{const start=input.selectionStart,end=input.selectionEnd,updated=capitalizeItemWords(input.value);if(updated===input.value)return;input.value=updated;if(typeof start==='number'&&typeof end==='number'){try{input.setSelectionRange(start,end)}catch(_){}}});
   input.addEventListener('blur',()=>{input.value=normalizeItemName(input.value)})
 }
-[itemNameInput,inventoryItemName,masterAddItemName,restrictionItemName,categoryNameInput].forEach(enableLiveItemCapitalization)
+[itemNameInput,inventoryItemName,restrictionItemName,categoryNameInput].forEach(enableLiveItemCapitalization)
 function normalizedKey(value){return normalizeItemName(value).toLocaleLowerCase()}
 function unwrapRpcResult(result){return Array.isArray(result)?result[0]:result}
 function sortByName(items){return items.sort((a,b)=>a.item_name.localeCompare(b.item_name,undefined,{sensitivity:'base',numeric:true}))}
@@ -487,7 +474,7 @@ async function loadInventoryCategories(force=false){
 }
 function invalidateInventoryCategories(){inventoryCategoriesCache=null}
 
-function showOnly(screen){[homeScreen,shoppingMenuScreen,addScreen,storeScreen,shoppingMoveScreen,purchaseCategoryScreen,itemCategoryScreen,inventoryScreen,inventoryCategoryScreen,inventoryAddScreen,adminScreen,masterListScreen,masterAddScreen,categoryManagementScreen,categoryManagementItemsScreen,categoryAddScreen,restrictionsScreen,restrictionsByItemScreen,restrictionsByStoreScreen,restrictionStoreScreen,restrictionEditScreen].forEach(s=>s.hidden=s!==screen)}
+function showOnly(screen){[homeScreen,shoppingMenuScreen,addScreen,storeScreen,shoppingMoveScreen,purchaseCategoryScreen,itemCategoryScreen,inventoryScreen,inventoryCategoryScreen,inventoryAddScreen,adminScreen,masterListScreen,categoryManagementScreen,categoryManagementItemsScreen,categoryAddScreen,restrictionsScreen,restrictionsByItemScreen,restrictionsByStoreScreen,restrictionStoreScreen,restrictionEditScreen].forEach(s=>s.hidden=s!==screen)}
 
 function showToast(message,isError=false,duration=3200){
   clearTimeout(toastTimer);pendingUndo=null;toastMessage.textContent=message;toastUndoButton.hidden=true;toastUndoButton.disabled=false;toast.classList.toggle('error',isError);toast.classList.add('show');
@@ -672,7 +659,6 @@ function goCategoryManagementItems(category){
 function goCategoryManagementItemDetail(itemName,category){if(!INVENTORY_CATEGORIES[category])return;restrictionReturnHash='#category-management/category/'+encodeURIComponent(category);location.hash='#restriction/edit/'+encodeURIComponent(itemName)}
 function goCategoryAdd(){location.hash='#category-management/add'}
 function goMasterList(){location.hash='#master'}
-function goMasterAdd(name=''){pendingMasterAddName=normalizeItemName(name);location.hash='#master/add'}
 function goMasterRestriction(name){
   if(location.hash==='#master'){
     masterListReturnScrollY=Math.max(0,window.scrollY||document.documentElement.scrollTop||0);
@@ -756,10 +742,6 @@ function route(){
     movingShoppingItem=null;currentStore=null;lockedAddStore=null;showOnly(adminScreen);pageTitle.textContent='Admin';backButton.hidden=false;return;
   }
 
-  if(hash==='#master/add'){
-    movingShoppingItem=null;currentStore=null;lockedAddStore=null;restrictionFromMaster=false;showOnly(masterAddScreen);pageTitle.textContent='Add Master Item';backButton.hidden=false;masterAddItemName.value=pendingMasterAddName||'';pendingMasterAddName=null;setTimeout(()=>masterAddItemName.focus(),80);return;
-  }
-
   if(hash.startsWith('#master/restriction/')){
     let name='';try{name=decodeURIComponent(hash.slice('#master/restriction/'.length))}catch(_){goMasterList();return}
     movingShoppingItem=null;currentStore=null;lockedAddStore=null;restrictionFromMaster=true;restrictionReturnHash='#master';showOnly(restrictionEditScreen);pageTitle.textContent='Item Detail';backButton.hidden=false;loadMasterItemRestriction(name);return;
@@ -802,7 +784,26 @@ headerHomeButton.addEventListener('click',goHome);
 addItemButton.addEventListener('click',goAdd);goShoppingButton.addEventListener('click',goShopping);inventoryButton.addEventListener('click',goInventory);adminButton.addEventListener('click',goAdmin);itemsByStoreButton.addEventListener('click',goRestrictionsByStore);masterListButton.addEventListener('click',goMasterList);categoryManagementButton.addEventListener('click',goCategoryManagement);addCategoryButton.addEventListener('click',goCategoryAdd);restrictionsByItemButton.addEventListener('click',goRestrictionsByItem);restrictionsByStoreButton.addEventListener('click',goRestrictionsByStore);addRestrictionButton.addEventListener('click',goNewRestriction);
 document.querySelectorAll('.store-button').forEach(button=>button.addEventListener('click',()=>goStore(button.dataset.store,'#shopping')));
 storeAddItemButton.addEventListener('click',()=>{if(currentStore&&STORES[currentStore])goAddForStore(currentStore)});
-masterAddItemButton.addEventListener('click',()=>goMasterAdd(masterSearchInput.value));
+masterAddItemButton.addEventListener('click',async()=>{
+  const itemName=normalizeItemName(masterSearchInput.value);masterSearchInput.value=itemName;hideSuggestions(masterSearchSuggestions);
+  if(!itemName){showToast('Type an item name in Search Master List first.',true);masterSearchInput.focus();return}
+  if(normalizedKey(itemName)==='case of water'){showToast('Case of Water is already a permanent shopping item.',true);return}
+  masterAddItemButton.disabled=true;masterAddItemButton.textContent='Adding…';
+  try{
+    const items=await fetchMasterItems(true);
+    const existing=items.find(item=>normalizedKey(item.item_name)===normalizedKey(itemName));
+    if(existing){goMasterRestriction(existing.item_name);return}
+    const result=unwrapRpcResult(await api('/rest/v1/rpc/remember_master_item',{method:'POST',body:JSON.stringify({p_item_name:itemName})}));
+    if(result?.remembered===false){
+      if(result.reason==='empty'||result.reason==='too_long'){showToast('Please enter a valid item name.',true);return}
+      showToast('Could not add the item to the Master List.',true);return;
+    }
+    invalidateMasterItems();
+    goMasterRestriction(itemName);
+    setTimeout(()=>showToast(`${itemName} added to the Master List. Set its details, then save.`),80);
+  }catch(error){console.error(error);showToast('Could not add the item to the Master List.',true)}
+  finally{masterAddItemButton.disabled=false;masterAddItemButton.textContent='Add Item'}
+});
 
 async function loadHomeCounts(){
   const counts={sams_costco:1,walmart:0,alcohol:0,amazon:0};
@@ -1002,29 +1003,6 @@ inventoryAddForm.addEventListener('submit',async event=>{
 async function deleteInventoryItem(item,row,button,currentQuantity){
   try{await api('/rest/v1/inventory_items?id=eq.'+encodeURIComponent(item.id),{method:'DELETE',headers:{Prefer:'return=minimal'}});invalidateInventorySearch();row.remove();showUndoToast({...item,quantity:currentQuantity},'inventory');if(!inventoryList.querySelector('.db-row'))appendEmpty(inventoryList,'No items in this category yet.')}catch(error){console.error(error);button.disabled=false;showToast('Could not remove the inventory item.',true)}
 }
-
-/* ADD MASTER ITEM */
-masterAddForm.addEventListener('submit',async event=>{
-  event.preventDefault();
-  const itemName=normalizeItemName(masterAddItemName.value);masterAddItemName.value=itemName;
-  if(!itemName){showToast('Please enter an item.',true);masterAddItemName.focus();return}
-  if(normalizedKey(itemName)==='case of water'){showToast('Case of Water is already a permanent shopping item.',true);return}
-  saveMasterItemButton.disabled=true;saveMasterItemButton.textContent='Adding…';
-  try{
-    const items=await fetchMasterItems(true);
-    if(items.some(item=>normalizedKey(item.item_name)===normalizedKey(itemName))){showToast(`${itemName} is already in the Master List.`,true);return}
-    const result=unwrapRpcResult(await api('/rest/v1/rpc/remember_master_item',{method:'POST',body:JSON.stringify({p_item_name:itemName})}));
-    if(result?.remembered===false){
-      if(result.reason==='empty'||result.reason==='too_long'){showToast('Please enter a valid item name.',true);return}
-      showToast('Could not add the item to the Master List.',true);return;
-    }
-    invalidateMasterItems();
-    restrictionReturnHash='#master';
-    history.replaceState(null,'','#master/restriction/'+encodeURIComponent(itemName));
-    route();
-    setTimeout(()=>showToast(`${itemName} added to the Master List. Set its details, then save.`),80);
-  }catch(error){console.error(error);showToast('Could not add the item to the Master List.',true)}finally{saveMasterItemButton.disabled=false;saveMasterItemButton.textContent='Add to Master List'}
-});
 
 /* MASTER LIST */
 async function fetchInventoryQuantityMap(){
