@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.56 -->
-<meta name="app-version" content="1.0.56">
+<!-- APP VERSION: 1.0.57 -->
+<meta name="app-version" content="1.0.57">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.56">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.56">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.57">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.57">
 
 <style>
 :root{
@@ -89,7 +89,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.56" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.57" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -102,7 +102,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.0.56</div>
+    <div class="version-label">v1.0.57</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -354,7 +354,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 <script>
 'use strict';
 
-const APP_VERSION='1.0.56';
+const APP_VERSION='1.0.57';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -1174,17 +1174,17 @@ async function loadRestrictionsByStore(store){
 }
 function renderRestrictionsByStore(items){restrictionStoreList.innerHTML='';if(!items.length){appendEmpty(restrictionStoreList,'No items are available at this store.');return}items.forEach(item=>restrictionStoreList.appendChild(createRestrictionRow(item)))}
 function clearRestrictionChecks(){document.querySelectorAll('input[name="allowedStore"]').forEach(c=>c.checked=false)}
-function clearRestrictionForm(){editingRestrictionOriginalName=null;restrictionFromMaster=false;itemDetailCategory=null;restrictionItemName.readOnly=false;restrictionItemName.value='';itemDetailCategoryField.hidden=true;itemDetailCategoryText.textContent='Choose Category';itemDetailInventoryQuantity.textContent='0';itemDetailShoppingListIcon.hidden=true;itemDetailShoppingListIcon.dataset.store='';itemDetailShoppingListIcon.dataset.itemName='';hideSuggestions(restrictionItemSuggestions);clearRestrictionChecks();deleteRestrictionItemButton.hidden=true;addRestrictionItemToShoppingButton.hidden=true;saveRestrictionButton.disabled=false;saveRestrictionButton.textContent='Save Restriction'}
+function clearRestrictionForm(){editingRestrictionOriginalName=null;restrictionFromMaster=false;itemDetailCategory=null;restrictionItemName.readOnly=false;restrictionItemName.value='';itemDetailCategoryField.hidden=true;itemDetailCategoryText.textContent='Choose Category';itemDetailInventoryQuantity.textContent='0';itemDetailShoppingListIcon.hidden=true;itemDetailShoppingListIcon.dataset.store='';itemDetailShoppingListIcon.dataset.itemName='';addRestrictionItemToShoppingButton.textContent='Add to List';hideSuggestions(restrictionItemSuggestions);clearRestrictionChecks();deleteRestrictionItemButton.hidden=true;addRestrictionItemToShoppingButton.hidden=true;saveRestrictionButton.disabled=false;saveRestrictionButton.textContent='Save Restriction'}
 async function loadItemDetail(itemName){
   const requestedName=normalizeItemName(itemName);
-  restrictionItemName.readOnly=false;restrictionItemName.value=requestedName;itemDetailCategoryField.hidden=false;itemDetailCategory=null;itemDetailCategoryText.textContent='Loading…';itemDetailInventoryQuantity.textContent='Loading…';itemDetailShoppingListIcon.hidden=true;itemDetailShoppingListIcon.dataset.store='';itemDetailShoppingListIcon.dataset.itemName='';hideSuggestions(restrictionItemSuggestions);clearRestrictionChecks();deleteRestrictionItemButton.hidden=false;addRestrictionItemToShoppingButton.hidden=false;saveRestrictionButton.textContent='Save Changes';
+  restrictionItemName.readOnly=false;restrictionItemName.value=requestedName;itemDetailCategoryField.hidden=false;itemDetailCategory=null;itemDetailCategoryText.textContent='Loading…';itemDetailInventoryQuantity.textContent='Loading…';itemDetailShoppingListIcon.hidden=true;itemDetailShoppingListIcon.dataset.store='';itemDetailShoppingListIcon.dataset.itemName='';addRestrictionItemToShoppingButton.textContent='Add to List';hideSuggestions(restrictionItemSuggestions);clearRestrictionChecks();deleteRestrictionItemButton.hidden=false;addRestrictionItemToShoppingButton.hidden=false;saveRestrictionButton.textContent='Save Changes';
   try{
     const [items,rows,inventoryItems,shoppingStores]=await Promise.all([fetchMasterItems(true),fetchRestrictionRows(),fetchInventoryItemMap(),fetchShoppingStoreMap()]);
     const key=normalizedKey(requestedName),masterItem=items.find(item=>normalizedKey(item.item_name)===key);
     if(!masterItem){showToast('That item no longer exists.',true);goRestrictionReturn();return}
     const display=masterItem.item_name,matches=rows.filter(r=>normalizedKey(r.item_name)===key),inventoryItem=inventoryItems.get(key)||null,shoppingStore=shoppingStores.get(key)||null;
     editingRestrictionOriginalName=display;restrictionItemName.value=display;itemDetailCategory=inventoryItem?.category&&INVENTORY_CATEGORIES[inventoryItem.category]?inventoryItem.category:null;itemDetailCategoryText.textContent=itemDetailCategory?INVENTORY_CATEGORIES[itemDetailCategory]:'Choose Category';itemDetailInventoryQuantity.textContent=String(Number(inventoryItem?.quantity)||0);
-    if(shoppingStore){itemDetailShoppingListIcon.hidden=false;itemDetailShoppingListIcon.dataset.store=shoppingStore;itemDetailShoppingListIcon.dataset.itemName=display;itemDetailShoppingListIcon.setAttribute('aria-label',`Open ${display} on ${STORES[shoppingStore]}`);itemDetailShoppingListIcon.title=`On ${STORES[shoppingStore]}`}
+    if(shoppingStore){itemDetailShoppingListIcon.hidden=false;itemDetailShoppingListIcon.dataset.store=shoppingStore;itemDetailShoppingListIcon.dataset.itemName=display;itemDetailShoppingListIcon.setAttribute('aria-label',`Open ${display} on ${STORES[shoppingStore]}`);itemDetailShoppingListIcon.title=`On ${STORES[shoppingStore]}`;addRestrictionItemToShoppingButton.textContent='Modify List'}
     if(matches.length){matches.forEach(r=>{const c=document.querySelector(`input[name="allowedStore"][value="${r.allowed_store}"]`);if(c)c.checked=true});}
     else{document.querySelectorAll('input[name="allowedStore"]').forEach(c=>c.checked=true)}
   }catch(error){console.error(error);itemDetailCategoryText.textContent='Choose Category';itemDetailInventoryQuantity.textContent='—';itemDetailShoppingListIcon.hidden=true;showToast('Could not load this item.',true);goRestrictionReturn()}
@@ -1236,6 +1236,8 @@ itemDetailShoppingListIcon.addEventListener('click',()=>{
 addRestrictionItemToShoppingButton.addEventListener('click',()=>{
   const itemName=normalizeItemName(editingRestrictionOriginalName||restrictionItemName.value);
   if(!itemName){showToast('Please enter an item first.',true);return}
+  const shoppingStore=itemDetailShoppingListIcon.dataset.store;
+  if(shoppingStore&&STORES[shoppingStore]){goStoreAndFocus(shoppingStore,itemName);return}
   goAddWithItem(itemName,restrictionFromMaster?(restrictionReturnHash||'#master'):null);
 });
 restrictionForm.addEventListener('submit',async event=>{
