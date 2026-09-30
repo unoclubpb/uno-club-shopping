@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.69 -->
-<meta name="app-version" content="1.0.69">
+<!-- APP VERSION: 1.0.70 -->
+<meta name="app-version" content="1.0.70">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.69">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.69">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.70">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.70">
 
 <style>
 :root{
@@ -97,7 +97,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.69" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.70" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -110,7 +110,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.0.69</div>
+    <div class="version-label">v1.0.70</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -333,7 +333,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 <script>
 'use strict';
 
-const APP_VERSION='1.0.69';
+const APP_VERSION='1.0.70';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -841,7 +841,17 @@ function createPermanentWaterRow(){
   const row=document.createElement('div');row.className='item-row permanent-row';row.dataset.itemKey=normalizedKey('Case of Water');const wrap=document.createElement('div'),name=document.createElement('div'),note=document.createElement('div'),qty=document.createElement('div'),spacer=document.createElement('div');name.className='item-name';name.textContent='Case of Water';note.className='fixed-note';note.textContent='Always on list';wrap.append(name,note);qty.className='qty-fixed';qty.textContent='1';row.append(wrap,qty,spacer);return row;
 }
 function createShoppingItemRow(item,restrictionRows){
-  return createDataItemRow(item,1,newQ=>updateQuantity('shopping_items',item.id,newQ),(row,button,q)=>deleteShoppingItem(item,row,button,q),null,()=>goShoppingItemDetail(item.item_name),(row,button)=>purchaseShoppingItem(item,row,button));
+  return createDataItemRow(
+    item,
+    0,
+    newQ=>updateQuantity('shopping_items',item.id,newQ),
+    null,
+    null,
+    ()=>goShoppingItemDetail(item.item_name),
+    (row,button)=>purchaseShoppingItem(item,row,button),
+    null,
+    (row,previousQuantity)=>removeShoppingItemAtZero(item,row,previousQuantity)
+  );
 }
 function createInventoryItemRow(item,shoppingStore=null){
   const isOnShoppingList=shoppingStore&&STORES[shoppingStore];
@@ -872,13 +882,33 @@ function createInventoryItemRow(item,shoppingStore=null){
   }
   return row;
 }
-function createDataItemRow(item,minQuantity,saveQuantity,deleteHandler,afterSaveQuantity=null,itemNameClickHandler=null,purchaseHandler=null,zeroAddHandler=null){
+function createDataItemRow(item,minQuantity,saveQuantity,deleteHandler,afterSaveQuantity=null,itemNameClickHandler=null,purchaseHandler=null,zeroAddHandler=null,zeroQuantityHandler=null){
   const row=document.createElement('div');row.className='item-row db-row';row.dataset.id=item.id;row.dataset.itemKey=normalizedKey(item.item_name);
   let name;if(typeof itemNameClickHandler==='function'){name=document.createElement('button');name.type='button';name.className='clickable-item-name';name.addEventListener('click',itemNameClickHandler)}else{name=document.createElement('div');name.className='item-name'}name.textContent=item.item_name;
   const control=document.createElement('div');control.className='qty-control';const minus=document.createElement('button'),qty=document.createElement('input'),plus=document.createElement('button');minus.type=plus.type='button';minus.className=plus.className='qty-step-button';minus.textContent='−';plus.textContent='+';qty.className='qty-input';qty.type='number';qty.min=String(minQuantity);qty.max='9999';qty.step='1';qty.inputMode='numeric';qty.value=item.quantity;qty.dataset.savedValue=String(item.quantity);
   let zeroAddButton=null;
   const getQty=()=>getBoundedQuantity(qty,minQuantity);const refresh=()=>{const v=getQty();minus.disabled=v<=minQuantity;plus.disabled=v>=9999;if(zeroAddButton)zeroAddButton.hidden=false};
-  const save=async()=>{const oldV=Number.parseInt(qty.dataset.savedValue,10),newV=getQty();qty.value=newV;if(newV===oldV){refresh();return true}minus.disabled=plus.disabled=qty.disabled=true;let ok=false;try{await saveQuantity(newV);qty.dataset.savedValue=String(newV);ok=true}catch(error){console.error(error);qty.value=oldV;showToast('Could not update the quantity.',true)}qty.disabled=false;refresh();if(!ok)return false;const handled=typeof afterSaveQuantity==='function'&&afterSaveQuantity(oldV,newV)===true;if(!handled)showToast('Quantity updated.');return true};
+  const save=async()=>{
+    const oldV=Number.parseInt(qty.dataset.savedValue,10),newV=getQty();
+    qty.value=newV;
+    if(newV===oldV){refresh();return true}
+    if(newV===0&&typeof zeroQuantityHandler==='function'){
+      minus.disabled=plus.disabled=qty.disabled=true;
+      let result=null;
+      try{result=await zeroQuantityHandler(row,oldV)}catch(error){console.error(error);showToast('Could not remove the item.',true)}
+      if(result?.removed===true)return false;
+      const restore=Number.isInteger(result?.restoreQuantity)?result.restoreQuantity:Math.max(1,oldV);
+      qty.value=restore;qty.dataset.savedValue=String(restore);qty.disabled=false;refresh();return false;
+    }
+    minus.disabled=plus.disabled=qty.disabled=true;
+    let ok=false;
+    try{await saveQuantity(newV);qty.dataset.savedValue=String(newV);ok=true}catch(error){console.error(error);qty.value=oldV;showToast('Could not update the quantity.',true)}
+    qty.disabled=false;refresh();
+    if(!ok)return false;
+    const handled=typeof afterSaveQuantity==='function'&&afterSaveQuantity(oldV,newV)===true;
+    if(!handled)showToast('Quantity updated.');
+    return true;
+  };
   minus.addEventListener('click',async()=>{const v=getQty();if(v<=minQuantity)return;qty.value=v-1;await save()});plus.addEventListener('click',async()=>{const v=getQty();if(v>=9999)return;qty.value=v+1;await save()});qty.addEventListener('focus',()=>qty.select());qty.addEventListener('input',refresh);qty.addEventListener('change',save);control.append(minus,qty,plus);refresh();
   const actions=document.createElement('div');actions.className='row-actions';
   if(typeof purchaseHandler==='function'){
@@ -893,9 +923,29 @@ function createDataItemRow(item,minQuantity,saveQuantity,deleteHandler,afterSave
   refresh();row.append(name,control,actions);return row;
 }
 async function updateQuantity(table,id,quantity){await api(`/rest/v1/${table}?id=eq.${encodeURIComponent(id)}`,{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify({quantity})})}
-async function deleteShoppingItem(item,row,button,currentQuantity){
-  if(!window.confirm('Are you sure you want to delete this item without purchasing?')){button.disabled=false;return}
-  try{await api('/rest/v1/shopping_items?id=eq.'+encodeURIComponent(item.id),{method:'DELETE',headers:{Prefer:'return=minimal'}});row.remove();showUndoToast({...item,quantity:currentQuantity},'shopping');loadHomeCounts();if(!storeList.querySelector('.db-row'))appendEmpty(storeList,currentStore==='sams_costco'?'No other items on this list.':'No items on this list.')}catch(error){console.error(error);button.disabled=false;showToast('Could not remove the item.',true)}
+async function removeShoppingItemAtZero(item,row,previousQuantity){
+  if(!window.confirm('Are you sure you want to remove this item without purchasing?')){
+    try{
+      if(previousQuantity!==1)await updateQuantity('shopping_items',item.id,1);
+      return{removed:false,restoreQuantity:1};
+    }catch(error){
+      console.error(error);
+      showToast('Could not restore the quantity.',true);
+      return{removed:false,restoreQuantity:previousQuantity};
+    }
+  }
+  try{
+    await api('/rest/v1/shopping_items?id=eq.'+encodeURIComponent(item.id),{method:'DELETE',headers:{Prefer:'return=minimal'}});
+    row.remove();
+    showUndoToast({...item,quantity:previousQuantity},'shopping');
+    loadHomeCounts();
+    if(!storeList.querySelector('.db-row'))appendEmpty(storeList,currentStore==='sams_costco'?'No other items on this list.':'No items on this list.');
+    return{removed:true};
+  }catch(error){
+    console.error(error);
+    showToast('Could not remove the item.',true);
+    return{removed:false,restoreQuantity:previousQuantity};
+  }
 }
 
 async function purchaseShoppingItem(item,row,button){
