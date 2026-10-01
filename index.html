@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.75 -->
-<meta name="app-version" content="1.0.75">
+<!-- APP VERSION: 1.0.76 -->
+<meta name="app-version" content="1.0.76">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.75">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.75">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.76">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.76">
 
 <style>
 :root{
@@ -47,7 +47,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 #inventoryButton{background:var(--green);box-shadow:0 5px 14px rgba(33,140,79,.24)}#inventoryButton:active{background:var(--green-dark)}
 #adminButton{background:var(--red);box-shadow:0 5px 14px rgba(198,40,40,.24)}#adminButton:active{background:var(--red-dark)}
 #masterListButton{background:var(--green);box-shadow:0 5px 14px rgba(33,140,79,.24)}#masterListButton:active{background:var(--green-dark)}
-#masterListButton,#itemsByStoreButton,#categoryManagementButton{min-height:124px}
+#masterListButton,#itemsByStoreButton,#categoryManagementButton,#untrackedInventoryButton{min-height:124px}
 #restrictionStoreButtons .category-button{min-height:124px}
 #inventoryButton,#goShoppingButton{min-height:186px}
 #adminButton{min-height:124px}
@@ -98,7 +98,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.75" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.76" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -111,7 +111,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.0.75</div>
+    <div class="version-label">v1.0.76</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -233,6 +233,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
       <button id="masterListButton" class="main-button" type="button">Master Item List</button>
       <button id="itemsByStoreButton" class="main-button" type="button">Items by Store</button>
       <button id="categoryManagementButton" class="main-button" type="button">Category Management</button>
+      <button id="untrackedInventoryButton" class="main-button" type="button">Items Not Tracked in Inventory</button>
     </div>
   </section>
 
@@ -249,6 +250,10 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
       </div>
     </div>
     <div id="masterList" class="master-list"></div>
+  </section>
+
+  <section id="untrackedInventoryScreen" class="screen" hidden>
+    <div id="untrackedInventoryList" class="restriction-list"></div>
   </section>
 
   <section id="categoryManagementScreen" class="screen" hidden>
@@ -341,7 +346,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 <script>
 'use strict';
 
-const APP_VERSION='1.0.75';
+const APP_VERSION='1.0.76';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -390,12 +395,12 @@ let currentCategoryManagementCategory=null;
 const $=id=>document.getElementById(id);
 const homeScreen=$('homeScreen'),shoppingMenuScreen=$('shoppingMenuScreen'),addScreen=$('addScreen'),storeScreen=$('storeScreen'),purchaseCategoryScreen=$('purchaseCategoryScreen'),itemCategoryScreen=$('itemCategoryScreen');
 const inventoryScreen=$('inventoryScreen'),inventoryCategoryScreen=$('inventoryCategoryScreen'),inventoryAddScreen=$('inventoryAddScreen');
-const adminScreen=$('adminScreen'),masterListScreen=$('masterListScreen'),categoryManagementScreen=$('categoryManagementScreen'),categoryManagementItemsScreen=$('categoryManagementItemsScreen'),categoryAddScreen=$('categoryAddScreen');
+const adminScreen=$('adminScreen'),masterListScreen=$('masterListScreen'),untrackedInventoryScreen=$('untrackedInventoryScreen'),categoryManagementScreen=$('categoryManagementScreen'),categoryManagementItemsScreen=$('categoryManagementItemsScreen'),categoryAddScreen=$('categoryAddScreen');
 const restrictionsByStoreScreen=$('restrictionsByStoreScreen');
 const restrictionStoreScreen=$('restrictionStoreScreen'),restrictionEditScreen=$('restrictionEditScreen');
 const pageTitle=$('pageTitle'),backButton=$('backButton'),headerHomeButton=$('headerHomeButton');
 const addItemButton=$('addItemButton'),goShoppingButton=$('goShoppingButton'),storeAddItemButton=$('storeAddItemButton'),inventoryButton=$('inventoryButton');
-const adminButton=$('adminButton'),itemsByStoreButton=$('itemsByStoreButton'),masterListButton=$('masterListButton'),categoryManagementButton=$('categoryManagementButton');
+const adminButton=$('adminButton'),itemsByStoreButton=$('itemsByStoreButton'),masterListButton=$('masterListButton'),categoryManagementButton=$('categoryManagementButton'),untrackedInventoryButton=$('untrackedInventoryButton');
 const addItemForm=$('addItemForm'),itemNameInput=$('itemName'),itemNameSuggestions=$('itemNameSuggestions'),quantityInput=$('quantity'),addQtyMinus=$('addQtyMinus'),addQtyPlus=$('addQtyPlus'),storeSelect=$('store'),lockedStoreNote=$('lockedStoreNote'),saveItemButton=$('saveItemButton');
 const storeList=$('storeList');
 const purchaseItemName=$('purchaseItemName'),purchaseCategoryButtons=$('purchaseCategoryButtons');
@@ -404,7 +409,7 @@ const inventorySearchInput=$('inventorySearchInput'),inventorySearchSuggestions=
 const inventoryCategoryButtons=$('inventoryCategoryButtons'),inventoryList=$('inventoryList');
 const inventoryAddForm=$('inventoryAddForm'),inventoryItemName=$('inventoryItemName'),inventoryItemSuggestions=$('inventoryItemSuggestions'),inventoryQuantity=$('inventoryQuantity'),inventoryQtyMinus=$('inventoryQtyMinus'),inventoryQtyPlus=$('inventoryQtyPlus'),inventoryCategoryNote=$('inventoryCategoryNote'),saveInventoryItemButton=$('saveInventoryItemButton');
 const masterAddItemButton=$('masterAddItemButton'),masterSearchInput=$('masterSearchInput'),masterSearchSuggestions=$('masterSearchSuggestions');
-const masterList=$('masterList');
+const masterList=$('masterList'),untrackedInventoryList=$('untrackedInventoryList');
 const addCategoryButton=$('addCategoryButton'),categoryManagementList=$('categoryManagementList'),categoryManagementItemsList=$('categoryManagementItemsList'),categoryAddForm=$('categoryAddForm'),categoryNameInput=$('categoryNameInput'),saveCategoryButton=$('saveCategoryButton');
 const restrictionStoreButtons=$('restrictionStoreButtons'),restrictionStoreList=$('restrictionStoreList');
 const restrictionForm=$('restrictionForm'),restrictionItemName=$('restrictionItemName'),restrictionItemSuggestions=$('restrictionItemSuggestions'),itemDetailCategoryField=$('itemDetailCategoryField'),itemDetailCategoryButton=$('itemDetailCategoryButton'),itemDetailCategoryText=$('itemDetailCategoryText'),itemDetailInventoryQuantity=$('itemDetailInventoryQuantity'),itemDetailLastPurchasedField=$('itemDetailLastPurchasedField'),itemDetailLastPurchased=$('itemDetailLastPurchased'),trackInventoryCheckbox=$('trackInventoryCheckbox'),saveRestrictionButton=$('saveRestrictionButton'),itemDetailShoppingListIcon=$('itemDetailShoppingListIcon'),addRestrictionItemToShoppingButton=$('addRestrictionItemToShoppingButton'),deleteRestrictionItemButton=$('deleteRestrictionItemButton');
@@ -644,6 +649,13 @@ function goInventoryItemDetail(itemName,category){if(!INVENTORY_CATEGORIES[categ
 function goItemCategoryChooser(itemName){const cleanName=normalizeItemName(itemName);if(!cleanName)return;itemCategoryReturnHash=location.hash||'#master';location.hash='#item-category/'+encodeURIComponent(cleanName)}
 function goInventoryAdd(category){location.hash='#inventory-add/'+category}
 function goAdmin(){location.hash='#admin'}
+function goUntrackedInventory(){location.hash='#untracked-inventory'}
+function goUntrackedInventoryItemDetail(itemName){
+  const cleanName=normalizeItemName(itemName);
+  if(!cleanName)return;
+  restrictionReturnHash='#untracked-inventory';
+  location.hash='#restriction/edit/'+encodeURIComponent(cleanName);
+}
 function goCategoryManagement(){restoreCategoryManagementScroll=false;location.hash='#category-management'}
 function goCategoryManagementItems(category){
   if(!INVENTORY_CATEGORIES[category])return;
@@ -733,6 +745,10 @@ function route(){
     currentStore=null;lockedAddStore=null;showOnly(adminScreen);pageTitle.textContent='Admin';backButton.hidden=false;return;
   }
 
+  if(hash==='#untracked-inventory'){
+    currentStore=null;lockedAddStore=null;editingRestrictionOriginalName=null;restrictionFromMaster=false;showOnly(untrackedInventoryScreen);pageTitle.textContent='Items Not Tracked in Inventory';backButton.hidden=false;loadUntrackedInventoryItems();return;
+  }
+
   if(hash.startsWith('#master/restriction/')){
     let name='';try{name=decodeURIComponent(hash.slice('#master/restriction/'.length))}catch(_){goMasterList();return}
     currentStore=null;lockedAddStore=null;restrictionFromMaster=true;restrictionReturnHash='#master';showOnly(restrictionEditScreen);pageTitle.textContent='Item Detail';backButton.hidden=false;loadMasterItemRestriction(name);return;
@@ -765,7 +781,7 @@ backButton.addEventListener('click',()=>{
 });
 headerHomeButton.addEventListener('click',goHome);
 
-addItemButton.addEventListener('click',goAdd);goShoppingButton.addEventListener('click',goShopping);inventoryButton.addEventListener('click',goInventory);adminButton.addEventListener('click',goAdmin);itemsByStoreButton.addEventListener('click',goRestrictionsByStore);masterListButton.addEventListener('click',goMasterList);categoryManagementButton.addEventListener('click',goCategoryManagement);addCategoryButton.addEventListener('click',goCategoryAdd);
+addItemButton.addEventListener('click',goAdd);goShoppingButton.addEventListener('click',goShopping);inventoryButton.addEventListener('click',goInventory);adminButton.addEventListener('click',goAdmin);itemsByStoreButton.addEventListener('click',goRestrictionsByStore);masterListButton.addEventListener('click',goMasterList);categoryManagementButton.addEventListener('click',goCategoryManagement);untrackedInventoryButton.addEventListener('click',goUntrackedInventory);addCategoryButton.addEventListener('click',goCategoryAdd);
 document.querySelectorAll('.store-button').forEach(button=>button.addEventListener('click',()=>goStore(button.dataset.store,'#shopping')));
 storeAddItemButton.addEventListener('click',()=>{if(currentStore&&STORES[currentStore])goAddForStore(currentStore)});
 masterAddItemButton.addEventListener('click',async()=>{
@@ -1040,6 +1056,39 @@ inventoryAddForm.addEventListener('submit',async event=>{
     showToast('Could not add the inventory item.',true);
   }catch(error){console.error(error);showToast('Could not add the inventory item.',true)}finally{saveInventoryItemButton.disabled=false;saveInventoryItemButton.textContent='Add to Inventory'}
 });
+
+/* ITEMS NOT TRACKED IN INVENTORY */
+function createUntrackedInventoryRow(item){
+  const button=document.createElement('button'),name=document.createElement('div'),chevron=document.createElement('div');
+  button.type='button';
+  button.className='restriction-row';
+  name.className='restriction-name';
+  name.textContent=item.item_name;
+  chevron.className='restriction-chevron';
+  chevron.textContent='›';
+  button.append(name,chevron);
+  button.addEventListener('click',()=>goUntrackedInventoryItemDetail(item.item_name));
+  return button;
+}
+function renderUntrackedInventoryItems(items){
+  untrackedInventoryList.innerHTML='';
+  if(!items.length){
+    appendEmpty(untrackedInventoryList,'All Master Items are currently tracked in Inventory.');
+    return;
+  }
+  sortByName(items).forEach(item=>untrackedInventoryList.appendChild(createUntrackedInventoryRow(item)));
+}
+async function loadUntrackedInventoryItems(){
+  untrackedInventoryList.innerHTML='<div class="loading-state">Loading…</div>';
+  try{
+    const items=await fetchMasterItems(true);
+    if(location.hash!=='#untracked-inventory')return;
+    renderUntrackedInventoryItems(items.filter(item=>item.track_inventory===false));
+  }catch(error){
+    console.error(error);
+    if(location.hash==='#untracked-inventory')untrackedInventoryList.innerHTML='<div class="error-state">Could not load untracked items.</div>';
+  }
+}
 
 /* MASTER LIST */
 async function fetchInventoryQuantityMap(){
@@ -1357,7 +1406,7 @@ deleteRestrictionItemButton.addEventListener('click',async()=>{
 let appReady=false;
 window.addEventListener('hashchange',()=>{if(appReady)route()});
 document.addEventListener('visibilitychange',()=>{
-  if(document.hidden)return;if(currentStore){loadStoreItems(true);return}if(currentInventoryCategory&&location.hash.startsWith('#inventory/')){loadInventoryItems(true);return}if(location.hash==='#inventory'){renderInventoryCategories();fetchInventorySearchItems(true).catch(error=>console.error(error));return}if(currentCategoryManagementCategory&&location.hash.startsWith('#category-management/category/')){loadCategoryManagementItems(currentCategoryManagementCategory);return}if(location.hash==='#category-management'){loadCategoryManagement();return}if(location.hash==='#master'){loadMasterList();return}if(currentRestrictionStore&&location.hash.startsWith('#restrictions/store/')){loadRestrictionsByStore(currentRestrictionStore);return}if(location.hash==='#home'||location.hash==='#shopping')loadHomeCounts();
+  if(document.hidden)return;if(currentStore){loadStoreItems(true);return}if(currentInventoryCategory&&location.hash.startsWith('#inventory/')){loadInventoryItems(true);return}if(location.hash==='#inventory'){renderInventoryCategories();fetchInventorySearchItems(true).catch(error=>console.error(error));return}if(currentCategoryManagementCategory&&location.hash.startsWith('#category-management/category/')){loadCategoryManagementItems(currentCategoryManagementCategory);return}if(location.hash==='#category-management'){loadCategoryManagement();return}if(location.hash==='#untracked-inventory'){loadUntrackedInventoryItems();return}if(location.hash==='#master'){loadMasterList();return}if(currentRestrictionStore&&location.hash.startsWith('#restrictions/store/')){loadRestrictionsByStore(currentRestrictionStore);return}if(location.hash==='#home'||location.hash==='#shopping')loadHomeCounts();
 });
 if(!location.hash)history.replaceState(null,'','#home');
 (async()=>{
