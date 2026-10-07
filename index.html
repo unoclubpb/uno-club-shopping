@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.89 -->
-<meta name="app-version" content="1.0.89">
+<!-- APP VERSION: 1.0.90 -->
+<meta name="app-version" content="1.0.90">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.89">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.89">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.90">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.90">
 
 <style>
 :root{
@@ -143,8 +143,8 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .qty-control .qty-step-button:last-of-type:active{background:var(--green-dark)}
 
 /* Dark gray = administrative / neutral */
-#adminButton{background:var(--action-gray);color:var(--white);box-shadow:0 5px 14px rgba(75,85,99,.24)}
-#adminButton:active{background:var(--action-gray-dark)}
+#adminButton{background:#000;color:var(--white);box-shadow:0 5px 14px rgba(0,0,0,.24)}
+#adminButton:active{background:#222}
 
 /* Red = delete / destructive / decrease */
 .delete-button,.delete-item-button{background:var(--red);color:var(--white)}
@@ -171,7 +171,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.89" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.90" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -184,7 +184,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.0.89</div>
+    <div class="version-label">v1.0.90</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -457,7 +457,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 <script>
 'use strict';
 
-const APP_VERSION='1.0.89';
+const APP_VERSION='1.0.90';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
