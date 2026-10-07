@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.90 -->
-<meta name="app-version" content="1.0.90">
+<!-- APP VERSION: 1.0.91 -->
+<meta name="app-version" content="1.0.91">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.90">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.90">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.91">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.91">
 
 <style>
 :root{
@@ -163,6 +163,129 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .toast-undo-button{background:var(--attention-amber);color:var(--black);border-color:var(--black)}
 .toast-undo-button:active{background:var(--attention-amber-dark)}
 
+
+/* v1.0.91 — authoritative semantic button colors */
+
+/* BLUE = navigation / view */
+#inventoryButton,
+#goShoppingButton,
+#masterListButton,
+#itemsByStoreButton,
+#categoryManagementButton,
+#untrackedInventoryButton,
+#restrictionStoreButtons .category-button,
+.category-button,
+.item-detail-category-button {
+  background: var(--blue) !important;
+  color: var(--white) !important;
+}
+#inventoryButton:active,
+#goShoppingButton:active,
+#masterListButton:active,
+#itemsByStoreButton:active,
+#categoryManagementButton:active,
+#untrackedInventoryButton:active,
+#restrictionStoreButtons .category-button:active,
+.category-button:active,
+.item-detail-category-button:active {
+  background: var(--blue-dark) !important;
+}
+
+/* GREEN = add / save / complete / positive */
+#addItemButton,
+#storeAddItemButton,
+#masterAddItemButton,
+#saveItemButton,
+#saveRestrictionButton,
+.store-add-button,
+.inventory-add-button,
+.master-add-button,
+.category-add-button,
+.purchase-button,
+.item-detail-add-list-button:not(.modify-list-mode),
+.shopping-modify-save-button {
+  background: var(--green) !important;
+  color: var(--white) !important;
+}
+#addItemButton:active,
+#storeAddItemButton:active,
+#masterAddItemButton:active,
+#saveItemButton:active,
+#saveRestrictionButton:active,
+.store-add-button:active,
+.inventory-add-button:active,
+.master-add-button:active,
+.category-add-button:active,
+.purchase-button:active,
+.item-detail-add-list-button:not(.modify-list-mode):active,
+.shopping-modify-save-button:active {
+  background: var(--green-dark) !important;
+}
+.qty-control .qty-step-button:last-of-type {
+  background: var(--green) !important;
+  color: var(--white) !important;
+}
+.qty-control .qty-step-button:last-of-type:active {
+  background: var(--green-dark) !important;
+}
+
+/* BLACK = administration */
+#adminButton {
+  background: #000 !important;
+  color: #fff !important;
+}
+#adminButton:active { background: #222 !important; }
+
+/* RED = remove / delete / decrease */
+.delete-button,
+.delete-item-button {
+  background: var(--red) !important;
+  color: var(--white) !important;
+}
+.delete-button:active,
+.delete-item-button:active {
+  background: var(--red-dark) !important;
+}
+.qty-control .qty-step-button:first-of-type {
+  background: var(--red) !important;
+  color: var(--white) !important;
+}
+.qty-control .qty-step-button:first-of-type:active {
+  background: var(--red-dark) !important;
+}
+
+/* ORANGE = modify / edit */
+.item-detail-add-list-button.modify-list-mode {
+  background: var(--edit-orange) !important;
+  color: var(--white) !important;
+}
+.item-detail-add-list-button.modify-list-mode:active {
+  background: var(--edit-orange-dark) !important;
+}
+
+/* AMBER = undo / temporary attention */
+.toast-undo-button {
+  background: var(--attention-amber) !important;
+  color: #000 !important;
+  border-color: #000 !important;
+}
+.toast-undo-button:active {
+  background: var(--attention-amber-dark) !important;
+}
+
+/* GRAY = neutral/back controls */
+.back-button,
+.back-arrow,
+button[aria-label="Back"] {
+  background: var(--action-gray) !important;
+  color: #fff !important;
+}
+.back-button:active,
+.back-arrow:active,
+button[aria-label="Back"]:active {
+  background: var(--action-gray-dark) !important;
+}
+
 </style>
 </head>
 <body>
@@ -171,7 +294,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.90" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.91" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -184,7 +307,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.0.90</div>
+    <div class="version-label">v1.0.91</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -457,7 +580,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 <script>
 'use strict';
 
-const APP_VERSION='1.0.90';
+const APP_VERSION='1.0.91';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
