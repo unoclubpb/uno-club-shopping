@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.91 -->
-<meta name="app-version" content="1.0.91">
+<!-- APP VERSION: 1.0.92 -->
+<meta name="app-version" content="1.0.92">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.91">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.91">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.92">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.92">
 
 <style>
 :root{
@@ -164,7 +164,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .toast-undo-button:active{background:var(--attention-amber-dark)}
 
 
-/* v1.0.91 — authoritative semantic button colors */
+/* v1.0.92 — authoritative semantic button colors */
 
 /* BLUE = navigation / view */
 #inventoryButton,
@@ -286,6 +286,14 @@ button[aria-label="Back"]:active {
   background: var(--action-gray-dark) !important;
 }
 
+.purchase-history-link{display:block;width:100%;border:0;background:transparent;text-align:left;padding:4px 0;cursor:pointer;font-family:inherit}
+.purchase-history-link:not(:disabled) .item-detail-last-purchased-date{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+.purchase-history-link:not(:disabled)::after{content:'View all purchase dates ›';display:block;font-size:12px;color:var(--blue);font-weight:700;margin-top:3px}
+.purchase-history-link:disabled{cursor:default}
+.purchase-history-title{margin:0 0 14px;font-size:19px}
+.purchase-history-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 0;border-bottom:1px solid var(--border);font-size:15px}
+.purchase-history-row:last-child{border-bottom:0}
+.purchase-history-row span{font-size:12px;color:var(--muted);text-align:right}
 </style>
 </head>
 <body>
@@ -294,7 +302,7 @@ button[aria-label="Back"]:active {
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.91" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.92" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -307,7 +315,7 @@ button[aria-label="Back"]:active {
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.0.91</div>
+    <div class="version-label">v1.0.92</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -512,6 +520,13 @@ button[aria-label="Back"]:active {
 
   <section id="restrictionStoreScreen" class="screen" hidden><div id="restrictionStoreList" class="restriction-list"></div></section>
 
+  <section id="purchaseHistoryScreen" class="screen" hidden>
+    <div class="card form-card">
+      <h2 id="purchaseHistoryItemName" class="purchase-history-title"></h2>
+      <div id="purchaseHistoryList" class="purchase-history-list">Loading…</div>
+    </div>
+  </section>
+
   <section id="restrictionEditScreen" class="screen" hidden>
     <div class="card form-card">
       <form id="restrictionForm">
@@ -538,10 +553,10 @@ button[aria-label="Back"]:active {
                 <div id="itemDetailInventoryQuantity" class="readonly-value item-detail-inventory-value">0</div>
                 <button id="itemDetailInventoryPlus" class="qty-step-button" type="button" aria-label="Increase inventory">+</button>
               </div>
-              <div id="itemDetailLastPurchasedField" class="item-detail-last-purchased">
+              <button id="itemDetailLastPurchasedField" class="item-detail-last-purchased purchase-history-link" type="button" disabled aria-label="View purchase history">
                 <div class="item-detail-last-purchased-label">Last Purchased</div>
                 <div id="itemDetailLastPurchased" class="item-detail-last-purchased-date">No purchase recorded yet</div>
-              </div>
+              </button>
             </div>
             <div class="item-detail-shopping-actions">
               <button id="itemDetailShoppingListIcon" class="master-list-icon item-detail-shopping-icon" type="button" aria-label="Open item on shopping list" title="On shopping list" hidden>
@@ -580,9 +595,10 @@ button[aria-label="Back"]:active {
 <script>
 'use strict';
 
-const APP_VERSION='1.0.91';
+const APP_VERSION='1.0.92';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
+const purchaseHistoryScreen=$('purchaseHistoryScreen'),purchaseHistoryItemName=$('purchaseHistoryItemName'),purchaseHistoryList=$('purchaseHistoryList');
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY='sb_publishable_gh0acghIDuQDgh24ZIm8Mw_c1bpvIM6';
 const STORES={sams_costco:'Sam’s / CostCo',walmart:'Grocery Store',alcohol:'Package Store',amazon:'Amazon'};
@@ -708,7 +724,7 @@ function invalidateInventoryCategories(){inventoryCategoriesCache=null}
 
 function showOnly(screen){
   document.body.classList.toggle('home-static',screen===homeScreen);
-  [homeScreen,shoppingMenuScreen,addScreen,storeScreen,purchaseCategoryScreen,shoppingModifyScreen,itemCategoryScreen,inventoryScreen,inventoryCategoryScreen,inventoryAddScreen,adminScreen,masterListScreen,untrackedInventoryScreen,categoryManagementScreen,categoryManagementItemsScreen,categoryAddScreen,restrictionsByStoreScreen,restrictionStoreScreen,restrictionEditScreen].forEach(s=>s.hidden=s!==screen)
+  [homeScreen,shoppingMenuScreen,addScreen,storeScreen,purchaseCategoryScreen,shoppingModifyScreen,itemCategoryScreen,inventoryScreen,inventoryCategoryScreen,inventoryAddScreen,adminScreen,masterListScreen,untrackedInventoryScreen,categoryManagementScreen,categoryManagementItemsScreen,categoryAddScreen,restrictionsByStoreScreen,restrictionStoreScreen,restrictionEditScreen,purchaseHistoryScreen].forEach(s=>s.hidden=s!==screen)
 }
 
 function showToast(message,isError=false,duration=3200){
@@ -1015,6 +1031,11 @@ function route(){
     const store=hash.slice('#restrictions/store/'.length);if(!STORES[store]){goRestrictionsByStore();return}currentStore=null;lockedAddStore=null;editingRestrictionOriginalName=null;restrictionFromMaster=false;currentRestrictionStore=store;showOnly(restrictionStoreScreen);pageTitle.textContent=STORES[store];backButton.hidden=false;loadRestrictionsByStore(store);return;
   }
 
+
+  if(hash.startsWith('#purchase-history/')){
+    let name='';try{name=decodeURIComponent(hash.slice('#purchase-history/'.length))}catch(_){goHome();return}
+    showOnly(purchaseHistoryScreen);pageTitle.textContent='Purchase History';backButton.hidden=false;loadPurchaseHistory(name);return;
+  }
 
   if(hash.startsWith('#restriction/edit/')){
     let name='';try{name=decodeURIComponent(hash.slice('#restriction/edit/'.length))}catch(_){goRestrictionReturn();return}
@@ -1632,6 +1653,30 @@ function renderRestrictionsByStore(items){restrictionStoreList.innerHTML='';if(!
 async function fetchLastPurchase(itemName){
   return unwrapRpcResult(await api('/rest/v1/rpc/get_last_purchase',{method:'POST',body:JSON.stringify({p_item_name:normalizeItemName(itemName)})}));
 }
+async function loadPurchaseHistory(itemName){
+  purchaseHistoryItemName.textContent=itemName;
+  purchaseHistoryList.textContent='Loading…';
+  try{
+    const records=unwrapRpcResult(await api('/rest/v1/rpc/get_purchase_history',{method:'POST',body:JSON.stringify({p_item_name:normalizeItemName(itemName)})}));
+    if(location.hash!=='#purchase-history/'+encodeURIComponent(itemName))return;
+    purchaseHistoryList.replaceChildren();
+    if(!Array.isArray(records)||!records.length){purchaseHistoryList.textContent='No purchases recorded yet.';return}
+    records.forEach(record=>{
+      const row=document.createElement('div');row.className='purchase-history-row';
+      const date=document.createElement('strong');date.textContent=formatPurchaseDate(record.purchased_at);
+      row.appendChild(date);
+      const details=document.createElement('span');
+      const store=STORES[record.store]||record.store||'';
+      details.textContent=[store,Number(record.quantity)>0?`Qty: ${record.quantity}`:''].filter(Boolean).join(' · ');
+      row.appendChild(details);purchaseHistoryList.appendChild(row);
+    });
+  }catch(error){console.error(error);purchaseHistoryList.textContent='Could not load purchase history.'}
+}
+itemDetailLastPurchasedField.addEventListener('click',()=>{
+  if(itemDetailLastPurchasedField.disabled)return;
+  const name=normalizeItemName(editingRestrictionOriginalName||restrictionItemName.value);
+  if(name)location.hash='#purchase-history/'+encodeURIComponent(name);
+});
 function formatPurchaseDate(value){
   const date=new Date(value);
   if(!value||Number.isNaN(date.getTime()))return'No purchase recorded yet';
@@ -1676,7 +1721,7 @@ trackInventoryCheckbox.addEventListener('change',refreshTrackInventoryUi);
 
 async function loadItemDetail(itemName){
   const requestedName=normalizeItemName(itemName);
-  restrictionItemName.readOnly=false;restrictionItemName.value=requestedName;itemDetailCategoryField.hidden=false;itemDetailCategory=null;itemDetailCategoryText.textContent='Loading…';itemDetailInventoryQuantity.dataset.quantity='0';itemDetailInventoryQuantity.dataset.inventoryId='';itemDetailInventoryQuantity.dataset.saving='false';itemDetailInventoryQuantity.textContent='Loading…';itemDetailLastPurchasedField.hidden=false;itemDetailLastPurchased.textContent='Loading…';trackInventoryCheckbox.checked=true;trackInventoryCheckbox.disabled=false;itemDetailShoppingListIcon.hidden=true;itemDetailShoppingListIcon.dataset.store='';itemDetailShoppingListIcon.dataset.itemName='';addRestrictionItemToShoppingButton.textContent='Add to List';addRestrictionItemToShoppingButton.classList.remove('modify-list-mode');hideSuggestions(restrictionItemSuggestions);clearRestrictionChecks();deleteRestrictionItemButton.hidden=false;addRestrictionItemToShoppingButton.hidden=false;saveRestrictionButton.textContent='Save Changes';saveRestrictionButton.classList.add('save-changes-mode');
+  restrictionItemName.readOnly=false;restrictionItemName.value=requestedName;itemDetailCategoryField.hidden=false;itemDetailCategory=null;itemDetailCategoryText.textContent='Loading…';itemDetailInventoryQuantity.dataset.quantity='0';itemDetailInventoryQuantity.dataset.inventoryId='';itemDetailInventoryQuantity.dataset.saving='false';itemDetailInventoryQuantity.textContent='Loading…';itemDetailLastPurchasedField.hidden=false;itemDetailLastPurchased.textContent='Loading…';itemDetailLastPurchasedField.disabled=true;trackInventoryCheckbox.checked=true;trackInventoryCheckbox.disabled=false;itemDetailShoppingListIcon.hidden=true;itemDetailShoppingListIcon.dataset.store='';itemDetailShoppingListIcon.dataset.itemName='';addRestrictionItemToShoppingButton.textContent='Add to List';addRestrictionItemToShoppingButton.classList.remove('modify-list-mode');hideSuggestions(restrictionItemSuggestions);clearRestrictionChecks();deleteRestrictionItemButton.hidden=false;addRestrictionItemToShoppingButton.hidden=false;saveRestrictionButton.textContent='Save Changes';saveRestrictionButton.classList.add('save-changes-mode');
   try{
     const lastPurchasePromise=fetchLastPurchase(requestedName).catch(error=>{console.error(error);return null});
     const [items,rows,inventoryItems,shoppingStores,lastPurchase]=await Promise.all([fetchMasterItems(true),fetchRestrictionRows(),fetchInventoryItemMap(),fetchShoppingStoreMap(),lastPurchasePromise]);
@@ -1685,7 +1730,7 @@ async function loadItemDetail(itemName){
     const display=masterItem.item_name,matches=rows.filter(r=>normalizedKey(r.item_name)===key),inventoryItem=inventoryItems.get(key)||null,shoppingStore=shoppingStores.get(key)||null;
     const trackInventory=masterItem.track_inventory!==false;
     const savedCategory=masterItem.category&&INVENTORY_CATEGORIES[masterItem.category]?masterItem.category:(inventoryItem?.category&&INVENTORY_CATEGORIES[inventoryItem.category]?inventoryItem.category:null);
-    editingRestrictionOriginalName=display;restrictionItemName.value=display;itemDetailCategory=savedCategory;itemDetailCategoryText.textContent=itemDetailCategory?INVENTORY_CATEGORIES[itemDetailCategory]:'Choose Category';itemDetailInventoryQuantity.dataset.quantity=String(Number(inventoryItem?.quantity)||0);itemDetailInventoryQuantity.dataset.inventoryId=inventoryItem?.id||'';itemDetailInventoryQuantity.dataset.saving='false';trackInventoryCheckbox.checked=trackInventory;refreshTrackInventoryUi();itemDetailLastPurchased.textContent=lastPurchase?.found?formatPurchaseDate(lastPurchase.purchased_at):(lastPurchase===null?'Unavailable':'No purchase recorded yet');
+    editingRestrictionOriginalName=display;restrictionItemName.value=display;itemDetailCategory=savedCategory;itemDetailCategoryText.textContent=itemDetailCategory?INVENTORY_CATEGORIES[itemDetailCategory]:'Choose Category';itemDetailInventoryQuantity.dataset.quantity=String(Number(inventoryItem?.quantity)||0);itemDetailInventoryQuantity.dataset.inventoryId=inventoryItem?.id||'';itemDetailInventoryQuantity.dataset.saving='false';trackInventoryCheckbox.checked=trackInventory;refreshTrackInventoryUi();itemDetailLastPurchased.textContent=lastPurchase?.found?formatPurchaseDate(lastPurchase.purchased_at):(lastPurchase===null?'Unavailable':'No purchase recorded yet');itemDetailLastPurchasedField.disabled=!lastPurchase?.found;
     if(shoppingStore){itemDetailShoppingListIcon.hidden=false;itemDetailShoppingListIcon.dataset.store=shoppingStore;itemDetailShoppingListIcon.dataset.itemName=display;itemDetailShoppingListIcon.setAttribute('aria-label',`Open ${display} on ${STORES[shoppingStore]}`);itemDetailShoppingListIcon.title=`On ${STORES[shoppingStore]}`;addRestrictionItemToShoppingButton.textContent='Modify List';addRestrictionItemToShoppingButton.classList.add('modify-list-mode')}
     if(matches.length){matches.forEach(r=>{const c=document.querySelector(`input[name="allowedStore"][value="${r.allowed_store}"]`);if(c)c.checked=true});}
     else{document.querySelectorAll('input[name="allowedStore"]').forEach(c=>c.checked=true)}
