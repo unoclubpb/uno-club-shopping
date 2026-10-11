@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.92 -->
-<meta name="app-version" content="1.0.92">
+<!-- APP VERSION: 1.0.93 -->
+<meta name="app-version" content="1.0.93">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.92">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.92">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.93">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.93">
 
 <style>
 :root{
@@ -164,7 +164,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .toast-undo-button:active{background:var(--attention-amber-dark)}
 
 
-/* v1.0.92 — authoritative semantic button colors */
+/* v1.0.93 — authoritative semantic button colors */
 
 /* BLUE = navigation / view */
 #inventoryButton,
@@ -302,7 +302,7 @@ button[aria-label="Back"]:active {
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.92" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.93" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -315,7 +315,7 @@ button[aria-label="Back"]:active {
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.0.92</div>
+    <div class="version-label">v1.0.93</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -595,10 +595,9 @@ button[aria-label="Back"]:active {
 <script>
 'use strict';
 
-const APP_VERSION='1.0.92';
+const APP_VERSION='1.0.93';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
-const purchaseHistoryScreen=$('purchaseHistoryScreen'),purchaseHistoryItemName=$('purchaseHistoryItemName'),purchaseHistoryList=$('purchaseHistoryList');
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY='sb_publishable_gh0acghIDuQDgh24ZIm8Mw_c1bpvIM6';
 const STORES={sams_costco:'Sam’s / CostCo',walmart:'Grocery Store',alcohol:'Package Store',amazon:'Amazon'};
@@ -644,6 +643,7 @@ let restoreCategoryManagementScroll=false;
 let currentCategoryManagementCategory=null;
 
 const $=id=>document.getElementById(id);
+const purchaseHistoryScreen=$('purchaseHistoryScreen'),purchaseHistoryItemName=$('purchaseHistoryItemName'),purchaseHistoryList=$('purchaseHistoryList');
 const homeScreen=$('homeScreen'),shoppingMenuScreen=$('shoppingMenuScreen'),addScreen=$('addScreen'),storeScreen=$('storeScreen'),purchaseCategoryScreen=$('purchaseCategoryScreen'),shoppingModifyScreen=$('shoppingModifyScreen'),itemCategoryScreen=$('itemCategoryScreen');
 const inventoryScreen=$('inventoryScreen'),inventoryCategoryScreen=$('inventoryCategoryScreen'),inventoryAddScreen=$('inventoryAddScreen');
 const adminScreen=$('adminScreen'),masterListScreen=$('masterListScreen'),untrackedInventoryScreen=$('untrackedInventoryScreen'),categoryManagementScreen=$('categoryManagementScreen'),categoryManagementItemsScreen=$('categoryManagementItemsScreen'),categoryAddScreen=$('categoryAddScreen');
