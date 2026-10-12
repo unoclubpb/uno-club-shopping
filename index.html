@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.97 -->
-<meta name="app-version" content="1.0.97">
+<!-- APP VERSION: 1.0.98 -->
+<meta name="app-version" content="1.0.98">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.97">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.97">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.98">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.98">
 
 <style>
 :root{
@@ -164,7 +164,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .toast-undo-button:active{background:var(--attention-amber-dark)}
 
 
-/* v1.0.97 — authoritative semantic button colors */
+/* v1.0.98 — authoritative semantic button colors */
 
 /* BLUE = navigation / view */
 #inventoryButton,
@@ -309,7 +309,7 @@ button[aria-label="Back"]:active {
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.97" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.98" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -318,11 +318,12 @@ button[aria-label="Back"]:active {
     <div class="button-stack">
       <button id="inventoryButton" class="main-button" type="button">Current Inventory</button>
       <button id="goShoppingButton" class="main-button" type="button">Shopping List</button>
+      <button id="oneTimeListsButton" class="main-button" type="button">One-Time Lists</button>
     </div>
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.0.97</div>
+    <div class="version-label">v1.0.98</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -469,6 +470,45 @@ button[aria-label="Back"]:active {
     </div>
   </section>
 
+  <section id="oneTimeListsScreen" class="screen" hidden>
+    <div class="screen-header">
+      <h2>One-Time Lists</h2>
+    </div>
+    <div class="one-time-tabs">
+      <button id="activeOneTimeTab" class="small-button" type="button">Active Lists</button>
+      <button id="pastOneTimeTab" class="small-button" type="button">Past Lists</button>
+    </div>
+    <div id="newOneTimeListRow" class="input-row">
+      <input id="newOneTimeListName" type="text" placeholder="New list name">
+      <button id="createOneTimeListButton" class="small-button" type="button">Create List</button>
+    </div>
+    <div id="oneTimeListsContainer"></div>
+  </section>
+
+  <section id="oneTimeListDetailScreen" class="screen" hidden>
+    <div class="screen-header">
+      <h2 id="oneTimeListTitle">One-Time List</h2>
+    </div>
+    <div id="oneTimeActiveControls">
+      <div class="input-row">
+        <div class="one-time-item-entry">
+          <input id="oneTimeItemInput" type="text" autocomplete="off" placeholder="Add an item">
+          <div id="oneTimeAutocomplete" class="one-time-autocomplete"></div>
+          <div id="oneTimeInventoryStatus" class="one-time-inventory-status"></div>
+        </div>
+        <select id="oneTimeStoreSelect">
+          <option value="sams_costco">Sam’s / CostCo</option>
+          <option value="walmart">Grocery Store</option>
+          <option value="alcohol">Package Store</option>
+          <option value="amazon">Amazon</option>
+        </select>
+        <button id="addOneTimeItemButton" class="small-button" type="button">Add Item</button>
+      </div>
+    </div>
+    <div id="oneTimeItemsContainer"></div>
+    <div id="oneTimeListActions"></div>
+  </section>
+
   <section id="adminScreen" class="screen" hidden>
     <div class="category-stack">
       <button id="masterListButton" class="main-button" type="button">Master Item List</button>
@@ -602,7 +642,7 @@ button[aria-label="Back"]:active {
 <script>
 'use strict';
 
-const APP_VERSION='1.0.97';
+const APP_VERSION='1.0.98';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
