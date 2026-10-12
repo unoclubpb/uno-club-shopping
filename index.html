@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.1.02 -->
-<meta name="app-version" content="1.1.02">
+<!-- APP VERSION: 1.1.03 -->
+<meta name="app-version" content="1.1.03">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.1.02">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.1.02">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.1.03">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.1.03">
 
 <style>
 :root{
@@ -164,7 +164,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .toast-undo-button:active{background:var(--attention-amber-dark)}
 
 
-/* v1.1.02 — authoritative semantic button colors */
+/* v1.1.03 — authoritative semantic button colors */
 
 /* BLUE = navigation / view */
 #inventoryButton,
@@ -324,7 +324,7 @@ button[aria-label="Back"]:active {
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.1.02" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.1.03" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -337,7 +337,7 @@ button[aria-label="Back"]:active {
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.1.02</div>
+    <div class="version-label">v1.1.03</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -632,7 +632,7 @@ button[aria-label="Back"]:active {
 <script>
 'use strict';
 
-const APP_VERSION='1.1.02';
+const APP_VERSION='1.1.03';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -1916,17 +1916,14 @@ async function addSimpleOneTimeItem(){
   const input=$('simpleOneTimeInput'),name=normalizeItemName(input.value);if(!name)return;
   const button=$('simpleOneTimeAddButton');button.disabled=true;
   try{
-    const rows=await api('/rest/v1/simple_one_time_items',{method:'POST',headers:{Prefer:'return=representation'},body:JSON.stringify({item_name:name,checked:false})});
+    await api('/rest/v1/simple_one_time_items',{method:'POST',body:JSON.stringify({item_name:name,checked:false})});
     input.value='';
-    if(Array.isArray(rows)&&rows[0]){
-      const box=$('simpleOneTimeList');
-      if(box.querySelector('.empty'))box.innerHTML='';
-      const x=rows[0];
-      box.insertAdjacentHTML('beforeend',`<button class="simple-one-time-row" type="button" data-simple-one-time="${x.id}" data-checked="0"><span class="simple-check"></span><span>${escapeHtml(x.item_name)}</span></button>`);
-    }else await loadSimpleOneTimeList();
+    await loadSimpleOneTimeList();
     input.focus();
-  }catch(error){console.error(error);showToast('Could not add that item.',true);}
-  finally{button.disabled=false;}
+  }catch(error){
+    console.error('One-Time List add failed:',error);
+    showToast(error?.message?`Could not add item: ${error.message}`:'Could not add that item.',true,5000);
+  }finally{button.disabled=false;}
 }
 async function toggleSimpleOneTimeItem(id,checked){
   try{
