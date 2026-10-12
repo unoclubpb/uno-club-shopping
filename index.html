@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.1.00 -->
-<meta name="app-version" content="1.1.00">
+<!-- APP VERSION: 1.1.01 -->
+<meta name="app-version" content="1.1.01">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.1.00">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.1.00">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.1.01">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.1.01">
 
 <style>
 :root{
@@ -164,7 +164,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .toast-undo-button:active{background:var(--attention-amber-dark)}
 
 
-/* v1.1.00 — authoritative semantic button colors */
+/* v1.1.01 — authoritative semantic button colors */
 
 /* BLUE = navigation / view */
 #inventoryButton,
@@ -301,7 +301,12 @@ button[aria-label="Back"]:active {
 .one-time-autocomplete-item{padding:10px 12px;border-bottom:1px solid #eee;cursor:pointer}
 .one-time-autocomplete-item:last-child{border-bottom:0}
 .one-time-inventory-status{font-size:13px;font-weight:700;margin-top:5px;min-height:17px}
-#shoppingMenuScreen .button-stack{gap:8px}#shoppingMenuScreen .main-button{min-height:46px;padding:10px 14px;margin:0}#shoppingMenuScreen .shopping-menu-spacer{height:2px!important;min-height:2px!important}#oneTimeListsButton{background:#6f42c1!important;color:#fff!important}.simple-one-time-card{padding:14px}.simple-one-time-add-row{display:flex;gap:8px;margin-bottom:14px}.simple-one-time-add-row input{flex:1}#simpleOneTimeAddButton{background:var(--green);color:#fff}.simple-one-time-row{width:100%;display:flex;align-items:center;gap:12px;text-align:left;background:#fff;border:0;border-bottom:1px solid #ddd;padding:13px 6px;font-size:16px}.simple-check{width:26px;height:26px;border:2px solid #999;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:800;flex:0 0 26px}.simple-one-time-row.checked .simple-check{background:var(--green);border-color:var(--green);color:#fff}.simple-one-time-actions{display:flex;gap:10px;margin-top:18px}.simple-one-time-actions button{flex:1;border:0;border-radius:10px;padding:12px;font-weight:700}#simpleOneTimeSaveButton{background:var(--green);color:#fff}#simpleOneTimeClearButton{background:var(--red);color:#fff}</style>
+#shoppingMenuScreen .button-stack{gap:8px}#shoppingMenuScreen .main-button{min-height:46px;padding:10px 14px;margin:0}#shoppingMenuScreen .shopping-menu-spacer{height:2px!important;min-height:2px!important}#oneTimeListsButton{background:#6f42c1!important;color:#fff!important}.simple-one-time-card{padding:14px}.simple-one-time-add-row{display:flex;gap:8px;margin-bottom:14px}.simple-one-time-add-row input{flex:1}#simpleOneTimeAddButton{background:var(--green);color:#fff}.simple-one-time-row{width:100%;display:flex;align-items:center;gap:12px;text-align:left;background:#fff;border:0;border-bottom:1px solid #ddd;padding:13px 6px;font-size:16px}.simple-check{width:26px;height:26px;border:2px solid #999;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:800;flex:0 0 26px}.simple-one-time-row.checked .simple-check{background:var(--green);border-color:var(--green);color:#fff}.simple-one-time-actions{display:flex;gap:10px;margin-top:18px}.simple-one-time-actions button{flex:1;border:0;border-radius:10px;padding:12px;font-weight:700}#simpleOneTimeSaveButton{background:var(--green);color:#fff}#simpleOneTimeClearButton{background:var(--red);color:#fff}
+#shoppingMenuScreen .store-button{
+  min-height:92px;
+}
+
+</style>
 </head>
 <body>
 
@@ -309,7 +314,7 @@ button[aria-label="Back"]:active {
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.1.00" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.1.01" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -322,7 +327,7 @@ button[aria-label="Back"]:active {
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.1.00</div>
+    <div class="version-label">v1.1.01</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -618,7 +623,7 @@ button[aria-label="Back"]:active {
 <script>
 'use strict';
 
-const APP_VERSION='1.1.00';
+const APP_VERSION='1.1.01';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
