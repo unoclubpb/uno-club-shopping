@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.94 -->
-<meta name="app-version" content="1.0.94">
+<!-- APP VERSION: 1.0.95 -->
+<meta name="app-version" content="1.0.95">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.94">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.94">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.95">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.95">
 
 <style>
 :root{
@@ -164,7 +164,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .toast-undo-button:active{background:var(--attention-amber-dark)}
 
 
-/* v1.0.94 — authoritative semantic button colors */
+/* v1.0.95 — authoritative semantic button colors */
 
 /* BLUE = navigation / view */
 #inventoryButton,
@@ -294,7 +294,7 @@ button[aria-label="Back"]:active {
 .purchase-history-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 0;border-bottom:1px solid var(--border);font-size:15px}
 .purchase-history-row:last-child{border-bottom:0}
 .purchase-history-row span{font-size:12px;color:var(--muted);text-align:right}
-</style>
+.one-time-tabs{display:flex;gap:10px;justify-content:center;margin:12px 0 18px}.one-time-tabs .small-button{background:var(--blue);color:#fff}.one-time-list-card,.one-time-item-row{background:#fff;border:1px solid #d8d8d8;border-radius:12px;padding:13px;margin:10px 0}.one-time-list-card{cursor:pointer}.one-time-list-name,.one-time-item-name{font-weight:700;font-size:17px}.one-time-list-meta,.one-time-item-meta{font-size:13px;color:#666;margin-top:4px}.one-time-item-row.purchased{opacity:.65}.one-time-item-row.purchased .one-time-item-name{text-decoration:line-through}.one-time-item-top{display:flex;justify-content:space-between;gap:10px;align-items:center}.one-time-item-actions,#oneTimeListActions{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.one-time-item-actions button,#oneTimeListActions button{border:0;border-radius:8px;padding:8px 10px;font-weight:700}.one-time-purchase,.one-time-master,#createOneTimeListButton,#addOneTimeItemButton{background:var(--green)!important;color:#fff!important}.one-time-remove{background:var(--red);color:#fff}.one-time-master-badge{font-size:12px;font-weight:700;color:var(--green-dark)}</style>
 </head>
 <body>
 
@@ -302,7 +302,7 @@ button[aria-label="Back"]:active {
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.94" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.95" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -315,7 +315,7 @@ button[aria-label="Back"]:active {
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.0.94</div>
+    <div class="version-label">v1.0.95</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -595,7 +595,7 @@ button[aria-label="Back"]:active {
 <script>
 'use strict';
 
-const APP_VERSION='1.0.94';
+const APP_VERSION='1.0.95';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -1857,6 +1857,22 @@ if(!location.hash)history.replaceState(null,'','#home');
   appReady=true;
   route();
 })();
+
+let oneTimeMode='active',currentOneTimeList=null,oneTimeMasterItems=[];
+function otEsc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+function otStoreLabel(s){return ({sams:"Sam's / Costco",walmart:"Grocery Store",alcohol:"Package Store",amazon:"Amazon"})[s]||s;}
+async function loadOneTimeMasterItems(){try{oneTimeMasterItems=await api('/rest/v1/master_items?select=id,item_name,category&order=item_name.asc');}catch(e){oneTimeMasterItems=[];}const dl=$('oneTimeMasterSuggestions');if(dl)dl.innerHTML=oneTimeMasterItems.map(x=>`<option value="${otEsc(x.item_name)}"></option>`).join('');}
+async function showOneTimeLists(mode='active'){oneTimeMode=mode;await loadOneTimeMasterItems();showOnly($('oneTimeListsScreen'));$('newOneTimeListRow').style.display=mode==='active'?'flex':'none';const rows=await api(`/rest/v1/one_time_lists?select=*&status=eq.${mode}&order=${mode==='active'?'created_at':'completed_at'}.desc`);$('oneTimeListsContainer').innerHTML=rows.length?rows.map(x=>`<div class="one-time-list-card" data-ot-list="${x.id}"><div class="one-time-list-name">${otEsc(x.name)}</div><div class="one-time-list-meta">${mode==='past'&&x.completed_at?'Finished '+new Date(x.completed_at).toLocaleDateString():''}</div></div>`).join(''):`<div class="empty">${mode==='active'?'No active one-time lists.':'No past lists yet.'}</div>`;}
+async function createOneTimeList(){const name=$('newOneTimeListName').value.trim();if(!name)return;const rows=await api('/rest/v1/one_time_lists',{method:'POST',headers:{Prefer:'return=representation'},body:JSON.stringify({name,status:'active'})});$('newOneTimeListName').value='';if(rows?.[0])openOneTimeList(rows[0].id);}
+async function openOneTimeList(id){const rows=await api(`/rest/v1/one_time_lists?id=eq.${encodeURIComponent(id)}&select=*`);if(!rows.length)return;currentOneTimeList=rows[0];$('oneTimeListTitle').textContent=currentOneTimeList.name;$('oneTimeActiveControls').style.display=currentOneTimeList.status==='active'?'block':'none';showOnly($('oneTimeListDetailScreen'));await renderOneTimeItems();}
+async function renderOneTimeItems(){const rows=await api(`/rest/v1/one_time_list_items?list_id=eq.${currentOneTimeList.id}&select=*&order=created_at.asc`);$('oneTimeItemsContainer').innerHTML=rows.length?rows.map(x=>`<div class="one-time-item-row ${x.purchased_at?'purchased':''}"><div class="one-time-item-top"><div><div class="one-time-item-name">${x.purchased_at?'✓ ':''}${otEsc(x.item_name)}</div><div class="one-time-item-meta">${otEsc(otStoreLabel(x.store))}${x.quantity>1?' · Qty '+x.quantity:''}</div></div>${x.master_item_id?'<span class="one-time-master-badge">Master Item ✓</span>':''}</div>${currentOneTimeList.status==='active'?`<div class="one-time-item-actions"><button class="one-time-purchase" data-ot-purchase="${x.id}">${x.purchased_at?'Undo':'Purchased ✓'}</button>${!x.master_item_id?`<button class="one-time-master" data-ot-master="${x.id}">Add to Master List</button>`:''}<button class="one-time-remove" data-ot-remove="${x.id}">Remove</button></div>`:''}</div>`).join(''):'<div class="empty">No items on this list yet.</div>';$('oneTimeListActions').innerHTML=currentOneTimeList.status==='active'?'<button id="finishOneTimeList" style="background:var(--green);color:#fff">Finish List</button>':'<button id="reuseOneTimeList" style="background:var(--green);color:#fff">Use Again</button>';}
+async function addOneTimeItem(){const name=$('oneTimeItemInput').value.trim();if(!name)return;const master=oneTimeMasterItems.find(x=>x.item_name.toLowerCase()===name.toLowerCase());let store=$('oneTimeStoreSelect').value;if(master){try{const rs=await api(`/rest/v1/item_store_restrictions?item_name=eq.${encodeURIComponent(master.item_name)}&select=allowed_store&limit=1`);if(rs?.[0]?.allowed_store)store=rs[0].allowed_store;}catch(e){}}const finalName=master?master.item_name:name;await api('/rest/v1/one_time_list_items',{method:'POST',body:JSON.stringify({list_id:currentOneTimeList.id,item_name:finalName,master_item_id:master?.id||null,store,quantity:1})});const ex=await api(`/rest/v1/shopping_items?item_name=ilike.${encodeURIComponent(finalName)}&store=eq.${encodeURIComponent(store)}&select=id&limit=1`);if(!ex.length)await api('/rest/v1/shopping_items',{method:'POST',body:JSON.stringify({item_name:finalName,quantity:1,store})});$('oneTimeItemInput').value='';await renderOneTimeItems();}
+async function toggleOneTimePurchased(id){const rows=await api(`/rest/v1/one_time_list_items?id=eq.${id}&select=*`);if(!rows.length)return;const x=rows[0];if(x.purchased_at){await api(`/rest/v1/one_time_list_items?id=eq.${id}`,{method:'PATCH',body:JSON.stringify({purchased_at:null})});const ex=await api(`/rest/v1/shopping_items?item_name=ilike.${encodeURIComponent(x.item_name)}&store=eq.${encodeURIComponent(x.store)}&select=id&limit=1`);if(!ex.length)await api('/rest/v1/shopping_items',{method:'POST',body:JSON.stringify({item_name:x.item_name,quantity:x.quantity,store:x.store})});}else{await api(`/rest/v1/one_time_list_items?id=eq.${id}`,{method:'PATCH',body:JSON.stringify({purchased_at:new Date().toISOString()})});await api(`/rest/v1/shopping_items?item_name=ilike.${encodeURIComponent(x.item_name)}&store=eq.${encodeURIComponent(x.store)}`,{method:'DELETE'});}await renderOneTimeItems();}
+async function removeOneTimeItem(id){const rows=await api(`/rest/v1/one_time_list_items?id=eq.${id}&select=*`);if(!rows.length)return;const x=rows[0];await api(`/rest/v1/one_time_list_items?id=eq.${id}`,{method:'DELETE'});if(!x.purchased_at)await api(`/rest/v1/shopping_items?item_name=ilike.${encodeURIComponent(x.item_name)}&store=eq.${encodeURIComponent(x.store)}`,{method:'DELETE'});await renderOneTimeItems();}
+async function finishOneTimeList(){await api(`/rest/v1/one_time_lists?id=eq.${currentOneTimeList.id}`,{method:'PATCH',body:JSON.stringify({status:'past',completed_at:new Date().toISOString()})});showOneTimeLists('past');}
+async function reuseOneTimeList(){const made=await api('/rest/v1/one_time_lists',{method:'POST',headers:{Prefer:'return=representation'},body:JSON.stringify({name:currentOneTimeList.name,status:'active'})});if(!made?.[0])return;const old=await api(`/rest/v1/one_time_list_items?list_id=eq.${currentOneTimeList.id}&select=*`);for(const x of old){await api('/rest/v1/one_time_list_items',{method:'POST',body:JSON.stringify({list_id:made[0].id,item_name:x.item_name,master_item_id:x.master_item_id,store:x.store,quantity:x.quantity,purchased_at:null})});const ex=await api(`/rest/v1/shopping_items?item_name=ilike.${encodeURIComponent(x.item_name)}&store=eq.${encodeURIComponent(x.store)}&select=id&limit=1`);if(!ex.length)await api('/rest/v1/shopping_items',{method:'POST',body:JSON.stringify({item_name:x.item_name,quantity:x.quantity,store:x.store})});}openOneTimeList(made[0].id);}
+async function promoteOneTimeItem(id){const rows=await api(`/rest/v1/one_time_list_items?id=eq.${id}&select=*`);if(!rows.length)return;const x=rows[0];showOnly($('masterListScreen'));if($('masterAddItemInput')){$('masterAddItemInput').value=x.item_name;$('masterAddItemInput').focus();}else if($('addItemInput')){$('addItemInput').value=x.item_name;$('addItemInput').focus();}}
+document.addEventListener('click',e=>{if(e.target.id==='oneTimeListsButton')return showOneTimeLists('active');if(e.target.id==='activeOneTimeTab')return showOneTimeLists('active');if(e.target.id==='pastOneTimeTab')return showOneTimeLists('past');if(e.target.id==='createOneTimeListButton')return createOneTimeList();if(e.target.id==='oneTimeDetailBack')return showOneTimeLists(oneTimeMode);const card=e.target.closest('[data-ot-list]');if(card)return openOneTimeList(card.dataset.otList);if(e.target.id==='addOneTimeItemButton')return addOneTimeItem();if(e.target.dataset.otPurchase)return toggleOneTimePurchased(e.target.dataset.otPurchase);if(e.target.dataset.otRemove)return removeOneTimeItem(e.target.dataset.otRemove);if(e.target.dataset.otMaster)return promoteOneTimeItem(e.target.dataset.otMaster);if(e.target.id==='finishOneTimeList')return finishOneTimeList();if(e.target.id==='reuseOneTimeList')return reuseOneTimeList();});
 </script>
 </body>
 </html>
