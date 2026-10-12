@@ -38,9 +38,9 @@ button,input,select{font:inherit}button{touch-action:manipulation}
 .back-button[hidden]{display:none!important}.back-button:active{background:rgba(255,255,255,.12)}
 main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inset-top)) 16px calc(42px + env(safe-area-inset-bottom))}
 .screen[hidden]{display:none!important}
-#homeScreen:not([hidden]){display:grid;grid-template-rows:repeat(4,minmax(0,1fr));gap:13px;height:calc(100dvh - 146px - env(safe-area-inset-top) - env(safe-area-inset-bottom));min-height:0;overflow:hidden}
+#homeScreen:not([hidden]){display:grid;grid-template-rows:repeat(3,minmax(0,1fr));gap:13px;height:calc(100dvh - 146px - env(safe-area-inset-top) - env(safe-area-inset-bottom));min-height:0;overflow:hidden}
 #homeScreen>.button-stack,#homeScreen>.home-bottom-menu{display:contents}
-#homeScreen #inventoryButton,#homeScreen #goShoppingButton,#homeScreen #oneTimeListsButton,#homeScreen #adminButton{min-height:0;height:100%}
+#homeScreen #inventoryButton,#homeScreen #goShoppingButton,#homeScreen #adminButton{min-height:0;height:100%}
 .button-stack,.category-stack,.home-bottom-menu{display:grid;gap:13px}
 .home-bottom-menu{margin-top:auto;padding-top:22px;margin-bottom:24px}
 .shopping-menu-spacer{height:62px}
@@ -61,7 +61,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 #masterListButton{background:var(--green);box-shadow:0 5px 14px rgba(33,140,79,.24)}#masterListButton:active{background:var(--green-dark)}
 #masterListButton,#itemsByStoreButton,#categoryManagementButton,#untrackedInventoryButton{min-height:124px}
 #restrictionStoreButtons .category-button{min-height:124px}
-#inventoryButton,#goShoppingButton,#oneTimeListsButton,#adminButton{min-height:0}
+#inventoryButton,#goShoppingButton,#adminButton{min-height:0}
 #addItemButton,#storeAddItemButton,#masterAddItemButton,#saveItemButton{background:var(--yellow);color:var(--black);box-shadow:0 5px 14px rgba(242,201,76,.28)}
 #addItemButton:active,#storeAddItemButton:active,#masterAddItemButton:active,#saveItemButton:active{background:var(--yellow-dark)}
 .item-detail-add-list-button.modify-list-mode{background:var(--yellow);color:var(--black);box-shadow:0 4px 12px rgba(242,201,76,.28)}
@@ -295,17 +295,12 @@ button[aria-label="Back"]:active {
 .purchase-history-row:last-child{border-bottom:0}
 .purchase-history-row span{font-size:12px;color:var(--muted);text-align:right}
 .one-time-tabs{display:flex;gap:10px;justify-content:center;margin:12px 0 18px}.one-time-tabs .small-button{background:var(--blue);color:#fff}.one-time-list-card,.one-time-item-row{background:#fff;border:1px solid #d8d8d8;border-radius:12px;padding:13px;margin:10px 0}.one-time-list-card{cursor:pointer}.one-time-list-name,.one-time-item-name{font-weight:700;font-size:17px}.one-time-list-meta,.one-time-item-meta{font-size:13px;color:#666;margin-top:4px}.one-time-item-row.purchased{opacity:.65}.one-time-item-row.purchased .one-time-item-name{text-decoration:line-through}.one-time-item-top{display:flex;justify-content:space-between;gap:10px;align-items:center}.one-time-item-actions,#oneTimeListActions{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.one-time-item-actions button,#oneTimeListActions button{border:0;border-radius:8px;padding:8px 10px;font-weight:700}.one-time-purchase,.one-time-master,#createOneTimeListButton,#addOneTimeItemButton{background:var(--green)!important;color:#fff!important}.one-time-remove{background:var(--red);color:#fff}.one-time-master-badge{font-size:12px;font-weight:700;color:var(--green-dark)}
-/* One-Time Lists v1.0.96 */
-#oneTimeListsButton{background:var(--blue)!important;color:white!important}
-.one-time-create{display:flex;gap:10px;padding:13px;align-items:center;margin-bottom:14px;overflow:visible}
-.one-time-create input,.one-time-create select{min-width:0;flex:1;min-height:48px;padding:10px;border:1.5px solid var(--border);border-radius:10px;font-size:16px}
-.one-time-create button,.one-time-back,.one-time-tabs button{min-height:45px;padding:9px 12px;border:2px solid var(--black);border-radius:10px;font-weight:800;cursor:pointer}
-.one-time-back{background:var(--action-gray);color:#fff}
-.one-time-add{display:grid;gap:8px;align-items:stretch}.one-time-add label{font-weight:800}
-.one-time-add button{background:var(--green);color:#fff}
-.one-time-list-card{border:2px solid var(--border)}.one-time-item-actions button{min-height:42px;cursor:pointer}
-#oneTimeListActions button{min-height:48px;cursor:pointer}
-@media(max-height:620px){#homeScreen:not([hidden]){gap:8px}.home-bottom-menu{padding-top:0;margin-bottom:8px}}
+.one-time-item-entry{position:relative;flex:1;min-width:180px}
+.one-time-item-entry input{width:100%;box-sizing:border-box}
+.one-time-autocomplete{display:none;position:absolute;left:0;right:0;top:100%;z-index:30;background:#fff;border:1px solid #bbb;border-radius:0 0 10px 10px;max-height:220px;overflow-y:auto;box-shadow:0 5px 12px rgba(0,0,0,.16)}
+.one-time-autocomplete-item{padding:10px 12px;border-bottom:1px solid #eee;cursor:pointer}
+.one-time-autocomplete-item:last-child{border-bottom:0}
+.one-time-inventory-status{font-size:13px;font-weight:700;margin-top:5px;min-height:17px}
 </style>
 </head>
 <body>
@@ -323,7 +318,6 @@ button[aria-label="Back"]:active {
     <div class="button-stack">
       <button id="inventoryButton" class="main-button" type="button">Current Inventory</button>
       <button id="goShoppingButton" class="main-button" type="button">Shopping List</button>
-      <button id="oneTimeListsButton" class="main-button" type="button">One-Time Lists</button>
     </div>
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
@@ -344,21 +338,6 @@ button[aria-label="Back"]:active {
     </div>
   </section>
 
-  <section id="oneTimeListsScreen" class="screen" hidden>
-    <div class="one-time-tabs"><button id="activeOneTimeTab" class="small-button" type="button">Active Lists</button><button id="pastOneTimeTab" class="small-button" type="button">Past Lists</button></div>
-    <div id="newOneTimeListRow" class="card one-time-create"><input id="newOneTimeListName" maxlength="100" placeholder="Name your list" aria-label="List name"><button id="createOneTimeListButton" type="button">Create List</button></div>
-    <div id="oneTimeListsContainer"></div>
-  </section>
-  <section id="oneTimeListDetailScreen" class="screen" hidden>
-    <button id="oneTimeDetailBack" class="one-time-back" type="button">← All Lists</button>
-    <h2 id="oneTimeListTitle"></h2>
-    <div id="oneTimeActiveControls" class="card one-time-create one-time-add">
-      <label for="oneTimeItemInput">Item name</label><input id="oneTimeItemInput" maxlength="100" list="oneTimeMasterSuggestions" placeholder="Start typing an item" autocomplete="off"><datalist id="oneTimeMasterSuggestions"></datalist>
-      <label for="oneTimeStoreSelect">Store</label><select id="oneTimeStoreSelect"><option value="sams_costco">Sam’s / CostCo</option><option value="walmart">Grocery Store</option><option value="alcohol">Package Store</option><option value="amazon">Amazon</option></select>
-      <button id="addOneTimeItemButton" type="button">Add Item</button>
-    </div>
-    <div id="oneTimeItemsContainer"></div><div id="oneTimeListActions"></div>
-  </section>
   <section id="addScreen" class="screen" hidden>
     <div class="card form-card">
       <form id="addItemForm">
@@ -752,7 +731,7 @@ function invalidateInventoryCategories(){inventoryCategoriesCache=null}
 
 function showOnly(screen){
   document.body.classList.toggle('home-static',screen===homeScreen);
-  [homeScreen,shoppingMenuScreen,addScreen,storeScreen,purchaseCategoryScreen,shoppingModifyScreen,itemCategoryScreen,inventoryScreen,inventoryCategoryScreen,inventoryAddScreen,adminScreen,masterListScreen,untrackedInventoryScreen,categoryManagementScreen,categoryManagementItemsScreen,categoryAddScreen,restrictionsByStoreScreen,restrictionStoreScreen,restrictionEditScreen,purchaseHistoryScreen,$('oneTimeListsScreen'),$('oneTimeListDetailScreen')].forEach(s=>s.hidden=s!==screen)
+  [homeScreen,shoppingMenuScreen,addScreen,storeScreen,purchaseCategoryScreen,shoppingModifyScreen,itemCategoryScreen,inventoryScreen,inventoryCategoryScreen,inventoryAddScreen,adminScreen,masterListScreen,untrackedInventoryScreen,categoryManagementScreen,categoryManagementItemsScreen,categoryAddScreen,restrictionsByStoreScreen,restrictionStoreScreen,restrictionEditScreen,purchaseHistoryScreen].forEach(s=>s.hidden=s!==screen)
 }
 
 function showToast(message,isError=false,duration=3200){
@@ -973,8 +952,6 @@ function route(){
   const hash=location.hash||'#home';currentInventoryCategory=null;currentRestrictionStore=null;currentCategoryManagementCategory=null;clearTimeout(storeRestrictionTimer);
 
 
-  if(hash==='#one-time'||hash==='#one-time-past'){pageTitle.textContent='One-Time Lists';backButton.hidden=false;showOneTimeLists(hash==='#one-time'?'active':'past').catch(oneTimeError);return;}
-  if(hash.startsWith('#one-time-list/')){pageTitle.textContent='One-Time List';backButton.hidden=false;openOneTimeList(hash.slice('#one-time-list/'.length)).catch(oneTimeError);return;}
   if(hash==='#shopping'){
     storeReturnHash='#shopping';
     currentStore=null;lockedAddStore=null;showOnly(shoppingMenuScreen);pageTitle.textContent='Shopping List';backButton.hidden=false;loadHomeCounts();return;
@@ -1407,6 +1384,13 @@ shoppingModifyForm.addEventListener('submit',async event=>{
 
 async function purchaseShoppingItem(item,row,button){
   try{
+    const oneTimeResult=unwrapRpcResult(await api('/rest/v1/rpc/purchase_one_time_shopping_item',{method:'POST',body:JSON.stringify({p_id:item.id})}));
+    if(oneTimeResult?.purchased===true){
+      row.remove();invalidateMasterItems();invalidateInventorySearch();loadHomeCounts();
+      if(!storeList.querySelector('.db-row'))appendEmpty(storeList,currentStore==='sams_costco'?'No other items on this list.':'No items on this list.');
+      showToast(`${item.item_name} purchased for the One-Time List. Inventory was not increased.`);
+      return;
+    }
     const result=unwrapRpcResult(await api('/rest/v1/rpc/purchase_shopping_item',{method:'POST',body:JSON.stringify({p_id:item.id,p_category:null})}));
     if(result?.purchased===true){
       row.remove();invalidateMasterItems();invalidateInventorySearch();loadHomeCounts();
@@ -1888,22 +1872,75 @@ if(!location.hash)history.replaceState(null,'','#home');
   route();
 })();
 
+
+async function syncActiveOneTimePurchase(itemName,store){
+  try{
+    const active=await api('/rest/v1/one_time_lists?select=id&status=eq.active');
+    if(!active.length)return false;
+    const ids=active.map(x=>x.id).join(',');
+    const rows=await api(`/rest/v1/one_time_list_items?select=id,list_id&list_id=in.(${ids})&item_name=ilike.${encodeURIComponent(itemName)}&store=eq.${encodeURIComponent(store)}&purchased_at=is.null`);
+    if(!rows.length)return false;
+    const now=new Date().toISOString();
+    for(const row of rows)await api(`/rest/v1/one_time_list_items?id=eq.${row.id}`,{method:'PATCH',body:JSON.stringify({purchased_at:now})});
+    return true;
+  }catch(e){return false;}
+}
+
 let oneTimeMode='active',currentOneTimeList=null,oneTimeMasterItems=[];
 function otEsc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
-function oneTimeError(e){console.error(e);showToast("One-Time Lists could not load. The database tables may need setup.",true,6000)}
-function otStoreLabel(s){return STORES[s]||s;}
-async function loadOneTimeMasterItems(){try{oneTimeMasterItems=await api('/rest/v1/master_items?select=id,item_name&order=item_name.asc');}catch(e){oneTimeMasterItems=[];}const dl=$('oneTimeMasterSuggestions');if(dl)dl.innerHTML=oneTimeMasterItems.map(x=>`<option value="${otEsc(x.item_name)}"></option>`).join('');}
+function otStoreLabel(s){return ({sams:"Sam's / Costco",walmart:"Grocery Store",alcohol:"Package Store",amazon:"Amazon"})[s]||s;}
+async function loadOneTimeMasterItems(){try{oneTimeMasterItems=await api('/rest/v1/master_items?select=id,item_name,category,track_inventory&order=item_name.asc');}catch(e){oneTimeMasterItems=[];}}
+let selectedOneTimeMaster=null;
+async function showOneTimeInventory(master){
+  selectedOneTimeMaster=master||null;
+  const el=$('oneTimeInventoryStatus'); if(!el)return;
+  if(!master){el.textContent='';return;}
+  if(!master.track_inventory){el.textContent='Not Tracked';return;}
+  try{
+    const inv=await api(`/rest/v1/inventory_items?item_name=ilike.${encodeURIComponent(master.item_name)}&select=quantity&limit=1`);
+    el.textContent=`Current Inventory: ${inv?.[0]?.quantity??0}`;
+  }catch(e){el.textContent='Current Inventory: 0';}
+}
+function renderOneTimeAutocomplete(){
+  const input=$('oneTimeItemInput'),box=$('oneTimeAutocomplete'); if(!input||!box)return;
+  const q=input.value.trim().toLowerCase();
+  if(selectedOneTimeMaster && selectedOneTimeMaster.item_name.toLowerCase()!==q)showOneTimeInventory(null);
+  if(!q){box.style.display='none';box.innerHTML='';return;}
+  const matches=oneTimeMasterItems.filter(x=>x.item_name.toLowerCase().includes(q)).slice(0,8);
+  if(!matches.length){box.style.display='none';box.innerHTML='';return;}
+  box.innerHTML=matches.map(x=>`<div class="one-time-autocomplete-item" data-ot-suggest="${x.id}">${otEsc(x.item_name)}</div>`).join('');
+  box.style.display='block';
+}
+async function chooseOneTimeMaster(id){
+  const m=oneTimeMasterItems.find(x=>x.id===id); if(!m)return;
+  $('oneTimeItemInput').value=m.item_name;
+  $('oneTimeAutocomplete').style.display='none';
+  await showOneTimeInventory(m);
+}
 async function showOneTimeLists(mode='active'){oneTimeMode=mode;await loadOneTimeMasterItems();showOnly($('oneTimeListsScreen'));$('newOneTimeListRow').style.display=mode==='active'?'flex':'none';const rows=await api(`/rest/v1/one_time_lists?select=*&status=eq.${mode}&order=${mode==='active'?'created_at':'completed_at'}.desc`);$('oneTimeListsContainer').innerHTML=rows.length?rows.map(x=>`<div class="one-time-list-card" data-ot-list="${x.id}"><div class="one-time-list-name">${otEsc(x.name)}</div><div class="one-time-list-meta">${mode==='past'&&x.completed_at?'Finished '+new Date(x.completed_at).toLocaleDateString():''}</div></div>`).join(''):`<div class="empty">${mode==='active'?'No active one-time lists.':'No past lists yet.'}</div>`;}
-async function createOneTimeList(){const name=$('newOneTimeListName').value.trim();if(!name)return;const rows=await api('/rest/v1/one_time_lists',{method:'POST',headers:{Prefer:'return=representation'},body:JSON.stringify({name,status:'active'})});$('newOneTimeListName').value='';if(rows?.[0])location.hash='#one-time-list/'+rows[0].id;}
+async function createOneTimeList(){const name=$('newOneTimeListName').value.trim();if(!name)return;const rows=await api('/rest/v1/one_time_lists',{method:'POST',headers:{Prefer:'return=representation'},body:JSON.stringify({name,status:'active'})});$('newOneTimeListName').value='';if(rows?.[0])openOneTimeList(rows[0].id);}
 async function openOneTimeList(id){const rows=await api(`/rest/v1/one_time_lists?id=eq.${encodeURIComponent(id)}&select=*`);if(!rows.length)return;currentOneTimeList=rows[0];$('oneTimeListTitle').textContent=currentOneTimeList.name;$('oneTimeActiveControls').style.display=currentOneTimeList.status==='active'?'block':'none';showOnly($('oneTimeListDetailScreen'));await renderOneTimeItems();}
 async function renderOneTimeItems(){const rows=await api(`/rest/v1/one_time_list_items?list_id=eq.${currentOneTimeList.id}&select=*&order=created_at.asc`);$('oneTimeItemsContainer').innerHTML=rows.length?rows.map(x=>`<div class="one-time-item-row ${x.purchased_at?'purchased':''}"><div class="one-time-item-top"><div><div class="one-time-item-name">${x.purchased_at?'✓ ':''}${otEsc(x.item_name)}</div><div class="one-time-item-meta">${otEsc(otStoreLabel(x.store))}${x.quantity>1?' · Qty '+x.quantity:''}</div></div>${x.master_item_id?'<span class="one-time-master-badge">Master Item ✓</span>':''}</div>${currentOneTimeList.status==='active'?`<div class="one-time-item-actions"><button class="one-time-purchase" data-ot-purchase="${x.id}">${x.purchased_at?'Undo':'Purchased ✓'}</button>${!x.master_item_id?`<button class="one-time-master" data-ot-master="${x.id}">Add to Master List</button>`:''}<button class="one-time-remove" data-ot-remove="${x.id}">Remove</button></div>`:''}</div>`).join(''):'<div class="empty">No items on this list yet.</div>';$('oneTimeListActions').innerHTML=currentOneTimeList.status==='active'?'<button id="finishOneTimeList" style="background:var(--green);color:#fff">Finish List</button>':'<button id="reuseOneTimeList" style="background:var(--green);color:#fff">Use Again</button>';}
-async function addOneTimeItem(){const name=normalizeItemName($('oneTimeItemInput').value);if(!name)return;const master=oneTimeMasterItems.find(x=>x.item_name.toLowerCase()===name.toLowerCase());let store=$('oneTimeStoreSelect').value;const finalName=master?master.item_name:name;await api('/rest/v1/one_time_list_items',{method:'POST',body:JSON.stringify({list_id:currentOneTimeList.id,item_name:finalName,master_item_id:master?.id||null,store,quantity:1})});$('oneTimeItemInput').value='';await renderOneTimeItems();}
-async function toggleOneTimePurchased(id){try{const rows=await api(`/rest/v1/one_time_list_items?id=eq.${encodeURIComponent(id)}&select=*`);if(!rows.length)return;await api(`/rest/v1/one_time_list_items?id=eq.${encodeURIComponent(id)}`,{method:'PATCH',body:JSON.stringify({purchased_at:rows[0].purchased_at?null:new Date().toISOString()})});await renderOneTimeItems();}catch(e){oneTimeError(e)}}
-async function removeOneTimeItem(id){try{await api(`/rest/v1/one_time_list_items?id=eq.${encodeURIComponent(id)}`,{method:'DELETE'});await renderOneTimeItems();}catch(e){oneTimeError(e)}}
-async function finishOneTimeList(){try{await api(`/rest/v1/one_time_lists?id=eq.${currentOneTimeList.id}`,{method:'PATCH',body:JSON.stringify({status:'past',completed_at:new Date().toISOString()})});location.hash='#one-time-past';}catch(e){oneTimeError(e)}}
-async function reuseOneTimeList(){try{const made=await api('/rest/v1/one_time_lists',{method:'POST',headers:{Prefer:'return=representation'},body:JSON.stringify({name:currentOneTimeList.name,status:'active'})});if(!made?.[0])return;const old=await api(`/rest/v1/one_time_list_items?list_id=eq.${currentOneTimeList.id}&select=*`);for(const x of old)await api('/rest/v1/one_time_list_items',{method:'POST',body:JSON.stringify({list_id:made[0].id,item_name:x.item_name,master_item_id:x.master_item_id,store:x.store,quantity:x.quantity,purchased_at:null})});location.hash='#one-time-list/'+made[0].id;}catch(e){oneTimeError(e)}}
-async function promoteOneTimeItem(id){try{const rows=await api(`/rest/v1/one_time_list_items?id=eq.${encodeURIComponent(id)}&select=*`);if(!rows.length)return;const x=rows[0];const result=unwrapRpcResult(await api('/rest/v1/rpc/remember_master_item',{method:'POST',body:JSON.stringify({p_item_name:x.item_name})}));if(result?.remembered===false&&result?.reason!=='already_exists'){showToast('Could not add to Master List.',true);return;}invalidateMasterItems();const master=await fetchMasterItems(true);const found=master.find(m=>normalizedKey(m.item_name)===normalizedKey(x.item_name));if(found)await api(`/rest/v1/one_time_list_items?id=eq.${encodeURIComponent(id)}`,{method:'PATCH',body:JSON.stringify({master_item_id:found.id})});await renderOneTimeItems();showToast(`${x.item_name} added to Master List.`);}catch(e){console.error(e);showToast('Could not add to Master List.',true)}}
-document.addEventListener('click',e=>{if(e.target.id==='oneTimeListsButton'){location.hash='#one-time';return;}if(e.target.id==='activeOneTimeTab'){location.hash='#one-time';return;}if(e.target.id==='pastOneTimeTab'){location.hash='#one-time-past';return;}if(e.target.id==='createOneTimeListButton')return createOneTimeList().catch(oneTimeError);if(e.target.id==='oneTimeDetailBack'){location.hash=oneTimeMode==='past'?'#one-time-past':'#one-time';return;}const card=e.target.closest('[data-ot-list]');if(card){location.hash='#one-time-list/'+card.dataset.otList;return;}if(e.target.id==='addOneTimeItemButton')return addOneTimeItem().catch(oneTimeError);if(e.target.dataset.otPurchase)return toggleOneTimePurchased(e.target.dataset.otPurchase);if(e.target.dataset.otRemove)return removeOneTimeItem(e.target.dataset.otRemove);if(e.target.dataset.otMaster)return promoteOneTimeItem(e.target.dataset.otMaster);if(e.target.id==='finishOneTimeList')return finishOneTimeList();if(e.target.id==='reuseOneTimeList')return reuseOneTimeList();});
+async function addOneTimeItem(){const name=$('oneTimeItemInput').value.trim();if(!name)return;const master=(selectedOneTimeMaster&&selectedOneTimeMaster.item_name.toLowerCase()===name.toLowerCase())?selectedOneTimeMaster:oneTimeMasterItems.find(x=>x.item_name.toLowerCase()===name.toLowerCase());let store=$('oneTimeStoreSelect').value;if(master){try{const rs=await api(`/rest/v1/item_store_restrictions?item_name=eq.${encodeURIComponent(master.item_name)}&select=allowed_store&limit=1`);if(rs?.[0]?.allowed_store)store=rs[0].allowed_store;}catch(e){}}const finalName=master?master.item_name:name;await api('/rest/v1/one_time_list_items',{method:'POST',body:JSON.stringify({list_id:currentOneTimeList.id,item_name:finalName,master_item_id:master?.id||null,store,quantity:1})});const ex=await api(`/rest/v1/shopping_items?item_name=ilike.${encodeURIComponent(finalName)}&store=eq.${encodeURIComponent(store)}&select=id&limit=1`);if(!ex.length)await api('/rest/v1/shopping_items',{method:'POST',body:JSON.stringify({item_name:finalName,quantity:1,store})});$('oneTimeItemInput').value='';selectedOneTimeMaster=null;$('oneTimeInventoryStatus').textContent='';$('oneTimeAutocomplete').style.display='none';await renderOneTimeItems();}
+async function toggleOneTimePurchased(id){const rows=await api(`/rest/v1/one_time_list_items?id=eq.${id}&select=*`);if(!rows.length)return;const x=rows[0];if(x.purchased_at){await api(`/rest/v1/one_time_list_items?id=eq.${id}`,{method:'PATCH',body:JSON.stringify({purchased_at:null})});const ex=await api(`/rest/v1/shopping_items?item_name=ilike.${encodeURIComponent(x.item_name)}&store=eq.${encodeURIComponent(x.store)}&select=id&limit=1`);if(!ex.length)await api('/rest/v1/shopping_items',{method:'POST',body:JSON.stringify({item_name:x.item_name,quantity:x.quantity,store:x.store})});}else{
+    const now=new Date().toISOString();
+    await api(`/rest/v1/one_time_list_items?id=eq.${id}`,{method:'PATCH',body:JSON.stringify({purchased_at:now})});
+    const master=oneTimeMasterItems.find(m=>m.id===x.master_item_id)||oneTimeMasterItems.find(m=>m.item_name.toLowerCase()===x.item_name.toLowerCase());
+    try{await api('/rest/v1/shopping_purchase_history',{method:'POST',body:JSON.stringify({master_item_id:master?.id||null,item_name:x.item_name,store:x.store,quantity:x.quantity,purchased_at:now})});}catch(e){}
+    await api(`/rest/v1/shopping_items?item_name=ilike.${encodeURIComponent(x.item_name)}&store=eq.${encodeURIComponent(x.store)}`,{method:'DELETE'});
+  }await renderOneTimeItems();}
+async function removeOneTimeItem(id){const rows=await api(`/rest/v1/one_time_list_items?id=eq.${id}&select=*`);if(!rows.length)return;const x=rows[0];await api(`/rest/v1/one_time_list_items?id=eq.${id}`,{method:'DELETE'});if(!x.purchased_at)await api(`/rest/v1/shopping_items?item_name=ilike.${encodeURIComponent(x.item_name)}&store=eq.${encodeURIComponent(x.store)}`,{method:'DELETE'});await renderOneTimeItems();}
+async function finishOneTimeList(){await api(`/rest/v1/one_time_lists?id=eq.${currentOneTimeList.id}`,{method:'PATCH',body:JSON.stringify({status:'past',completed_at:new Date().toISOString()})});showOneTimeLists('past');}
+async function reuseOneTimeList(){const made=await api('/rest/v1/one_time_lists',{method:'POST',headers:{Prefer:'return=representation'},body:JSON.stringify({name:currentOneTimeList.name,status:'active'})});if(!made?.[0])return;const old=await api(`/rest/v1/one_time_list_items?list_id=eq.${currentOneTimeList.id}&select=*`);for(const x of old){await api('/rest/v1/one_time_list_items',{method:'POST',body:JSON.stringify({list_id:made[0].id,item_name:x.item_name,master_item_id:x.master_item_id,store:x.store,quantity:x.quantity,purchased_at:null})});const ex=await api(`/rest/v1/shopping_items?item_name=ilike.${encodeURIComponent(x.item_name)}&store=eq.${encodeURIComponent(x.store)}&select=id&limit=1`);if(!ex.length)await api('/rest/v1/shopping_items',{method:'POST',body:JSON.stringify({item_name:x.item_name,quantity:x.quantity,store:x.store})});}openOneTimeList(made[0].id);}
+async function promoteOneTimeItem(id){const rows=await api(`/rest/v1/one_time_list_items?id=eq.${id}&select=*`);if(!rows.length)return;const x=rows[0];showOnly($('masterListScreen'));if($('masterAddItemInput')){$('masterAddItemInput').value=x.item_name;$('masterAddItemInput').focus();}else if($('addItemInput')){$('addItemInput').value=x.item_name;$('addItemInput').focus();}}
+document.addEventListener('click',e=>{if(e.target.id==='oneTimeListsButton')return showOneTimeLists('active');if(e.target.id==='activeOneTimeTab')return showOneTimeLists('active');if(e.target.id==='pastOneTimeTab')return showOneTimeLists('past');if(e.target.id==='createOneTimeListButton')return createOneTimeList();if(e.target.id==='oneTimeDetailBack')return showOneTimeLists(oneTimeMode);const card=e.target.closest('[data-ot-list]');if(card)return openOneTimeList(card.dataset.otList);if(e.target.id==='addOneTimeItemButton')return addOneTimeItem();if(e.target.dataset.otPurchase)return toggleOneTimePurchased(e.target.dataset.otPurchase);if(e.target.dataset.otRemove)return removeOneTimeItem(e.target.dataset.otRemove);if(e.target.dataset.otMaster)return promoteOneTimeItem(e.target.dataset.otMaster);if(e.target.id==='finishOneTimeList')return finishOneTimeList();if(e.target.id==='reuseOneTimeList')return reuseOneTimeList();});
+
+document.addEventListener('input',e=>{if(e.target.id==='oneTimeItemInput')renderOneTimeAutocomplete();});
+document.addEventListener('click',e=>{
+  const s=e.target.closest('[data-ot-suggest]');
+  if(s){e.preventDefault();chooseOneTimeMaster(s.dataset.otSuggest);}
+  else if(e.target.id!=='oneTimeItemInput' && $('oneTimeAutocomplete')) $('oneTimeAutocomplete').style.display='none';
+});
 </script>
 </body>
 </html>
