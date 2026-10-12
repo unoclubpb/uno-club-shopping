@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.98 -->
-<meta name="app-version" content="1.0.98">
+<!-- APP VERSION: 1.0.99 -->
+<meta name="app-version" content="1.0.99">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.98">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.98">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.99">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.99">
 
 <style>
 :root{
@@ -164,7 +164,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .toast-undo-button:active{background:var(--attention-amber-dark)}
 
 
-/* v1.0.98 — authoritative semantic button colors */
+/* v1.0.99 — authoritative semantic button colors */
 
 /* BLUE = navigation / view */
 #inventoryButton,
@@ -309,7 +309,7 @@ button[aria-label="Back"]:active {
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.98" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.99" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -318,12 +318,11 @@ button[aria-label="Back"]:active {
     <div class="button-stack">
       <button id="inventoryButton" class="main-button" type="button">Current Inventory</button>
       <button id="goShoppingButton" class="main-button" type="button">Shopping List</button>
-      <button id="oneTimeListsButton" class="main-button" type="button">One-Time Lists</button>
     </div>
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.0.98</div>
+    <div class="version-label">v1.0.99</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -336,6 +335,8 @@ button[aria-label="Back"]:active {
       <button class="main-button store-button" type="button" data-store="walmart">Grocery Store<span class="count-badge" data-count-store="walmart">0</span></button>
       <button class="main-button store-button" type="button" data-store="alcohol">Package Store<span class="count-badge" data-count-store="alcohol">0</span></button>
       <button class="main-button store-button" type="button" data-store="amazon">Amazon<span class="count-badge" data-count-store="amazon">0</span></button>
+      <div class="shopping-menu-spacer" aria-hidden="true"></div>
+      <button id="oneTimeListsButton" class="main-button" type="button">One-Time Lists</button>
     </div>
   </section>
 
@@ -642,7 +643,7 @@ button[aria-label="Back"]:active {
 <script>
 'use strict';
 
-const APP_VERSION='1.0.98';
+const APP_VERSION='1.0.99';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -771,7 +772,7 @@ function invalidateInventoryCategories(){inventoryCategoriesCache=null}
 
 function showOnly(screen){
   document.body.classList.toggle('home-static',screen===homeScreen);
-  [homeScreen,shoppingMenuScreen,addScreen,storeScreen,purchaseCategoryScreen,shoppingModifyScreen,itemCategoryScreen,inventoryScreen,inventoryCategoryScreen,inventoryAddScreen,adminScreen,masterListScreen,untrackedInventoryScreen,categoryManagementScreen,categoryManagementItemsScreen,categoryAddScreen,restrictionsByStoreScreen,restrictionStoreScreen,restrictionEditScreen,purchaseHistoryScreen].forEach(s=>s.hidden=s!==screen)
+  [homeScreen,shoppingMenuScreen,addScreen,storeScreen,purchaseCategoryScreen,shoppingModifyScreen,itemCategoryScreen,inventoryScreen,inventoryCategoryScreen,inventoryAddScreen,adminScreen,masterListScreen,untrackedInventoryScreen,categoryManagementScreen,categoryManagementItemsScreen,categoryAddScreen,restrictionsByStoreScreen,restrictionStoreScreen,restrictionEditScreen,purchaseHistoryScreen,$('oneTimeListsScreen'),$('oneTimeListDetailScreen')].filter(Boolean).forEach(s=>s.hidden=s!==screen)
 }
 
 function showToast(message,isError=false,duration=3200){
@@ -1963,7 +1964,7 @@ async function chooseOneTimeMaster(id){
   $('oneTimeAutocomplete').style.display='none';
   await showOneTimeInventory(m);
 }
-async function showOneTimeLists(mode='active'){oneTimeMode=mode;await loadOneTimeMasterItems();showOnly($('oneTimeListsScreen'));$('newOneTimeListRow').style.display=mode==='active'?'flex':'none';const rows=await api(`/rest/v1/one_time_lists?select=*&status=eq.${mode}&order=${mode==='active'?'created_at':'completed_at'}.desc`);$('oneTimeListsContainer').innerHTML=rows.length?rows.map(x=>`<div class="one-time-list-card" data-ot-list="${x.id}"><div class="one-time-list-name">${otEsc(x.name)}</div><div class="one-time-list-meta">${mode==='past'&&x.completed_at?'Finished '+new Date(x.completed_at).toLocaleDateString():''}</div></div>`).join(''):`<div class="empty">${mode==='active'?'No active one-time lists.':'No past lists yet.'}</div>`;}
+async function showOneTimeLists(mode='active'){oneTimeMode=mode;await loadOneTimeMasterItems();showOnly($('oneTimeListsScreen'));backButton.hidden=false;pageTitle.textContent='One-Time Lists';$('newOneTimeListRow').style.display=mode==='active'?'flex':'none';const rows=await api(`/rest/v1/one_time_lists?select=*&status=eq.${mode}&order=${mode==='active'?'created_at':'completed_at'}.desc`);$('oneTimeListsContainer').innerHTML=rows.length?rows.map(x=>`<div class="one-time-list-card" data-ot-list="${x.id}"><div class="one-time-list-name">${otEsc(x.name)}</div><div class="one-time-list-meta">${mode==='past'&&x.completed_at?'Finished '+new Date(x.completed_at).toLocaleDateString():''}</div></div>`).join(''):`<div class="empty">${mode==='active'?'No active one-time lists.':'No past lists yet.'}</div>`;}
 async function createOneTimeList(){const name=$('newOneTimeListName').value.trim();if(!name)return;const rows=await api('/rest/v1/one_time_lists',{method:'POST',headers:{Prefer:'return=representation'},body:JSON.stringify({name,status:'active'})});$('newOneTimeListName').value='';if(rows?.[0])openOneTimeList(rows[0].id);}
 async function openOneTimeList(id){const rows=await api(`/rest/v1/one_time_lists?id=eq.${encodeURIComponent(id)}&select=*`);if(!rows.length)return;currentOneTimeList=rows[0];$('oneTimeListTitle').textContent=currentOneTimeList.name;$('oneTimeActiveControls').style.display=currentOneTimeList.status==='active'?'block':'none';showOnly($('oneTimeListDetailScreen'));await renderOneTimeItems();}
 async function renderOneTimeItems(){const rows=await api(`/rest/v1/one_time_list_items?list_id=eq.${currentOneTimeList.id}&select=*&order=created_at.asc`);$('oneTimeItemsContainer').innerHTML=rows.length?rows.map(x=>`<div class="one-time-item-row ${x.purchased_at?'purchased':''}"><div class="one-time-item-top"><div><div class="one-time-item-name">${x.purchased_at?'✓ ':''}${otEsc(x.item_name)}</div><div class="one-time-item-meta">${otEsc(otStoreLabel(x.store))}${x.quantity>1?' · Qty '+x.quantity:''}</div></div>${x.master_item_id?'<span class="one-time-master-badge">Master Item ✓</span>':''}</div>${currentOneTimeList.status==='active'?`<div class="one-time-item-actions"><button class="one-time-purchase" data-ot-purchase="${x.id}">${x.purchased_at?'Undo':'Purchased ✓'}</button>${!x.master_item_id?`<button class="one-time-master" data-ot-master="${x.id}">Add to Master List</button>`:''}<button class="one-time-remove" data-ot-remove="${x.id}">Remove</button></div>`:''}</div>`).join(''):'<div class="empty">No items on this list yet.</div>';$('oneTimeListActions').innerHTML=currentOneTimeList.status==='active'?'<button id="finishOneTimeList" style="background:var(--green);color:#fff">Finish List</button>':'<button id="reuseOneTimeList" style="background:var(--green);color:#fff">Use Again</button>';}
