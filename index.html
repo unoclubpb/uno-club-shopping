@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.0.96 -->
-<meta name="app-version" content="1.0.96">
+<!-- APP VERSION: 1.0.97 -->
+<meta name="app-version" content="1.0.97">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.96">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.96">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.0.97">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.0.97">
 
 <style>
 :root{
@@ -164,7 +164,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .toast-undo-button:active{background:var(--attention-amber-dark)}
 
 
-/* v1.0.96 — authoritative semantic button colors */
+/* v1.0.97 — authoritative semantic button colors */
 
 /* BLUE = navigation / view */
 #inventoryButton,
@@ -309,7 +309,7 @@ button[aria-label="Back"]:active {
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.96" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.0.97" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -322,7 +322,7 @@ button[aria-label="Back"]:active {
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.0.96</div>
+    <div class="version-label">v1.0.97</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -602,7 +602,7 @@ button[aria-label="Back"]:active {
 <script>
 'use strict';
 
-const APP_VERSION='1.0.96';
+const APP_VERSION='1.0.97';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -1889,17 +1889,23 @@ async function syncActiveOneTimePurchase(itemName,store){
 let oneTimeMode='active',currentOneTimeList=null,oneTimeMasterItems=[];
 function otEsc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
 function otStoreLabel(s){return ({sams:"Sam's / Costco",walmart:"Grocery Store",alcohol:"Package Store",amazon:"Amazon"})[s]||s;}
-async function loadOneTimeMasterItems(){try{oneTimeMasterItems=await api('/rest/v1/master_items?select=id,item_name,category,track_inventory&order=item_name.asc');}catch(e){oneTimeMasterItems=[];}}
+async function loadOneTimeMasterItems(){
+  try{
+    const [masters,inventory]=await Promise.all([
+      api('/rest/v1/master_items?select=id,item_name,category,track_inventory&order=item_name.asc'),
+      api('/rest/v1/inventory_items?select=item_name,quantity')
+    ]);
+    const qtyMap=new Map((Array.isArray(inventory)?inventory:[]).map(x=>[normalizedKey(x.item_name),Number(x.quantity)||0]));
+    oneTimeMasterItems=(Array.isArray(masters)?masters:[]).map(x=>({...x,on_hand:qtyMap.get(normalizedKey(x.item_name))??0}));
+  }catch(e){oneTimeMasterItems=[];}
+}
 let selectedOneTimeMaster=null;
 async function showOneTimeInventory(master){
   selectedOneTimeMaster=master||null;
   const el=$('oneTimeInventoryStatus'); if(!el)return;
   if(!master){el.textContent='';return;}
   if(!master.track_inventory){el.textContent='Not Tracked';return;}
-  try{
-    const inv=await api(`/rest/v1/inventory_items?item_name=ilike.${encodeURIComponent(master.item_name)}&select=quantity&limit=1`);
-    el.textContent=`Current Inventory: ${inv?.[0]?.quantity??0}`;
-  }catch(e){el.textContent='Current Inventory: 0';}
+  el.textContent=`Current Inventory: ${Number(master.on_hand)||0}`;
 }
 function renderOneTimeAutocomplete(){
   const input=$('oneTimeItemInput'),box=$('oneTimeAutocomplete'); if(!input||!box)return;
@@ -1908,7 +1914,7 @@ function renderOneTimeAutocomplete(){
   if(!q){box.style.display='none';box.innerHTML='';return;}
   const matches=oneTimeMasterItems.filter(x=>x.item_name.toLowerCase().includes(q)).slice(0,8);
   if(!matches.length){box.style.display='none';box.innerHTML='';return;}
-  box.innerHTML=matches.map(x=>`<div class="one-time-autocomplete-item" data-ot-suggest="${x.id}">${otEsc(x.item_name)}</div>`).join('');
+  box.innerHTML=matches.map(x=>`<div class="one-time-autocomplete-item" data-ot-suggest="${x.id}"><div>${otEsc(x.item_name)}</div><div style="font-size:12px;color:#666;margin-top:2px">${x.track_inventory?`On Hand: ${Number(x.on_hand)||0}`:'Not Tracked'}</div></div>`).join('');
   box.style.display='block';
 }
 async function chooseOneTimeMaster(id){
