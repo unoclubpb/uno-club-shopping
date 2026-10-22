@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.1.15 -->
-<meta name="app-version" content="1.1.15">
+<!-- APP VERSION: 1.1.16 -->
+<meta name="app-version" content="1.1.16">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.1.15">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.1.15">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.1.16">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.1.16">
 
 <style>
 :root{
@@ -164,7 +164,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .toast-undo-button:active{background:var(--attention-amber-dark)}
 
 
-/* v1.1.15 — authoritative semantic button colors */
+/* v1.1.16 — authoritative semantic button colors */
 
 /* BLUE = navigation / view */
 #inventoryButton,
@@ -320,6 +320,7 @@ button[aria-label="Back"]:active {
 .multi-store-note{font-size:14px;font-weight:800;color:var(--muted);margin:2px 0 3px}
 .app-modal{position:fixed;inset:0;z-index:4000;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:20px}.app-modal[hidden]{display:none}.app-modal-card{width:min(420px,100%);background:#fff;border-radius:18px;padding:20px;box-shadow:0 12px 35px rgba(0,0,0,.3)}.app-modal-card h3{margin:0 0 6px;text-align:center}.modal-note{text-align:center;color:var(--muted);font-weight:700;margin-bottom:14px}.modal-actions{display:flex;gap:10px;margin-top:18px}.modal-actions button{flex:1;border:0;border-radius:12px;padding:12px;font-weight:800}#multiStoreCancelButton{background:#777;color:#fff}#multiStoreConfirmButton{background:var(--green);color:#fff}
 #adminScreen .category-stack{gap:10px}#adminScreen .main-button{min-height:58px;padding:12px 14px}
+.zero-inventory-row{width:100%;min-height:58px;padding:8px 14px;border:0;border-bottom:1px solid #ececec;background:#fff;color:var(--text);display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;font-size:17px;font-weight:800;cursor:pointer}.zero-inventory-row:last-child{border-bottom:0}.zero-inventory-row:active{background:#f5f5f5}.zero-inventory-row .inventory-row-list-icon{margin-left:auto}
 </style>
 </head>
 <body>
@@ -328,7 +329,7 @@ button[aria-label="Back"]:active {
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.1.15" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.1.16" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -341,7 +342,7 @@ button[aria-label="Back"]:active {
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.1.15</div>
+    <div class="version-label">v1.1.16</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -649,7 +650,7 @@ button[aria-label="Back"]:active {
 <script>
 'use strict';
 
-const APP_VERSION='1.1.15';
+const APP_VERSION='1.1.16';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -949,15 +950,26 @@ masterSearchInput.addEventListener('blur',()=>setTimeout(()=>hideSuggestions(mas
 async function loadZeroInventoryItems(){
   const box=$('zeroInventoryList');box.innerHTML='<div class="loading-state">Loading…</div>';
   try{
-    const [masters,inventory]=await Promise.all([
+    const [masters,inventory,shopping]=await Promise.all([
       api('/rest/v1/master_items?select=item_name,track_inventory&track_inventory=eq.true'),
-      api('/rest/v1/inventory_items?select=item_name,quantity')
+      api('/rest/v1/inventory_items?select=item_name,quantity'),
+      api('/rest/v1/shopping_items?select=item_name,store')
     ]);
     const qty=new Map((Array.isArray(inventory)?inventory:[]).map(x=>[normalizedKey(x.item_name),Number(x.quantity)||0]));
+    const shoppingKeys=new Set((Array.isArray(shopping)?shopping:[]).filter(x=>STORES[x.store]).map(x=>normalizedKey(x.item_name)));
     const items=(Array.isArray(masters)?masters:[]).filter(x=>qty.has(normalizedKey(x.item_name))&&qty.get(normalizedKey(x.item_name))===0).sort((a,b)=>a.item_name.localeCompare(b.item_name,undefined,{sensitivity:'base',numeric:true}));
     box.innerHTML='';
     if(!items.length){appendEmpty(box,'No tracked items have zero inventory.');return}
-    items.forEach(item=>{const button=document.createElement('button');button.type='button';button.className='restriction-row';button.textContent=item.item_name;button.addEventListener('click',()=>goZeroInventoryItemDetail(item.item_name));box.appendChild(button)});
+    items.forEach(item=>{
+      const button=document.createElement('button');button.type='button';button.className='zero-inventory-row';
+      const name=document.createElement('span');name.textContent=item.item_name;button.appendChild(name);
+      if(shoppingKeys.has(normalizedKey(item.item_name))){
+        const icon=document.createElement('span');icon.className='inventory-row-list-icon';icon.setAttribute('aria-label',`${item.item_name} is on a shopping list`);icon.title='On Shopping List';
+        icon.innerHTML='<svg viewBox="0 0 36 44" aria-hidden="true"><rect x="5" y="2.5" width="26" height="39" rx="1" fill="none" stroke="currentColor" stroke-width="2.4"/><line x1="5" y1="9" x2="31" y2="9" stroke="currentColor" stroke-width="2.2"/><path d="M9 17l3 3 5-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><line x1="20" y1="18" x2="28" y2="18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M9 26l3 3 5-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><line x1="20" y1="27" x2="28" y2="27" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M9 35l3 3 5-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><line x1="20" y1="36" x2="28" y2="36" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
+        button.appendChild(icon);
+      }
+      button.addEventListener('click',()=>goZeroInventoryItemDetail(item.item_name));box.appendChild(button);
+    });
   }catch(error){console.error(error);box.innerHTML='<div class="error-state">Could not load zero inventory items.</div>'}
 }
 
