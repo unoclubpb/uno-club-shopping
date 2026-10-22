@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.1.10 -->
-<meta name="app-version" content="1.1.10">
+<!-- APP VERSION: 1.1.11 -->
+<meta name="app-version" content="1.1.11">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.1.10">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.1.10">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.1.11">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.1.11">
 
 <style>
 :root{
@@ -164,7 +164,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .toast-undo-button:active{background:var(--attention-amber-dark)}
 
 
-/* v1.1.10 — authoritative semantic button colors */
+/* v1.1.11 — authoritative semantic button colors */
 
 /* BLUE = navigation / view */
 #inventoryButton,
@@ -317,6 +317,7 @@ button[aria-label="Back"]:active {
 }
 #simpleOneTimeClearButton{max-width:220px;margin:0 auto;}
 .multi-store-choices{display:grid;gap:9px;margin-top:8px}.multi-store-choice{display:flex;align-items:center;gap:10px;padding:11px 12px;border:1.5px solid var(--border);border-radius:12px;background:#fff;font-size:16px;font-weight:750}.multi-store-choice input{width:22px;height:22px;min-height:0;margin:0;flex:0 0 22px}
+.multi-store-note{font-size:14px;font-weight:800;color:var(--muted);margin:2px 0 3px}
 </style>
 </head>
 <body>
@@ -325,7 +326,7 @@ button[aria-label="Back"]:active {
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.1.10" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.1.11" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -338,7 +339,7 @@ button[aria-label="Back"]:active {
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.1.10</div>
+    <div class="version-label">v1.1.11</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -385,9 +386,6 @@ button[aria-label="Back"]:active {
   </section>
 
   <section id="storeScreen" class="screen" hidden>
-    <div class="sticky-top-block">
-      <button id="storeAddItemButton" class="main-button store-add-button" type="button">Add Item</button>
-    </div>
     <div class="card list-card">
       <div class="list-heading"><span>Item</span><span>Qty</span><span></span></div>
       <div id="storeList"></div>
@@ -633,7 +631,7 @@ button[aria-label="Back"]:active {
 <script>
 'use strict';
 
-const APP_VERSION='1.1.10';
+const APP_VERSION='1.1.11';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -851,7 +849,7 @@ async function refreshStoreChoicesForItem(preferBlank=false){
   try{
     const rows=await fetchRestrictionRows();if(request!==storeRestrictionRequestNumber)return;
     const allowed=getAllowedStoresForItemName(itemName,rows);let selected='';
-    if(allowed.length===1)selected=allowed[0];else if(!preferBlank&&previous&&allowed.includes(previous))selected=previous;else if(!preferBlank){const last=getLastStore();if(last&&allowed.includes(last))selected=last}
+    if(allowed.length===1)selected=allowed[0];
     rebuildStoreOptions(allowed,selected);
     renderMultiStoreChoices(allowed,selected);
   }catch(error){console.error(error);if(request!==storeRestrictionRequestNumber)return;rebuildStoreOptions(Object.keys(STORES),preferBlank?'':(previous||getLastStore()||''));renderMultiStoreChoices(Object.keys(STORES),previous||getLastStore()||'')}
@@ -859,7 +857,7 @@ async function refreshStoreChoicesForItem(preferBlank=false){
 function renderMultiStoreChoices(allowed,selected=''){
   const box=$('multiStoreChoices');if(!box)return;
   if(lockedAddStore||!Array.isArray(allowed)||allowed.length<=1){box.hidden=true;box.innerHTML='';storeSelect.hidden=false;return}
-  storeSelect.hidden=true;box.hidden=false;box.innerHTML='';
+  storeSelect.hidden=true;box.hidden=false;box.innerHTML='<div class="multi-store-note">Select every store where you want this item listed:</div>';
   allowed.forEach(key=>{const label=document.createElement('label');label.className='multi-store-choice';const input=document.createElement('input');input.type='checkbox';input.value=key;input.checked=key===selected;const span=document.createElement('span');span.textContent=STORES[key];label.append(input,span);box.appendChild(label)});
 }
 function getSelectedAddStores(){
@@ -1103,7 +1101,6 @@ headerHomeButton.addEventListener('click',goHome);
 
 addItemButton.addEventListener('click',goAdd);goShoppingButton.addEventListener('click',goShopping);inventoryButton.addEventListener('click',goInventory);adminButton.addEventListener('click',goAdmin);itemsByStoreButton.addEventListener('click',goRestrictionsByStore);masterListButton.addEventListener('click',goMasterList);categoryManagementButton.addEventListener('click',goCategoryManagement);untrackedInventoryButton.addEventListener('click',goUntrackedInventory);addCategoryButton.addEventListener('click',goCategoryAdd);
 document.querySelectorAll('.store-button').forEach(button=>button.addEventListener('click',()=>goStore(button.dataset.store,'#shopping')));
-storeAddItemButton.addEventListener('click',()=>{if(currentStore&&STORES[currentStore])goAddForStore(currentStore)});
 masterAddItemButton.addEventListener('click',async()=>{
   const itemName=normalizeItemName(masterSearchInput.value);masterSearchInput.value=itemName;hideSuggestions(masterSearchSuggestions);
   if(!itemName){showToast('Type an item name in Search Master List first.',true);masterSearchInput.focus();return}
