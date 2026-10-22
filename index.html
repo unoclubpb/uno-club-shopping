@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.1.12 -->
-<meta name="app-version" content="1.1.12">
+<!-- APP VERSION: 1.1.13 -->
+<meta name="app-version" content="1.1.13">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.1.12">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.1.12">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.1.13">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.1.13">
 
 <style>
 :root{
@@ -164,7 +164,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .toast-undo-button:active{background:var(--attention-amber-dark)}
 
 
-/* v1.1.12 — authoritative semantic button colors */
+/* v1.1.13 — authoritative semantic button colors */
 
 /* BLUE = navigation / view */
 #inventoryButton,
@@ -327,7 +327,7 @@ button[aria-label="Back"]:active {
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.1.12" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.1.13" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -340,7 +340,7 @@ button[aria-label="Back"]:active {
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.1.12</div>
+    <div class="version-label">v1.1.13</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -644,7 +644,7 @@ button[aria-label="Back"]:active {
 <script>
 'use strict';
 
-const APP_VERSION='1.1.12';
+const APP_VERSION='1.1.13';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -723,7 +723,7 @@ function enableLiveItemCapitalization(input){
   input.addEventListener('blur',()=>{input.value=normalizeItemName(input.value)})
 }
 [itemNameInput,inventoryItemName,restrictionItemName,categoryNameInput].forEach(enableLiveItemCapitalization)
-function normalizedKey(value){return normalizeItemName(value).toLocaleLowerCase()}
+function normalizedKey(value){return normalizeItemName(value).toLocaleLowerCase().replace(/[^a-z0-9]+/g,'')}
 function unwrapRpcResult(result){return Array.isArray(result)?result[0]:result}
 function sortByName(items){return items.sort((a,b)=>a.item_name.localeCompare(b.item_name,undefined,{sensitivity:'base',numeric:true}))}
 function rememberLastStore(store){if(!STORES[store])return;try{localStorage.setItem(LAST_STORE_KEY,store)}catch(_){}}
