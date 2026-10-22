@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.1.14 -->
-<meta name="app-version" content="1.1.14">
+<!-- APP VERSION: 1.1.15 -->
+<meta name="app-version" content="1.1.15">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.1.14">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.1.14">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.1.15">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.1.15">
 
 <style>
 :root{
@@ -164,7 +164,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .toast-undo-button:active{background:var(--attention-amber-dark)}
 
 
-/* v1.1.14 — authoritative semantic button colors */
+/* v1.1.15 — authoritative semantic button colors */
 
 /* BLUE = navigation / view */
 #inventoryButton,
@@ -319,6 +319,7 @@ button[aria-label="Back"]:active {
 .multi-store-choices{display:grid;gap:9px;margin-top:8px}.multi-store-choice{display:flex;align-items:center;gap:10px;padding:11px 12px;border:1.5px solid var(--border);border-radius:12px;background:#fff;font-size:16px;font-weight:750}.multi-store-choice input{width:22px;height:22px;min-height:0;margin:0;flex:0 0 22px}
 .multi-store-note{font-size:14px;font-weight:800;color:var(--muted);margin:2px 0 3px}
 .app-modal{position:fixed;inset:0;z-index:4000;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:20px}.app-modal[hidden]{display:none}.app-modal-card{width:min(420px,100%);background:#fff;border-radius:18px;padding:20px;box-shadow:0 12px 35px rgba(0,0,0,.3)}.app-modal-card h3{margin:0 0 6px;text-align:center}.modal-note{text-align:center;color:var(--muted);font-weight:700;margin-bottom:14px}.modal-actions{display:flex;gap:10px;margin-top:18px}.modal-actions button{flex:1;border:0;border-radius:12px;padding:12px;font-weight:800}#multiStoreCancelButton{background:#777;color:#fff}#multiStoreConfirmButton{background:var(--green);color:#fff}
+#adminScreen .category-stack{gap:10px}#adminScreen .main-button{min-height:58px;padding:12px 14px}
 </style>
 </head>
 <body>
@@ -327,7 +328,7 @@ button[aria-label="Back"]:active {
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.1.14" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.1.15" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -340,7 +341,7 @@ button[aria-label="Back"]:active {
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.1.14</div>
+    <div class="version-label">v1.1.15</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -516,6 +517,7 @@ button[aria-label="Back"]:active {
       <button id="itemsByStoreButton" class="main-button" type="button">Items by Store</button>
       <button id="categoryManagementButton" class="main-button" type="button">Category Management</button>
       <button id="untrackedInventoryButton" class="main-button" type="button">Items Not Tracked in Inventory</button>
+      <button id="zeroInventoryButton" class="main-button" type="button">Items With Zero Inventory</button>
     </div>
   </section>
 
@@ -538,6 +540,10 @@ button[aria-label="Back"]:active {
 
   <section id="untrackedInventoryScreen" class="screen" hidden>
     <div id="untrackedInventoryList" class="restriction-list"></div>
+  </section>
+
+  <section id="zeroInventoryScreen" class="screen" hidden>
+    <div id="zeroInventoryList" class="restriction-list"></div>
   </section>
 
   <section id="categoryManagementScreen" class="screen" hidden>
@@ -643,7 +649,7 @@ button[aria-label="Back"]:active {
 <script>
 'use strict';
 
-const APP_VERSION='1.1.14';
+const APP_VERSION='1.1.15';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -772,7 +778,7 @@ function invalidateInventoryCategories(){inventoryCategoriesCache=null}
 
 function showOnly(screen){
   document.body.classList.toggle('home-static',screen===homeScreen);
-  [homeScreen,shoppingMenuScreen,addScreen,storeScreen,purchaseCategoryScreen,shoppingModifyScreen,itemCategoryScreen,inventoryScreen,inventoryCategoryScreen,inventoryAddScreen,adminScreen,masterListScreen,untrackedInventoryScreen,categoryManagementScreen,categoryManagementItemsScreen,categoryAddScreen,restrictionsByStoreScreen,restrictionStoreScreen,restrictionEditScreen,purchaseHistoryScreen,$('simpleOneTimeScreen')].filter(Boolean).forEach(s=>s.hidden=s!==screen)
+  [homeScreen,shoppingMenuScreen,addScreen,storeScreen,purchaseCategoryScreen,shoppingModifyScreen,itemCategoryScreen,inventoryScreen,inventoryCategoryScreen,inventoryAddScreen,adminScreen,masterListScreen,untrackedInventoryScreen,$('zeroInventoryScreen'),categoryManagementScreen,categoryManagementItemsScreen,categoryAddScreen,restrictionsByStoreScreen,restrictionStoreScreen,restrictionEditScreen,purchaseHistoryScreen,$('simpleOneTimeScreen')].filter(Boolean).forEach(s=>s.hidden=s!==screen)
 }
 
 function showToast(message,isError=false,duration=3200){
@@ -940,6 +946,21 @@ masterSearchInput.addEventListener('input',renderMasterSearchSuggestions);
 masterSearchInput.addEventListener('focus',renderMasterSearchSuggestions);
 masterSearchInput.addEventListener('blur',()=>setTimeout(()=>hideSuggestions(masterSearchSuggestions),180));
 
+async function loadZeroInventoryItems(){
+  const box=$('zeroInventoryList');box.innerHTML='<div class="loading-state">Loading…</div>';
+  try{
+    const [masters,inventory]=await Promise.all([
+      api('/rest/v1/master_items?select=item_name,track_inventory&track_inventory=eq.true'),
+      api('/rest/v1/inventory_items?select=item_name,quantity')
+    ]);
+    const qty=new Map((Array.isArray(inventory)?inventory:[]).map(x=>[normalizedKey(x.item_name),Number(x.quantity)||0]));
+    const items=(Array.isArray(masters)?masters:[]).filter(x=>qty.has(normalizedKey(x.item_name))&&qty.get(normalizedKey(x.item_name))===0).sort((a,b)=>a.item_name.localeCompare(b.item_name,undefined,{sensitivity:'base',numeric:true}));
+    box.innerHTML='';
+    if(!items.length){appendEmpty(box,'No tracked items have zero inventory.');return}
+    items.forEach(item=>{const button=document.createElement('button');button.type='button';button.className='restriction-row';button.textContent=item.item_name;button.addEventListener('click',()=>goZeroInventoryItemDetail(item.item_name));box.appendChild(button)});
+  }catch(error){console.error(error);box.innerHTML='<div class="error-state">Could not load zero inventory items.</div>'}
+}
+
 function goHome(){restoreMasterListScroll=false;location.hash='#home'}
 function goShopping(){storeReturnHash='#shopping';location.hash='#shopping'}
 function goAdd(){pendingShoppingPrefillName=null;pendingShoppingAddReturnHash=null;location.hash='#add'}
@@ -970,6 +991,12 @@ function goItemCategoryChooser(itemName){const cleanName=normalizeItemName(itemN
 function goInventoryAdd(category){location.hash='#inventory-add/'+category}
 function goAdmin(){location.hash='#admin'}
 function goUntrackedInventory(){location.hash='#untracked-inventory'}
+function goZeroInventory(){location.hash='#zero-inventory'}
+function goZeroInventoryItemDetail(itemName){
+  const cleanName=normalizeItemName(itemName);if(!cleanName)return;
+  restrictionReturnHash='#zero-inventory';
+  location.hash='#restriction/edit/'+encodeURIComponent(cleanName);
+}
 function goUntrackedInventoryItemDetail(itemName){
   const cleanName=normalizeItemName(itemName);
   if(!cleanName)return;
@@ -1004,6 +1031,10 @@ function goRestrictionReturn(){location.hash=restrictionReturnHash||'#restrictio
 function route(){
   const hash=location.hash||'#home';currentInventoryCategory=null;currentRestrictionStore=null;currentCategoryManagementCategory=null;clearTimeout(storeRestrictionTimer);
 
+
+  if(hash==='#zero-inventory'){
+    currentStore=null;lockedAddStore=null;showOnly($('zeroInventoryScreen'));pageTitle.textContent='Items With Zero Inventory';backButton.hidden=false;loadZeroInventoryItems();return;
+  }
 
   if(hash==='#shopping'){
     storeReturnHash='#shopping';
@@ -1111,7 +1142,8 @@ backButton.addEventListener('click',()=>{
 });
 headerHomeButton.addEventListener('click',goHome);
 
-addItemButton.addEventListener('click',goAdd);goShoppingButton.addEventListener('click',goShopping);inventoryButton.addEventListener('click',goInventory);adminButton.addEventListener('click',goAdmin);itemsByStoreButton.addEventListener('click',goRestrictionsByStore);masterListButton.addEventListener('click',goMasterList);categoryManagementButton.addEventListener('click',goCategoryManagement);untrackedInventoryButton.addEventListener('click',goUntrackedInventory);addCategoryButton.addEventListener('click',goCategoryAdd);
+addItemButton.addEventListener('click',goAdd);goShoppingButton.addEventListener('click',goShopping);inventoryButton.addEventListener('click',goInventory);adminButton.addEventListener('click',goAdmin);itemsByStoreButton.addEventListener('click',goRestrictionsByStore);masterListButton.addEventListener('click',goMasterList);categoryManagementButton.addEventListener('click',goCategoryManagement);untrackedInventoryButton.addEventListener('click',goUntrackedInventory);
+zeroInventoryButton.addEventListener('click',goZeroInventory);addCategoryButton.addEventListener('click',goCategoryAdd);
 document.querySelectorAll('.store-button').forEach(button=>button.addEventListener('click',()=>goStore(button.dataset.store,'#shopping')));
 masterAddItemButton.addEventListener('click',async()=>{
   const itemName=normalizeItemName(masterSearchInput.value);masterSearchInput.value=itemName;hideSuggestions(masterSearchSuggestions);
