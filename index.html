@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.1.09 -->
-<meta name="app-version" content="1.1.09">
+<!-- APP VERSION: 1.1.10 -->
+<meta name="app-version" content="1.1.10">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.1.09">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.1.09">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.1.10">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.1.10">
 
 <style>
 :root{
@@ -164,7 +164,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .toast-undo-button:active{background:var(--attention-amber-dark)}
 
 
-/* v1.1.09 — authoritative semantic button colors */
+/* v1.1.10 — authoritative semantic button colors */
 
 /* BLUE = navigation / view */
 #inventoryButton,
@@ -316,6 +316,7 @@ button[aria-label="Back"]:active {
   font-weight:700;
 }
 #simpleOneTimeClearButton{max-width:220px;margin:0 auto;}
+.multi-store-choices{display:grid;gap:9px;margin-top:8px}.multi-store-choice{display:flex;align-items:center;gap:10px;padding:11px 12px;border:1.5px solid var(--border);border-radius:12px;background:#fff;font-size:16px;font-weight:750}.multi-store-choice input{width:22px;height:22px;min-height:0;margin:0;flex:0 0 22px}
 </style>
 </head>
 <body>
@@ -324,7 +325,7 @@ button[aria-label="Back"]:active {
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.1.09" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.1.10" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -337,7 +338,7 @@ button[aria-label="Back"]:active {
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.1.09</div>
+    <div class="version-label">v1.1.10</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -632,7 +633,7 @@ button[aria-label="Back"]:active {
 <script>
 'use strict';
 
-const APP_VERSION='1.1.09';
+const APP_VERSION='1.1.10';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -852,7 +853,19 @@ async function refreshStoreChoicesForItem(preferBlank=false){
     const allowed=getAllowedStoresForItemName(itemName,rows);let selected='';
     if(allowed.length===1)selected=allowed[0];else if(!preferBlank&&previous&&allowed.includes(previous))selected=previous;else if(!preferBlank){const last=getLastStore();if(last&&allowed.includes(last))selected=last}
     rebuildStoreOptions(allowed,selected);
-  }catch(error){console.error(error);if(request!==storeRestrictionRequestNumber)return;rebuildStoreOptions(Object.keys(STORES),preferBlank?'':(previous||getLastStore()||''))}
+    renderMultiStoreChoices(allowed,selected);
+  }catch(error){console.error(error);if(request!==storeRestrictionRequestNumber)return;rebuildStoreOptions(Object.keys(STORES),preferBlank?'':(previous||getLastStore()||''));renderMultiStoreChoices(Object.keys(STORES),previous||getLastStore()||'')}
+}
+function renderMultiStoreChoices(allowed,selected=''){
+  const box=$('multiStoreChoices');if(!box)return;
+  if(lockedAddStore||!Array.isArray(allowed)||allowed.length<=1){box.hidden=true;box.innerHTML='';storeSelect.hidden=false;return}
+  storeSelect.hidden=true;box.hidden=false;box.innerHTML='';
+  allowed.forEach(key=>{const label=document.createElement('label');label.className='multi-store-choice';const input=document.createElement('input');input.type='checkbox';input.value=key;input.checked=key===selected;const span=document.createElement('span');span.textContent=STORES[key];label.append(input,span);box.appendChild(label)});
+}
+function getSelectedAddStores(){
+  const box=$('multiStoreChoices');
+  if(box&&!box.hidden)return Array.from(box.querySelectorAll('input:checked')).map(x=>x.value);
+  const store=lockedAddStore||storeSelect.value;return store?[store]:[];
 }
 
 function scheduleStoreRestrictionCheck(){clearTimeout(storeRestrictionTimer);if(lockedAddStore)return;storeRestrictionTimer=setTimeout(()=>refreshStoreChoicesForItem(false),300)}
@@ -1133,30 +1146,22 @@ function formatAllowedStores(keys){
 }
 
 addItemForm.addEventListener('submit',async event=>{
-  event.preventDefault();const itemName=normalizeItemName(itemNameInput.value);itemNameInput.value=itemName;const store=lockedAddStore||storeSelect.value,quantity=getAddQuantity();
+  event.preventDefault();const itemName=normalizeItemName(itemNameInput.value);itemNameInput.value=itemName;const stores=getSelectedAddStores(),quantity=getAddQuantity();
   if(!itemName){showToast('Please enter an item.',true);itemNameInput.focus();return}
-  if(!store||!STORES[store]){showToast('Please choose a store.',true);storeSelect.focus();return}
+  if(!stores.length){showToast('Please choose at least one store.',true);return}
   if(normalizedKey(itemName)==='case of water'){showToast('Case of Water is already on the Sam’s / CostCo list.',true);return}
-  if(!lockedAddStore)rememberLastStore(store);saveItemButton.disabled=true;saveItemButton.textContent='Adding…';
+  if(!lockedAddStore&&stores.length===1)rememberLastStore(stores[0]);saveItemButton.disabled=true;saveItemButton.textContent='Adding…';
   try{
-    const result=unwrapRpcResult(await api('/rest/v1/rpc/add_shopping_item',{method:'POST',body:JSON.stringify({p_item_name:itemName,p_quantity:quantity,p_store:store})}));
-    if(result?.added===false&&result.reason==='duplicate'){showToast(`${itemName} is already on the ${STORES[result.existing_store]||'another'} list.`,true);return}
-    if(result?.added===false&&result.reason==='restricted'){showToast(`${itemName} can only be added to ${formatAllowedStores(Array.isArray(result.allowed_stores)?result.allowed_stores:[])}.`,true);refreshStoreChoicesForItem(false);return}
-    if(result?.added===true){
-      invalidateMasterItems();loadHomeCounts();
-      if(activeShoppingAddReturnHash){
-        const returnHash=activeShoppingAddReturnHash;
-        activeShoppingAddReturnHash=null;
-        location.hash=returnHash;
-        setTimeout(()=>showToast(`${itemName} added to ${STORES[store]}.`),80);
-        return;
-      }
-      itemNameInput.value='';hideSuggestions(itemNameSuggestions);setAddQuantity(1);rebuildStoreOptions(Object.keys(STORES),store);showToast(`${itemName} added to ${STORES[store]}.`);itemNameInput.focus();return
-    }
-    showToast('Could not add the item. Please try again.',true);
-  }catch(error){console.error(error);showToast('Could not add the item. Please try again.',true)}finally{saveItemButton.disabled=false;saveItemButton.textContent='Add Item'}
+    const result=unwrapRpcResult(await api('/rest/v1/rpc/add_shopping_item_multi',{method:'POST',body:JSON.stringify({p_item_name:itemName,p_quantity:quantity,p_stores:stores})}));
+    const added=Array.isArray(result?.added_stores)?result.added_stores:[];
+    if(!added.length){showToast(`${itemName} is already on the selected list${stores.length>1?'s':''}.`,true);return}
+    invalidateMasterItems();loadHomeCounts();
+    const names=added.map(x=>STORES[x]).filter(Boolean).join(' and ');
+    if(activeShoppingAddReturnHash){const returnHash=activeShoppingAddReturnHash;activeShoppingAddReturnHash=null;location.hash=returnHash;setTimeout(()=>showToast(`${itemName} added to ${names}.`),80);return}
+    itemNameInput.value='';hideSuggestions(itemNameSuggestions);setAddQuantity(1);rebuildStoreOptions(Object.keys(STORES),'');renderMultiStoreChoices([], '');showToast(`${itemName} added to ${names}.`);itemNameInput.focus();
+  }catch(error){console.error(error);showToast('Could not add the item. Please try again.',true)}
+  finally{saveItemButton.disabled=false;saveItemButton.textContent='Add Item'}
 });
-
 async function loadStoreItems(quiet=false,restoreScroll=false){
   if(!currentStore)return;const storeAtStart=currentStore,savedScrollY=restoreScroll?storeListReturnScrollY:0;if(!quiet)storeList.innerHTML='<div class="loading-state">Loading…</div>';
   try{
@@ -1416,7 +1421,7 @@ async function purchaseShoppingItem(item,row,button){
   try{
     const oneTimeResult=unwrapRpcResult(await api('/rest/v1/rpc/purchase_one_time_shopping_item',{method:'POST',body:JSON.stringify({p_id:item.id})}));
     if(oneTimeResult?.purchased===true){
-      row.remove();invalidateMasterItems();invalidateInventorySearch();loadHomeCounts();
+      await api('/rest/v1/rpc/remove_other_shopping_copies',{method:'POST',body:JSON.stringify({p_item_name:item.item_name})});row.remove();invalidateMasterItems();invalidateInventorySearch();loadHomeCounts();
       if(!storeList.querySelector('.db-row'))appendEmpty(storeList,currentStore==='sams_costco'?'No other items on this list.':'No items on this list.');
       showToast(`${item.item_name} purchased for the One-Time List. Inventory was not increased.`);
       return;
@@ -1450,7 +1455,7 @@ async function completePurchaseWithCategory(category){
   try{
     const result=unwrapRpcResult(await api('/rest/v1/rpc/purchase_shopping_item',{method:'POST',body:JSON.stringify({p_id:item.id,p_category:category})}));
     if(result?.purchased===true){
-      pendingPurchaseItem=null;invalidateMasterItems();invalidateInventorySearch();loadHomeCounts();goStore(item.store,storeReturnHash);setTimeout(()=>showToast(`${item.item_name} purchased and added to ${INVENTORY_CATEGORIES[result.category]||INVENTORY_CATEGORIES[category]}.`),80);return;
+      await api('/rest/v1/rpc/remove_other_shopping_copies',{method:'POST',body:JSON.stringify({p_item_name:item.item_name})});pendingPurchaseItem=null;invalidateMasterItems();invalidateInventorySearch();loadHomeCounts();goStore(item.store,storeReturnHash);setTimeout(()=>showToast(`${item.item_name} purchased and added to ${INVENTORY_CATEGORIES[result.category]||INVENTORY_CATEGORIES[category]}.`),80);return;
     }
     if(result?.reason==='inventory_limit'){showToast(`Inventory quantity for ${item.item_name} would exceed 9,999.`,true,4500);return}
     if(result?.reason==='not_found'){pendingPurchaseItem=null;goStore(item.store,storeReturnHash);setTimeout(()=>showToast(`${item.item_name} is no longer on the shopping list.`,true),80);return}
