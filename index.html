@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.1.11 -->
-<meta name="app-version" content="1.1.11">
+<!-- APP VERSION: 1.1.12 -->
+<meta name="app-version" content="1.1.12">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.1.11">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.1.11">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.1.12">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.1.12">
 
 <style>
 :root{
@@ -164,7 +164,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .toast-undo-button:active{background:var(--attention-amber-dark)}
 
 
-/* v1.1.11 — authoritative semantic button colors */
+/* v1.1.12 — authoritative semantic button colors */
 
 /* BLUE = navigation / view */
 #inventoryButton,
@@ -318,6 +318,7 @@ button[aria-label="Back"]:active {
 #simpleOneTimeClearButton{max-width:220px;margin:0 auto;}
 .multi-store-choices{display:grid;gap:9px;margin-top:8px}.multi-store-choice{display:flex;align-items:center;gap:10px;padding:11px 12px;border:1.5px solid var(--border);border-radius:12px;background:#fff;font-size:16px;font-weight:750}.multi-store-choice input{width:22px;height:22px;min-height:0;margin:0;flex:0 0 22px}
 .multi-store-note{font-size:14px;font-weight:800;color:var(--muted);margin:2px 0 3px}
+.app-modal{position:fixed;inset:0;z-index:4000;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:20px}.app-modal[hidden]{display:none}.app-modal-card{width:min(420px,100%);background:#fff;border-radius:18px;padding:20px;box-shadow:0 12px 35px rgba(0,0,0,.3)}.app-modal-card h3{margin:0 0 6px;text-align:center}.modal-note{text-align:center;color:var(--muted);font-weight:700;margin-bottom:14px}.modal-actions{display:flex;gap:10px;margin-top:18px}.modal-actions button{flex:1;border:0;border-radius:12px;padding:12px;font-weight:800}#multiStoreCancelButton{background:#777;color:#fff}#multiStoreConfirmButton{background:var(--green);color:#fff}
 </style>
 </head>
 <body>
@@ -326,7 +327,7 @@ button[aria-label="Back"]:active {
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.1.11" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.1.12" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -339,7 +340,7 @@ button[aria-label="Back"]:active {
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.1.11</div>
+    <div class="version-label">v1.1.12</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -384,6 +385,18 @@ button[aria-label="Back"]:active {
       </form>
     </div>
   </section>
+
+  <div id="multiStoreModal" class="app-modal" hidden>
+    <div class="app-modal-card">
+      <h3>Choose Store(s)</h3>
+      <div class="modal-note">Where would you like to put this item?</div>
+      <div id="multiStoreModalChoices" class="multi-store-choices"></div>
+      <div class="modal-actions">
+        <button id="multiStoreCancelButton" type="button">Cancel</button>
+        <button id="multiStoreConfirmButton" type="button">Add to Selected Stores</button>
+      </div>
+    </div>
+  </div>
 
   <section id="storeScreen" class="screen" hidden>
     <div class="card list-card">
@@ -631,7 +644,7 @@ button[aria-label="Back"]:active {
 <script>
 'use strict';
 
-const APP_VERSION='1.1.11';
+const APP_VERSION='1.1.12';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -1142,22 +1155,45 @@ function formatAllowedStores(keys){
   const names=keys.map(k=>STORES[k]).filter(Boolean);if(!names.length)return'the correct store';if(names.length===1)return names[0];if(names.length===2)return`${names[0]} or ${names[1]}`;return`${names.slice(0,-1).join(', ')}, or ${names[names.length-1]}`;
 }
 
-addItemForm.addEventListener('submit',async event=>{
-  event.preventDefault();const itemName=normalizeItemName(itemNameInput.value);itemNameInput.value=itemName;const stores=getSelectedAddStores(),quantity=getAddQuantity();
-  if(!itemName){showToast('Please enter an item.',true);itemNameInput.focus();return}
-  if(!stores.length){showToast('Please choose at least one store.',true);return}
-  if(normalizedKey(itemName)==='case of water'){showToast('Case of Water is already on the Sam’s / CostCo list.',true);return}
-  if(!lockedAddStore&&stores.length===1)rememberLastStore(stores[0]);saveItemButton.disabled=true;saveItemButton.textContent='Adding…';
+let pendingMultiStoreAdd=null;
+function openMultiStoreModal(itemName,quantity,allowed){
+  pendingMultiStoreAdd={itemName,quantity,allowed};
+  const box=$('multiStoreModalChoices');box.innerHTML='';
+  allowed.forEach(key=>{const label=document.createElement('label');label.className='multi-store-choice';const input=document.createElement('input');input.type='checkbox';input.value=key;const span=document.createElement('span');span.textContent=STORES[key];label.append(input,span);box.appendChild(label)});
+  $('multiStoreModal').hidden=false;
+}
+function closeMultiStoreModal(){$('multiStoreModal').hidden=true;pendingMultiStoreAdd=null}
+async function submitShoppingItemToStores(itemName,quantity,stores){
+  saveItemButton.disabled=true;saveItemButton.textContent='Adding…';
   try{
     const result=unwrapRpcResult(await api('/rest/v1/rpc/add_shopping_item_multi',{method:'POST',body:JSON.stringify({p_item_name:itemName,p_quantity:quantity,p_stores:stores})}));
     const added=Array.isArray(result?.added_stores)?result.added_stores:[];
-    if(!added.length){showToast(`${itemName} is already on the selected list${stores.length>1?'s':''}.`,true);return}
-    invalidateMasterItems();loadHomeCounts();
-    const names=added.map(x=>STORES[x]).filter(Boolean).join(' and ');
-    if(activeShoppingAddReturnHash){const returnHash=activeShoppingAddReturnHash;activeShoppingAddReturnHash=null;location.hash=returnHash;setTimeout(()=>showToast(`${itemName} added to ${names}.`),80);return}
-    itemNameInput.value='';hideSuggestions(itemNameSuggestions);setAddQuantity(1);rebuildStoreOptions(Object.keys(STORES),'');renderMultiStoreChoices([], '');showToast(`${itemName} added to ${names}.`);itemNameInput.focus();
-  }catch(error){console.error(error);showToast('Could not add the item. Please try again.',true)}
+    if(!added.length){showToast(`${itemName} is already on the selected list${stores.length>1?'s':''}.`,true);return false}
+    invalidateMasterItems();loadHomeCounts();const names=added.map(x=>STORES[x]).filter(Boolean).join(' and ');
+    if(activeShoppingAddReturnHash){const returnHash=activeShoppingAddReturnHash;activeShoppingAddReturnHash=null;location.hash=returnHash;setTimeout(()=>showToast(`${itemName} added to ${names}.`),80);return true}
+    itemNameInput.value='';hideSuggestions(itemNameSuggestions);setAddQuantity(1);showToast(`${itemName} added to ${names}.`);itemNameInput.focus();return true;
+  }catch(error){console.error(error);showToast('Could not add the item. Please try again.',true);return false}
   finally{saveItemButton.disabled=false;saveItemButton.textContent='Add Item'}
+}
+addItemForm.addEventListener('submit',async event=>{
+  event.preventDefault();const itemName=normalizeItemName(itemNameInput.value);itemNameInput.value=itemName;const quantity=getAddQuantity();
+  if(!itemName){showToast('Please enter an item.',true);itemNameInput.focus();return}
+  if(normalizedKey(itemName)==='case of water'){showToast('Case of Water is already on the Sam’s / CostCo list.',true);return}
+  try{
+    const rows=await fetchRestrictionRows();const allowed=getAllowedStoresForItemName(itemName,rows);
+    if(!Array.isArray(allowed)||!allowed.length){showToast('No available store is set for this item.',true);return}
+    if(allowed.length===1){await submitShoppingItemToStores(itemName,quantity,[allowed[0]]);return}
+    openMultiStoreModal(itemName,quantity,allowed);
+  }catch(error){console.error(error);showToast('Could not determine the available stores.',true)}
+});
+$('multiStoreCancelButton').addEventListener('click',closeMultiStoreModal);
+$('multiStoreConfirmButton').addEventListener('click',async()=>{
+  if(!pendingMultiStoreAdd)return;
+  const stores=Array.from($('multiStoreModalChoices').querySelectorAll('input:checked')).map(x=>x.value);
+  if(!stores.length){showToast('Choose at least one store.',true);return}
+  const pending={...pendingMultiStoreAdd};$('multiStoreConfirmButton').disabled=true;
+  const ok=await submitShoppingItemToStores(pending.itemName,pending.quantity,stores);
+  $('multiStoreConfirmButton').disabled=false;if(ok)closeMultiStoreModal();
 });
 async function loadStoreItems(quiet=false,restoreScroll=false){
   if(!currentStore)return;const storeAtStart=currentStore,savedScrollY=restoreScroll?storeListReturnScrollY:0;if(!quiet)storeList.innerHTML='<div class="loading-state">Loading…</div>';
