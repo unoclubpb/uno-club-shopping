@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- APP VERSION: 1.1.16 -->
-<meta name="app-version" content="1.1.16">
+<!-- APP VERSION: 1.1.17 -->
+<meta name="app-version" content="1.1.17">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,8 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Uno Shopping">
 <title>Uno Club Shopping</title>
-<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.1.16">
-<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.1.16">
+<link rel="icon" type="image/png" href="uno-club-shopping.PNG?v=1.1.17">
+<link rel="apple-touch-icon" href="uno-club-shopping.PNG?v=1.1.17">
 
 <style>
 :root{
@@ -164,7 +164,7 @@ main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inse
 .toast-undo-button:active{background:var(--attention-amber-dark)}
 
 
-/* v1.1.16 — authoritative semantic button colors */
+/* v1.1.17 — authoritative semantic button colors */
 
 /* BLUE = navigation / view */
 #inventoryButton,
@@ -301,7 +301,7 @@ button[aria-label="Back"]:active {
 .one-time-autocomplete-item{padding:10px 12px;border-bottom:1px solid #eee;cursor:pointer}
 .one-time-autocomplete-item:last-child{border-bottom:0}
 .one-time-inventory-status{font-size:13px;font-weight:700;margin-top:5px;min-height:17px}
-#shoppingMenuScreen .button-stack{gap:8px}#shoppingMenuScreen .main-button{min-height:46px;padding:10px 14px;margin:0}#shoppingMenuScreen .shopping-menu-spacer{height:2px!important;min-height:2px!important}#oneTimeListsButton{background:#6f42c1!important;color:#fff!important}.simple-one-time-card{padding:14px}.simple-one-time-add-row{display:flex;gap:8px;margin-bottom:14px}.simple-one-time-add-row input{flex:1}#simpleOneTimeAddButton{background:var(--green);color:#fff}.simple-one-time-row{width:100%;display:flex;align-items:center;gap:12px;text-align:left;background:#fff;border:0;border-bottom:1px solid #ddd;padding:13px 6px;font-size:16px}.simple-check{width:26px;height:26px;border:2px solid #999;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:800;flex:0 0 26px}.simple-one-time-row.checked .simple-check{background:var(--green);border-color:var(--green);color:#fff}.simple-one-time-actions{display:flex;gap:10px;margin-top:18px}.simple-one-time-actions button{flex:1;border:0;border-radius:10px;padding:12px;font-weight:700}#simpleOneTimeClearButton{background:var(--red);color:#fff}
+#shoppingMenuScreen .button-stack{gap:8px}#shoppingMenuScreen .main-button{min-height:46px;padding:10px 14px;margin:0}#shoppingMenuScreen .shopping-menu-spacer{height:2px!important;min-height:2px!important}#oneTimeListsButton{background:#6f42c1!important;color:#fff!important}.simple-one-time-card{padding:14px}.simple-one-time-add-row{display:flex;gap:8px;margin-bottom:14px}.simple-one-time-add-row input{flex:1}#simpleOneTimeAddButton{background:var(--green);color:#fff}.simple-one-time-row{width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px;background:#fff;border-bottom:1px solid #ddd;padding:9px 6px;font-size:16px}.simple-one-time-check{min-width:0;display:flex;align-items:center;gap:12px;text-align:left;background:transparent;border:0;padding:4px 0;font-size:16px}.simple-check{width:26px;height:26px;border:2px solid #999;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:800;flex:0 0 26px}.simple-one-time-row.checked .simple-check{background:var(--green);border-color:var(--green);color:#fff}.simple-one-time-master-button{min-height:38px;padding:7px 10px;border:1.5px solid var(--black);border-radius:9px;background:var(--yellow);color:var(--black);font-size:12px;font-weight:850;white-space:nowrap}.simple-one-time-actions{display:flex;gap:10px;margin-top:18px}.simple-one-time-actions button{flex:1;border:0;border-radius:10px;padding:12px;font-weight:700}#simpleOneTimeClearButton{background:var(--red);color:#fff}
 #shoppingMenuScreen .store-button{
   min-height:92px;
 }
@@ -329,7 +329,7 @@ button[aria-label="Back"]:active {
   <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
-    <img class="header-logo" src="uno-club-shopping.PNG?v=1.1.16" alt="Uno Club Shopping logo">
+    <img class="header-logo" src="uno-club-shopping.PNG?v=1.1.17" alt="Uno Club Shopping logo">
   </button>
 </header>
 
@@ -342,7 +342,7 @@ button[aria-label="Back"]:active {
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button" type="button">Admin</button>
     </div>
-    <div class="version-label">v1.1.16</div>
+    <div class="version-label">v1.1.17</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -650,7 +650,7 @@ button[aria-label="Back"]:active {
 <script>
 'use strict';
 
-const APP_VERSION='1.1.16';
+const APP_VERSION='1.1.17';
 console.info(`Uno Club Shopping v${APP_VERSION}`);
 
 const SUPABASE_URL='https://yfchkrnuxaquqzxtcynp.supabase.co';
@@ -1994,10 +1994,13 @@ async function loadSimpleOneTimeList(){
     if(!Array.isArray(rows)||!rows.length){box.innerHTML='<div class="empty">No items on this list.</div>';return;}
     box.innerHTML='';
     rows.forEach(x=>{
-      const row=document.createElement('button');row.type='button';row.className='simple-one-time-row';row.dataset.simpleOneTime=x.id;
+      const row=document.createElement('div');row.className='simple-one-time-row';row.dataset.simpleOneTime=x.id;row.dataset.itemName=x.item_name;
+      const checkButton=document.createElement('button');checkButton.type='button';checkButton.className='simple-one-time-check';checkButton.dataset.simpleOneTimeCheck=x.id;checkButton.setAttribute('aria-label',\`Check off ${x.item_name}\`);
       const check=document.createElement('span');check.className='simple-check';check.textContent='';
       const name=document.createElement('span');name.textContent=x.item_name;
-      row.append(check,name);box.appendChild(row);
+      checkButton.append(check,name);
+      const masterButton=document.createElement('button');masterButton.type='button';masterButton.className='simple-one-time-master-button';masterButton.dataset.simpleOneTimeMaster=x.id;masterButton.textContent='Add to Master List';
+      row.append(checkButton,masterButton);box.appendChild(row);
     });
   }catch(error){console.error('One-Time List load failed:',error);$('simpleOneTimeList').innerHTML='<div class="error-state">Could not load the One-Time List.</div>';}
 }
@@ -2019,6 +2022,24 @@ async function removeSimpleOneTimeItem(id){
     if(!$('simpleOneTimeList').querySelector('[data-simple-one-time]'))$('simpleOneTimeList').innerHTML='<div class="empty">No items on this list.</div>';
   }catch(error){console.error(error);if(row){row.classList.remove('checked');const check=row.querySelector('.simple-check');if(check)check.textContent='';}showToast('Could not remove that item.',true);}
 }
+async function promoteSimpleOneTimeItem(id){
+  const row=document.querySelector(\`[data-simple-one-time="${id}"]\`);if(!row)return;
+  const itemName=normalizeItemName(row.dataset.itemName||'');if(!itemName)return;
+  const button=row.querySelector('[data-simple-one-time-master]');if(button){button.disabled=true;button.textContent='Adding…';}
+  try{
+    const items=await fetchMasterItems(true);
+    const existing=items.find(item=>normalizedKey(item.item_name)===normalizedKey(itemName));
+    if(!existing){
+      const result=unwrapRpcResult(await api('/rest/v1/rpc/remember_master_item',{method:'POST',body:JSON.stringify({p_item_name:itemName})}));
+      if(result?.remembered===false){showToast('Could not add the item to the Master List.',true);return;}
+      invalidateMasterItems();
+    }
+    await api(\`/rest/v1/one_time_notepad_items?id=eq.${id}\`,{method:'DELETE'});
+    goMasterRestriction(existing?.item_name||itemName);
+    setTimeout(()=>showToast(existing?\`${existing.item_name} is already on the Master List.\`:\`${itemName} added to the Master List. Set its stores and inventory details.\`),80);
+  }catch(error){console.error(error);showToast('Could not add that item to the Master List.',true);}
+  finally{if(button){button.disabled=false;button.textContent='Add to Master List';}}
+}
 async function clearSimpleOneTimeList(){
   if(!window.confirm('Clear the entire One-Time List?'))return;
   try{await api('/rest/v1/one_time_notepad_items?id=not.is.null',{method:'DELETE'});await loadSimpleOneTimeList();showToast('One-Time List cleared.');}
@@ -2027,7 +2048,8 @@ async function clearSimpleOneTimeList(){
 document.addEventListener('click',e=>{
   if(e.target.id==='oneTimeListsButton')return loadSimpleOneTimeList();
   if(e.target.id==='simpleOneTimeAddButton')return addSimpleOneTimeItem();
-  const row=e.target.closest('[data-simple-one-time]');if(row)return removeSimpleOneTimeItem(row.dataset.simpleOneTime);
+  const master=e.target.closest('[data-simple-one-time-master]');if(master)return promoteSimpleOneTimeItem(master.dataset.simpleOneTimeMaster);
+  const check=e.target.closest('[data-simple-one-time-check]');if(check)return removeSimpleOneTimeItem(check.dataset.simpleOneTimeCheck);
   if(e.target.id==='simpleOneTimeClearButton')return clearSimpleOneTimeList();
 });
 $('simpleOneTimeInput')?.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();addSimpleOneTimeItem();}});
