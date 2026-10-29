@@ -1588,7 +1588,7 @@ async function renderInventoryCategories(){
     const b=document.createElement('button');b.className='main-button category-button inventory-icon-button';b.type='button';
     const icon=document.createElement('span');icon.className='inventory-category-icon';icon.setAttribute('aria-hidden','true');const normalizedLabel=label.toLowerCase().trim();const tile=customCategoryTiles[key]??customByLabel[normalizedLabel];if(tile!==undefined){icon.classList.add('custom-category-tile');icon.style.backgroundPosition=`${-48*(tile%3)}px ${-48*Math.floor(tile/3)}px`;icon.textContent='';}else{icon.textContent=categoryIcons[key]||byLabel[normalizedLabel]||'?';}
     if(tile!==undefined){
-      const spriteUrl=getComputedStyle(icon).backgroundImage.match(/url\\(["']?(.*?)["']?\\)/)?.[1];
+      const backgroundUrl=getComputedStyle(icon).backgroundImage;const spriteUrl=backgroundUrl.startsWith('url(')?backgroundUrl.slice(4,-1).replace(/^['\"]|['\"]$/g,''):null;
       if(spriteUrl){
         const spriteImage=new Image();
         spriteImage.onload=()=>{
