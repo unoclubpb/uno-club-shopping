@@ -370,7 +370,7 @@ body:not(:has(#homeScreen:not([hidden]))) #hubNavLogo{display:none}
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button hubStyleButton" type="button"><span class="hubStyleIcon" aria-hidden="true">⚙</span><span class="hubStyleText">Admin</span><span class="hubStyleArrow" aria-hidden="true">›</span></button>
     </div>
-    <div class="version-label">uno club shopping v.102826.126</div>
+    <div class="version-label">uno club shopping v.102826.127</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -1580,13 +1580,38 @@ async function completePurchaseWithCategory(category){
 async function renderInventoryCategories(){
   await loadInventoryCategories(true);
   inventoryCategoryButtons.innerHTML='';
-  const categoryIcons={meats:'🥩',frozen_foods:'❄️',canned_jarred_items:'🥫',pasta_sauces:'🍝',salad_dressings:'🥗',desserts:'🍰',toppings_extras:'🍒',miscellaneous_items:'🛒',alcoholic_drinks:'🍺',bread_bakery:'🍞',bread_and_bakery:'🍞',breakfast_items:'🍳',cookies_crackers:'🍪',cookies_and_crackers:'🍪',cooking_supplies:'🥣',dairy:'🥛',ice_creams_toppings:'🍦',janitorial_supplies:'🧻',rice:'🍚',salad_bar_items:'🥗'};
-  const customCategoryTiles={boxed_items:0,condiments:1,drink_mixes:2,foil_wraps_pans:3,medical:4,paper_goods:5,snacks_candy:6,sodas:7,seasonings_spices:8};
-  const byLabel={'alcoholic drinks':'🍺','bread & bakery':'🍞','breakfast items':'🍳','cookies & crackers':'🍪','cooking supplies':'🥣','dairy':'🥛','frozen foods':'❄️','ice creams & toppings':'🍦','janitorial supplies':'🧻','rice':'🍚','salad bar items':'🥗'};
-  const customByLabel={'boxed items':0,'boxed food items':0,'condiments':1,'drink mixes':2,'foil, wraps, and pans':3,'foil, wraps & pans':3,'medical':4,'paper goods':5,'snacks and candy':6,'snacks & candy':6,'sodas':7,'seasonings & spices':8};
+  const categoryIcons={meats:'🥩',frozen_foods:'❄️',canned_jarred_items:'🥫',pasta_sauces:'🍝',salad_dressings:'🥗',desserts:'🍰',toppings_extras:'🍒',miscellaneous_items:'🛒',alcoholic_drinks:'🍺',bread_bakery:'🍞',bread_and_bakery:'🍞',breakfast_items:'🍳',cookies_crackers:'🍪',cookies_and_crackers:'🍪',cooking_supplies:'🥣',dairy:'🥛',ice_creams_toppings:'🍦',janitorial_supplies:'🧻',rice:'🍚',rice_and_grains:'🍚',food_storage_and_wraps:'🫙',food_storage_wraps:'🫙',salad_bar_items:'🥗'};
+  const customCategoryTiles={boxed_items:0,condiments:1,drink_mixes:2,foil_wraps_pans:3,medical:4,paper_goods:5,snacks_candy:6,sodas:7,soda_other_drinks:7,seasonings_spices:8,foils_wraps_pans:3,snacks_and_candy:6};
+  const byLabel={'alcoholic drinks':'🍺','bread & bakery':'🍞','breakfast items':'🍳','cookies & crackers':'🍪','cooking supplies':'🥣','dairy':'🥛','frozen foods':'❄️','ice creams & toppings':'🍦','janitorial supplies':'🧻','rice':'🍚','rice and grains':'🍚','rice & grains':'🍚','salad bar items':'🥗','food storage and wraps':'🫙','food storage & wraps':'🫙'};
+  const customByLabel={'boxed items':0,'boxed food items':0,'condiments':1,'drink mixes':2,'foil, wraps, and pans':3,'foil, wraps & pans':3,'foils, wraps, pans':3,'foils, wraps & pans':3,'medical':4,'paper goods':5,'snacks and candy':6,'snacks & candy':6,'sodas':7,'soda/other drinks':7,'soda / other drinks':7,'seasonings & spices':8};
   Object.entries(INVENTORY_CATEGORIES).forEach(([key,label])=>{
     const b=document.createElement('button');b.className='main-button category-button inventory-icon-button';b.type='button';
     const icon=document.createElement('span');icon.className='inventory-category-icon';icon.setAttribute('aria-hidden','true');const normalizedLabel=label.toLowerCase().trim();const tile=customCategoryTiles[key]??customByLabel[normalizedLabel];if(tile!==undefined){icon.classList.add('custom-category-tile');icon.style.backgroundPosition=`${-48*(tile%3)}px ${-48*Math.floor(tile/3)}px`;icon.textContent='';}else{icon.textContent=categoryIcons[key]||byLabel[normalizedLabel]||'?';}
+    if(tile!==undefined){
+      const spriteUrl=getComputedStyle(icon).backgroundImage.match(/url\\(["']?(.*?)["']?\\)/)?.[1];
+      if(spriteUrl){
+        const spriteImage=new Image();
+        spriteImage.onload=()=>{
+          const canvas=document.createElement('canvas');canvas.width=48;canvas.height=48;
+          const context=canvas.getContext('2d',{willReadFrequently:true});if(!context)return;
+          context.drawImage(spriteImage,(tile%3)*48,Math.floor(tile/3)*48,48,48,0,0,48,48);
+          const image=context.getImageData(0,0,48,48),data=image.data;
+          // Replace the blue backing and border with white while retaining the approved artwork.
+          for(let i=0;i<data.length;i+=4){
+            const red=data[i],green=data[i+1],blue=data[i+2];
+            if(blue>red*1.10&&blue>green*1.025&&blue-red>15&&blue-green>5&&blue>95){
+              data[i]=255;data[i+1]=255;data[i+2]=255;
+            }
+          }
+          context.putImageData(image,0,0);
+          icon.style.backgroundImage='url("'+canvas.toDataURL('image/png')+'")';
+          icon.style.backgroundPosition='center';
+          icon.style.backgroundSize='48px 48px';
+          icon.style.backgroundColor='#fff';
+        };
+        spriteImage.src=spriteUrl;
+      }
+    }
     const name=document.createElement('span');name.className='inventory-category-label';name.textContent=label;
     b.append(icon,name);
     b.addEventListener('click',()=>goInventoryCategory(key));inventoryCategoryButtons.appendChild(b);
