@@ -321,12 +321,30 @@ button[aria-label="Back"]:active {
 .app-modal{position:fixed;inset:0;z-index:4000;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:20px}.app-modal[hidden]{display:none}.app-modal-card{width:min(420px,100%);background:#fff;border-radius:18px;padding:20px;box-shadow:0 12px 35px rgba(0,0,0,.3)}.app-modal-card h3{margin:0 0 6px;text-align:center}.modal-note{text-align:center;color:var(--muted);font-weight:700;margin-bottom:14px}.modal-actions{display:flex;gap:10px;margin-top:18px}.modal-actions button{flex:1;border:0;border-radius:12px;padding:12px;font-weight:800}#multiStoreCancelButton{background:#777;color:#fff}#multiStoreConfirmButton{background:var(--green);color:#fff}
 #adminScreen .category-stack{gap:10px}#adminScreen .main-button{min-height:58px;padding:12px 14px}
 .zero-inventory-row{width:100%;min-height:58px;padding:8px 14px;border:0;border-bottom:1px solid #ececec;background:#fff;color:var(--text);display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;font-size:17px;font-weight:800;cursor:pointer}.zero-inventory-row:last-child{border-bottom:0}.zero-inventory-row:active{background:#f5f5f5}.zero-inventory-row .inventory-row-list-icon{margin-left:auto}
+
+/* Hub-consistent navigation buttons; keep shopping functions and count badges. */
+#homeScreen:not([hidden]){display:flex;flex-direction:column;gap:12px}
+#homeScreen>.button-stack{display:grid;gap:12px}
+#homeScreen>.home-bottom-menu{display:grid;margin-top:auto;padding-top:0;margin-bottom:24px}
+#homeScreen .hubStyleButton{height:88px!important;min-height:88px!important}
+#shoppingMenuScreen .hubStyleButton{min-height:88px!important;height:88px!important;padding:14px!important;margin:0!important}
+#homeScreen .hubStyleButton,#shoppingMenuScreen .hubStyleButton{width:100%;display:flex;align-items:center;gap:15px;text-align:left;background:#1e5acb!important;color:#fff!important;border:2px solid #103c8b!important;border-radius:12px;font-size:17px;font-weight:800}
+#homeScreen .hubStyleButton .hubStyleIcon,#shoppingMenuScreen .hubStyleButton .hubStyleIcon{width:52px;height:52px;flex:0 0 52px;border-radius:10px;background:#e8f2ff;color:#1760be;display:grid;place-items:center;font-size:27px}
+.hubStyleText{flex:1;min-width:0}
+.hubStyleArrow{color:#fff;font-size:30px;font-weight:300}
+#shoppingMenuScreen #addItemButton{background:#ffef00!important;border-color:#c7a900!important;color:#111!important}
+#shoppingMenuScreen #addItemButton .hubStyleArrow{color:#111!important}
+#shoppingMenuScreen #oneTimeListsButton{background:#1e5acb!important}
+#shoppingMenuScreen .hubStyleButton .count-badge{position:static;flex:0 0 auto;margin-left:2px}
+@media(max-width:390px){#homeScreen .hubStyleButton,#shoppingMenuScreen .hubStyleButton{height:84px!important;min-height:84px!important}}
+#hubNavLogo{width:58px;height:58px;flex:0 0 58px;background:transparent;border:0;padding:0;border-radius:12px;cursor:pointer}
+#hubNavLogo img{width:58px;height:58px;border-radius:12px;object-fit:cover}
 </style>
 </head>
 <body>
 
 <header class="app-header">
-  <button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
+  <button id="hubNavLogo" type="button" aria-label="Back to Uno Club Hub"><img src="https://unoclubpb.github.io/uno-club-signup/uno-club-hub-icon.png" alt="Uno Club Hub"></button><button id="backButton" class="back-button" type="button" aria-label="Back" hidden>&larr;</button>
   <h1 id="pageTitle">Uno Club Shopping</h1>
   <button id="headerHomeButton" class="header-home-button" type="button" aria-label="Main Menu" title="Main Menu">
     <img class="header-logo" src="uno-club-shopping.PNG?v=1.1.21" alt="Uno Club Shopping logo">
@@ -336,27 +354,27 @@ button[aria-label="Back"]:active {
 <main>
   <section id="homeScreen" class="screen">
     <div class="button-stack">
-      <button id="inventoryButton" class="main-button" type="button">Current Inventory</button>
-      <button id="goShoppingButton" class="main-button" type="button">Shopping List</button>
+      <button id="inventoryButton" class="main-button hubStyleButton" type="button"><span class="hubStyleIcon" aria-hidden="true">▣</span><span class="hubStyleText">Current Inventory</span><span class="hubStyleArrow" aria-hidden="true">›</span></button>
+      <button id="goShoppingButton" class="main-button hubStyleButton" type="button"><span class="hubStyleIcon" aria-hidden="true">🛒</span><span class="hubStyleText">Shopping List</span><span class="hubStyleArrow" aria-hidden="true">›</span></button>
     </div>
     <div class="home-bottom-menu">
-      <button id="adminButton" class="main-button" type="button">Admin</button>
+      <button id="adminButton" class="main-button hubStyleButton" type="button"><span class="hubStyleIcon" aria-hidden="true">⚙</span><span class="hubStyleText">Admin</span><span class="hubStyleArrow" aria-hidden="true">›</span></button>
     </div>
-    <div class="version-label">v1.1.21</div>
+    <div class="version-label">v1.1.22</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
     <div class="button-stack">
       <div class="sticky-top-block shopping-menu-sticky">
-        <button id="addItemButton" class="main-button add-item" type="button">Add Item</button>
+        <button id="addItemButton" class="main-button add-item hubStyleButton" type="button"><span class="hubStyleIcon" aria-hidden="true">+</span><span class="hubStyleText">Add Item</span><span class="hubStyleArrow" aria-hidden="true">›</span></button>
       </div>
       <div class="shopping-menu-spacer" aria-hidden="true"></div>
-      <button class="main-button store-button" type="button" data-store="sams_costco">Sam’s / CostCo<span class="count-badge" data-count-store="sams_costco">1</span></button>
-      <button class="main-button store-button" type="button" data-store="walmart">Grocery Store<span class="count-badge" data-count-store="walmart">0</span></button>
-      <button class="main-button store-button" type="button" data-store="alcohol">Package Store<span class="count-badge" data-count-store="alcohol">0</span></button>
-      <button class="main-button store-button" type="button" data-store="amazon">Amazon<span class="count-badge" data-count-store="amazon">0</span></button>
+      <button class="main-button store-button hubStyleButton" type="button" data-store="sams_costco"><span class="hubStyleIcon" aria-hidden="true">▥</span><span class="hubStyleText">Sam’s / CostCo</span><span class="hubStyleArrow" aria-hidden="true">›</span><span class="count-badge" data-count-store="sams_costco">1</span></button>
+      <button class="main-button store-button hubStyleButton" type="button" data-store="walmart"><span class="hubStyleIcon" aria-hidden="true">▤</span><span class="hubStyleText">Grocery Store</span><span class="hubStyleArrow" aria-hidden="true">›</span><span class="count-badge" data-count-store="walmart">0</span></button>
+      <button class="main-button store-button hubStyleButton" type="button" data-store="alcohol"><span class="hubStyleIcon" aria-hidden="true">▣</span><span class="hubStyleText">Package Store</span><span class="hubStyleArrow" aria-hidden="true">›</span><span class="count-badge" data-count-store="alcohol">0</span></button>
+      <button class="main-button store-button hubStyleButton" type="button" data-store="amazon"><span class="hubStyleIcon" aria-hidden="true">▢</span><span class="hubStyleText">Amazon</span><span class="hubStyleArrow" aria-hidden="true">›</span><span class="count-badge" data-count-store="amazon">0</span></button>
       <div class="shopping-menu-spacer" aria-hidden="true"></div>
-      <button id="oneTimeListsButton" class="main-button" type="button">One-Time List<span class="count-badge" data-count-store="one_time">0</span></button>
+      <button id="oneTimeListsButton" class="main-button hubStyleButton" type="button"><span class="hubStyleIcon" aria-hidden="true">☷</span><span class="hubStyleText">One-Time List</span><span class="hubStyleArrow" aria-hidden="true">›</span><span class="count-badge" data-count-store="one_time">0</span></button>
     </div>
   </section>
 
@@ -1148,6 +1166,7 @@ function route(){
   currentStore=null;lockedAddStore=null;editingRestrictionOriginalName=null;restrictionFromMaster=false;showOnly(homeScreen);pageTitle.textContent='Uno Club Shopping';backButton.hidden=true;loadHomeCounts();
 }
 
+document.getElementById('hubNavLogo').addEventListener('click',()=>{if(window.parent!==window)window.parent.postMessage({type:'UNO_HUB_CLOSE_SHOPPING'},'https://unoclubpb.github.io');else location.href='https://unoclubpb.github.io/uno-club-signup/hub.html';});
 backButton.addEventListener('click',()=>{
   if(history.length>1){history.back();return}
   goHome();
