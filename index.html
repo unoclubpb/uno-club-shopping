@@ -69,7 +69,7 @@ main{width:min(100%,620px);margin:0 auto;padding:140px 16px calc(42px + env(safe
 #saveRestrictionButton.save-changes-mode{background:var(--green);color:var(--white);box-shadow:0 5px 14px rgba(33,140,79,.24)}
 #saveRestrictionButton.save-changes-mode:active{background:var(--green-dark)}
 .count-badge{position:absolute;top:7px;right:8px;min-width:29px;height:29px;padding:0 7px;border-radius:15px;background:var(--white);color:var(--blue);border:2px solid var(--black);font-size:15px;font-weight:900;line-height:25px;text-align:center;box-shadow:0 2px 5px rgba(0,0,0,.18);pointer-events:none}
-.version-label{position:fixed;left:50%;transform:translateX(-50%);text-align:center;white-space:nowrap;bottom:calc(7px + env(safe-area-inset-bottom));color:#000;font-size:11px;font-weight:500;z-index:10;pointer-events:none}
+.version-label{position:fixed;left:50%;transform:translateX(-50%);width:max-content;max-width:96vw;text-align:center;bottom:calc(8px + env(safe-area-inset-bottom));color:#000;font-size:.68rem;font-weight:400;z-index:10;pointer-events:none}
 .card,.restriction-list,.master-list{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
 .form-card{padding:18px}.field{margin-bottom:18px}.field label,.field-label{display:block;margin-bottom:7px;font-size:15px;font-weight:800}
 .field input,.field select{width:100%;min-height:54px;padding:12px 13px;border:1.5px solid var(--border);border-radius:12px;background:var(--white);color:var(--text);font-size:18px;outline:none}
@@ -389,7 +389,7 @@ body:has(#shoppingMenuScreen:not([hidden])) main{padding-bottom:0}
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button hubStyleButton" type="button"><span class="hubStyleIcon" aria-hidden="true">⚙</span><span class="hubStyleText">Admin</span><span class="hubStyleArrow" aria-hidden="true">›</span></button>
     </div>
-    <div class="version-label">uno club shopping v.102926.136</div>
+    <div class="version-label">uno club shopping v.102926.137</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
