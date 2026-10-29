@@ -30,21 +30,21 @@ body{min-height:100vh;min-height:100dvh}
 body.home-static{position:fixed;inset:0;width:100%;height:100dvh;min-height:0;overflow:hidden;overscroll-behavior:none}
 body.home-static main{height:100dvh;overflow:hidden}
 button,input,select{font:inherit}button{touch-action:manipulation}
-.app-header{height:calc(82px + env(safe-area-inset-top));padding:calc(9px + env(safe-area-inset-top)) 14px 9px;background:var(--black);color:var(--white);display:flex;align-items:center;gap:10px;position:fixed;inset:0 0 auto 0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.22)}
+.app-header{height:118px;min-height:118px;padding:10px 14px;background:var(--black);color:var(--white);display:flex;align-items:center;gap:10px;position:fixed;inset:0 0 auto 0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.22)}
 .app-header h1{flex:1;min-width:0;margin:0;text-align:center;white-space:pre-line;overflow:hidden;font-size:20px;line-height:1.12;font-weight:850}
-.header-home-button{width:58px;height:58px;flex:0 0 58px;padding:0;border:0;border-radius:12px;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center}.header-home-button:active{transform:scale(.97)}
-.header-logo{width:58px;height:58px;object-fit:cover;border-radius:12px;box-shadow:0 0 0 1px rgba(255,255,255,.14),0 4px 12px rgba(0,0,0,.35)}
+.header-home-button{width:68px;height:68px;flex:0 0 68px;padding:0;border:0;border-radius:12px;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center}.header-home-button:active{transform:scale(.97)}
+.header-logo{width:68px;height:68px;object-fit:cover;border-radius:12px;box-shadow:0 0 0 1px rgba(255,255,255,.14),0 4px 12px rgba(0,0,0,.35)}
 .back-button{width:58px;height:44px;flex:0 0 58px;border:0;border-radius:12px;background:transparent;color:var(--white);font-size:32px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .back-button[hidden]{display:none!important}.back-button:active{background:rgba(255,255,255,.12)}
-main{width:min(100%,620px);margin:0 auto;padding:calc(104px + env(safe-area-inset-top)) 16px calc(42px + env(safe-area-inset-bottom))}
+main{width:min(100%,620px);margin:0 auto;padding:140px 16px calc(42px + env(safe-area-inset-bottom))}
 .screen[hidden]{display:none!important}
-#homeScreen:not([hidden]){display:grid;grid-template-rows:repeat(3,minmax(0,1fr));gap:13px;height:calc(100dvh - 146px - env(safe-area-inset-top) - env(safe-area-inset-bottom));min-height:0;overflow:hidden}
+#homeScreen:not([hidden]){display:grid;grid-template-rows:repeat(3,minmax(0,1fr));gap:13px;height:calc(100dvh - 182px - env(safe-area-inset-bottom));min-height:0;overflow:hidden}
 #homeScreen>.button-stack,#homeScreen>.home-bottom-menu{display:contents}
 #homeScreen #inventoryButton,#homeScreen #goShoppingButton,#homeScreen #adminButton{min-height:0;height:100%}
 .button-stack,.category-stack,.home-bottom-menu{display:grid;gap:13px}
 .home-bottom-menu{margin-top:auto;padding-top:22px;margin-bottom:24px}
 .shopping-menu-spacer{height:62px}
-.sticky-top-block{position:sticky;top:calc(104px + env(safe-area-inset-top));z-index:900;background:var(--page);padding-bottom:13px}
+.sticky-top-block{position:sticky;top:140px;z-index:900;background:var(--page);padding-bottom:13px}
 .sticky-top-block::before{content:"";position:absolute;left:-16px;right:-16px;top:-22px;height:22px;background:var(--page);pointer-events:none}
 .sticky-top-block.shopping-menu-sticky{padding-bottom:0}
 .sticky-top-block.master-sticky-tools{display:grid;gap:13px}
@@ -389,7 +389,7 @@ body:has(#shoppingMenuScreen:not([hidden])) main{padding-bottom:0}
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button hubStyleButton" type="button"><span class="hubStyleIcon" aria-hidden="true">⚙</span><span class="hubStyleText">Admin</span><span class="hubStyleArrow" aria-hidden="true">›</span></button>
     </div>
-    <div class="version-label">uno club shopping v.102826.134</div>
+    <div class="version-label">uno club shopping v.102926.135</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
