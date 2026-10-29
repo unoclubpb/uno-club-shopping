@@ -339,6 +339,7 @@ button[aria-label="Back"]:active {
 @media(max-width:390px){#homeScreen .hubStyleButton,#shoppingMenuScreen .hubStyleButton{height:84px!important;min-height:84px!important}}
 #hubNavLogo{width:58px;height:58px;flex:0 0 58px;background:transparent;border:0;padding:0;border-radius:12px;cursor:pointer}
 #hubNavLogo img{width:58px;height:58px;border-radius:12px;object-fit:cover}
+body:not(:has(#homeScreen:not([hidden]))) #hubNavLogo{display:none}
 </style>
 </head>
 <body>
