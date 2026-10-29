@@ -340,6 +340,14 @@ button[aria-label="Back"]:active {
 #hubNavLogo{width:58px;height:58px;flex:0 0 58px;background:transparent;border:0;padding:0;border-radius:12px;cursor:pointer}
 #hubNavLogo img{width:58px;height:58px;border-radius:12px;object-fit:cover}
 body:not(:has(#homeScreen:not([hidden]))) #hubNavLogo{display:none}
+
+/* Current Inventory category icons; keep category names and navigation intact. */
+#inventoryCategoryButtons{gap:12px}
+#inventoryCategoryButtons .inventory-icon-button{display:flex!important;align-items:center;gap:15px;width:100%;height:88px;min-height:88px;padding:14px!important;border:2px solid #103c8b!important;border-radius:12px;background:#1e5acb!important;color:#fff!important;text-align:left;font-size:17px;font-weight:800}
+#inventoryCategoryButtons .inventory-icon-button .inventory-category-icon{width:52px;height:52px;flex:0 0 52px;display:grid;place-items:center;background:#e8f2ff;color:#1760be;border-radius:10px;font-size:27px;font-weight:800}
+#inventoryCategoryButtons .inventory-icon-button .inventory-category-label{flex:1;min-width:0}
+#inventoryCategoryButtons .inventory-icon-button::after{content:'›';float:none;color:#fff;font-size:30px;font-weight:300;line-height:1}
+@media(max-width:390px){#inventoryCategoryButtons .inventory-icon-button{height:84px;min-height:84px}}
 </style>
 </head>
 <body>
@@ -361,7 +369,7 @@ body:not(:has(#homeScreen:not([hidden]))) #hubNavLogo{display:none}
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button hubStyleButton" type="button"><span class="hubStyleIcon" aria-hidden="true">⚙</span><span class="hubStyleText">Admin</span><span class="hubStyleArrow" aria-hidden="true">›</span></button>
     </div>
-    <div class="version-label">uno club shopping v.102826.124</div>
+    <div class="version-label">uno club shopping v.102826.125</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -1571,7 +1579,14 @@ async function completePurchaseWithCategory(category){
 async function renderInventoryCategories(){
   await loadInventoryCategories(true);
   inventoryCategoryButtons.innerHTML='';
-  Object.entries(INVENTORY_CATEGORIES).forEach(([key,label])=>{const b=document.createElement('button');b.className='main-button category-button';b.type='button';b.textContent=label;b.addEventListener('click',()=>goInventoryCategory(key));inventoryCategoryButtons.appendChild(b)});
+  const categoryIcons={meats:'🥩',frozen_foods:'?',canned_jarred_items:'🥫',boxed_items:'?',pasta_sauces:'🍝',condiments:'🍅',salad_dressings:'🥗',cooking_supplies:'?',desserts:'🍰',seasonings_spices:'🧂',toppings_extras:'🍒',miscellaneous_items:'🛒'};
+  Object.entries(INVENTORY_CATEGORIES).forEach(([key,label])=>{
+    const b=document.createElement('button');b.className='main-button category-button inventory-icon-button';b.type='button';
+    const icon=document.createElement('span');icon.className='inventory-category-icon';icon.setAttribute('aria-hidden','true');icon.textContent=categoryIcons[key]||'?';
+    const name=document.createElement('span');name.className='inventory-category-label';name.textContent=label;
+    b.append(icon,name);
+    b.addEventListener('click',()=>goInventoryCategory(key));inventoryCategoryButtons.appendChild(b);
+  });
 }
 async function loadInventoryItems(quiet=false){
   if(!currentInventoryCategory)return;const categoryAtStart=currentInventoryCategory;if(!quiet)inventoryList.innerHTML='<div class="loading-state">Loading…</div>';
