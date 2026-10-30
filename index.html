@@ -369,7 +369,7 @@ body:has(#shoppingMenuScreen:not([hidden])) main{padding-bottom:0}
 #adminScreen .adminIconArrow{font-size:30px;font-weight:300;color:#fff}
 @media(max-width:390px){#adminScreen .adminIconButton{height:84px!important;min-height:84px!important}}
 #backButton.back-button{background:transparent!important;color:#fff!important;width:68px;flex:0 0 68px;font-size:32px;line-height:1;border:0;border-radius:12px}#backButton.back-button:active{background:rgba(255,255,255,.12)!important}
-/* Shared red-X delete control used across Uno Club apps. */
+/* Shared trash delete control used across Uno Club apps. */
 button.delete-button{width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:center!important;border:2px solid #000!important;border-radius:9px!important;background:#c62828!important;color:#fff!important;font-size:24px!important;font-weight:800!important;line-height:1!important}
 </style>
 </head>
@@ -392,7 +392,7 @@ button.delete-button{width:44px!important;height:44px!important;min-width:44px!i
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button hubStyleButton" type="button"><span class="hubStyleIcon" aria-hidden="true">⚙</span><span class="hubStyleText">Admin</span><span class="hubStyleArrow" aria-hidden="true">›</span></button>
     </div>
-    <div class="version-label">uno club shopping v.102926.138</div>
+    <div class="version-label">uno club shopping v.102926.139</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -1403,7 +1403,7 @@ function createDataItemRow(item,minQuantity,saveQuantity,deleteHandler,afterSave
     zeroAddButton=document.createElement('button');zeroAddButton.type='button';zeroAddButton.className='inventory-row-add-button';zeroAddButton.textContent='Add';zeroAddButton.setAttribute('aria-label',`Add ${item.item_name} to shopping list`);zeroAddButton.title='Add to List';zeroAddButton.addEventListener('click',async()=>{zeroAddButton.disabled=true;const current=getQty(),saved=Number.parseInt(qty.dataset.savedValue,10);if(current!==saved){const savedOkay=await save();if(!savedOkay||Number.parseInt(qty.dataset.savedValue,10)!==current){zeroAddButton.disabled=false;return}}zeroAddHandler();zeroAddButton.disabled=false});actions.appendChild(zeroAddButton);
   }
   if(typeof deleteHandler==='function'){
-    const del=document.createElement('button');del.type='button';del.className='delete-button';del.textContent='×';del.setAttribute('aria-label',`Remove ${item.item_name}`);del.addEventListener('click',async()=>{del.disabled=true;await deleteHandler(row,del,getQty())});actions.appendChild(del);
+    const del=document.createElement('button');del.type='button';del.className='delete-button';del.innerHTML='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2m3 0-1 15H6L5 6m5 4v7m4-7v7"/></svg>';del.setAttribute('aria-label',`Remove ${item.item_name}`);del.addEventListener('click',async()=>{del.disabled=true;await deleteHandler(row,del,getQty())});actions.appendChild(del);
   }
   refresh();row.append(name,control,actions);return row;
 }
@@ -1777,7 +1777,7 @@ async function loadCategoryManagement(restoreScroll=false){
       const row=document.createElement('div');row.className='category-management-row';
       const name=document.createElement('button');name.type='button';name.className='category-management-name-button';name.textContent=category.name;name.setAttribute('aria-label',`View items in ${category.name}`);name.addEventListener('click',()=>goCategoryManagementItems(category.category_key));
       const count=document.createElement('div');count.className='category-management-count';count.textContent=String(categoryCounts.get(category.category_key)||0);count.setAttribute('aria-label',`${count.textContent} items`);
-      const del=document.createElement('button');del.type='button';del.className='delete-button';del.textContent='×';del.setAttribute('aria-label',`Delete ${category.name}`);del.addEventListener('click',()=>deleteInventoryCategory(category,del));
+      const del=document.createElement('button');del.type='button';del.className='delete-button';del.innerHTML='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2m3 0-1 15H6L5 6m5 4v7m4-7v7"/></svg>';del.setAttribute('aria-label',`Delete ${category.name}`);del.addEventListener('click',()=>deleteInventoryCategory(category,del));
       row.append(name,count,del);categoryManagementList.appendChild(row);
     });
     if(restoreScroll){
