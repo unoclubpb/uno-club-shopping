@@ -393,7 +393,7 @@ button.delete-button{width:44px!important;height:44px!important;min-width:44px!i
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button hubStyleButton" type="button"><span class="hubStyleIcon" aria-hidden="true">⚙</span><span class="hubStyleText">Admin</span><span class="hubStyleArrow" aria-hidden="true">›</span></button>
     </div>
-    <div class="version-label">uno club shopping v.102926.145</div>
+    <div class="version-label">uno club shopping v.102926.146</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -2149,5 +2149,31 @@ document.addEventListener('click',e=>{
 });
 $('simpleOneTimeInput')?.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();addSimpleOneTimeItem();}});
 </script>
-</body>
+<script>
+/* Fit each banner title to its available width without wrapping. */
+(()=>{
+ const selector=".app-header h1";
+ const fit=()=>{
+  document.querySelectorAll(selector).forEach(el=>{
+   if(!el.clientWidth)return;
+   el.style.setProperty('white-space','nowrap','important');
+   el.style.setProperty('font-size','28px','important');
+   let size=28;
+   while(size>12 && el.scrollWidth>el.clientWidth+1){
+    size-=1;
+    el.style.setProperty('font-size',size+'px','important');
+   }
+  });
+ };
+ let queued=false;
+ const schedule=()=>{if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;fit()})};
+ const observer=new MutationObserver(schedule);
+ observer.observe(document.body,{childList:true,subtree:true,characterData:true});
+ const resize=new ResizeObserver(schedule);
+ document.querySelectorAll('header').forEach(h=>resize.observe(h));
+ window.addEventListener('resize',schedule);
+ document.fonts?.ready.then(schedule);
+ schedule();
+})();
+</script></body>
 </html>
