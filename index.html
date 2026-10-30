@@ -361,6 +361,7 @@ body:has(#shoppingMenuScreen:not([hidden])) main{padding-bottom:0}
 #shoppingMenuScreen .hubStyleButton{height:min(84px,calc((100dvh - 190px - env(safe-area-inset-top) - env(safe-area-inset-bottom))/6))!important;min-height:62px!important}
 #shoppingMenuScreen #oneTimeListsButton{background:#8354d1!important;border-color:#6038ab!important;color:#fff!important}
 
+#homeScreen #adminButton,#homeScreen #adminButton.hubStyleButton{background:#000!important;border-color:#000!important;color:#fff!important}#homeScreen #adminButton .hubStyleText,#homeScreen #adminButton .hubStyleArrow{color:#fff!important}
 /* Admin navigation matches the Hub and Shopping main-menu buttons. */
 #adminScreen .category-stack{display:grid;gap:12px}
 #adminScreen .adminIconButton{width:100%;height:88px!important;min-height:88px!important;box-sizing:border-box;display:flex;align-items:center;gap:15px;padding:14px!important;margin:0;background:#1e5acb!important;color:#fff!important;border:2px solid #103c8b!important;border-radius:12px;text-align:left;font-size:17px;font-weight:800}
@@ -392,7 +393,7 @@ button.delete-button{width:44px!important;height:44px!important;min-width:44px!i
     <div class="home-bottom-menu">
       <button id="adminButton" class="main-button hubStyleButton" type="button"><span class="hubStyleIcon" aria-hidden="true">⚙</span><span class="hubStyleText">Admin</span><span class="hubStyleArrow" aria-hidden="true">›</span></button>
     </div>
-    <div class="version-label">uno club shopping v.102926.142</div>
+    <div class="version-label">uno club shopping v.102926.143</div>
   </section>
 
   <section id="shoppingMenuScreen" class="screen" hidden>
@@ -2140,7 +2141,7 @@ async function clearSimpleOneTimeList(){
   catch(error){console.error(error);showToast('Could not clear the list.',true);}
 }
 document.addEventListener('click',e=>{
-  if(e.target.id==='oneTimeListsButton')return loadSimpleOneTimeList();
+  if(e.target.closest('#oneTimeListsButton'))return loadSimpleOneTimeList();
   if(e.target.id==='simpleOneTimeAddButton')return addSimpleOneTimeItem();
   const master=e.target.closest('[data-simple-one-time-master]');if(master)return promoteSimpleOneTimeItem(master.dataset.simpleOneTimeMaster);
   const check=e.target.closest('[data-simple-one-time-check]');if(check)return removeSimpleOneTimeItem(check.dataset.simpleOneTimeCheck);
